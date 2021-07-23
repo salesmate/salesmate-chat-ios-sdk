@@ -6,6 +6,7 @@
 //
 
 import Foundation
+@_implementationOnly import HTTP
 
 typealias ConversationID = String
 typealias MessageID = String

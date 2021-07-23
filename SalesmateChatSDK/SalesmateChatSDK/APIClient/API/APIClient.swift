@@ -6,6 +6,7 @@
 //
 
 import Foundation
+@_implementationOnly import HTTP
 
 class ChatAPIClient {
     

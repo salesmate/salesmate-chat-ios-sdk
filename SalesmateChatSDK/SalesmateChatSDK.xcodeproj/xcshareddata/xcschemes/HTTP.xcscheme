@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "9BB117E826A1A45500E0B242"
-               BuildableName = "SalesmateChatSDK.framework"
-               BlueprintName = "SalesmateChatSDK"
+               BlueprintIdentifier = "9B488BB626AAC51200FDD21C"
+               BuildableName = "HTTP.framework"
+               BlueprintName = "HTTP"
                ReferencedContainer = "container:SalesmateChatSDK.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -32,16 +32,16 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "9BB117F126A1A45500E0B242"
-               BuildableName = "SalesmateChatSDKTests.xctest"
-               BlueprintName = "SalesmateChatSDKTests"
+               BlueprintIdentifier = "9B488BBE26AAC51200FDD21C"
+               BuildableName = "HTTPTests.xctest"
+               BlueprintName = "HTTPTests"
                ReferencedContainer = "container:SalesmateChatSDK.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
-      buildConfiguration = "Release"
+      buildConfiguration = "Debug(Development)"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       launchStyle = "0"
@@ -60,9 +60,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "9BB117E826A1A45500E0B242"
-            BuildableName = "SalesmateChatSDK.framework"
-            BlueprintName = "SalesmateChatSDK"
+            BlueprintIdentifier = "9B488BB626AAC51200FDD21C"
+            BuildableName = "HTTP.framework"
+            BlueprintName = "HTTP"
             ReferencedContainer = "container:SalesmateChatSDK.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

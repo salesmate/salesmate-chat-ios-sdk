@@ -7,11 +7,11 @@
 
 import Foundation
 
-protocol RequestLoader {
+public protocol RequestLoader {
     func load(request: HTTPRequest, completion: @escaping (HTTPResult) -> Void)
 }
 
-protocol RequestUploader {
+public protocol RequestUploader {
     typealias ProgressHandler = (Float) -> Void
     
     func upload(request: HTTPRequest, progress: ProgressHandler?, completion: @escaping (HTTPResult) -> Void)

@@ -6,6 +6,8 @@
 //
 
 import Foundation
+@_implementationOnly import SwiftyJSON
+@_implementationOnly import HTTP
 
 enum HeaderKey: String {
     case linkName = "x-linkname"

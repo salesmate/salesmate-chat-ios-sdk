@@ -7,6 +7,7 @@
 
 import Foundation
 @_implementationOnly import SwiftyJSON
+@_implementationOnly import HTTP
 
 enum PayloadHandler {
        

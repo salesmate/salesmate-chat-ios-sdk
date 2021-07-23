@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol EndPoint {
+public protocol EndPoint {
     var method: HTTPMethod { get }
     var path: String { get }
     var queryItems: [URLQueryItem]? { get }
@@ -15,7 +15,7 @@ protocol EndPoint {
     var body: HTTPBody? { get }
 }
 
-protocol HTTPRequest: EndPoint {
+public protocol HTTPRequest: EndPoint {
     var request: URLRequest? { get }
 }
 
@@ -58,7 +58,7 @@ extension HTTPRequest {
 
 extension URLRequest {
     
-    var curl: String {
+    public var curl: String {
         guard let url = url else { return "" }
         
         var baseCommand = #"curl "\#(url.absoluteString)""#

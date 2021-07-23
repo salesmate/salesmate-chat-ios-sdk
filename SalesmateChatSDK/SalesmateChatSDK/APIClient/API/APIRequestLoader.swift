@@ -6,6 +6,7 @@
 //
 
 import Foundation
+@_implementationOnly import HTTP
 
 class APIRequestLoader: NSObject {
     private lazy var session: URLSession = URLSession(configuration: .default, delegate: self, delegateQueue: nil)

@@ -6,13 +6,3 @@
 //
 
 import Foundation
-@_implementationOnly import Starscream
-
-struct SalesmateChat {
-    let client: WebSocket = WebSocket(request: URLRequest(url: URL(string: "wss://dev7.salesmate.io/socketcluster/")!))
-    
-    init() {}
-    func connect() {
-        client.connect()
-    }
-}

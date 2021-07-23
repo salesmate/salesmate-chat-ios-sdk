@@ -7,13 +7,13 @@
 
 import Foundation
 
-enum HTTPMethod: String {
+public enum HTTPMethod: String {
     case get = "GET"
     case post = "POST"
     case put = "PUT"
     case delete = "DELETE"
 }
 
-typealias HTTPHeaders = [String: String]
-typealias JSONObject = [String: Any]
-typealias JSONArray = [JSONObject]
+public typealias HTTPHeaders = [String: String]
+public typealias JSONObject = [String: Any]
+public typealias JSONArray = [JSONObject]

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+@_implementationOnly import HTTP
 
 protocol ChatAPI: AnyObject {
     func getAssignCount(completion: @escaping (Result<Int, HTTPError>) -> Void)

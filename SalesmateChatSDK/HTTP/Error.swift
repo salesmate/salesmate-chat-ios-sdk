@@ -7,9 +7,9 @@
 
 import Foundation
 
-struct HTTPError: Error {
+public struct HTTPError: Error {
     
-    enum Code: String, Codable {
+    public enum Code: String, Codable {
         case AuthorizationFailed = "AuthorizationFailed"
         case networkFail
         case unknown
@@ -27,4 +27,12 @@ struct HTTPError: Error {
     
     /// If we have more information about the error that caused this, stash it here
     let underlyingError: Error?
+    
+    public init(name: Code, message: String?, request: HTTPRequest, response: HTTPResponse?, underlyingError: Error?) {
+        self.name = name
+        self.message = message
+        self.request = request
+        self.response = response
+        self.underlyingError = underlyingError
+    }
 }
