@@ -38,13 +38,12 @@ class StarscreamChatStream {
         self.socket?.delegate = self
     }
     
-//    static func getDefault() -> StarscreamChatStream {
-//        guard let webSocketLink = configuration?.webSocketLink else {
-//            preconditionFailure("`ChatConnectionDetail.webSocketLink` is not set.")
-//        }
-//        
-//        return StarscreamChatStream(socket: WebSocket(request: URLRequest(url: webSocketLink)))
-//    }
+    init(for url: URL) {
+        self.socket = WebSocket(request: URLRequest(url: url))
+        
+        self.socket?.respondToPingWithPong = true
+        self.socket?.delegate = self
+    }
     
     private func connect() {
         guard status.isNotConnected else { return }

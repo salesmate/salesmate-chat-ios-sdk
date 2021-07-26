@@ -8,7 +8,7 @@
 import Foundation
 @_implementationOnly import HTTP
 
-class ChatAPIClient {
+class ChatAPIClient: ChatAPI {
     
     private let loader: (RequestLoader & RequestUploader)
     

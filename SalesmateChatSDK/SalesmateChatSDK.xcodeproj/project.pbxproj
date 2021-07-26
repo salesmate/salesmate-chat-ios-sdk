@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9B1B121C26AEB01500ABC3FB /* ChatEventRelay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1B121B26AEB01500ABC3FB /* ChatEventRelay.swift */; };
 		9B3A9B6226A6FF4200EB7C10 /* WebSocketEventCreation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3A9B5E26A6FF4200EB7C10 /* WebSocketEventCreation.swift */; };
 		9B3A9B6326A6FF4200EB7C10 /* PayloadHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3A9B5F26A6FF4200EB7C10 /* PayloadHandler.swift */; };
 		9B3A9B6426A6FF4200EB7C10 /* ChatStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3A9B6026A6FF4200EB7C10 /* ChatStream.swift */; };
@@ -14,7 +15,7 @@
 		9B3A9B6826A7007400EB7C10 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 9B3A9B6726A7007400EB7C10 /* SwiftyJSON */; };
 		9B3A9B7926A701D200EB7C10 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3A9B6B26A701D200EB7C10 /* Conversation.swift */; };
 		9B3A9B7A26A701D200EB7C10 /* Visitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3A9B6C26A701D200EB7C10 /* Visitor.swift */; };
-		9B3A9B7B26A701D200EB7C10 /* ChatConnectionConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3A9B6D26A701D200EB7C10 /* ChatConnectionConfiguration.swift */; };
+		9B3A9B7B26A701D200EB7C10 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3A9B6D26A701D200EB7C10 /* Configuration.swift */; };
 		9B3A9B7D26A701D200EB7C10 /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3A9B6F26A701D200EB7C10 /* Block.swift */; };
 		9B3A9B7E26A701D200EB7C10 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3A9B7026A701D200EB7C10 /* Message.swift */; };
 		9B3A9B8026A701D200EB7C10 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3A9B7226A701D200EB7C10 /* File.swift */; };
@@ -34,7 +35,7 @@
 		9B488BD126AAC51B00FDD21C /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B65DFFE26A58615001F3928 /* Response.swift */; };
 		9B488BD226AAC51B00FDD21C /* RequestLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B65DFFC26A58615001F3928 /* RequestLoader.swift */; };
 		9B488BD326AAC51B00FDD21C /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B65DFFB26A58615001F3928 /* Result.swift */; };
-		9B488BD426AAC51B00FDD21C /* HTTPDataTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B65DFFD26A58615001F3928 /* HTTPDataTypes.swift */; };
+		9B488BD426AAC51B00FDD21C /* DataTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B65DFFD26A58615001F3928 /* DataTypes.swift */; };
 		9B488BD526AAC55600FDD21C /* HTTP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B488BB726AAC51200FDD21C /* HTTP.framework */; };
 		9B488BD626AAC55600FDD21C /* HTTP.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9B488BB726AAC51200FDD21C /* HTTP.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9B65E00E26A58615001F3928 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B65E00326A58615001F3928 /* APIClient.swift */; };
@@ -89,13 +90,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		9B1B121B26AEB01500ABC3FB /* ChatEventRelay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatEventRelay.swift; sourceTree = "<group>"; };
 		9B3A9B5E26A6FF4200EB7C10 /* WebSocketEventCreation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebSocketEventCreation.swift; sourceTree = "<group>"; };
 		9B3A9B5F26A6FF4200EB7C10 /* PayloadHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PayloadHandler.swift; sourceTree = "<group>"; };
 		9B3A9B6026A6FF4200EB7C10 /* ChatStream.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatStream.swift; sourceTree = "<group>"; };
 		9B3A9B6126A6FF4200EB7C10 /* StarscreamChatStream.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StarscreamChatStream.swift; sourceTree = "<group>"; };
 		9B3A9B6B26A701D200EB7C10 /* Conversation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
 		9B3A9B6C26A701D200EB7C10 /* Visitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Visitor.swift; sourceTree = "<group>"; };
-		9B3A9B6D26A701D200EB7C10 /* ChatConnectionConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatConnectionConfiguration.swift; sourceTree = "<group>"; };
+		9B3A9B6D26A701D200EB7C10 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		9B3A9B6F26A701D200EB7C10 /* Block.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
 		9B3A9B7026A701D200EB7C10 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		9B3A9B7226A701D200EB7C10 /* File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
@@ -115,7 +117,7 @@
 		9B65DFFA26A58615001F3928 /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		9B65DFFB26A58615001F3928 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		9B65DFFC26A58615001F3928 /* RequestLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestLoader.swift; sourceTree = "<group>"; };
-		9B65DFFD26A58615001F3928 /* HTTPDataTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPDataTypes.swift; sourceTree = "<group>"; };
+		9B65DFFD26A58615001F3928 /* DataTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataTypes.swift; sourceTree = "<group>"; };
 		9B65DFFE26A58615001F3928 /* Response.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		9B65E00026A58615001F3928 /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		9B65E00126A58615001F3928 /* Body.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Body.swift; sourceTree = "<group>"; };
@@ -183,7 +185,9 @@
 			children = (
 				9B3A9B6026A6FF4200EB7C10 /* ChatStream.swift */,
 				9B3A9B5E26A6FF4200EB7C10 /* WebSocketEventCreation.swift */,
+				9B3A9B7526A701D200EB7C10 /* Payload.swift */,
 				9B3A9B5F26A6FF4200EB7C10 /* PayloadHandler.swift */,
+				9B1B121B26AEB01500ABC3FB /* ChatEventRelay.swift */,
 				9B3A9B6126A6FF4200EB7C10 /* StarscreamChatStream.swift */,
 			);
 			path = ChatStream;
@@ -202,12 +206,11 @@
 			children = (
 				9B3A9B6B26A701D200EB7C10 /* Conversation.swift */,
 				9B3A9B6C26A701D200EB7C10 /* Visitor.swift */,
-				9B3A9B6D26A701D200EB7C10 /* ChatConnectionConfiguration.swift */,
+				9B3A9B6D26A701D200EB7C10 /* Configuration.swift */,
 				9B3A9B6F26A701D200EB7C10 /* Block.swift */,
 				9B3A9B7026A701D200EB7C10 /* Message.swift */,
 				9B3A9B7226A701D200EB7C10 /* File.swift */,
 				9B3A9B7326A701D200EB7C10 /* IntegerID.swift */,
-				9B3A9B7526A701D200EB7C10 /* Payload.swift */,
 				9B3A9B7826A701D200EB7C10 /* DataTypes.swift */,
 			);
 			path = Models;
@@ -227,7 +230,7 @@
 		9B488BB826AAC51200FDD21C /* HTTP */ = {
 			isa = PBXGroup;
 			children = (
-				9B65DFFD26A58615001F3928 /* HTTPDataTypes.swift */,
+				9B65DFFD26A58615001F3928 /* DataTypes.swift */,
 				9B65E00126A58615001F3928 /* Body.swift */,
 				9B65E00026A58615001F3928 /* Request.swift */,
 				9B65DFFE26A58615001F3928 /* Response.swift */,
@@ -252,20 +255,12 @@
 		9B65DFF826A58615001F3928 /* APIClient */ = {
 			isa = PBXGroup;
 			children = (
-				9B65E00226A58615001F3928 /* API */,
-			);
-			path = APIClient;
-			sourceTree = "<group>";
-		};
-		9B65E00226A58615001F3928 /* API */ = {
-			isa = PBXGroup;
-			children = (
 				9B65E01126A58C64001F3928 /* APIDataTypes.swift */,
 				9B65E00426A58615001F3928 /* APIRequests.swift */,
 				9B65E00526A58615001F3928 /* APIRequestLoader.swift */,
 				9B65E00326A58615001F3928 /* APIClient.swift */,
 			);
-			path = API;
+			path = APIClient;
 			sourceTree = "<group>";
 		};
 		9BB117DF26A1A45500E0B242 = {
@@ -299,8 +294,8 @@
 				9B3A9B5D26A6FF4200EB7C10 /* ChatStream */,
 				9B65DFF826A58615001F3928 /* APIClient */,
 				9BB189A526A70A2700D7F7FD /* ChatClient */,
-				9B3A9B6926A701BE00EB7C10 /* Interface */,
 				9BB189AA26A72FB100D7F7FD /* UI */,
+				9B3A9B6926A701BE00EB7C10 /* Interface */,
 				9BB117EC26A1A45500E0B242 /* SalesmateChatSDK.h */,
 				9BB117ED26A1A45500E0B242 /* Info.plist */,
 			);
@@ -520,7 +515,7 @@
 				9B488BD326AAC51B00FDD21C /* Result.swift in Sources */,
 				9B488BD126AAC51B00FDD21C /* Response.swift in Sources */,
 				9B488BD226AAC51B00FDD21C /* RequestLoader.swift in Sources */,
-				9B488BD426AAC51B00FDD21C /* HTTPDataTypes.swift in Sources */,
+				9B488BD426AAC51B00FDD21C /* DataTypes.swift in Sources */,
 				9B488BCE26AAC51B00FDD21C /* Error.swift in Sources */,
 				9B488BD026AAC51B00FDD21C /* Request.swift in Sources */,
 				9B488BCF26AAC51B00FDD21C /* Body.swift in Sources */,
@@ -550,6 +545,7 @@
 				9B3A9B8026A701D200EB7C10 /* File.swift in Sources */,
 				9BB189A826A70A2700D7F7FD /* SalesmateChatClient.swift in Sources */,
 				9BBBAED826A6EEC5006AB718 /* SalesmateChat.swift in Sources */,
+				9B1B121C26AEB01500ABC3FB /* ChatEventRelay.swift in Sources */,
 				9B65E00E26A58615001F3928 /* APIClient.swift in Sources */,
 				9B3A9B6426A6FF4200EB7C10 /* ChatStream.swift in Sources */,
 				9B3A9B7D26A701D200EB7C10 /* Block.swift in Sources */,
@@ -557,7 +553,7 @@
 				9BB189A926A70A2700D7F7FD /* ChatClient.swift in Sources */,
 				9B3A9B8326A701D200EB7C10 /* Payload.swift in Sources */,
 				9B3A9B7E26A701D200EB7C10 /* Message.swift in Sources */,
-				9B3A9B7B26A701D200EB7C10 /* ChatConnectionConfiguration.swift in Sources */,
+				9B3A9B7B26A701D200EB7C10 /* Configuration.swift in Sources */,
 				9B3A9B8C26A701E600EB7C10 /* MIME.swift in Sources */,
 				9B3A9B8D26A701E600EB7C10 /* Extensions.swift in Sources */,
 				9B3A9B7A26A701D200EB7C10 /* Visitor.swift in Sources */,

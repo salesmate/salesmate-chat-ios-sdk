@@ -15,5 +15,3 @@ public enum HTTPMethod: String {
 }
 
 public typealias HTTPHeaders = [String: String]
-public typealias JSONObject = [String: Any]
-public typealias JSONArray = [JSONObject]
