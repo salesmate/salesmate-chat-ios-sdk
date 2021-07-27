@@ -38,10 +38,21 @@
 		9B488BD426AAC51B00FDD21C /* DataTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B65DFFD26A58615001F3928 /* DataTypes.swift */; };
 		9B488BD526AAC55600FDD21C /* HTTP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B488BB726AAC51200FDD21C /* HTTP.framework */; };
 		9B488BD626AAC55600FDD21C /* HTTP.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9B488BB726AAC51200FDD21C /* HTTP.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9B4B630B26B0106000203172 /* ChatAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4B630A26B0106000203172 /* ChatAPI.swift */; };
+		9B4B631E26B02D6500203172 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4B631D26B02D6500203172 /* AppDelegate.swift */; };
+		9B4B632026B02D6500203172 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4B631F26B02D6500203172 /* SceneDelegate.swift */; };
+		9B4B632226B02D6500203172 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4B632126B02D6500203172 /* ViewController.swift */; };
+		9B4B632526B02D6500203172 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B4B632326B02D6500203172 /* Main.storyboard */; };
+		9B4B632726B02D6700203172 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9B4B632626B02D6700203172 /* Assets.xcassets */; };
+		9B4B632A26B02D6700203172 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B4B632826B02D6700203172 /* LaunchScreen.storyboard */; };
+		9B4B633026B02D7200203172 /* SalesmateChatSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BB117E926A1A45500E0B242 /* SalesmateChatSDK.framework */; };
+		9B4B633126B02D7200203172 /* SalesmateChatSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9BB117E926A1A45500E0B242 /* SalesmateChatSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9B65E00E26A58615001F3928 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B65E00326A58615001F3928 /* APIClient.swift */; };
 		9B65E00F26A58615001F3928 /* APIRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B65E00426A58615001F3928 /* APIRequests.swift */; };
 		9B65E01026A58615001F3928 /* APIRequestLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B65E00526A58615001F3928 /* APIRequestLoader.swift */; };
 		9B65E01226A58C64001F3928 /* APIDataTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B65E01126A58C64001F3928 /* APIDataTypes.swift */; };
+		9B85939926AFE4BF00D035AD /* Configeration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B85939826AFE4BF00D035AD /* Configeration.swift */; };
+		9B85939B26AFE96200D035AD /* Entities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B85939A26AFE96200D035AD /* Entities.swift */; };
 		9BB117F326A1A45500E0B242 /* SalesmateChatSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BB117E926A1A45500E0B242 /* SalesmateChatSDK.framework */; };
 		9BB117F826A1A45500E0B242 /* SalesmateChatSDKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB117F726A1A45500E0B242 /* SalesmateChatSDKTests.swift */; };
 		9BB117FA26A1A45500E0B242 /* SalesmateChatSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BB117EC26A1A45500E0B242 /* SalesmateChatSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -66,6 +77,13 @@
 			remoteGlobalIDString = 9B488BB626AAC51200FDD21C;
 			remoteInfo = HTTP;
 		};
+		9B4B633226B02D7200203172 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9BB117E026A1A45500E0B242 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9BB117E826A1A45500E0B242;
+			remoteInfo = SalesmateChatSDK;
+		};
 		9BB117F426A1A45500E0B242 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9BB117E026A1A45500E0B242 /* Project object */;
@@ -83,6 +101,17 @@
 			dstSubfolderSpec = 10;
 			files = (
 				9B488BD626AAC55600FDD21C /* HTTP.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9B4B633426B02D7200203172 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				9B4B633126B02D7200203172 /* SalesmateChatSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -114,6 +143,15 @@
 		9B488BBF26AAC51200FDD21C /* HTTPTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HTTPTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B488BC426AAC51200FDD21C /* HTTPTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPTests.swift; sourceTree = "<group>"; };
 		9B488BC626AAC51200FDD21C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9B4B630A26B0106000203172 /* ChatAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatAPI.swift; sourceTree = "<group>"; };
+		9B4B631B26B02D6500203172 /* TestApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B4B631D26B02D6500203172 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		9B4B631F26B02D6500203172 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		9B4B632126B02D6500203172 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		9B4B632426B02D6500203172 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		9B4B632626B02D6700203172 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		9B4B632926B02D6700203172 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		9B4B632B26B02D6700203172 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9B65DFFA26A58615001F3928 /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		9B65DFFB26A58615001F3928 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		9B65DFFC26A58615001F3928 /* RequestLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestLoader.swift; sourceTree = "<group>"; };
@@ -125,6 +163,8 @@
 		9B65E00426A58615001F3928 /* APIRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIRequests.swift; sourceTree = "<group>"; };
 		9B65E00526A58615001F3928 /* APIRequestLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIRequestLoader.swift; sourceTree = "<group>"; };
 		9B65E01126A58C64001F3928 /* APIDataTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIDataTypes.swift; sourceTree = "<group>"; };
+		9B85939826AFE4BF00D035AD /* Configeration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configeration.swift; sourceTree = "<group>"; };
+		9B85939A26AFE96200D035AD /* Entities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entities.swift; sourceTree = "<group>"; };
 		9BB117E926A1A45500E0B242 /* SalesmateChatSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SalesmateChatSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BB117EC26A1A45500E0B242 /* SalesmateChatSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SalesmateChatSDK.h; sourceTree = "<group>"; };
 		9BB117ED26A1A45500E0B242 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -149,6 +189,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				9B488BC026AAC51200FDD21C /* HTTP.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9B4B631826B02D6500203172 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9B4B633026B02D7200203172 /* SalesmateChatSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -197,6 +245,7 @@
 			isa = PBXGroup;
 			children = (
 				9BBBAED726A6EEC5006AB718 /* SalesmateChat.swift */,
+				9B85939826AFE4BF00D035AD /* Configeration.swift */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -212,6 +261,7 @@
 				9B3A9B7226A701D200EB7C10 /* File.swift */,
 				9B3A9B7326A701D200EB7C10 /* IntegerID.swift */,
 				9B3A9B7826A701D200EB7C10 /* DataTypes.swift */,
+				9B85939A26AFE96200D035AD /* Entities.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -252,15 +302,30 @@
 			path = HTTPTests;
 			sourceTree = "<group>";
 		};
-		9B65DFF826A58615001F3928 /* APIClient */ = {
+		9B4B631C26B02D6500203172 /* TestApp */ = {
 			isa = PBXGroup;
 			children = (
+				9B4B631D26B02D6500203172 /* AppDelegate.swift */,
+				9B4B631F26B02D6500203172 /* SceneDelegate.swift */,
+				9B4B632126B02D6500203172 /* ViewController.swift */,
+				9B4B632326B02D6500203172 /* Main.storyboard */,
+				9B4B632626B02D6700203172 /* Assets.xcassets */,
+				9B4B632826B02D6700203172 /* LaunchScreen.storyboard */,
+				9B4B632B26B02D6700203172 /* Info.plist */,
+			);
+			path = TestApp;
+			sourceTree = "<group>";
+		};
+		9B65DFF826A58615001F3928 /* ChatAPIClient */ = {
+			isa = PBXGroup;
+			children = (
+				9B4B630A26B0106000203172 /* ChatAPI.swift */,
 				9B65E01126A58C64001F3928 /* APIDataTypes.swift */,
 				9B65E00426A58615001F3928 /* APIRequests.swift */,
 				9B65E00526A58615001F3928 /* APIRequestLoader.swift */,
 				9B65E00326A58615001F3928 /* APIClient.swift */,
 			);
-			path = APIClient;
+			path = ChatAPIClient;
 			sourceTree = "<group>";
 		};
 		9BB117DF26A1A45500E0B242 = {
@@ -270,6 +335,7 @@
 				9BB117F626A1A45500E0B242 /* SalesmateChatSDKTests */,
 				9B488BB826AAC51200FDD21C /* HTTP */,
 				9B488BC326AAC51200FDD21C /* HTTPTests */,
+				9B4B631C26B02D6500203172 /* TestApp */,
 				9BB117EA26A1A45500E0B242 /* Products */,
 				9B20482E26A6F23A001EC729 /* Frameworks */,
 			);
@@ -282,6 +348,7 @@
 				9BB117F226A1A45500E0B242 /* SalesmateChatSDKTests.xctest */,
 				9B488BB726AAC51200FDD21C /* HTTP.framework */,
 				9B488BBF26AAC51200FDD21C /* HTTPTests.xctest */,
+				9B4B631B26B02D6500203172 /* TestApp.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -292,7 +359,7 @@
 				9B3A9B8726A701E600EB7C10 /* Util */,
 				9B3A9B6A26A701D200EB7C10 /* Models */,
 				9B3A9B5D26A6FF4200EB7C10 /* ChatStream */,
-				9B65DFF826A58615001F3928 /* APIClient */,
+				9B65DFF826A58615001F3928 /* ChatAPIClient */,
 				9BB189A526A70A2700D7F7FD /* ChatClient */,
 				9BB189AA26A72FB100D7F7FD /* UI */,
 				9B3A9B6926A701BE00EB7C10 /* Interface */,
@@ -385,6 +452,25 @@
 			productReference = 9B488BBF26AAC51200FDD21C /* HTTPTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		9B4B631A26B02D6500203172 /* TestApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9B4B632F26B02D6700203172 /* Build configuration list for PBXNativeTarget "TestApp" */;
+			buildPhases = (
+				9B4B631726B02D6500203172 /* Sources */,
+				9B4B631826B02D6500203172 /* Frameworks */,
+				9B4B631926B02D6500203172 /* Resources */,
+				9B4B633426B02D7200203172 /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9B4B633326B02D7200203172 /* PBXTargetDependency */,
+			);
+			name = TestApp;
+			productName = TestApp;
+			productReference = 9B4B631B26B02D6500203172 /* TestApp.app */;
+			productType = "com.apple.product-type.application";
+		};
 		9BB117E826A1A45500E0B242 /* SalesmateChatSDK */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9BB117FD26A1A45500E0B242 /* Build configuration list for PBXNativeTarget "SalesmateChatSDK" */;
@@ -442,6 +528,9 @@
 					9B488BBE26AAC51200FDD21C = {
 						CreatedOnToolsVersion = 12.5.1;
 					};
+					9B4B631A26B02D6500203172 = {
+						CreatedOnToolsVersion = 12.5.1;
+					};
 					9BB117E826A1A45500E0B242 = {
 						CreatedOnToolsVersion = 12.5;
 						LastSwiftMigration = 1250;
@@ -472,6 +561,7 @@
 				9BB117F126A1A45500E0B242 /* SalesmateChatSDKTests */,
 				9B488BB626AAC51200FDD21C /* HTTP */,
 				9B488BBE26AAC51200FDD21C /* HTTPTests */,
+				9B4B631A26B02D6500203172 /* TestApp */,
 			);
 		};
 /* End PBXProject section */
@@ -488,6 +578,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9B4B631926B02D6500203172 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9B4B632A26B02D6700203172 /* LaunchScreen.storyboard in Resources */,
+				9B4B632726B02D6700203172 /* Assets.xcassets in Resources */,
+				9B4B632526B02D6500203172 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -530,14 +630,26 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9B4B631726B02D6500203172 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9B4B632226B02D6500203172 /* ViewController.swift in Sources */,
+				9B4B631E26B02D6500203172 /* AppDelegate.swift in Sources */,
+				9B4B632026B02D6500203172 /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9BB117E526A1A45500E0B242 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				9B65E00F26A58615001F3928 /* APIRequests.swift in Sources */,
 				9B3A9B6226A6FF4200EB7C10 /* WebSocketEventCreation.swift in Sources */,
+				9B85939926AFE4BF00D035AD /* Configeration.swift in Sources */,
 				9B3A9B6526A6FF4200EB7C10 /* StarscreamChatStream.swift in Sources */,
 				9B3A9B8F26A701E600EB7C10 /* DateTime.swift in Sources */,
+				9B85939B26AFE96200D035AD /* Entities.swift in Sources */,
 				9B65E01026A58615001F3928 /* APIRequestLoader.swift in Sources */,
 				9B3A9B8E26A701E600EB7C10 /* Miscellaneous.swift in Sources */,
 				9B3A9B8126A701D200EB7C10 /* IntegerID.swift in Sources */,
@@ -558,6 +670,7 @@
 				9B3A9B8D26A701E600EB7C10 /* Extensions.swift in Sources */,
 				9B3A9B7A26A701D200EB7C10 /* Visitor.swift in Sources */,
 				9B3A9B8626A701D200EB7C10 /* DataTypes.swift in Sources */,
+				9B4B630B26B0106000203172 /* ChatAPI.swift in Sources */,
 				9B3A9B6326A6FF4200EB7C10 /* PayloadHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -583,12 +696,36 @@
 			target = 9B488BB626AAC51200FDD21C /* HTTP */;
 			targetProxy = 9B488BD726AAC55600FDD21C /* PBXContainerItemProxy */;
 		};
+		9B4B633326B02D7200203172 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9BB117E826A1A45500E0B242 /* SalesmateChatSDK */;
+			targetProxy = 9B4B633226B02D7200203172 /* PBXContainerItemProxy */;
+		};
 		9BB117F526A1A45500E0B242 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 9BB117E826A1A45500E0B242 /* SalesmateChatSDK */;
 			targetProxy = 9BB117F426A1A45500E0B242 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		9B4B632326B02D6500203172 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9B4B632426B02D6500203172 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		9B4B632826B02D6700203172 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9B4B632926B02D6700203172 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		9B488BC826AAC51200FDD21C /* Debug (Development) */ = {
@@ -839,6 +976,174 @@
 			};
 			name = "Debug (Production)";
 		};
+		9B4B632C26B02D6700203172 /* Debug (Development) */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 4V6LJL28E3;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = TestApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.salesmateapp.www.TestApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = "Debug (Development)";
+		};
+		9B4B632D26B02D6700203172 /* Debug (Production) */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 4V6LJL28E3;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = TestApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.salesmateapp.www.TestApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = "Debug (Production)";
+		};
+		9B4B632E26B02D6700203172 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4V6LJL28E3;
+				INFOPLIST_FILE = TestApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.salesmateapp.www.TestApp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		9BB117FB26A1A45500E0B242 /* Debug (Development) */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1077,6 +1382,16 @@
 				9B488BCA26AAC51200FDD21C /* Debug (Development) */,
 				9B488BDD26AAF72200FDD21C /* Debug (Production) */,
 				9B488BCB26AAC51200FDD21C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9B4B632F26B02D6700203172 /* Build configuration list for PBXNativeTarget "TestApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9B4B632C26B02D6700203172 /* Debug (Development) */,
+				9B4B632D26B02D6700203172 /* Debug (Production) */,
+				9B4B632E26B02D6700203172 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

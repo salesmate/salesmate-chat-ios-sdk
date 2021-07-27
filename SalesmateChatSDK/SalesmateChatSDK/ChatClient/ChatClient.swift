@@ -41,6 +41,7 @@ protocol ChatObservation {
 }
 
 protocol ChatClient {
+    func getConfigerations(completion: @escaping ((Result<JSONObject, ChatError>) -> Void))
     func connect(waitForFullConnection: Bool, completion: @escaping (Result<Void, ChatError>) -> Void)
 }
 

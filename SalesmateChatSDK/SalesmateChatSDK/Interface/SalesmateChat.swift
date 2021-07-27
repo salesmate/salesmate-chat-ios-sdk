@@ -7,35 +7,50 @@
 
 import Foundation
 
-struct Settings {
-    let workspace_id: String
-    let app_key: String
-    let tenant_id: String
+public struct Settings {
+    
+    let workspaceID: String
+    let appKey: String
+    let tenantID: String
+    
+    public init(workspaceID: String, appKey: String, tenantID: String) {
+        self.workspaceID = workspaceID
+        self.appKey = appKey
+        self.tenantID = tenantID
+    }
 }
 
-protocol SalesmateChat {
-    static func setSalesmateChat(configeration settings: Settings)
-}
+public class SalesmateChat {
 
-class SalesmateChatSDK: SalesmateChat {
-
-    private var environment: Environment
     private var client: ChatClient
-    private var settings: Settings
+    private var config: Configeration
     
-    private static var shared: SalesmateChatSDK?
+    private static var shared: SalesmateChat?
     
-    init(with settings: Settings) {
-        self.environment = .development
-        self.settings = settings
-        self.client = SalesmateChatClient(chatStream: StarscreamChatStream(for: URL(string: "")!), chatAPI: ChatAPIClient())
+    init?(with settings: Settings) {
+        self.config = Configeration(connection: settings, environment: Environment.current)
+        
+        let chatStream = StarscreamChatStream(for: config)
+        let chatAPI = ChatAPIClient(config: config)
+        
+        self.client = SalesmateChatClient(config: config, chatStream: chatStream, chatAPI: chatAPI)
     }
     
-    static func setSalesmateChat(configeration settings: Settings) {
-        shared = SalesmateChatSDK(with: settings)
+    public static func setSalesmateChat(configeration settings: Settings) {
+        shared = SalesmateChat(with: settings)
         
-        shared?.client.connect(waitForFullConnection: false, completion: { _ in
-            
-        })
+        shared?.updateCustomization()
+        shared?.client.connect(completion: { result in })
+    }
+    
+    func updateCustomization() {
+        client.getConfigerations { result in
+            switch result {
+            case .success(let customization):
+                self.config.update(with: customization)
+                print("")
+            case .failure: break
+            }
+        }
     }
 }

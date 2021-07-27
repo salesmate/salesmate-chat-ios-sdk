@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol ChatStream {
+protocol ChatStream: AnyObject {
     var isReady: Bool { get }
     
     func register(observer: AnyObject, for events: [ChatEventToObserve], of conversation: ConversationID?, onEvent: @escaping (ChatEvent) -> Void)

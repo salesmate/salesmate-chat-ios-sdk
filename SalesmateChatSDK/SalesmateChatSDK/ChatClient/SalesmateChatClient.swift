@@ -7,16 +7,15 @@
 
 import Foundation
 
-protocol ChatAPI: AnyObject {
-}
-
 class SalesmateChatClient {
     
+    private let config: Configeration
     private let chatStream: ChatStream
     private let chatAPI: ChatAPI
     private let relay: ChatEventRelay = ChatEventRelay()
     
-    init(chatStream: ChatStream, chatAPI: ChatAPI) {
+    init(config: Configeration, chatStream: ChatStream, chatAPI: ChatAPI) {
+        self.config = config
         self.chatStream = chatStream
         self.chatAPI = chatAPI
         
@@ -29,30 +28,40 @@ class SalesmateChatClient {
 
 extension SalesmateChatClient: ChatClient {
     
+    func getConfigerations(completion: @escaping ((Result<JSONObject, ChatError>) -> Void)) {
+        chatAPI.getConfigerations { result in
+            completion(result)
+        }
+    }
+    
     func connect(waitForFullConnection: Bool = false, completion: @escaping (Result<Void, ChatError>) -> Void) {
         
-//        func whenAuthTokenAvailable() {
-//            if waitForFullConnection {
-//                self.chatStream.connect(completion: completion)
-//            } else {
-//                self.chatStream.connect(completion: { _ in })
-//                completion(.success(()))
-//            }
-//        }
-//
-//        if configuration?.csAuthToken == nil {
-//            getAuthToken { result in
-//                switch result {
-//                case .success():
-//                    whenAuthTokenAvailable()
-//                case .failure(let error):
-//                    print(error)
-//                    completion(.failure(ChatError.unknown))
-//                }
-//            }
-//        } else {
-//            whenAuthTokenAvailable()
-//        }
+        func whenAuthTokenAvailable() {
+            if waitForFullConnection {
+                self.chatStream.connect(completion: completion)
+            } else {
+                self.chatStream.connect(completion: { _ in })
+                completion(.success(()))
+            }
+        }
+
+        if config.socketAuthToken == nil {
+            chatAPI.getAuthToken { result in
+                switch result {
+                case .success((let pseudoName, let authToken, let channels)):
+                    self.config.pseudoName = pseudoName
+                    self.config.socketAuthToken = authToken
+                    self.config.channels = channels
+                    
+                    whenAuthTokenAvailable()
+                case .failure(let error):
+                    print(error)
+                    completion(.failure(ChatError.unknown))
+                }
+            }
+        } else {
+            whenAuthTokenAvailable()
+        }
     }
 }
 

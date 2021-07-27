@@ -9,7 +9,12 @@ import Foundation
 
 class PayloadMaker: ChatStreamPayloadMaker {
     
+    private let config: Configeration
     private var cid: Int = 0
+    
+    init(config: Configeration) {
+        self.config = config
+    }
     
     private func nextCID() -> Int {
         cid += 1
@@ -17,59 +22,36 @@ class PayloadMaker: ChatStreamPayloadMaker {
     }
     
     func handshakeObject() -> Data? {
-//        guard let authToken = configuration?.csAuthToken else {
-//            print("Chat AuthToken not found")
-//            return nil
-//        }
-//
-//        let authToken = ""
-//        let event: JSONObject = [
-//            Payload.Keys.event: Payload.Event.handshake.rawValue,
-//            Payload.Keys.data: [
-//                Payload.Keys.authToken: authToken
-//            ],
-//            Payload.Keys.cid: nextCID()
-//        ]
-//
-//        return try? JSONSerialization.data(withJSONObject: event, options: [])
-        return nil
+        guard let authToken = config.socketAuthToken else {
+            print("Chat AuthToken not found")
+            return nil
+        }
+
+        let event: JSONObject = [
+            Payload.Keys.event: Payload.Event.handshake.rawValue,
+            Payload.Keys.data: [
+                Payload.Keys.authToken: authToken
+            ],
+            Payload.Keys.cid: nextCID()
+        ]
+
+        return try? JSONSerialization.data(withJSONObject: event, options: [])
     }
     
     func subscribeObjects() -> [Data]? {
-//        guard let linkName = configuration?.linkName,
-//              let userID = configuration?.userID,
-//              let workspaceID = configuration?.workspaceID else {
-//            print("ChatConnectionDetail.linkName, ChatConnectionDetail.userID or ChatConnectionDetail.workspaceID is not set.")
-//            return nil
-//        }
-//
-//        let event1: JSONObject = [
-//            Payload.Keys.event: Payload.Event.subscribe.rawValue,
-//            Payload.Keys.data: [
-//                Payload.Keys.channel: "link-\(linkName)-\(userID)"
-//            ],
-//            Payload.Keys.cid: nextCID()
-//        ]
-//
-//        let event2: JSONObject = [
-//            Payload.Keys.event: Payload.Event.subscribe.rawValue,
-//            Payload.Keys.data: [
-//                Payload.Keys.channel: "link-\(linkName)"
-//            ],
-//            Payload.Keys.cid: nextCID()
-//        ]
-//        let event3: JSONObject = [
-//            Payload.Keys.event: Payload.Event.subscribe.rawValue,
-//            Payload.Keys.data: [
-//                Payload.Keys.channel: "link-\(linkName)-\(workspaceID)"
-//            ],
-//            Payload.Keys.cid: nextCID()
-//        ]
-//
-//        return [event1, event2, event3].compactMap {
-//            try? JSONSerialization.data(withJSONObject: $0, options: [])
-//        }
-        return nil
+        let events = config.channels?.map { channel in
+            return [
+                Payload.Keys.event: Payload.Event.subscribe.rawValue,
+                Payload.Keys.data: [
+                    Payload.Keys.channel: channel
+                ],
+                Payload.Keys.cid: nextCID()
+            ]
+        }
+        
+        return events?.compactMap {
+            try? JSONSerialization.data(withJSONObject: $0, options: [])
+        }
     }
     
     func presenceObject() -> Data? {

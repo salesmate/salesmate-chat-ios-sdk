@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 typealias ConversationID = String
 typealias MessageID = String
@@ -17,6 +18,34 @@ typealias JSONArray = [JSONObject]
 enum Environment {
     case development
     case production
+    
+    private static let infoDictionary: [String: Any] = {
+        guard let dict = Bundle.main.infoDictionary else { fatalError("Plist file not found") }
+        return dict
+    }()
+    
+    static let current: Environment = {
+        guard let configuration = Environment.infoDictionary["Configuration"] as? String else {
+            return .production
+        }
+        
+        if configuration.contains("Development") {
+            return .development
+        } else if configuration.contains("Production") {
+            return .production
+        } else {
+            return .production
+        }
+    }()
+    
+    var baseAPIURL: URL {
+        switch self {
+        case .development:
+            return URL(string: "https://apis-dev.salesmate.io")!
+        case .production:
+            return URL(string: "https://apis.salesmate.io")!
+        }
+    }
 }
 
 enum ChatError: Error {
@@ -84,16 +113,14 @@ extension Decodable {
             return nil
         }
     }
-}
-
-extension JSONObject {
     
-    func getStringID(for key: String) -> String? {
-        if let string = self[key] as? String {
-            return string
-        } else if let integer = self[key] as? String {
-            return String(integer)
-        } else {
+    init?(from json: JSON) {
+        do {
+            let jsonData = try json.rawData()
+            let instance = try jsonDecoder.decode(Self.self, from: jsonData)
+            self = instance
+        } catch {
+            print(error)
             return nil
         }
     }

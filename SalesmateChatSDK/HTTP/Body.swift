@@ -20,7 +20,7 @@ public struct JSONBody<T: Encodable>: HTTPBody {
     
     private let value: T
     
-    init(_ value: T) {
+    public init(_ value: T) {
         self.value = value
     }
     

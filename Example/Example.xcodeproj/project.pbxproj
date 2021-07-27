@@ -3,26 +3,26 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9B4B631426B02D0E00203172 /* SalesmateChatSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B4B631326B02D0E00203172 /* SalesmateChatSDK.framework */; };
+		9B4B631526B02D0E00203172 /* SalesmateChatSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9B4B631326B02D0E00203172 /* SalesmateChatSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9BB1181026A1A6A600E0B242 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB1180F26A1A6A600E0B242 /* AppDelegate.swift */; };
 		9BB1181726A1A6A600E0B242 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BB1181526A1A6A600E0B242 /* Main.storyboard */; };
 		9BB1181926A1A6A800E0B242 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BB1181826A1A6A800E0B242 /* Assets.xcassets */; };
 		9BB1181C26A1A6A800E0B242 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BB1181A26A1A6A800E0B242 /* LaunchScreen.storyboard */; };
-		9BD2AC5426A6F43500EF6628 /* SalesmateChatSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BD2AC5326A6F43500EF6628 /* SalesmateChatSDK.xcframework */; };
-		9BD2AC5526A6F43500EF6628 /* SalesmateChatSDK.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9BD2AC5326A6F43500EF6628 /* SalesmateChatSDK.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		9BD2AC5626A6F43500EF6628 /* Embed Frameworks */ = {
+		9B4B631626B02D0E00203172 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				9BD2AC5526A6F43500EF6628 /* SalesmateChatSDK.xcframework in Embed Frameworks */,
+				9B4B631526B02D0E00203172 /* SalesmateChatSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -30,6 +30,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		9B4B630C26B02C2100203172 /* SalesmateChatSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SalesmateChatSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B4B630F26B02CB600203172 /* SalesmateChatSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SalesmateChatSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B4B631326B02D0E00203172 /* SalesmateChatSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = SalesmateChatSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BB1180C26A1A6A600E0B242 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BB1180F26A1A6A600E0B242 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9BB1181626A1A6A600E0B242 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -44,7 +47,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9BD2AC5426A6F43500EF6628 /* SalesmateChatSDK.xcframework in Frameworks */,
+				9B4B631426B02D0E00203172 /* SalesmateChatSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +86,9 @@
 		9BEF452326A1C92700FD25BE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9B4B631326B02D0E00203172 /* SalesmateChatSDK.framework */,
+				9B4B630F26B02CB600203172 /* SalesmateChatSDK.framework */,
+				9B4B630C26B02C2100203172 /* SalesmateChatSDK.framework */,
 				9BD2AC5326A6F43500EF6628 /* SalesmateChatSDK.xcframework */,
 			);
 			name = Frameworks;
@@ -98,7 +104,7 @@
 				9BB1180826A1A6A600E0B242 /* Sources */,
 				9BB1180926A1A6A600E0B242 /* Frameworks */,
 				9BB1180A26A1A6A600E0B242 /* Resources */,
-				9BD2AC5626A6F43500EF6628 /* Embed Frameworks */,
+				9B4B631626B02D0E00203172 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);

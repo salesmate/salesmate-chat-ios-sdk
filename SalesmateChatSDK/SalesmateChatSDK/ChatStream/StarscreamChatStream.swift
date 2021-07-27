@@ -23,30 +23,35 @@ class StarscreamChatStream {
         var isConnected: Bool { self == .connected }
     }
     
-    private var socket: WebSocket? = nil
+    private let config: Configeration
+    private var socket: WebSocket?
     private var status: ConnectionStatus = .notConnected
-    private var relay: ChatEventRelay = ChatEventRelay()
+    private let relay: ChatEventRelay = ChatEventRelay()
     private let internetMonitor = NWPathMonitor()
-    private let payloads: ChatStreamPayloadMaker = PayloadMaker()
+    private let payloads: ChatStreamPayloadMaker
     
     private var onConnect: ((Result<Void, ChatError>) -> Void)?
-    
-    init(socket: WebSocket) {
-        self.socket = socket
         
-        self.socket?.respondToPingWithPong = true
-        self.socket?.delegate = self
-    }
-    
-    init(for url: URL) {
-        self.socket = WebSocket(request: URLRequest(url: url))
-        
-        self.socket?.respondToPingWithPong = true
-        self.socket?.delegate = self
+    init(for config: Configeration) {
+        self.config = config
+        self.payloads = PayloadMaker(config: config)
     }
     
     private func connect() {
         guard status.isNotConnected else { return }
+        
+        var builder = URLComponents()
+        
+        builder.scheme = "wss"
+        builder.host = config.identity.tenantID
+        builder.path = "/socketcluster/"
+        
+        guard let url = builder.url else { return }
+        
+        socket = WebSocket(request: URLRequest(url: url))
+        
+        socket?.respondToPingWithPong = true
+        socket?.delegate = self
         
         status = .connecting
         

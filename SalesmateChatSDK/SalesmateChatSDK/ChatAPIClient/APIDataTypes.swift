@@ -9,11 +9,13 @@ import Foundation
 @_implementationOnly import SwiftyJSON
 @_implementationOnly import HTTP
 
-enum HeaderKey: String {
-    case linkName = "x-linkname"
-    case workspaceID = "x-workspace-id"
-    case accessToken = "accessToken"
-    case contentType = "Content-Type"
+struct HeaderKey {
+    static let linkName = "x-linkname"
+    static let workspaceID = "x-workspace-id"
+    static let contactID = "x-contact-id"
+    static let uniqueID = "x-unique-id"
+    static let verifiedID = "x-verified-id"
+    static let contentType = "Content-Type"
 }
 
 struct ResponseKeyValue {
