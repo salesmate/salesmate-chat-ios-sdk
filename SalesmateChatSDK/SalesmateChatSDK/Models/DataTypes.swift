@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import SwiftyJSON
+@_implementationOnly import SwiftyJSON
 
 typealias ConversationID = String
 typealias MessageID = String

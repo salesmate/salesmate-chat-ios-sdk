@@ -9,7 +9,7 @@ import Foundation
 
 public protocol EndPoint {
     var method: HTTPMethod { get }
-    var path: URL { get }
+    var url: URL { get }
     var queryItems: [URLQueryItem]? { get }
     var headers: HTTPHeaders? { get }
     var body: HTTPBody? { get }
@@ -26,7 +26,7 @@ public extension HTTPRequest {
     
     var request: URLRequest? {
         // Construct URL
-        var components = URLComponents(url: path, resolvingAgainstBaseURL: true)
+        var components = URLComponents(url: url, resolvingAgainstBaseURL: true)
         components?.queryItems = queryItems?.filter({ !($0.value?.isEmpty ?? true) }) // Remove nil or Empty value.
         
         guard let requestURL = components?.url else {

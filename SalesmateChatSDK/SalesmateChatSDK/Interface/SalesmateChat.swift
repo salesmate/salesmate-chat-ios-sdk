@@ -5,7 +5,7 @@
 //  Created by Chintan Dave on 20/07/21.
 //
 
-import Foundation
+import UIKit
 
 public struct Settings {
     
@@ -43,7 +43,11 @@ public class SalesmateChat {
         shared?.client.connect(completion: { result in })
     }
     
-    func updateCustomization() {
+    public static func presentMessenger(from viewController: UIViewController) {
+        shared?.presentMessenger(from: viewController)
+    }
+    
+    private func updateCustomization() {
         client.getConfigerations { result in
             switch result {
             case .success(let customization):
@@ -52,5 +56,10 @@ public class SalesmateChat {
             case .failure: break
             }
         }
+    }
+    
+    private func presentMessenger(from viewController: UIViewController) {
+        let VC = HomeVC.create(with: HomeViewModel(config: config, client: client))
+        viewController.present(VC, animated: true, completion: nil)
     }
 }

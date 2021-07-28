@@ -53,4 +53,17 @@ extension ChatAPIClient: ChatAPI {
             }
         }
     }
+    
+    func getConversations(at page: Page, completion: @escaping (Result<[Conversation], ChatError>) -> Void) {
+//        let request = GetConversationsRequest(rows: 3, offset: 0)
+//
+//        loader.load(request: request) { (result) in
+//            switch result {
+//            case .success(let response):
+//
+//            case .failure:
+//                //completion(.failure(.unknown))
+//            }
+//        }
+    }
 }

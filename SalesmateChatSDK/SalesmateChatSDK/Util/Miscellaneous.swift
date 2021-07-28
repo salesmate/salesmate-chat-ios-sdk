@@ -15,3 +15,7 @@ func print(_ items: Any..., separator: String = " ", terminator: String = "\n") 
     items.forEach { Swift.print($0, separator: separator, terminator: terminator) }
     #endif
 }
+
+func run(afterDelay seconds: TimeInterval, execute work: @escaping @convention(block) () -> Void) {
+    DispatchQueue.main.asyncAfter(deadline: .now() + seconds, execute: work)
+}

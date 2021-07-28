@@ -19,4 +19,8 @@ class ViewController: UIViewController {
         
         SalesmateChat.setSalesmateChat(configeration: setting)
     }
+    
+    @IBAction func showChatPressed(_ sender: UIButton) {
+        SalesmateChat.presentMessenger(from: self)
+    }
 }

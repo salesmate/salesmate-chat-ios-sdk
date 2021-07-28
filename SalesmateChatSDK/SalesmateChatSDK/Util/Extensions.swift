@@ -18,6 +18,9 @@ extension Data {
     var utf8: String? { String(data: self, encoding: .utf8) }
 }
 
-func run(afterDelay seconds: TimeInterval, execute work: @escaping @convention(block) () -> Void) {
-    DispatchQueue.main.asyncAfter(deadline: .now() + seconds, execute: work)
+extension String {
+    
+    func trim() -> String {
+        trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+    }
 }

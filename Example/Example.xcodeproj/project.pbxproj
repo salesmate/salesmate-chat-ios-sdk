@@ -3,12 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9B4B631426B02D0E00203172 /* SalesmateChatSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B4B631326B02D0E00203172 /* SalesmateChatSDK.framework */; };
-		9B4B631526B02D0E00203172 /* SalesmateChatSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9B4B631326B02D0E00203172 /* SalesmateChatSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9B961AB326B18B9D00052150 /* SalesmateChatSDK.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BD2AC5326A6F43500EF6628 /* SalesmateChatSDK.xcframework */; };
+		9B961AB426B18B9D00052150 /* SalesmateChatSDK.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9BD2AC5326A6F43500EF6628 /* SalesmateChatSDK.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9BB1181026A1A6A600E0B242 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB1180F26A1A6A600E0B242 /* AppDelegate.swift */; };
 		9BB1181726A1A6A600E0B242 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BB1181526A1A6A600E0B242 /* Main.storyboard */; };
 		9BB1181926A1A6A800E0B242 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BB1181826A1A6A800E0B242 /* Assets.xcassets */; };
@@ -16,13 +16,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		9B4B631626B02D0E00203172 /* Embed Frameworks */ = {
+		9B961AB526B18B9D00052150 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				9B4B631526B02D0E00203172 /* SalesmateChatSDK.framework in Embed Frameworks */,
+				9B961AB426B18B9D00052150 /* SalesmateChatSDK.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -47,7 +47,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9B4B631426B02D0E00203172 /* SalesmateChatSDK.framework in Frameworks */,
+				9B961AB326B18B9D00052150 /* SalesmateChatSDK.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,7 +104,7 @@
 				9BB1180826A1A6A600E0B242 /* Sources */,
 				9BB1180926A1A6A600E0B242 /* Frameworks */,
 				9BB1180A26A1A6A600E0B242 /* Resources */,
-				9B4B631626B02D0E00203172 /* Embed Frameworks */,
+				9B961AB526B18B9D00052150 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);

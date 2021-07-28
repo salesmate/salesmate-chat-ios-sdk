@@ -8,6 +8,9 @@ echo $PWD
 
 rm -r '../build'
 
+xcodebuild clean \
+-scheme SalesmateChatSDK \
+
 xcodebuild archive \
 -scheme SalesmateChatSDK \
 -destination "generic/platform=iOS" \

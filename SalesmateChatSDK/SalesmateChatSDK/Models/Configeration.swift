@@ -29,9 +29,6 @@ class Configeration {
         let messengerBackground: String
         let logourl: String
         let showPoweredBy: Bool
-        let launcherPosition: String
-        let sideSpacing: String
-        let bottomSpacing: String
     }
     
     struct Welcome {
@@ -58,7 +55,7 @@ class Configeration {
     let environment: Environment
     
     var availability: Availability?
-    var look: lookAndFeel??
+    var look: lookAndFeel?
     var welcome: Welcome?
     var workspace: Workspace?
     var users: [User]?
@@ -144,9 +141,6 @@ extension Configeration.lookAndFeel: Codable {
         case messengerBackground = "messenger_background"
         case logourl = "logo_url"
         case showPoweredBy = "show_powered_by"
-        case launcherPosition = "launcher_position"
-        case sideSpacing = "side_spacing"
-        case bottomSpacing = "bottom_spacing"
     }
 }
 

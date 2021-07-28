@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "ic-start-new-chat.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
