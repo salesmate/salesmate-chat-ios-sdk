@@ -63,9 +63,9 @@ class Configeration {
     var contact: Contact?
     var rating: [Rating]?
     
-    var uniqueID: String? = UIDevice.current.identifierForVendor?.uuidString
+    var uniqueID: String? = "7caf763b-f7eb-4c54-8a99-8dcc0c120ee4"//UIDevice.current.identifierForVendor?.uuidString
     var contactID: IntegerID? { self.contact?.id }
-    var verifiedID: IntegerID?
+    var verifiedID: IntegerID? = "102"
     
     var socketAuthToken: String?
     var pseudoName: String?

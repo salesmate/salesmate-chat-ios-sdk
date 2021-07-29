@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Recent ConversationsVC-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController id="Y6W-OH-hqX" customClass="RecentConversationsVC" customModule="SalesmateChatSDK" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="jUh-V6-o7S">
+                                <rect key="frame" x="0.0" y="44" width="414" height="788"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rXT-Za-C0V">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="84"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IdN-aw-rzy">
+                                                <rect key="frame" x="30" y="30" width="354" height="29"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Recent Chats" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wIl-nI-Np1">
+                                                        <rect key="frame" x="0.0" y="0.0" width="300" height="29"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
+                                                        <color key="textColor" red="0.035294117647058823" green="0.11764705882352941" blue="0.25882352941176467" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="npC-Tc-6OS">
+                                                        <rect key="frame" x="300" y="0.0" width="54" height="29"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
+                                                        <state key="normal" title="View All">
+                                                            <color key="titleColor" name="AccentColor"/>
+                                                        </state>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstItem="IdN-aw-rzy" firstAttribute="top" secondItem="rXT-Za-C0V" secondAttribute="top" constant="30" id="WkH-SH-ijX"/>
+                                            <constraint firstAttribute="bottom" secondItem="IdN-aw-rzy" secondAttribute="bottom" constant="25" id="dxJ-1A-8Qd"/>
+                                            <constraint firstItem="IdN-aw-rzy" firstAttribute="leading" secondItem="rXT-Za-C0V" secondAttribute="leading" constant="30" id="oGK-Xs-091"/>
+                                            <constraint firstAttribute="trailing" secondItem="IdN-aw-rzy" secondAttribute="trailing" constant="30" id="p5d-XZ-92f"/>
+                                        </constraints>
+                                    </view>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oBH-Vz-fyZ">
+                                        <rect key="frame" x="0.0" y="84" width="414" height="604"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <connections>
+                                            <outlet property="dataSource" destination="Y6W-OH-hqX" id="MP3-uF-oyZ"/>
+                                            <outlet property="delegate" destination="Y6W-OH-hqX" id="oiK-Cx-Tm7"/>
+                                        </connections>
+                                    </tableView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="umW-2g-sl7">
+                                        <rect key="frame" x="0.0" y="688" width="414" height="52"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zKQ-CI-73N" customClass="NewChatButton" customModule="SalesmateChatSDK" customModuleProvider="target">
+                                                <rect key="frame" x="59.5" y="0.0" width="295" height="52"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="295" id="PKK-bs-BMd"/>
+                                                    <constraint firstAttribute="height" constant="52" id="wWw-bY-7p0"/>
+                                                </constraints>
+                                                <state key="normal" title="Start New Chat">
+                                                    <color key="titleColor" name="AccentColor"/>
+                                                </state>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="52" id="5TT-Bu-OK5"/>
+                                            <constraint firstItem="zKQ-CI-73N" firstAttribute="centerX" secondItem="umW-2g-sl7" secondAttribute="centerX" id="7kA-um-Aec"/>
+                                            <constraint firstItem="zKQ-CI-73N" firstAttribute="centerY" secondItem="umW-2g-sl7" secondAttribute="centerY" id="T36-B0-Flk"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JHy-rP-piQ">
+                                        <rect key="frame" x="0.0" y="740" width="414" height="30"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="02h-k5-iix"/>
+                                        </constraints>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Made with ❤️ by Salesmate" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HiT-7g-mSP">
+                                        <rect key="frame" x="0.0" y="770" width="414" height="18"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" red="0.41960784309999999" green="0.46666666670000001" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="jUh-V6-o7S" secondAttribute="bottom" constant="30" id="7zi-SG-kCa"/>
+                            <constraint firstItem="jUh-V6-o7S" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="J2V-GN-7dg"/>
+                            <constraint firstItem="jUh-V6-o7S" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="jqW-J8-NpE"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="jUh-V6-o7S" secondAttribute="trailing" id="kRR-gS-leK"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="btnStartChat" destination="zKQ-CI-73N" id="eag-gz-2cX"/>
+                        <outlet property="btnViewAll" destination="npC-Tc-6OS" id="CKn-Ib-cmq"/>
+                        <outlet property="lblPowerBy" destination="HiT-7g-mSP" id="QqO-cq-G83"/>
+                        <outlet property="tableView" destination="oBH-Vz-fyZ" id="kdn-I7-ii4"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="132" y="102"/>
+        </scene>
+    </scenes>
+    <resources>
+        <namedColor name="AccentColor">
+            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

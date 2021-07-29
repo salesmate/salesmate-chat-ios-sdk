@@ -7,38 +7,24 @@
 
 import Foundation
 
-protocol HomeViewModelType {
-    var backgroundColorCode: String { get }
-    var actionColorCode: String { get }
-    
-    var headerLogoURL: URL? { get }
-    var backgroundPatternURL: URL? { get }
-
-    var greeting: String { get }
-    var teamIntro: String { get }
-    
-    var newVisitorViewModel: NewVisitorViewModelType { get }
-}
-
-class HomeViewModel: HomeViewModelType {
+class HomeViewModel {
     
     // MARK: - Private Properties
     private let config: Configeration
     private let client: ChatClient
-
-    // MARK: - Properties
-    var backgroundColorCode: String = ""
-    var actionColorCode: String = ""
     
-    var headerLogoURL: URL? = nil
-    var backgroundPatternURL: URL? = nil
-
-    var greeting: String = ""
-    var teamIntro: String = ""
-
-    var newVisitorViewModel: NewVisitorViewModelType {
-        NewVisitorViewModel(config: config)
-    }
+    // MARK: - Properties
+    private(set) var backgroundColorCode: String = ""
+    private(set) var actionColorCode: String = ""
+    
+    private(set) var headerLogoURL: URL? = nil
+    private(set) var backgroundPatternURL: URL? = nil
+    
+    private(set) var greeting: String = ""
+    private(set) var teamIntro: String = ""
+    
+    var showNewVisitorView: ((NewVisitorViewModel) -> Void)?
+    var showRecentConversationsView: ((RecentConversationsViewModel) -> Void)?
     
     // MARK: - Init
     init(config: Configeration, client: ChatClient) {
@@ -68,5 +54,39 @@ class HomeViewModel: HomeViewModelType {
         let fileName = name.replacingOccurrences(of: "pattern", with: "pt")
         
         return URL(string: "https://\(config.identity.tenantID)/assets/images/pattern/\(fileName).png")
+    }
+    
+    private func askToShowNewVisitorView() {
+        let viewModel = NewVisitorViewModel(config: config)
+        
+        OperationQueue.main.addOperation {
+            self.showNewVisitorView?(viewModel)
+        }
+    }
+    
+    private func askToShowRecentConversationsView(with conversations: [Conversation]) {
+        let viewModel = RecentConversationsViewModel(config: config, conversations: conversations)
+        
+        OperationQueue.main.addOperation {
+            self.showRecentConversationsView?(viewModel)
+        }
+    }
+}
+
+extension HomeViewModel {
+    
+    func getRecentConversations() {
+        client.getConversations(at: Page(size: 3)) { result in
+            switch result {
+            case .success(let conversations):
+                if conversations.isEmpty {
+                    self.askToShowNewVisitorView()
+                } else {
+                    self.askToShowRecentConversationsView(with: conversations)
+                }
+            case .failure:
+                break
+            }
+        }
     }
 }

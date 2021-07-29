@@ -65,6 +65,15 @@ extension SalesmateChatClient: ChatClient {
     }
 }
 
+extension SalesmateChatClient: ConversationFetcher {
+    
+    func getConversations(at page: Page, completion: @escaping (Result<[Conversation], ChatError>) -> Void) {
+        chatAPI.getConversations(at: page) { result in
+            completion(result)
+        }
+    }
+}
+
 extension SalesmateChatClient {
     
     private func prepareEventListener() {

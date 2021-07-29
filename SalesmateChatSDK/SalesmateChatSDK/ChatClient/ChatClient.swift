@@ -9,6 +9,10 @@ import Foundation
 
 var enableLog: Bool = true
 
+protocol ConversationFetcher {
+    func getConversations(at page: Page, completion: @escaping (Result<[Conversation], ChatError>) -> Void)
+}
+
 protocol ChatDataSource {
     var conversations: Set<Conversation> { get }
     var messages: Set<Message> { get }
@@ -40,7 +44,7 @@ protocol ChatObservation {
     func register(observer: AnyObject, for events:[ChatEventToObserve], of conversation: ConversationID?, onEvent: @escaping (ChatEvent) -> Void)
 }
 
-protocol ChatClient {
+protocol ChatClient: ConversationFetcher {
     func getConfigerations(completion: @escaping ((Result<JSONObject, ChatError>) -> Void))
     func connect(waitForFullConnection: Bool, completion: @escaping (Result<Void, ChatError>) -> Void)
 }

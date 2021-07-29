@@ -10,7 +10,7 @@ import UIKit
 class HomeVC: UIViewController {
 
     // MARK: - Static Functions
-    static func create(with viewModel: HomeViewModelType) -> HomeVC {
+    static func create(with viewModel: HomeViewModel) -> HomeVC {
         let storyboard = UIStoryboard(name: "Home", bundle: Bundle(for: Self.self))
         let homeVC = storyboard.instantiateInitialViewController() as! HomeVC
         
@@ -20,7 +20,7 @@ class HomeVC: UIViewController {
     }
     
     // MARK: - Private Properties
-    private var viewModel: HomeViewModelType!
+    private var viewModel: HomeViewModel!
     
     // MARK: - IBOutlets
     @IBOutlet private weak var viewTop: UIView!
@@ -39,16 +39,28 @@ class HomeVC: UIViewController {
         super.viewDidLoad()
 
         prepareView()
+        viewModel.getRecentConversations()
     }
     
     // MARK: - View
     private func prepareView() {
+        prepareViewModel()
         prepareTopView()
         
         viewContainer.layer.cornerRadius = 10
         viewContainer.clipsToBounds = true
+    }
+    
+    private func prepareViewModel() {
+        viewModel.showNewVisitorView = { viewModel in
+            let VC = NewVisitorVC.create(with: viewModel)
+            self.add(child: VC, in: self.viewContainer)
+        }
         
-        add(child: NewVisitorVC.create(with: viewModel.newVisitorViewModel), in: viewContainer)
+        viewModel.showRecentConversationsView = { viewModel in
+            let VC = RecentConversationsVC.create(with: viewModel)
+            self.add(child: VC, in: self.viewContainer)
+        }
     }
     
     private func prepareTopView() {

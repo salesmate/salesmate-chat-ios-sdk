@@ -57,17 +57,15 @@ struct GetSCAuthTokenRequest: HTTPRequest {
 
 struct GetConversationsRequest: HTTPRequest {
     
-    var method: HTTPMethod = .post
+    var method: HTTPMethod = .get
     var url: URL
     var queryItems: [URLQueryItem]?
     var headers: HTTPHeaders?
-    var body: HTTPBody?
     
     init(rows: Int, offset: Int, common: CAC = common) {
         url = URL(string: "messenger/v1/widget/conversations", relativeTo: common.base)!
         queryItems = [URLQueryItem(name: "rows", value: String(rows)),
                       URLQueryItem(name: "offset", value: String(offset))]
         headers = common.headers
-        body = JSONBody(["referer": common.config?.identity.tenantID ?? ""])
     }
 }

@@ -49,8 +49,6 @@ enum Environment {
 }
 
 enum ChatError: Error {
-    case authFail
-    case messageSendingFail(MessageToSend)
     case unknown
 }
 

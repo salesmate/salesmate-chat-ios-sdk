@@ -55,15 +55,17 @@ extension ChatAPIClient: ChatAPI {
     }
     
     func getConversations(at page: Page, completion: @escaping (Result<[Conversation], ChatError>) -> Void) {
-//        let request = GetConversationsRequest(rows: 3, offset: 0)
-//
-//        loader.load(request: request) { (result) in
-//            switch result {
-//            case .success(let response):
-//
-//            case .failure:
-//                //completion(.failure(.unknown))
-//            }
-//        }
+        let request = GetConversationsRequest(rows: page.rows, offset: page.offset)
+
+        loader.load(request: request) { (result) in
+            switch result {
+            case .success(let response):
+                guard let json = response.json as? JSONArray else { return }
+                let conversations = json.compactMap { Conversation(from: $0) }
+                completion(.success(conversations))
+            case .failure:
+                completion(.failure(.unknown))
+            }
+        }
     }
 }

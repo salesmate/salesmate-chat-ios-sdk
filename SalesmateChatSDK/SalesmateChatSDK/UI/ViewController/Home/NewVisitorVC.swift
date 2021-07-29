@@ -7,46 +7,10 @@
 
 import UIKit
 
-class NewChatButton: UIButton {
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-        setup()
-    }
-    
-    private func setup() {
-        layer.cornerRadius = 10
-        clipsToBounds = true
-        
-        setTitle("Start New Chat", for: .normal)
-        setImage(UIImage.startNewChat, for: .normal)
-        
-        titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
-            
-        semanticContentAttribute = .forceRightToLeft
-        titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 10)
-    }
-    
-    override var backgroundColor: UIColor? {
-        didSet {
-            guard let color = backgroundColor else { return }
-            
-            if color.isDark {
-                setTitleColor(.white, for: .normal)
-                tintColor = .white
-            } else {
-                setTitleColor(.black, for: .normal)
-                tintColor = .black
-            }
-        }
-    }
-}
-
 class NewVisitorVC: UIViewController {
     
     // MARK: - Static Functions
-    static func create(with viewModel: NewVisitorViewModelType) -> NewVisitorVC {
+    static func create(with viewModel: NewVisitorViewModel) -> NewVisitorVC {
         let storyboard = UIStoryboard(name: "NewVisitor", bundle: Bundle(for: Self.self))
         let VC = storyboard.instantiateInitialViewController() as! NewVisitorVC
         
@@ -56,7 +20,7 @@ class NewVisitorVC: UIViewController {
     }
     
     // MARK: - Private Properties
-    private var viewModel: NewVisitorViewModelType!
+    private var viewModel: NewVisitorViewModel!
     
     // MARK: - IBOutlets
     @IBOutlet private weak var lblResponseTime: UILabel!

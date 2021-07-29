@@ -38,6 +38,32 @@ extension ISO8601DateFormatter {
 
 extension Date {
     var stringAsISO8601Format: String { ISO8601DateFormatter.convertor.string(from: self) }
+    
+    var shortDurationString: String {
+        let interval = Int(abs(timeIntervalSince(Date())))
+        let minute = 60
+        let hour = 60 * 60
+        let day = hour * 24
+        let weak = day * 7
+        let month = day * 30
+        let year = day * 365
+        
+        if interval < minute {
+            return "Now"
+        } else if interval < hour {
+            return "\(interval / minute)m"
+        } else if interval < day {
+            return "\(interval / hour)h"
+        } else if interval < weak {
+            return "\(interval / day)d"
+        } else if interval < month {
+            return "\(interval / weak)w"
+        } else if interval < year {
+            return "\(interval / month)mth"
+        } else {
+            return "\(interval / year)y"
+        }
+    }
 }
 
 extension String {

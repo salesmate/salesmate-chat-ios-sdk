@@ -60,10 +60,16 @@
 		9BB189A826A70A2700D7F7FD /* SalesmateChatClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB189A626A70A2700D7F7FD /* SalesmateChatClient.swift */; };
 		9BB189A926A70A2700D7F7FD /* ChatClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB189A726A70A2700D7F7FD /* ChatClient.swift */; };
 		9BBBAED826A6EEC5006AB718 /* SalesmateChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBBAED726A6EEC5006AB718 /* SalesmateChat.swift */; };
+		9BCD394A26B30BA100D484CF /* ConversationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCD394926B30BA100D484CF /* ConversationCell.swift */; };
 		9BD2AC5F26A6FA3600EF6628 /* Starscream in Frameworks */ = {isa = PBXBuildFile; productRef = 9BD2AC5E26A6FA3600EF6628 /* Starscream */; };
 		9BD7752D26B27BEE002BA2AD /* XIBView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD7752C26B27BEE002BA2AD /* XIBView.swift */; };
 		9BD7752F26B27D59002BA2AD /* AvailableUsersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD7752E26B27D59002BA2AD /* AvailableUsersView.swift */; };
 		9BD7753126B2A986002BA2AD /* CirculerProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD7753026B2A986002BA2AD /* CirculerProfileView.swift */; };
+		9BD7753326B2C72D002BA2AD /* ConversationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9BD7753226B2C72D002BA2AD /* ConversationCell.xib */; };
+		9BD7753526B2D18A002BA2AD /* RecentConversations.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BD7753426B2D18A002BA2AD /* RecentConversations.storyboard */; };
+		9BD7753726B2D1A8002BA2AD /* RecentConversationsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD7753626B2D1A8002BA2AD /* RecentConversationsVC.swift */; };
+		9BD7753926B2D1B2002BA2AD /* RecentConversationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD7753826B2D1B2002BA2AD /* RecentConversationsViewModel.swift */; };
+		9BD7753B26B2D1FC002BA2AD /* NewChatButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD7753A26B2D1FC002BA2AD /* NewChatButton.swift */; };
 		9BDD51B626B19CA2002C2307 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BDD51B526B19CA2002C2307 /* Media.xcassets */; };
 		9BE7183426B1897900DD3113 /* NewVisitor.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BE7183326B1897900DD3113 /* NewVisitor.storyboard */; };
 		9BE7183626B1898800DD3113 /* NewVisitorVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE7183526B1898800DD3113 /* NewVisitorVC.swift */; };
@@ -186,9 +192,15 @@
 		9BB189A626A70A2700D7F7FD /* SalesmateChatClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SalesmateChatClient.swift; sourceTree = "<group>"; };
 		9BB189A726A70A2700D7F7FD /* ChatClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatClient.swift; sourceTree = "<group>"; };
 		9BBBAED726A6EEC5006AB718 /* SalesmateChat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalesmateChat.swift; sourceTree = "<group>"; };
+		9BCD394926B30BA100D484CF /* ConversationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationCell.swift; sourceTree = "<group>"; };
 		9BD7752C26B27BEE002BA2AD /* XIBView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XIBView.swift; sourceTree = "<group>"; };
 		9BD7752E26B27D59002BA2AD /* AvailableUsersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailableUsersView.swift; sourceTree = "<group>"; };
 		9BD7753026B2A986002BA2AD /* CirculerProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CirculerProfileView.swift; sourceTree = "<group>"; };
+		9BD7753226B2C72D002BA2AD /* ConversationCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConversationCell.xib; sourceTree = "<group>"; };
+		9BD7753426B2D18A002BA2AD /* RecentConversations.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RecentConversations.storyboard; sourceTree = "<group>"; };
+		9BD7753626B2D1A8002BA2AD /* RecentConversationsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentConversationsVC.swift; sourceTree = "<group>"; };
+		9BD7753826B2D1B2002BA2AD /* RecentConversationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentConversationsViewModel.swift; sourceTree = "<group>"; };
+		9BD7753A26B2D1FC002BA2AD /* NewChatButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewChatButton.swift; sourceTree = "<group>"; };
 		9BDD51B526B19CA2002C2307 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		9BE7183326B1897900DD3113 /* NewVisitor.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewVisitor.storyboard; sourceTree = "<group>"; };
 		9BE7183526B1898800DD3113 /* NewVisitorVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewVisitorVC.swift; sourceTree = "<group>"; };
@@ -429,6 +441,9 @@
 				9BE7183326B1897900DD3113 /* NewVisitor.storyboard */,
 				9BE7183526B1898800DD3113 /* NewVisitorVC.swift */,
 				9BE7183726B1899900DD3113 /* NewVisitorViewModel.swift */,
+				9BD7753426B2D18A002BA2AD /* RecentConversations.storyboard */,
+				9BD7753626B2D1A8002BA2AD /* RecentConversationsVC.swift */,
+				9BD7753826B2D1B2002BA2AD /* RecentConversationsViewModel.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -447,6 +462,9 @@
 				9BD7752C26B27BEE002BA2AD /* XIBView.swift */,
 				9BD7752E26B27D59002BA2AD /* AvailableUsersView.swift */,
 				9BD7753026B2A986002BA2AD /* CirculerProfileView.swift */,
+				9BD7753A26B2D1FC002BA2AD /* NewChatButton.swift */,
+				9BD7753226B2C72D002BA2AD /* ConversationCell.xib */,
+				9BCD394926B30BA100D484CF /* ConversationCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -652,8 +670,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9BD7753326B2C72D002BA2AD /* ConversationCell.xib in Resources */,
 				9BE7183426B1897900DD3113 /* NewVisitor.storyboard in Resources */,
 				9BDD51B626B19CA2002C2307 /* Media.xcassets in Resources */,
+				9BD7753526B2D18A002BA2AD /* RecentConversations.storyboard in Resources */,
 				9BFC63CC26B128B400976141 /* Home.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -708,8 +728,10 @@
 				9BD7752F26B27D59002BA2AD /* AvailableUsersView.swift in Sources */,
 				9B3A9B6226A6FF4200EB7C10 /* WebSocketEventCreation.swift in Sources */,
 				9B85939926AFE4BF00D035AD /* Configeration.swift in Sources */,
+				9BCD394A26B30BA100D484CF /* ConversationCell.swift in Sources */,
 				9B3A9B6526A6FF4200EB7C10 /* StarscreamChatStream.swift in Sources */,
 				9B3A9B8F26A701E600EB7C10 /* DateTime.swift in Sources */,
+				9BD7753B26B2D1FC002BA2AD /* NewChatButton.swift in Sources */,
 				9B85939B26AFE96200D035AD /* Entities.swift in Sources */,
 				9B65E01026A58615001F3928 /* APIRequestLoader.swift in Sources */,
 				9B3A9B8E26A701E600EB7C10 /* Miscellaneous.swift in Sources */,
@@ -726,6 +748,7 @@
 				9BD7752D26B27BEE002BA2AD /* XIBView.swift in Sources */,
 				9B3A9B7D26A701D200EB7C10 /* Block.swift in Sources */,
 				9B65E01226A58C64001F3928 /* APIDataTypes.swift in Sources */,
+				9BD7753926B2D1B2002BA2AD /* RecentConversationsViewModel.swift in Sources */,
 				9B2B4F7726B1B126008AA860 /* UIKitExtensions.swift in Sources */,
 				9BB189A926A70A2700D7F7FD /* ChatClient.swift in Sources */,
 				9B3A9B8326A701D200EB7C10 /* Payload.swift in Sources */,
@@ -735,6 +758,7 @@
 				9BFC63CE26B128C600976141 /* HomeVC.swift in Sources */,
 				9BE7183826B1899900DD3113 /* NewVisitorViewModel.swift in Sources */,
 				9B3A9B8D26A701E600EB7C10 /* Extensions.swift in Sources */,
+				9BD7753726B2D1A8002BA2AD /* RecentConversationsVC.swift in Sources */,
 				9B3A9B7A26A701D200EB7C10 /* Visitor.swift in Sources */,
 				9B3A9B8626A701D200EB7C10 /* DataTypes.swift in Sources */,
 				9BD7753126B2A986002BA2AD /* CirculerProfileView.swift in Sources */,

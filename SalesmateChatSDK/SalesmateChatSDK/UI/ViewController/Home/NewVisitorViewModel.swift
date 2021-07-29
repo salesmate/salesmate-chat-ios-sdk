@@ -7,22 +7,15 @@
 
 import Foundation
 
-protocol NewVisitorViewModelType {
-    var responseTime: String { get }
-    var availableuserViewModel: AvailableUsersViewModel { get }
-    var showPowerBy: Bool { get }
-    var buttonColorCode: String { get }
-}
-
-class NewVisitorViewModel: NewVisitorViewModelType {
+class NewVisitorViewModel {
 
     // MARK: - Private Properties
     private let config: Configeration
 
-    var responseTime: String = ""
-    var availableuserViewModel = AvailableUsersViewModel(users: [], spacing: -10, maxNumberUserToShow: 3)
-    var showPowerBy: Bool = false
-    var buttonColorCode: String = ""
+    private(set) var responseTime: String = ""
+    private(set) var availableuserViewModel = AvailableUsersViewModel(users: [], spacing: -10, maxNumberUserToShow: 3)
+    private(set) var showPowerBy: Bool = false
+    private(set) var buttonColorCode: String = ""
     
     // MARK: - Init
     init(config: Configeration) {
