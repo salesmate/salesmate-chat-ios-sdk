@@ -46,11 +46,23 @@
                                             <constraint firstAttribute="height" constant="40" id="hd6-zF-ncR"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bt4-nU-iTu">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZjS-Mm-1f8">
                                         <rect key="frame" x="0.0" y="94.5" width="300" height="60"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="300" placeholderIntrinsicHeight="60" translatesAutoresizingMaskIntoConstraints="NO" id="bt4-nU-iTu" customClass="AvailableUsersView" customModule="SalesmateChatSDK" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="300" height="60"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="60" id="CTc-Ef-uni"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="60" id="CTc-Ef-uni"/>
+                                            <constraint firstAttribute="height" constant="60" id="LSc-af-eQ6"/>
+                                            <constraint firstItem="bt4-nU-iTu" firstAttribute="top" secondItem="ZjS-Mm-1f8" secondAttribute="top" id="Uit-XU-031"/>
+                                            <constraint firstAttribute="bottom" secondItem="bt4-nU-iTu" secondAttribute="bottom" id="atj-fm-Q5c"/>
+                                            <constraint firstItem="bt4-nU-iTu" firstAttribute="centerX" secondItem="ZjS-Mm-1f8" secondAttribute="centerX" id="avh-7I-ZJf"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pgr-hr-n6L" userLabel="Space">
@@ -92,6 +104,7 @@
                         <outlet property="btnStartChat" destination="aqi-Zl-CJw" id="NK3-Nz-cpH"/>
                         <outlet property="lblPowerBy" destination="G24-YK-UTv" id="oUE-hc-mGF"/>
                         <outlet property="lblResponseTime" destination="jQ8-Ze-M3I" id="ZQo-Xd-EcD"/>
+                        <outlet property="userView" destination="bt4-nU-iTu" id="Kvf-O3-FtH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

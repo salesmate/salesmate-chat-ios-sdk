@@ -60,6 +60,7 @@ class NewVisitorVC: UIViewController {
     
     // MARK: - IBOutlets
     @IBOutlet private weak var lblResponseTime: UILabel!
+    @IBOutlet private weak var userView: AvailableUsersView!
     @IBOutlet private weak var lblPowerBy: UILabel!
     @IBOutlet private weak var btnStartChat: UIButton!
     
@@ -74,7 +75,7 @@ class NewVisitorVC: UIViewController {
     private func prepareView() {
         lblResponseTime.text = viewModel.responseTime
         lblPowerBy.isHidden = !viewModel.showPowerBy
-        
+        userView.viewModel = viewModel.availableuserViewModel
         btnStartChat.backgroundColor = UIColor(hex: viewModel.buttonColorCode)
     }
 }

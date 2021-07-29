@@ -9,6 +9,7 @@ import Foundation
 
 protocol NewVisitorViewModelType {
     var responseTime: String { get }
+    var availableuserViewModel: AvailableUsersViewModel { get }
     var showPowerBy: Bool { get }
     var buttonColorCode: String { get }
 }
@@ -19,6 +20,7 @@ class NewVisitorViewModel: NewVisitorViewModelType {
     private let config: Configeration
 
     var responseTime: String = ""
+    var availableuserViewModel = AvailableUsersViewModel(users: [], spacing: -10, maxNumberUserToShow: 3)
     var showPowerBy: Bool = false
     var buttonColorCode: String = ""
     
@@ -36,5 +38,9 @@ class NewVisitorViewModel: NewVisitorViewModelType {
         responseTime = "The team typically replies \(availability.replyTime)"
         showPowerBy = look.showPoweredBy
         buttonColorCode = look.actionColor
+        
+        availableuserViewModel = AvailableUsersViewModel(users: config.users ?? [],
+                                                         spacing: -10,
+                                                         maxNumberUserToShow: 3)
     }
 }
