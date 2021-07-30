@@ -18,7 +18,7 @@ class HomeViewModel {
     private(set) var actionColorCode: String = ""
     
     private(set) var headerLogoURL: URL? = nil
-    private(set) var backgroundPatternURL: URL? = nil
+    private(set) var backgroundPatternName: String = ""
     
     private(set) var greeting: String = ""
     private(set) var teamIntro: String = ""
@@ -43,7 +43,7 @@ class HomeViewModel {
         actionColorCode = look.actionColor
         
         headerLogoURL = URL(string: look.logourl)
-        backgroundPatternURL = config.backgroundPatternURL
+        backgroundPatternName = look.messengerBackground
         
         guard let welcome = config.welcome else { return }
         

@@ -71,11 +71,11 @@ extension Bundle {
 
 extension UIImage {
     
-    static func image(_ name: String) -> UIImage? {
-        UIImage(named: name, in: .salesmate, compatibleWith: nil)
+    convenience init?(_ name: String) {
+        self.init(named: name, in: .salesmate, compatibleWith: nil)
     }
     
-    static var startNewChat: UIImage { image("ic-start-new-chat")! }
+    static var startNewChat: UIImage { UIImage("ic-start-new-chat")! }
 }
 
 extension UIViewController {

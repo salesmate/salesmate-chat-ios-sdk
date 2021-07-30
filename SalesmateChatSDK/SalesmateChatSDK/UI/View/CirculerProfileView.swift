@@ -7,6 +7,19 @@
 
 import UIKit
 
+protocol CirculerProfileViewModelType {
+    var imageURL: URL? { get }
+    var text: String?  { get }
+    
+    var border: Bool { get }
+    var textColorCode: String { get }
+    var backgroundColorCode: String { get }
+}
+
+class CirculerUserProfileViewModel {
+    
+}
+
 class CirculerProfileViewModel {
     
     enum Display {

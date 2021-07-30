@@ -15,10 +15,3 @@ protocol ChatStream: AnyObject {
     func connect(completion: @escaping (Result<Void, ChatError>) -> Void)
     func sendTyping(for conversation: String, and uniqueID: String)
 }
-
-protocol ChatStreamPayloadMaker {
-    func handshakeObject() -> Data?
-    func subscribeObjects() -> [Data]?
-    func presenceObject() -> Data?
-    func typingObject(for conversation: ConversationID, and uniqueID: String) -> Data?
-}

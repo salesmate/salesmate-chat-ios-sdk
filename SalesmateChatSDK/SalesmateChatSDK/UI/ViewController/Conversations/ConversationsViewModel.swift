@@ -18,7 +18,7 @@ class ConversationsViewModel {
     }
     
     private(set) var backgroundColorCode: String = ""
-    private(set) var backgroundPatternURL: URL? = nil
+    private(set) var backgroundPatternName: String = ""
     
     private(set) var actionColorCode: String = ""
     private(set) var conversationViewModels: [ConversationCellViewModel] = []
@@ -37,7 +37,7 @@ class ConversationsViewModel {
         guard let look = config.look else { return }
         
         backgroundColorCode = look.backgroundColor
-        backgroundPatternURL = config.backgroundPatternURL
+        backgroundPatternName = look.messengerBackground
         
         actionColorCode = look.actionColor
     }

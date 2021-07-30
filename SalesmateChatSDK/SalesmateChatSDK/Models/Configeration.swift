@@ -63,9 +63,9 @@ class Configeration {
     var contact: Contact?
     var rating: [Rating]?
     
-    var uniqueID: String? = "7caf763b-f7eb-4c54-8a99-8dcc0c120ee4"//UIDevice.current.identifierForVendor?.uuidString
+    let uniqueID: String = "7caf763b-f7eb-4c54-8a99-8dcc0c120ee4"//UIDevice.current.identifierForVendor?.uuidString
     var contactID: IntegerID? { self.contact?.id }
-    var verifiedID: IntegerID? = "102"
+    var verifiedID: String? = "102"
     
     var socketAuthToken: String?
     var pseudoName: String?
@@ -106,7 +106,7 @@ class Configeration {
         
         if json["contactData"].exists() {
             self.contact = Contact(from: json["contactData"])
-        }
+        }   
         
         if json["emojiMapping"].exists() {
             self.rating = json["emojiMapping"].arrayValue.compactMap { Rating(from: $0) }
@@ -170,16 +170,5 @@ extension Configeration.Rating: Codable {
         case id = "id"
         case label = "label"
         case unicode = "unicode"
-    }
-}
-
-extension Configeration {
-    
-    var backgroundPatternURL: URL? {
-        guard let patternName = look?.messengerBackground else { return nil }
-        
-        let fileName = patternName.replacingOccurrences(of: "pattern", with: "pt")
-        
-        return URL(string: "https://\(identity.tenantID)/assets/images/pattern/\(fileName).png")
     }
 }

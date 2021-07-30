@@ -141,6 +141,7 @@
                         <outlet property="btnClose" destination="AUs-Fm-KV2" id="D31-vo-wjh"/>
                         <outlet property="btnStartChat" destination="ZsY-O7-WeX" id="CeF-NF-yhK"/>
                         <outlet property="imgvTopPattern" destination="RHt-3Y-N9V" id="W9a-dk-WNy"/>
+                        <outlet property="lblTitle" destination="sfm-Q2-l1h" id="T2u-a6-pV4"/>
                         <outlet property="tableView" destination="Mzx-5P-oi8" id="00R-jY-orH"/>
                         <outlet property="viewTop" destination="FRY-Pi-ZAk" id="9al-KE-Edc"/>
                     </connections>

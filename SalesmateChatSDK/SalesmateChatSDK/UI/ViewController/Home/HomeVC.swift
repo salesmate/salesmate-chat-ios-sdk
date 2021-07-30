@@ -85,19 +85,10 @@ class HomeVC: UIViewController {
             imgvLogo.setImage(from: link)
         }
         
-        if let link = viewModel.backgroundPatternURL {
-            imgvTopPattern.setImage(from: link)
-        } else {
-            imgvTopPattern.isHidden = true
-        }
-        
+        imgvTopPattern.image = UIImage(viewModel.backgroundPatternName)
         imgvLogoContainer.isHidden = (viewModel.headerLogoURL == nil)
         
         lblGreeting.text = viewModel.greeting
         lblTeamIntro.text = viewModel.teamIntro
-    }
-    
-    private func showAllConversations() {
-        
     }
 }

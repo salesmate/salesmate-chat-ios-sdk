@@ -7,6 +7,13 @@
 
 import Foundation
 
+protocol ChatStreamPayloadMaker {
+    func handshakeObject() -> Data?
+    func subscribeObjects() -> [Data]?
+    func presenceObject() -> Data?
+    func typingObject(for conversation: ConversationID, and uniqueID: String) -> Data?
+}
+
 class PayloadMaker: ChatStreamPayloadMaker {
     
     private let config: Configeration

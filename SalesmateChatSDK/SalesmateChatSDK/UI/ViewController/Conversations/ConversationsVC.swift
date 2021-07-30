@@ -26,6 +26,7 @@ class ConversationsVC: UIViewController {
     @IBOutlet private weak var viewTop: UIView!
     @IBOutlet private weak var imgvTopPattern: UIImageView!
     @IBOutlet private weak var btnBack: UIButton!
+    @IBOutlet private weak var lblTitle: UILabel!
     @IBOutlet private weak var btnClose: UIButton!
     
     @IBOutlet private weak var tableView: UITableView!
@@ -71,14 +72,11 @@ class ConversationsVC: UIViewController {
         }()
         
         viewTop.backgroundColor = backgroundColor
-        btnBack.setTitleColor(foregroundColor, for: .normal)
-        btnClose.setTitleColor(foregroundColor, for: .normal)
+        btnBack.tintColor = foregroundColor
+        btnClose.tintColor = foregroundColor
+        lblTitle.textColor = foregroundColor
         
-        if let link = viewModel.backgroundPatternURL {
-            imgvTopPattern.setImage(from: link)
-        } else {
-            imgvTopPattern.isHidden = true
-        }
+        imgvTopPattern.image = UIImage(viewModel.backgroundPatternName)
     }
     
     // MARK: - Actions
