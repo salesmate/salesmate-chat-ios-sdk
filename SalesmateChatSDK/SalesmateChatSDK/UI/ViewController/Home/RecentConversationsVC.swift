@@ -49,8 +49,14 @@ class RecentConversationsVC: UIViewController {
         tableView.register(UINib(nibName: "ConversationCell", bundle: .salesmate),
                            forCellReuseIdentifier: ConversationCell.ID)
     }
+    
+    // MARK: - Actions
+    @IBAction private func btnViewAllPressed(_ sender: UIButton) {
+        viewModel.didSelectViewAll()
+    }
 }
 
+// MARK: - UITableViewDataSource
 extension RecentConversationsVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

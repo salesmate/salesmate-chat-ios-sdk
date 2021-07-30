@@ -172,3 +172,14 @@ extension Configeration.Rating: Codable {
         case unicode = "unicode"
     }
 }
+
+extension Configeration {
+    
+    var backgroundPatternURL: URL? {
+        guard let patternName = look?.messengerBackground else { return nil }
+        
+        let fileName = patternName.replacingOccurrences(of: "pattern", with: "pt")
+        
+        return URL(string: "https://\(identity.tenantID)/assets/images/pattern/\(fileName).png")
+    }
+}

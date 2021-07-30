@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--ConversationsVC-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController id="Y6W-OH-hqX" customClass="ConversationsVC" customModule="SalesmateChatSDK" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="skt-yC-PZE">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="-20" translatesAutoresizingMaskIntoConstraints="NO" id="P8X-Wr-m5C">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FRY-Pi-ZAk">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="95"/>
+                                                <subviews>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.05000000074505806" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="255" translatesAutoresizingMaskIntoConstraints="NO" id="RHt-3Y-N9V">
+                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="95"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </imageView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gF7-3P-a6G">
+                                                        <rect key="frame" x="0.0" y="15" width="414" height="45"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PCY-kO-Vlg">
+                                                                <rect key="frame" x="0.0" y="0.0" width="45" height="45"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="45" id="mSK-xv-jAA"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
+                                                                <state key="normal" image="ic-back">
+                                                                    <color key="titleColor" name="AccentColor"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="btnBackAllPressed:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="hSn-uf-REA"/>
+                                                                </connections>
+                                                            </button>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your conversations" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sfm-Q2-l1h">
+                                                                <rect key="frame" x="45" y="0.0" width="319" height="45"/>
+                                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AUs-Fm-KV2">
+                                                                <rect key="frame" x="364" y="0.0" width="50" height="45"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="50" id="eGb-uI-Zje"/>
+                                                                </constraints>
+                                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
+                                                                <state key="normal" image="ic-close">
+                                                                    <color key="titleColor" name="AccentColor"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="btnCloseAllPressed:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="oVQ-xO-nn3"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="45" id="Era-gM-7Ay"/>
+                                                        </constraints>
+                                                    </stackView>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="bottom" secondItem="gF7-3P-a6G" secondAttribute="bottom" constant="35" id="2Tg-tW-iSS"/>
+                                                    <constraint firstItem="gF7-3P-a6G" firstAttribute="top" secondItem="FRY-Pi-ZAk" secondAttribute="top" constant="15" id="EwN-LA-M9J"/>
+                                                    <constraint firstAttribute="trailing" secondItem="RHt-3Y-N9V" secondAttribute="trailing" id="HDU-B4-XPA"/>
+                                                    <constraint firstAttribute="trailing" secondItem="gF7-3P-a6G" secondAttribute="trailing" id="TYI-vP-htF"/>
+                                                    <constraint firstAttribute="height" constant="95" id="Zyq-tC-NPK"/>
+                                                    <constraint firstItem="RHt-3Y-N9V" firstAttribute="leading" secondItem="FRY-Pi-ZAk" secondAttribute="leading" id="bh4-vm-uRl"/>
+                                                    <constraint firstAttribute="bottom" secondItem="RHt-3Y-N9V" secondAttribute="bottom" id="cB4-eb-on8"/>
+                                                    <constraint firstItem="RHt-3Y-N9V" firstAttribute="top" secondItem="FRY-Pi-ZAk" secondAttribute="top" id="kHB-ge-uaD"/>
+                                                    <constraint firstItem="gF7-3P-a6G" firstAttribute="leading" secondItem="FRY-Pi-ZAk" secondAttribute="leading" id="pD6-dl-22u"/>
+                                                </constraints>
+                                            </view>
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Mzx-5P-oi8">
+                                                <rect key="frame" x="0.0" y="75" width="414" height="661"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <connections>
+                                                    <outlet property="dataSource" destination="Y6W-OH-hqX" id="PEd-DM-hyI"/>
+                                                    <outlet property="delegate" destination="Y6W-OH-hqX" id="EyT-yF-KXE"/>
+                                                </connections>
+                                            </tableView>
+                                        </subviews>
+                                    </stackView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="m6t-Ud-AGf">
+                                        <rect key="frame" x="0.0" y="736" width="414" height="52"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZsY-O7-WeX" customClass="NewChatButton" customModule="SalesmateChatSDK" customModuleProvider="target">
+                                                <rect key="frame" x="59.5" y="0.0" width="295" height="52"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="295" id="1r3-ef-gR1"/>
+                                                    <constraint firstAttribute="height" constant="52" id="Nja-VZ-TDv"/>
+                                                </constraints>
+                                                <state key="normal" title="Start New Chat">
+                                                    <color key="titleColor" name="AccentColor"/>
+                                                </state>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="52" id="QS1-66-HhM"/>
+                                            <constraint firstItem="ZsY-O7-WeX" firstAttribute="centerX" secondItem="m6t-Ud-AGf" secondAttribute="centerX" id="W1Q-vL-bG6"/>
+                                            <constraint firstItem="ZsY-O7-WeX" firstAttribute="centerY" secondItem="m6t-Ud-AGf" secondAttribute="centerY" id="lso-C7-vMq"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="66q-a3-Eeh">
+                                        <rect key="frame" x="0.0" y="788" width="414" height="30"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="lxu-sX-bEH"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="skt-yC-PZE" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="0gA-53-n1S"/>
+                            <constraint firstItem="skt-yC-PZE" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="3cO-f8-7ky"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="skt-yC-PZE" secondAttribute="trailing" id="g7D-Nl-Ucl"/>
+                            <constraint firstItem="skt-yC-PZE" firstAttribute="bottom" secondItem="vDu-zF-Fre" secondAttribute="bottom" id="zXz-Fb-kJd"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="btnBack" destination="PCY-kO-Vlg" id="Sle-7b-yxA"/>
+                        <outlet property="btnClose" destination="AUs-Fm-KV2" id="D31-vo-wjh"/>
+                        <outlet property="btnStartChat" destination="ZsY-O7-WeX" id="CeF-NF-yhK"/>
+                        <outlet property="imgvTopPattern" destination="RHt-3Y-N9V" id="W9a-dk-WNy"/>
+                        <outlet property="tableView" destination="Mzx-5P-oi8" id="00R-jY-orH"/>
+                        <outlet property="viewTop" destination="FRY-Pi-ZAk" id="9al-KE-Edc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="132" y="97"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="ic-back" width="11" height="18"/>
+        <image name="ic-close" width="16" height="16"/>
+        <namedColor name="AccentColor">
+            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

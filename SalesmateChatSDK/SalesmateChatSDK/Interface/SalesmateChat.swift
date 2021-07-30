@@ -60,6 +60,10 @@ public class SalesmateChat {
     
     private func presentMessenger(from viewController: UIViewController) {
         let VC = HomeVC.create(with: HomeViewModel(config: config, client: client))
-        viewController.present(VC, animated: true, completion: nil)
+        let NC = UINavigationController(rootViewController: VC)
+        
+        NC.navigationBar.isHidden = true
+        
+        viewController.present(NC, animated: true, completion: nil)
     }
 }

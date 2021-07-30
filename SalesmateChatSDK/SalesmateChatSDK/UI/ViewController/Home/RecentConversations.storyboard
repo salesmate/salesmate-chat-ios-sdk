@@ -39,6 +39,9 @@
                                                         <state key="normal" title="View All">
                                                             <color key="titleColor" name="AccentColor"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="btnViewAllPressed:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="YJm-JK-G1i"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>

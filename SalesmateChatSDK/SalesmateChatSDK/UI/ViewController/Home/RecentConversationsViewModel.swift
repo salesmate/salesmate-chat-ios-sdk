@@ -18,12 +18,18 @@ class RecentConversationsViewModel {
     private(set) var shouldShowViewAll: Bool = true
     private(set) var conversationViewModels: [ConversationCellViewModel] = []
     
+    var showAllConversations: (() -> Void)?
+    
     // MARK: - Init
     init(config: Configeration, conversations: [Conversation]) {
         self.config = config
         self.conversations = conversations
         
         prepareProperties()
+    }
+    
+    func didSelectViewAll() {
+        showAllConversations?()
     }
     
     private func prepareProperties() {
@@ -36,7 +42,7 @@ class RecentConversationsViewModel {
         
         let conversationToShow = conversations.prefix(2)
         let users: [User?] = conversationToShow.map { cid in config.users?.first(where: { $0.id == cid.ownerUserId }) }
-        let zip = zip(conversations, users)
+        let zip = zip(conversationToShow, users)
         
         conversationViewModels = zip.map { ConversationCellViewModel(conversation: $0, user: $1)}
     }

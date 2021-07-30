@@ -25,6 +25,7 @@ class HomeViewModel {
     
     var showNewVisitorView: ((NewVisitorViewModel) -> Void)?
     var showRecentConversationsView: ((RecentConversationsViewModel) -> Void)?
+    var showAllConversations: ((ConversationsViewModel) -> Void)?
     
     // MARK: - Init
     init(config: Configeration, client: ChatClient) {
@@ -42,18 +43,12 @@ class HomeViewModel {
         actionColorCode = look.actionColor
         
         headerLogoURL = URL(string: look.logourl)
-        backgroundPatternURL = patternURL(for: look.messengerBackground)
+        backgroundPatternURL = config.backgroundPatternURL
         
         guard let welcome = config.welcome else { return }
         
         greeting = welcome.greetingMessage
         teamIntro = welcome.teamIntro
-    }
-    
-    private func patternURL(for name: String) -> URL? {
-        let fileName = name.replacingOccurrences(of: "pattern", with: "pt")
-        
-        return URL(string: "https://\(config.identity.tenantID)/assets/images/pattern/\(fileName).png")
     }
     
     private func askToShowNewVisitorView() {
@@ -67,8 +62,20 @@ class HomeViewModel {
     private func askToShowRecentConversationsView(with conversations: [Conversation]) {
         let viewModel = RecentConversationsViewModel(config: config, conversations: conversations)
         
+        viewModel.showAllConversations = {
+            self.askToShowAllConversations()
+        }
+        
         OperationQueue.main.addOperation {
             self.showRecentConversationsView?(viewModel)
+        }
+    }
+    
+    private func askToShowAllConversations() {
+        let viewModel = ConversationsViewModel(config: self.config, client: self.client)
+        
+        OperationQueue.main.addOperation {
+            self.showAllConversations?(viewModel)
         }
     }
 }

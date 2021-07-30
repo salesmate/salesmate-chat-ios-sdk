@@ -59,7 +59,14 @@ class HomeVC: UIViewController {
         
         viewModel.showRecentConversationsView = { viewModel in
             let VC = RecentConversationsVC.create(with: viewModel)
+            
             self.add(child: VC, in: self.viewContainer)
+        }
+        
+        viewModel.showAllConversations = { viewModel in
+            let VC = ConversationsVC.create(with: viewModel)
+            
+            self.navigationController?.pushViewController(VC, animated: true)
         }
     }
     
@@ -80,11 +87,17 @@ class HomeVC: UIViewController {
         
         if let link = viewModel.backgroundPatternURL {
             imgvTopPattern.setImage(from: link)
+        } else {
+            imgvTopPattern.isHidden = true
         }
         
         imgvLogoContainer.isHidden = (viewModel.headerLogoURL == nil)
         
         lblGreeting.text = viewModel.greeting
         lblTeamIntro.text = viewModel.teamIntro
+    }
+    
+    private func showAllConversations() {
+        
     }
 }
