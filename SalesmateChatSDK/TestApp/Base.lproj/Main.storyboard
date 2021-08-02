@@ -18,7 +18,9 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9rj-Db-Whs">
                                 <rect key="frame" x="170" y="433" width="74" height="30"/>
-                                <state key="normal" title="Show Chat"/>
+                                <state key="normal" title="Show Chat">
+                                    <color key="titleColor" systemColor="systemBlueColor"/>
+                                </state>
                                 <connections>
                                     <action selector="showChatPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ce9-z4-Jb6"/>
                                 </connections>
@@ -40,6 +42,9 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

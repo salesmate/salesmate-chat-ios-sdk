@@ -13,7 +13,7 @@ class AvailableUsersViewModel {
     private let maxNumberUserToShow: Int
     
     let spacing: CGFloat
-    var profileViewModels: [CirculerProfileViewModel] = []
+    var profileViewModels: [CirculerProfileViewModelType] = []
     
     init(users: [User], spacing: CGFloat, maxNumberUserToShow: Int) {
         self.users = users
@@ -27,12 +27,12 @@ class AvailableUsersViewModel {
         let availableUsers = users.filter({ $0.status == "available" })
         let usersToDisplay = availableUsers.prefix(maxNumberUserToShow)
         
-        profileViewModels = usersToDisplay.map { CirculerProfileViewModel(display: .user($0), border: true) }
+        profileViewModels = usersToDisplay.map { CirculerUserProfileViewModel(user: $0, border: true) }
         
         let count = availableUsers.count - maxNumberUserToShow
         
         if count > 0 {
-            profileViewModels.append(CirculerProfileViewModel(display: .count(count), border: true))
+            profileViewModels.append(CirculerMoreProfileViewModel(count: count))
         }
     }
 }

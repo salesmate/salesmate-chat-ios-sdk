@@ -4,7 +4,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -41,7 +40,7 @@
                                                                 </constraints>
                                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                                                 <state key="normal" image="ic-back">
-                                                                    <color key="titleColor" name="AccentColor"/>
+                                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 </state>
                                                                 <connections>
                                                                     <action selector="btnBackAllPressed:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="hSn-uf-REA"/>
@@ -60,7 +59,7 @@
                                                                 </constraints>
                                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="14"/>
                                                                 <state key="normal" image="ic-close">
-                                                                    <color key="titleColor" name="AccentColor"/>
+                                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 </state>
                                                                 <connections>
                                                                     <action selector="btnCloseAllPressed:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="oVQ-xO-nn3"/>
@@ -106,7 +105,7 @@
                                                     <constraint firstAttribute="height" constant="52" id="Nja-VZ-TDv"/>
                                                 </constraints>
                                                 <state key="normal" title="Start New Chat">
-                                                    <color key="titleColor" name="AccentColor"/>
+                                                    <color key="titleColor" systemColor="systemBlueColor"/>
                                                 </state>
                                             </button>
                                         </subviews>
@@ -154,11 +153,11 @@
     <resources>
         <image name="ic-back" width="11" height="18"/>
         <image name="ic-close" width="16" height="16"/>
-        <namedColor name="AccentColor">
-            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

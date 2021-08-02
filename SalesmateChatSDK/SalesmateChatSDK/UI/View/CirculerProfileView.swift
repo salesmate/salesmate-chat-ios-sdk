@@ -8,73 +8,94 @@
 import UIKit
 
 protocol CirculerProfileViewModelType {
-    var imageURL: URL? { get }
-    var text: String?  { get }
-    
     var border: Bool { get }
-    var textColorCode: String { get }
     var backgroundColorCode: String { get }
+    
+    var imageURL: URL? { get }
+    
+    var text: String?  { get }
+    var textColorCode: String { get }
+    var textSize: CGFloat { get }
 }
 
-class CirculerUserProfileViewModel {
+extension CirculerProfileViewModelType {
     
-}
-
-class CirculerProfileViewModel {
+    var textSize: CGFloat { 18 }
     
-    enum Display {
-        case user(User)
-        case count(Int)
+    private static var colorCodesForProfilePicBG: [String] {[
+        "ff5622", "8157ff", "4d88ff",
+        "ff416a", "683ab7", "03a8f4",
+        "26c5da", "00ac7c", "c0ca33",
+        "ffb301", "00cc88"
+    ]}
+    
+    static func profileBackgroundColorCode(for name:String) -> String {
+        var totalValue: Int = 0
+        
+        for character in name.utf8 {
+            let stringSegment = "\(character)"
+            let intValue = Int(stringSegment)!
+            totalValue = totalValue + intValue
+        }
+        
+        let index = totalValue % colorCodesForProfilePicBG.count
+        return colorCodesForProfilePicBG[index]
     }
-    
-    private let display: Display
+}
+
+class CirculerUserProfileViewModel: CirculerProfileViewModelType {
     
     let border: Bool
+    let backgroundColorCode: String
     
-    var imageURL: URL?
+    let imageURL: URL?
     
-    var text: String?
-    var textColorCode: String = "505F79"
+    let text: String?
+    let textColorCode: String = "FFFFFF"
+    let textSize: CGFloat = 22
+
+    private let user: User
     
-    var generateRandomBGColor: Bool = true
-    var textToGenerateBGColor: String = ""
-    
-    init(display: Display, border: Bool = false) {
-        self.display = display
+    init(user: User, border: Bool = false) {
+        self.user = user
         self.border = border
         
-        prepareProperties()
+        text = user.firstName.first?.description
+        imageURL = URL(string: user.profileUrl ?? "")
+        backgroundColorCode = Self.profileBackgroundColorCode(for: user.firstName)
     }
+}
+
+class CirculerMoreProfileViewModel: CirculerProfileViewModelType {
     
-    private func prepareProperties() {
-        switch display {
-        case .user(let user):
-            text = user.firstName.first?.description
-            textColorCode = "FFFFFF"
-            generateRandomBGColor = true
-            textToGenerateBGColor = user.firstName
-            
-            if let profilePath = user.profileUrl {
-                imageURL = URL(string: profilePath)
-            }
-        case .count(let count):
-            text = "+\(count)"
-            textColorCode = "505F79"
-            generateRandomBGColor = false
-        }
+    let border: Bool = true
+    let backgroundColorCode: String = "EBECF0"
+    
+    let imageURL: URL? = nil
+    
+    let text: String?
+    let textSize: CGFloat = 18
+    let textColorCode: String = "505F79"
+
+    private let count: Int
+    
+    init(count: Int) {
+        self.count = count
+        
+        text = "+\(count)"
     }
 }
 
 class CirculerProfileView: UIView {
     
-    var viewModel: CirculerProfileViewModel? {
+    var viewModel: CirculerProfileViewModelType? {
         didSet { display()  }
     }
     
     private let imageView = UIImageView()
     private let label = UILabel()
     
-    init(viewModel: CirculerProfileViewModel) {
+    init(viewModel: CirculerProfileViewModelType) {
         super.init(frame: CGRect.zero)
         self.viewModel = viewModel
         
@@ -119,17 +140,13 @@ class CirculerProfileView: UIView {
         
         label.isHidden = true
         imageView.isHidden = true
+       
+        backgroundColor = UIColor(hex: viewModel.backgroundColorCode)
         
-        if viewModel.generateRandomBGColor {
-            backgroundColor = UIColor.getRandomBgColor(forName: viewModel.textToGenerateBGColor)
-        } else {
-            backgroundColor = UIColor(hex: "EBECF0")
-        }
-
         if let string = viewModel.text {
             label.isHidden = false
             label.text = string
-            
+            label.font = UIFont.systemFont(ofSize: viewModel.textSize, weight: .bold)
             label.textColor = UIColor(hex: viewModel.textColorCode)
         }
 

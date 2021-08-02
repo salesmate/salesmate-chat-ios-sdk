@@ -12,7 +12,7 @@ class ConversationCellViewModel {
     private let conversation: Conversation
     private let user: User?
     
-    let profileViewModel: CirculerProfileViewModel?
+    let profileViewModel: CirculerProfileViewModelType?
     let name: String
     
     let lastMessage: String?
@@ -24,7 +24,7 @@ class ConversationCellViewModel {
         self.user = user
         
         if let user = user {
-            profileViewModel = CirculerProfileViewModel(display: .user(user), border: false)
+            profileViewModel = CirculerUserProfileViewModel(user: user, border: false)
         } else {
             profileViewModel = nil
         }

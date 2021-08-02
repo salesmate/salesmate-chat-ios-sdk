@@ -89,7 +89,8 @@ extension HomeViewModel {
                 if conversations.isEmpty {
                     self.askToShowNewVisitorView()
                 } else {
-                    self.askToShowRecentConversationsView(with: conversations)
+                    self.askToShowNewVisitorView()
+                    //self.askToShowRecentConversationsView(with: conversations)
                 }
             case .failure:
                 break
