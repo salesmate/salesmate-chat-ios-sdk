@@ -9,8 +9,8 @@
 import Foundation
 
 func print(_ items: Any..., separator: String = " ", terminator: String = "\n") {
-    //guard enableLog else { return }
-    
+    // guard enableLog else { return }
+
     #if DEBUG
     items.forEach { Swift.print($0, separator: separator, terminator: terminator) }
     #endif

@@ -54,6 +54,10 @@
 		9B65E01226A58C64001F3928 /* APIDataTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B65E01126A58C64001F3928 /* APIDataTypes.swift */; };
 		9B85939926AFE4BF00D035AD /* Configeration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B85939826AFE4BF00D035AD /* Configeration.swift */; };
 		9B85939B26AFE96200D035AD /* Entities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B85939A26AFE96200D035AD /* Entities.swift */; };
+		9B86734C26B83575002C7959 /* MessageComposeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B86734B26B83575002C7959 /* MessageComposeView.swift */; };
+		9BAD6E6E26B7F8380072EC83 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BAD6E6D26B7F8380072EC83 /* ChatViewModel.swift */; };
+		9BAD6E7026B7F84B0072EC83 /* ChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BAD6E6F26B7F84B0072EC83 /* ChatVC.swift */; };
+		9BAD6E7226B7F9EC0072EC83 /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BAD6E7126B7F9EC0072EC83 /* Chat.storyboard */; };
 		9BB117F326A1A45500E0B242 /* SalesmateChatSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BB117E926A1A45500E0B242 /* SalesmateChatSDK.framework */; };
 		9BB117F826A1A45500E0B242 /* SalesmateChatSDKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB117F726A1A45500E0B242 /* SalesmateChatSDKTests.swift */; };
 		9BB117FA26A1A45500E0B242 /* SalesmateChatSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BB117EC26A1A45500E0B242 /* SalesmateChatSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -186,6 +190,10 @@
 		9B65E01126A58C64001F3928 /* APIDataTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIDataTypes.swift; sourceTree = "<group>"; };
 		9B85939826AFE4BF00D035AD /* Configeration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configeration.swift; sourceTree = "<group>"; };
 		9B85939A26AFE96200D035AD /* Entities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entities.swift; sourceTree = "<group>"; };
+		9B86734B26B83575002C7959 /* MessageComposeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageComposeView.swift; sourceTree = "<group>"; };
+		9BAD6E6D26B7F8380072EC83 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
+		9BAD6E6F26B7F84B0072EC83 /* ChatVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatVC.swift; sourceTree = "<group>"; };
+		9BAD6E7126B7F9EC0072EC83 /* Chat.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Chat.storyboard; sourceTree = "<group>"; };
 		9BB117E926A1A45500E0B242 /* SalesmateChatSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SalesmateChatSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BB117EC26A1A45500E0B242 /* SalesmateChatSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SalesmateChatSDK.h; sourceTree = "<group>"; };
 		9BB117ED26A1A45500E0B242 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -368,6 +376,16 @@
 			path = ChatAPIClient;
 			sourceTree = "<group>";
 		};
+		9BAD6E6A26B7F7DF0072EC83 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				9BAD6E7126B7F9EC0072EC83 /* Chat.storyboard */,
+				9BAD6E6F26B7F84B0072EC83 /* ChatVC.swift */,
+				9BAD6E6D26B7F8380072EC83 /* ChatViewModel.swift */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
 		9BB117DF26A1A45500E0B242 = {
 			isa = PBXGroup;
 			children = (
@@ -469,6 +487,7 @@
 			children = (
 				9BE7183226B1892000DD3113 /* Home */,
 				9BF260DE26B3D57200D21C75 /* Conversations */,
+				9BAD6E6A26B7F7DF0072EC83 /* Chat */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -482,6 +501,7 @@
 				9BD7753A26B2D1FC002BA2AD /* NewChatButton.swift */,
 				9BD7753226B2C72D002BA2AD /* ConversationCell.xib */,
 				9BCD394926B30BA100D484CF /* ConversationCell.swift */,
+				9B86734B26B83575002C7959 /* MessageComposeView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -572,6 +592,7 @@
 				9BB117E626A1A45500E0B242 /* Frameworks */,
 				9BB117E726A1A45500E0B242 /* Resources */,
 				9B20483126A6F23A001EC729 /* Embed Frameworks */,
+				9B86734D26B84753002C7959 /* Run Script (SwiftLint) */,
 			);
 			buildRules = (
 			);
@@ -687,6 +708,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9BAD6E7226B7F9EC0072EC83 /* Chat.storyboard in Resources */,
 				9BD7753326B2C72D002BA2AD /* ConversationCell.xib in Resources */,
 				9BE7183426B1897900DD3113 /* NewVisitor.storyboard in Resources */,
 				9BDD51B626B19CA2002C2307 /* Media.xcassets in Resources */,
@@ -704,6 +726,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		9B86734D26B84753002C7959 /* Run Script (SwiftLint) */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script (SwiftLint)";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint autocorrect && swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		9B488BB326AAC51200FDD21C /* Sources */ = {
@@ -747,12 +790,14 @@
 				9B3A9B6226A6FF4200EB7C10 /* WebSocketEventCreation.swift in Sources */,
 				9B85939926AFE4BF00D035AD /* Configeration.swift in Sources */,
 				9BCD394A26B30BA100D484CF /* ConversationCell.swift in Sources */,
+				9B86734C26B83575002C7959 /* MessageComposeView.swift in Sources */,
 				9B3A9B6526A6FF4200EB7C10 /* StarscreamChatStream.swift in Sources */,
 				9B3A9B8F26A701E600EB7C10 /* DateTime.swift in Sources */,
 				9BD7753B26B2D1FC002BA2AD /* NewChatButton.swift in Sources */,
 				9B85939B26AFE96200D035AD /* Entities.swift in Sources */,
 				9BF260E226B3D5A400D21C75 /* ConversationsViewModel.swift in Sources */,
 				9B65E01026A58615001F3928 /* APIRequestLoader.swift in Sources */,
+				9BAD6E6E26B7F8380072EC83 /* ChatViewModel.swift in Sources */,
 				9B3A9B8E26A701E600EB7C10 /* Miscellaneous.swift in Sources */,
 				9BE7183626B1898800DD3113 /* NewVisitorVC.swift in Sources */,
 				9B3A9B8126A701D200EB7C10 /* IntegerID.swift in Sources */,
@@ -769,6 +814,7 @@
 				9B65E01226A58C64001F3928 /* APIDataTypes.swift in Sources */,
 				9BD7753926B2D1B2002BA2AD /* RecentConversationsViewModel.swift in Sources */,
 				9B2B4F7726B1B126008AA860 /* UIKitExtensions.swift in Sources */,
+				9BAD6E7026B7F84B0072EC83 /* ChatVC.swift in Sources */,
 				9BB189A926A70A2700D7F7FD /* ChatClient.swift in Sources */,
 				9B3A9B8326A701D200EB7C10 /* Payload.swift in Sources */,
 				9B3A9B7E26A701D200EB7C10 /* Message.swift in Sources */,

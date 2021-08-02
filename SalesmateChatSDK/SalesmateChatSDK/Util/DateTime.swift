@@ -16,7 +16,7 @@ extension DateFormatter {
         formatter.locale = Locale(identifier: "en_US_POSIX")
         return formatter
     }()
-    
+
     static let fullISO8601NoFraction: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
@@ -38,7 +38,7 @@ extension ISO8601DateFormatter {
 
 extension Date {
     var stringAsISO8601Format: String { ISO8601DateFormatter.convertor.string(from: self) }
-    
+
     var shortDurationString: String {
         let interval = Int(abs(timeIntervalSince(Date())))
         let minute = 60
@@ -47,7 +47,7 @@ extension Date {
         let weak = day * 7
         let month = day * 30
         let year = day * 365
-        
+
         if interval < minute {
             return "Now"
         } else if interval < hour {

@@ -9,9 +9,9 @@ import Foundation
 @_implementationOnly import HTTP
 
 class CommonAPIComponents {
-    
+
     static let shared: CommonAPIComponents = CommonAPIComponents()
-    
+
     var config: Configeration?
     var base: URL { config?.environment.baseAPIURL ?? Environment.current.baseAPIURL }
     var headers: HTTPHeaders {
@@ -28,12 +28,12 @@ typealias CAC = CommonAPIComponents
 private let common = CommonAPIComponents.shared
 
 struct PingRequest: HTTPRequest {
-    
+
     var method: HTTPMethod = .post
     var url: URL
     var headers: HTTPHeaders?
     var body: HTTPBody?
-    
+
     init(common: CAC = common) {
         url = URL(string: "messenger/v1/widget/ping", relativeTo: common.base)!
         headers = common.headers
@@ -42,12 +42,12 @@ struct PingRequest: HTTPRequest {
 }
 
 struct GetSCAuthTokenRequest: HTTPRequest {
-    
+
     var method: HTTPMethod = .post
     var url: URL
     var headers: HTTPHeaders?
     var body: HTTPBody?
-    
+
     init(common: CAC = common) {
         url = URL(string: "messenger/v1/widget/generate-token", relativeTo: common.base)!
         headers = common.headers
@@ -56,12 +56,12 @@ struct GetSCAuthTokenRequest: HTTPRequest {
 }
 
 struct GetConversationsRequest: HTTPRequest {
-    
+
     var method: HTTPMethod = .get
     var url: URL
     var queryItems: [URLQueryItem]?
     var headers: HTTPHeaders?
-    
+
     init(rows: Int, offset: Int, common: CAC = common) {
         url = URL(string: "messenger/v1/widget/conversations", relativeTo: common.base)!
         queryItems = [URLQueryItem(name: "rows", value: String(rows)),

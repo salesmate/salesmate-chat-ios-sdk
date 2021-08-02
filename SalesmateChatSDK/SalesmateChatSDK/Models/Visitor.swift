@@ -35,7 +35,7 @@ struct Visitor {
 }
 
 extension Visitor: Codable {
-    
+
     enum CodingKeys: String, CodingKey {
         case visitorID = "visitorId"
         case tenantID = "tenantId"

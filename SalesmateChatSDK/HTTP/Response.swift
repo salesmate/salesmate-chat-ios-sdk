@@ -11,7 +11,7 @@ public struct HTTPResponse {
     let request: HTTPRequest
     let response: HTTPURLResponse
     let body: Data?
-    
+
     public init(request: HTTPRequest, response: HTTPURLResponse, body: Data?) {
         self.request = request
         self.response = response

@@ -8,34 +8,34 @@
 import Foundation
 
 class SalesmateChatClient {
-    
+
     private let config: Configeration
     private let chatStream: ChatStream
     private let chatAPI: ChatAPI
     private let relay: ChatEventRelay = ChatEventRelay()
-    
+
     init(config: Configeration, chatStream: ChatStream, chatAPI: ChatAPI) {
         self.config = config
         self.chatStream = chatStream
         self.chatAPI = chatAPI
-        
+
         prepareEventListener()
     }
-    
+
     var conversations: Set<Conversation> { Conversation.current }
     var messages: Set<Message> { Message.current }
 }
 
 extension SalesmateChatClient: ChatClient {
-    
+
     func getConfigerations(completion: @escaping ((Result<JSONObject, ChatError>) -> Void)) {
         chatAPI.getConfigerations { result in
             completion(result)
         }
     }
-    
+
     func connect(waitForFullConnection: Bool = false, completion: @escaping (Result<Void, ChatError>) -> Void) {
-        
+
         func whenAuthTokenAvailable() {
             if waitForFullConnection {
                 self.chatStream.connect(completion: completion)
@@ -52,7 +52,7 @@ extension SalesmateChatClient: ChatClient {
                     self.config.pseudoName = pseudoName
                     self.config.socketAuthToken = authToken
                     self.config.channels = channels
-                    
+
                     whenAuthTokenAvailable()
                 case .failure(let error):
                     print(error)
@@ -66,7 +66,7 @@ extension SalesmateChatClient: ChatClient {
 }
 
 extension SalesmateChatClient: ConversationFetcher {
-    
+
     func getConversations(at page: Page, completion: @escaping (Result<[Conversation], ChatError>) -> Void) {
         chatAPI.getConversations(at: page) { result in
             completion(result)
@@ -75,7 +75,7 @@ extension SalesmateChatClient: ConversationFetcher {
 }
 
 extension SalesmateChatClient {
-    
+
     private func prepareEventListener() {
 //        let events: [ChatEventToObserve] = [.disconnected, .conversationUpdated, .readStatusChange,
 //                                            .assign, .messageReceived, .typing, .messageDeleted]
@@ -120,7 +120,7 @@ extension SalesmateChatClient {
 //            }
 //        }
     }
-    
+
     /**
      Get updated detail and latest messages of given `ConversationID`.
      

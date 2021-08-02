@@ -16,7 +16,7 @@ protocol ConversationFetcher {
 protocol ChatDataSource {
     var conversations: Set<Conversation> { get }
     var messages: Set<Message> { get }
-    
+
     func clearConversations()
     func clearMessages()
 }
@@ -41,7 +41,7 @@ protocol ChatObservation {
      - Parameter conversation: Pass if only event related to perticuler ConversationID need to be observer.
      - Parameter onEvent: Block to be called whe  event happe.
     */
-    func register(observer: AnyObject, for events:[ChatEventToObserve], of conversation: ConversationID?, onEvent: @escaping (ChatEvent) -> Void)
+    func register(observer: AnyObject, for events: [ChatEventToObserve], of conversation: ConversationID?, onEvent: @escaping (ChatEvent) -> Void)
 }
 
 protocol ChatClient: ConversationFetcher {
@@ -50,7 +50,7 @@ protocol ChatClient: ConversationFetcher {
 }
 
 extension ChatClient {
-    
+
     func connect(waitForFullConnection: Bool = false, completion: @escaping (Result<Void, ChatError>) -> Void) {
         self.connect(waitForFullConnection: waitForFullConnection, completion: completion)
     }

@@ -31,20 +31,20 @@ struct ResponseKeyValue {
 struct Page {
     private let size: Int
     private var page: Int = 0
-    
+
     var offset: Int { page * size}
     var rows: Int { size }
-    
+
     init(size: Int = 20) {
         self.size = size
     }
-    
+
     @discardableResult
     mutating func next() -> Self {
         page += 1
         return self
     }
-    
+
     @discardableResult
     mutating func reset() -> Self {
         page = 0
@@ -53,34 +53,34 @@ struct Page {
 }
 
 extension HTTPResult {
-    
+
     init(request: HTTPRequest, responseData: Data?, response: URLResponse?, error: Error?) {
         if let e = error as? URLError {
             self = .failure(HTTPError(name: .networkFail, message: "", request: request, response: nil, underlyingError: e))
             return
         }
-        
+
         guard let response = response as? HTTPURLResponse else {
             self = .failure(HTTPError(name: .unknown, message: "", request: request, response: nil, underlyingError: error))
             return
         }
-        
+
         let httpResponse = HTTPResponse(request: request, response: response, body: responseData ?? Data())
-        
+
         guard let json = httpResponse.json as? JSONObject else {
             self = .failure(HTTPError(name: .unknown, message: "", request: request, response: httpResponse, underlyingError: error))
             return
         }
-        
+
         guard let status = json[ResponseKeyValue.status] as? String else {
             self = .failure(HTTPError(name: .unknown, message: "", request: request, response: httpResponse, underlyingError: error))
             return
         }
-        
+
         if status == ResponseKeyValue.success {
             let data: Data? = {
                 guard let object = json[ResponseKeyValue.data] else { return nil }
-                
+
                 if JSONSerialization.isValidJSONObject(object) {
                     return try? JSONSerialization.data(withJSONObject: object, options: [])
                 } else if let string = object as? String {
@@ -89,7 +89,7 @@ extension HTTPResult {
                     return nil
                 }
             }()
-            
+
             if let data = data {
                 self = .success(HTTPResponse(request: request, response: response, body: data))
             } else {
@@ -103,7 +103,7 @@ extension HTTPResult {
                 self = .failure(HTTPError(name: .unknown, message: "", request: request, response: httpResponse, underlyingError: error))
                 return
             }
-            
+
             self = .failure(HTTPError(name: apiErrorCode, message: errroMessage, request: request, response: httpResponse, underlyingError: error))
         } else {
             self = .failure(HTTPError(name: .unknown, message: "", request: request, response: httpResponse, underlyingError: error))

@@ -9,7 +9,7 @@ import Foundation
 
 public protocol HTTPBody {
     var headers: HTTPHeaders { get }
-    
+
     func encode() throws -> Data
 }
 
@@ -17,13 +17,13 @@ public struct JSONBody<T: Encodable>: HTTPBody {
     public var headers: HTTPHeaders = [
         "Content-Type": "application/json; charset=utf-8"
     ]
-    
+
     private let value: T
-    
+
     public init(_ value: T) {
         self.value = value
     }
-    
+
     public func encode() throws -> Data {
         try JSONEncoder().encode(value)
     }
@@ -38,33 +38,33 @@ public struct MultipartSingleFileBody: HTTPBody {
     private let fileName: String
     private let fileData: Data
     private let mimeType: String
-    
+
     init(fileName: String, fileData: Data, mimeType: String) {
         self.fileName = fileName
         self.fileData = fileData
         self.mimeType = mimeType
     }
-    
+
     private static func createBoundary() -> String {
       var uuid = UUID().uuidString
       uuid = uuid.replacingOccurrences(of: "-", with: "")
       uuid = uuid.map { $0.lowercased() }.joined()
-      
+
       let boundary = String(repeating: "-", count: 20) + uuid + "\(Int(Date.timeIntervalSinceReferenceDate))"
-      
+
       return boundary
     }
-    
+
     public func encode() throws -> Data {
         var data = Data()
-        
+
         data.append("--\(boundary)\r\n".data(using: .utf8) ?? Data())
         data.append("Content-Disposition: form-data; name=\"file\"; filename=\"\(fileName)\"\r\n".data(using: .utf8) ?? Data())
         data.append("Content-Type: \(mimeType)\r\n\r\n".data(using: .utf8) ?? Data())
         data.append(fileData)
         data.append("\r\n".data(using: .utf8) ?? Data())
         data.append("\r\n--\(boundary)--\r\n".data(using: .utf8) ?? Data())
-        
+
         return data
     }
 }

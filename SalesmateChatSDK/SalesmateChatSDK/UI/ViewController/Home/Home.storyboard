@@ -23,7 +23,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xD8-bV-ecz">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="255"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.050000000000000003" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="255" translatesAutoresizingMaskIntoConstraints="NO" id="vxY-5c-Atv">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.050000000000000003" contentMode="scaleAspectFill" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" placeholderIntrinsicWidth="414" placeholderIntrinsicHeight="255" translatesAutoresizingMaskIntoConstraints="NO" id="vxY-5c-Atv">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="255"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </imageView>
@@ -82,8 +82,10 @@
                                             <constraint firstItem="vxY-5c-Atv" firstAttribute="leading" secondItem="xD8-bV-ecz" secondAttribute="leading" id="8T2-Zz-Qhw"/>
                                             <constraint firstAttribute="trailing" secondItem="mEO-Kf-eBU" secondAttribute="trailing" constant="30" id="Ffs-J7-8MG"/>
                                             <constraint firstItem="mEO-Kf-eBU" firstAttribute="leading" secondItem="xD8-bV-ecz" secondAttribute="leading" constant="30" id="KOQ-Yc-dnR"/>
+                                            <constraint firstAttribute="trailing" secondItem="vxY-5c-Atv" secondAttribute="trailing" id="LXO-I7-Ge3"/>
                                             <constraint firstItem="vxY-5c-Atv" firstAttribute="top" secondItem="xD8-bV-ecz" secondAttribute="top" id="MUw-Cb-e8M"/>
                                             <constraint firstAttribute="bottom" secondItem="mEO-Kf-eBU" secondAttribute="bottom" constant="50" id="kFB-z9-VdD"/>
+                                            <constraint firstAttribute="bottom" secondItem="vxY-5c-Atv" secondAttribute="bottom" id="mOy-Gq-8er"/>
                                         </constraints>
                                     </view>
                                     <containerView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F7a-y0-J1B">

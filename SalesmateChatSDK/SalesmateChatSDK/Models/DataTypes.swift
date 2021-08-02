@@ -18,17 +18,17 @@ typealias JSONArray = [JSONObject]
 enum Environment {
     case development
     case production
-    
+
     private static let infoDictionary: [String: Any] = {
         guard let dict = Bundle.main.infoDictionary else { fatalError("Plist file not found") }
         return dict
     }()
-    
+
     static let current: Environment = {
         guard let configuration = Environment.infoDictionary["Configuration"] as? String else {
             return .production
         }
-        
+
         if configuration.contains("Development") {
             return .development
         } else if configuration.contains("Production") {
@@ -37,7 +37,7 @@ enum Environment {
             return .production
         }
     }()
-    
+
     var baseAPIURL: URL {
         switch self {
         case .development:
@@ -54,19 +54,19 @@ enum ChatError: Error {
 
 enum ChatEvent {
     case disconnected
-    
+
     case conversationUpdated(ConversationID?)
     case readStatusChange(ConversationID)
     case assign(Assign)
-    
+
     case messageReceived(ConversationID)
     case messageDeleted(ConversationID, MessageID, IntegerID, Date)
     case messageesUpdated(ConversationID, [Message])
-    
+
     case typing(ConversationID, UserID?)
-    
+
     case offlineUsers([IntegerID])
-        
+
     func hasAssociatedConversation(ID: ConversationID) -> Bool {
         switch self {
         case .disconnected:
@@ -88,7 +88,7 @@ enum ChatEvent {
         case .offlineUsers:
             return false
         }
-        
+
         return false
     }
 }
@@ -100,7 +100,7 @@ private let jsonDecoder: JSONDecoder = {
 }()
 
 extension Decodable {
-    
+
     init?(from json: JSONObject) {
         do {
             let jsonData = try JSONSerialization.data(withJSONObject: json, options: [])
@@ -111,7 +111,7 @@ extension Decodable {
             return nil
         }
     }
-    
+
     init?(from json: JSON) {
         do {
             let jsonData = try json.rawData()
@@ -127,7 +127,7 @@ extension Decodable {
 struct RefUser: Codable {
     let id: IntegerID
     let name: String
-    
+
     init(id: IntegerID, name: String) {
         self.id = id
         self.name = name
@@ -137,7 +137,7 @@ struct RefUser: Codable {
 struct RefTeam: Codable {
     let id: IntegerID
     let name: String
-    
+
     init(id: IntegerID, name: String) {
         self.id = id
         self.name = name
@@ -145,7 +145,7 @@ struct RefTeam: Codable {
 }
 
 struct Assign: Codable {
-    
+
     enum CodingKeys: String, CodingKey {
         case conversationId
         case userId
@@ -153,7 +153,7 @@ struct Assign: Codable {
         case referencedTeams
         case message = "messageSummary"
     }
-    
+
     let conversationId: ConversationID
     let userId: IntegerID
     let referencedUsers: [RefUser]?
@@ -164,7 +164,7 @@ struct Assign: Codable {
 struct Team: Codable {
     let id: IntegerID
     let name: String
-    
+
     init(id: IntegerID, name: String) {
         self.id = id
         self.name = name
@@ -172,23 +172,23 @@ struct Team: Codable {
 }
 
 struct Teammate: Codable {
-    
+
     let id: IntegerID
     let firstName: String
     let lastName: String
     let imagePath: String?
     let email: String?
-    
+
     var name: String {
         (firstName + " " + lastName).trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
     }
-    
+
     var imageURL: URL? {
         guard let imagePath = imagePath else { return nil }
         return URL(string: imagePath)
     }
-     
-    init(id: IntegerID, firstName: String, lastName: String, imagePath : String? = nil, email: String? = nil) {
+
+    init(id: IntegerID, firstName: String, lastName: String, imagePath: String? = nil, email: String? = nil) {
         self.id = id
         self.firstName = firstName
         self.lastName = lastName

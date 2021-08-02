@@ -9,7 +9,7 @@ import Foundation
 @_implementationOnly import SwiftyJSON
 
 struct Payload {
-    
+
     enum Keys {
         static let event = "event"
         static let data = "data"
@@ -27,7 +27,7 @@ struct Payload {
         static let channel = "channel"
         static let type = "type"
     }
-    
+
     enum Event: String, Codable {
         case handshake = "#handshake"
         case subscribe = "#subscribe"
@@ -36,7 +36,7 @@ struct Payload {
         case visitorIsTyping = "visitor-is-typing"
         case tenantIsPresent = "tenant-user-presence"
     }
-    
+
     enum PublishType: String {
         case newMessage = "NEW_MESSAGE"
         case availableStatusUpdate = "USER_AVAILABILITY_STATUS_UPDATED"
@@ -45,34 +45,33 @@ struct Payload {
         case conversationStatusUpdate = "CONVERSATION_STATUS_UPDATE"
         case messageDeleted = "MESSAGE_DELETED"
     }
-    
+
     let event: Event?
     let data: JSON?
     let rid: String?
     let cid: String?
-    
-    init(from json:JSON) {
+
+    init(from json: JSON) {
         event = Event(rawValue: json["event"].string ?? "")
         data = json["data"]
         rid = json["rid"].string
         cid = json["cid"].string
     }
-    
+
     init(event: Event? = nil, data: JSON? = nil, rid: String? = nil, cid: String? = nil) {
         self.event = event
         self.data = data
         self.rid = rid
         self.cid = cid
     }
-    
+
     var jsonData: Data? {
         let payload: JSONObject = [
             Payload.Keys.event: event?.rawValue ?? "",
             Payload.Keys.data: data?.object ?? "",
             Payload.Keys.cid: cid ?? ""
         ]
-        
+
         return try? JSONSerialization.data(withJSONObject: payload, options: [])
     }
 }
-

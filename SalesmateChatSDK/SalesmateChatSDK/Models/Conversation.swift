@@ -8,19 +8,19 @@
 import Foundation
 
 struct Conversation {
-    
+
     static var current: Set<Conversation> = []
-    
+
     struct LastMessage {
         let id: String?
         let messageSummary: String
         let messageType: MessageType?
         let userID: IntegerID?
     }
-        
+
     let id: String
     let name: String
-    
+
     let uniqueId: String
     let contactId: IntegerID?
     let verifiedId: IntegerID?
@@ -28,12 +28,12 @@ struct Conversation {
 
     let lastMessageDate: Date
     let lastMessage: LastMessage?
-    
+
     let isRead: Bool
 }
 
 extension Conversation: Codable {
-    
+
     enum CodingKeys: String, CodingKey {
         case id = "id"
         case uniqueId = "unique_id"
@@ -48,7 +48,7 @@ extension Conversation: Codable {
 }
 
 extension Conversation.LastMessage: Codable {
-    
+
     enum CodingKeys: String, CodingKey {
         case id = "id"
         case messageSummary = "message_summary"
@@ -58,11 +58,11 @@ extension Conversation.LastMessage: Codable {
 }
 
 extension Conversation: Hashable {
-    
+
     static func == (lhs: Conversation, rhs: Conversation) -> Bool {
         lhs.id == rhs.id
     }
-    
+
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }

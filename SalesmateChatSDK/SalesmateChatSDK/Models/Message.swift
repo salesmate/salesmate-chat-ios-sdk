@@ -20,17 +20,17 @@ enum MessageType: String, Codable {
 
     case emailAsked = "email_asked"
     case emailProvided = "email_provided"
-    
+
     case close = "close_conversation"
     case reOpen = "reopen_conversation"
     case sendAndReopen = "send_and_reopen"
     case sendAndClose = "send_and_close"
     case repliedAndClose = "replied_and_close"
     case repliedAndReopen = "replied_and_reopen"
-    
+
     case snoozed = "snoozed"
     case sendAndSnooze = "send_and_snooze"
-    
+
     case assignment
     case assignAndReopen = "assign_and_reopen"
     case repliedAndAssigned = "replied_and_assigned"
@@ -39,7 +39,7 @@ enum MessageType: String, Codable {
 }
 
 struct MessageToSend: Codable, Hashable {
-    
+
     enum CodingKeys: String, CodingKey {
         case id = "message_id"
         case type = "message_type"
@@ -48,7 +48,7 @@ struct MessageToSend: Codable, Hashable {
         case referencedTeams = "referenced_teams"
         case cannedResponseId = "canned_response_id"
     }
-    
+
     enum SendStatus {
         case sending
         case sent
@@ -63,29 +63,29 @@ struct MessageToSend: Codable, Hashable {
     let cannedResponseId: String?
     let createdDate: Date = Date()
     var status: SendStatus = .sending
-    
-    init(type:MessageType, contents: [BlockToSend], referencedUsers: [RefUser]? = nil, referencedTeams: [RefTeam]? = nil, cannedResponseId:String? = nil) {
+
+    init(type: MessageType, contents: [BlockToSend], referencedUsers: [RefUser]? = nil, referencedTeams: [RefTeam]? = nil, cannedResponseId: String? = nil) {
         self.id = UUID().uuidString.lowercased()
         self.type = type
         self.contents = contents
         self.referencedUsers = referencedUsers
         self.referencedTeams = referencedTeams
-        self.cannedResponseId = cannedResponseId;
+        self.cannedResponseId = cannedResponseId
     }
-    
+
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }
-    
+
     static func == (lhs: MessageToSend, rhs: MessageToSend) -> Bool {
         lhs.id == rhs.id
     }
 }
 
 struct Message: Codable, Hashable {
-    
+
     static var current: Set<Message> = []
-    
+
     let id: String
     let conversationID: String
     let summary: String
@@ -100,7 +100,7 @@ struct Message: Codable, Hashable {
     var deletedBy: IntegerID?
     var deletedDate: Date?
     var snoozedUntil: Date?
-    
+
     enum CodingKeys: String, CodingKey {
         case id = "id"
         case conversationID = "conversation_id"
@@ -117,11 +117,11 @@ struct Message: Codable, Hashable {
         case deletedDate = "deleted_date"
         case snoozedUntil = "snoozed_until_time"
     }
-    
+
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
     }
-    
+
     static func == (lhs: Message, rhs: Message) -> Bool {
         lhs.id == rhs.id
     }

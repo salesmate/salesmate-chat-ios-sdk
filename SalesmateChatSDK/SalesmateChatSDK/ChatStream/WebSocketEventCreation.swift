@@ -15,19 +15,19 @@ protocol ChatStreamPayloadMaker {
 }
 
 class PayloadMaker: ChatStreamPayloadMaker {
-    
+
     private let config: Configeration
     private var cid: Int = 0
-    
+
     init(config: Configeration) {
         self.config = config
     }
-    
+
     private func nextCID() -> Int {
         cid += 1
         return cid
     }
-    
+
     func handshakeObject() -> Data? {
         guard let authToken = config.socketAuthToken else {
             print("Chat AuthToken not found")
@@ -44,7 +44,7 @@ class PayloadMaker: ChatStreamPayloadMaker {
 
         return try? JSONSerialization.data(withJSONObject: event, options: [])
     }
-    
+
     func subscribeObjects() -> [Data]? {
         let events = config.channels?.map { channel in
             return [
@@ -55,21 +55,21 @@ class PayloadMaker: ChatStreamPayloadMaker {
                 Payload.Keys.cid: nextCID()
             ]
         }
-        
+
         return events?.compactMap {
             try? JSONSerialization.data(withJSONObject: $0, options: [])
         }
     }
-    
+
     func presenceObject() -> Data? {
         let event: [String: Any?] = [
             Payload.Keys.event: Payload.Event.tenantIsPresent.rawValue,
             Payload.Keys.data: nil
         ]
-        
+
         return try? JSONSerialization.data(withJSONObject: event, options: [])
     }
-    
+
     func typingObject(for conversation: ConversationID, and uniqueID: String) -> Data? {
 //        let eventName = Payload.Event.tenantIsTyping.rawValue
 //        let userID = configuration?.userID ?? ""

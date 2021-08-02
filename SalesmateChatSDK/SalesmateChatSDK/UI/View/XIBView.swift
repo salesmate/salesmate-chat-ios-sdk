@@ -10,8 +10,8 @@ import UIKit
 class XIBView: UIView {
 
     var namerOfXIB: String { String(describing: Self.self) }
-    
-    private(set) var contentView : UIView?
+
+    private(set) var contentView: UIView?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -25,12 +25,12 @@ class XIBView: UIView {
 
     private func setup() {
         guard let contentView = loadViewFromNib() else { return }
-        
+
         contentView.frame = bounds
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 
         addSubview(contentView)
-        
+
         self.contentView = contentView
     }
 

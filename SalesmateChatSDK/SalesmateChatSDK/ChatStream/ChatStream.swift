@@ -10,7 +10,7 @@ import Foundation
 
 protocol ChatStream: AnyObject {
     var isReady: Bool { get }
-    
+
     func register(observer: AnyObject, for events: [ChatEventToObserve], of conversation: ConversationID?, onEvent: @escaping (ChatEvent) -> Void)
     func connect(completion: @escaping (Result<Void, ChatError>) -> Void)
     func sendTyping(for conversation: String, and uniqueID: String)

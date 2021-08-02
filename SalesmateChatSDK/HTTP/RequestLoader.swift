@@ -13,6 +13,6 @@ public protocol RequestLoader {
 
 public protocol RequestUploader {
     typealias ProgressHandler = (Float) -> Void
-    
+
     func upload(request: HTTPRequest, progress: ProgressHandler?, completion: @escaping (HTTPResult) -> Void)
 }

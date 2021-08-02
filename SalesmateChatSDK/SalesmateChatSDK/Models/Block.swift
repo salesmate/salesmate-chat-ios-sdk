@@ -17,23 +17,23 @@ enum BlockType: String, Codable {
 }
 
 struct BlockToSend: Codable {
-    
+
     let type: BlockType
     let text: String?
     let attachment: FileToSend?
-    
+
     init(text: String) {
         self.type = .text
         self.text = text
         self.attachment = nil
     }
-    
+
     init(from file: UploadedFile) {
         self.type = file.mimeType.contains("image") ? .image : .file
         self.text = nil
         self.attachment = FileToSend(from: file)
     }
-    
+
     init(html text: String) {
         self.type = .html
         self.text = text
@@ -42,14 +42,14 @@ struct BlockToSend: Codable {
 }
 
 struct Block: Codable {
-    
+
     let id: String
     let blockType: BlockType
     let isDraft: Bool
     let orderedNo: IntegerID
     let text: String?
     let file: File?
-    
+
     enum CodingKeys: String, CodingKey {
         case id = "id"
         case blockType = "block_type"
