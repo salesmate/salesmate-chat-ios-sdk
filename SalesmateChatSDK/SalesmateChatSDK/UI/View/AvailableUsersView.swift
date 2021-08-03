@@ -28,7 +28,7 @@ class AvailableUsersViewModel {
     }
 
     private func prepareProperties() {
-        let availableUsers = users.filter({ $0.status == "available" })
+        let availableUsers = users.filter({ $0.status != "available" })
         let usersToDisplay = availableUsers.prefix(attributes.maxNumberUserToShow)
 
         profileViewModels = usersToDisplay.map { CirculerUserProfileViewModel(user: $0, borderWidth: attributes.borderWidth) }

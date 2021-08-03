@@ -106,3 +106,20 @@ extension UIView {
         ])
     }
 }
+
+extension UIColor {
+
+    var foregroundColor: UIColor {
+        isDark ? Self.lightForegroundColor : Self.darkForegroundColor
+    }
+
+    var secondaryForegroundColor: UIColor {
+        isDark ? Self.secondaryLightForegroundColor : Self.secondaryDarkForegroundColor
+    }
+
+    static var darkForegroundColor: UIColor { .black }
+    static var secondaryDarkForegroundColor: UIColor { UIColor(hex: "47484A") ?? .black }
+
+    static var lightForegroundColor: UIColor { .white }
+    static var secondaryLightForegroundColor: UIColor { UIColor(hex: "DEEBFF") ?? .white }
+}

@@ -50,7 +50,7 @@ class CirculerUserProfileViewModel: CirculerProfileViewModelType {
 
     let text: String?
     let textColorCode: String = "FFFFFF"
-    let textSize: CGFloat = 22
+    let textSize: CGFloat = 18
 
     private let user: User
 

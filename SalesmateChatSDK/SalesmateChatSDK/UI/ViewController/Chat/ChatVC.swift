@@ -23,13 +23,8 @@ class ChatVC: UIViewController {
     private var viewModel: ChatViewModel!
 
     // MARK: - IBOutlets
-    @IBOutlet private weak var viewTop: UIView!
-    @IBOutlet private weak var imgvTopPattern: UIImageView!
-    @IBOutlet private weak var btnBack: UIButton!
-    @IBOutlet private weak var userView: AvailableUsersView!
-    @IBOutlet private weak var lblTitle: UILabel!
-    @IBOutlet private weak var lblResponseTime: UILabel!
-    @IBOutlet private weak var btnClose: UIButton!
+    @IBOutlet private weak var viewTopWithoutLogo: ChatTopWithoutLogo!
+    @IBOutlet private weak var viewTopWithLogo: ChatTopWithLogo!
 
     @IBOutlet private weak var messageInputBar: MessageComposeView!
 
@@ -52,28 +47,30 @@ class ChatVC: UIViewController {
     }
 
     private func prepareTopBar() {
-        viewTop.backgroundColor = UIColor(hex: viewModel.backgroundColorCode)
+        viewTopWithLogo.isHidden = true
+        viewTopWithoutLogo.isHidden = true
 
-        let backgroundColor = UIColor(hex: viewModel.backgroundColorCode)
-        let foregroundColor: UIColor = {
-            if backgroundColor?.isDark ?? true {
-                return UIColor.white
-            } else {
-                return UIColor.black
-            }
-        }()
+        let viewTop: ChatTopView?
 
-        viewTop.backgroundColor = backgroundColor
-        imgvTopPattern.image = UIImage(viewModel.backgroundPatternName)
+        switch viewModel.topbar {
+        case .withoutLogo:
+            viewTop = viewTopWithoutLogo
+        case .withLogo:
+            viewTop = viewTopWithLogo
+        case .assigned:
+            viewTop = nil
+        }
 
-        btnBack.tintColor = foregroundColor
-        btnClose.tintColor = foregroundColor
+        viewTop?.viewModel = viewModel.topViewModel
+        viewTop?.isHidden = false
 
-        userView.viewModel = viewModel.availableuserViewModel
+        viewTop?.didSelectBack = {
+            self.navigationController?.popViewController(animated: true)
+        }
 
-        lblResponseTime.text = viewModel.responseTime
-        lblTitle.textColor = foregroundColor
-        lblResponseTime.textColor = foregroundColor
+        viewTop?.didSelectClose = {
+            self.navigationController?.dismiss(animated: true)
+        }
     }
 
     private func prepareInputBar() {
