@@ -22,8 +22,19 @@ class SalesmateChatClient {
         prepareEventListener()
     }
 
-    var conversations: Set<Conversation> { Conversation.current }
-    var messages: Set<Message> { Message.current }
+    private(set) var conversations: Set<Conversation> = []
+    private(set) var messages: Set<Message> = []
+}
+
+extension SalesmateChatClient: ChatDataSource {
+
+    func clearConversations() {
+        conversations = []
+    }
+
+    func clearMessages() {
+        messages = []
+    }
 }
 
 extension SalesmateChatClient: ChatClient {
@@ -69,7 +80,37 @@ extension SalesmateChatClient: ConversationFetcher {
 
     func getConversations(at page: Page, completion: @escaping (Result<[Conversation], ChatError>) -> Void) {
         chatAPI.getConversations(at: page) { result in
-            completion(result)
+            switch result {
+            case .success(let conversations):
+                self.conversations.update(with: conversations)
+                completion(.success(conversations))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+
+    func getDetail(of conversation: ConversationID, completion: @escaping (Result<Conversation, ChatError>) -> Void) {
+        chatAPI.getDetail(of: conversation) { result in
+            switch result {
+            case .success(let conversation):
+                self.conversations.update(with: conversation)
+                completion(.success(conversation))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+
+    func getMessages(of conversation: ConversationID, at page: Page, completion: @escaping (Result<[Message], ChatError>) -> Void) {
+        chatAPI.getMessages(of: conversation, at: page) { result in
+            switch result {
+            case .success(let messages):
+                self.messages.update(with: messages)
+                completion(.success(messages))
+            case .failure(let error):
+                completion(.failure(error))
+            }
         }
     }
 }

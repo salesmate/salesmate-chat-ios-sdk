@@ -12,4 +12,7 @@ protocol ChatAPI: AnyObject {
     func getAuthToken(completion: @escaping (Result<(pseudoName: String, authToken: String, channels: [String]), ChatError>) -> Void)
 
     func getConversations(at page: Page, completion: @escaping (Result<[Conversation], ChatError>) -> Void)
+    func getDetail(of conversation: ConversationID, completion: @escaping (Result<Conversation, ChatError>) -> Void)
+
+    func getMessages(of conversation: ConversationID, at page: Page, completion: @escaping (Result<[Message], ChatError>) -> Void)
 }

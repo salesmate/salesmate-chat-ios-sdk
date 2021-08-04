@@ -68,4 +68,35 @@ extension ChatAPIClient: ChatAPI {
             }
         }
     }
+
+    func getDetail(of conversation: ConversationID, completion: @escaping (Result<Conversation, ChatError>) -> Void) {
+        let request = GetConversationDetailRequest(conversationID: conversation)
+
+        loader.load(request: request) { (result) in
+            switch result {
+            case .success(let response):
+                guard let conversationDetail = response.json as? JSONObject else { return }
+                guard let conversation = Conversation(from: conversationDetail) else { return }
+
+                completion(.success(conversation))
+            case .failure:
+                completion(.failure(.unknown))
+            }
+        }
+    }
+
+    func getMessages(of conversation: ConversationID, at page: Page, completion: @escaping (Result<[Message], ChatError>) -> Void) {
+        let request = GetMessagesRequest(conversationID: conversation, rows: page.rows, offset: page.offset)
+
+        loader.load(request: request) { (result) in
+            switch result {
+            case .success(let response):
+                guard let allMessages = response.json as? JSONArray else { return }
+                let messages = allMessages.compactMap { Message(from: $0) }
+                completion(.success(messages))
+            case .failure:
+                completion(.failure(.unknown))
+            }
+        }
+    }
 }

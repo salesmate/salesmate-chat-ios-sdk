@@ -42,6 +42,15 @@ class ConversationsViewModel {
         actionColorCode = look.actionColor
     }
 
+    private func updateConversations() {
+        conversations = Array(self.client.conversations)
+        conversations.sort(by: { $0.lastMessageDate > $1.lastMessageDate })
+
+        OperationQueue.main.addOperation {
+            self.conversationsUpdated?()
+        }
+    }
+
     private func prepareCellViewModels() {
         let users: [User?] = conversations.map { cid in config.users?.first(where: { $0.id == cid.ownerUserId }) }
         let zip = zip(conversations, users)
@@ -53,14 +62,11 @@ class ConversationsViewModel {
 extension ConversationsViewModel {
 
     func getRecentConversations() {
+        
         client.getConversations(at: Page(size: 10)) { result in
             switch result {
-            case .success(let conversations):
-                self.conversations = conversations
-
-                OperationQueue.main.addOperation {
-                    self.conversationsUpdated?()
-                }
+            case .success:
+                self.updateConversations()
             case .failure:
                 break
             }

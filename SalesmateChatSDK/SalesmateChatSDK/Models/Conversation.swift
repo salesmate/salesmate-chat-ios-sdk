@@ -30,27 +30,35 @@ struct Conversation {
     let lastMessage: LastMessage?
 
     let isRead: Bool
+
+    let rating: String?
+    let remark: String?
+
+    let closedDate: Date?
 }
 
 extension Conversation: Codable {
 
     enum CodingKeys: String, CodingKey {
-        case id = "id"
+        case id
         case uniqueId = "unique_id"
         case contactId = "contact_id"
         case verifiedId = "verified_id"
-        case name = "name"
+        case name
         case lastMessageDate = "last_message_date"
         case lastMessage = "lastMessageData"
         case isRead = "contact_has_read"
         case ownerUserId = "owner_user"
+        case rating
+        case remark
+        case closedDate
     }
 }
 
 extension Conversation.LastMessage: Codable {
 
     enum CodingKeys: String, CodingKey {
-        case id = "id"
+        case id
         case messageSummary = "message_summary"
         case messageType = "message_type"
         case userID = "user_id"

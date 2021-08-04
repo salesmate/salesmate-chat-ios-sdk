@@ -9,7 +9,7 @@ import Foundation
 
 extension Set {
 
-    mutating func update<Source>(_ sequence: Source) where Element == Source.Element, Source: Sequence {
+    mutating func update<Source>(with sequence: Source) where Element == Source.Element, Source: Sequence {
         sequence.forEach { self.update(with: $0) }
     }
 }

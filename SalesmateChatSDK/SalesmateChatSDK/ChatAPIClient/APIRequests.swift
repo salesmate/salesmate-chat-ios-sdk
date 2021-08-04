@@ -69,3 +69,32 @@ struct GetConversationsRequest: HTTPRequest {
         headers = common.headers
     }
 }
+
+struct GetConversationDetailRequest: HTTPRequest {
+
+    var method: HTTPMethod = .get
+    var url: URL
+    var queryItems: [URLQueryItem]?
+    var headers: HTTPHeaders?
+
+    init(conversationID: String, common: CAC = common) {
+        url = URL(string: "messenger/v1/widget/conversations/\(conversationID)", relativeTo: common.base)!
+        queryItems = [URLQueryItem(name: "messages", value: "true")]
+        headers = common.headers
+    }
+}
+
+struct GetMessagesRequest: HTTPRequest {
+
+    var method: HTTPMethod = .get
+    var url: URL
+    var queryItems: [URLQueryItem]?
+    var headers: HTTPHeaders?
+
+    init(conversationID: String, rows: Int, offset: Int, common: CAC = common) {
+        url = URL(string: "messenger/v1/widget/conversations/\(conversationID)/messages", relativeTo: common.base)!
+        queryItems = [URLQueryItem(name: "rows", value: String(rows)),
+                      URLQueryItem(name: "offset", value: String(offset))]
+        headers = common.headers
+    }
+}

@@ -11,6 +11,7 @@ var enableLog: Bool = true
 
 protocol ConversationFetcher {
     func getConversations(at page: Page, completion: @escaping (Result<[Conversation], ChatError>) -> Void)
+    func getDetail(of conversation: ConversationID, completion: @escaping (Result<Conversation, ChatError>) -> Void)
 }
 
 protocol ChatDataSource {
@@ -44,7 +45,7 @@ protocol ChatObservation {
     func register(observer: AnyObject, for events: [ChatEventToObserve], of conversation: ConversationID?, onEvent: @escaping (ChatEvent) -> Void)
 }
 
-protocol ChatClient: ConversationFetcher {
+protocol ChatClient: ConversationFetcher, ChatDataSource {
     func getConfigerations(completion: @escaping ((Result<JSONObject, ChatError>) -> Void))
     func connect(waitForFullConnection: Bool, completion: @escaping (Result<Void, ChatError>) -> Void)
 }
