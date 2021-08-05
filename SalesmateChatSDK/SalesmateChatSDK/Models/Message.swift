@@ -63,7 +63,6 @@ struct Message: Codable, Hashable {
     static var current: Set<Message> = []
 
     let id: String
-    let conversationID: String
     let isInternalMessage: Bool
     let type: MessageType
     let createdDate: Date
@@ -74,7 +73,6 @@ struct Message: Codable, Hashable {
 
     enum CodingKeys: String, CodingKey {
         case id = "id"
-        case conversationID = "conversation_id"
         case isInternalMessage = "is_internal_message"
         case type = "message_type"
         case createdDate = "created_date"

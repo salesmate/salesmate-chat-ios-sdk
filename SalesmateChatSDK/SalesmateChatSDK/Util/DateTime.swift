@@ -39,6 +39,13 @@ extension ISO8601DateFormatter {
 extension Date {
     var stringAsISO8601Format: String { ISO8601DateFormatter.convertor.string(from: self) }
 
+    var durationString: String {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .short
+        return formatter.string(from: self)
+    }
+
     var shortDurationString: String {
         let interval = Int(abs(timeIntervalSince(Date())))
         let minute = 60

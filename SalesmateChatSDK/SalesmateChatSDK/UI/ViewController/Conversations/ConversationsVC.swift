@@ -104,3 +104,13 @@ extension ConversationsVC: UITableViewDataSource {
         return cell
     }
 }
+
+extension ConversationsVC: UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let viewModel = self.viewModel.chatViewModelForConversation(at: indexPath.row)
+        let VC = ChatVC.create(with: viewModel)
+
+        navigationController?.pushViewController(VC, animated: true)
+    }
+}

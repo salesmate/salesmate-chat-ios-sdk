@@ -80,6 +80,9 @@
                                         <state key="normal" title="Start New Chat">
                                             <color key="titleColor" systemColor="systemBlueColor"/>
                                         </state>
+                                        <connections>
+                                            <action selector="btnStartNewChatPressed:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="rZh-4B-AB2"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>

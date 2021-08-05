@@ -26,23 +26,43 @@ class ChatVC: UIViewController {
     @IBOutlet private weak var viewTopWithoutLogo: ChatTopWithoutLogo!
     @IBOutlet private weak var viewTopWithLogo: ChatTopWithLogo!
 
+    @IBOutlet private weak var tableView: UITableView!
+
     @IBOutlet private weak var messageInputBar: MessageComposeView!
 
     // MARK: - Override
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        prepareView()
-        becomeFirstResponder()
-    }
-
     override var canBecomeFirstResponder: Bool { true }
     override var canResignFirstResponder: Bool { true }
     override var inputAccessoryView: UIView? { messageInputBar }
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        prepareViewModel()
+        prepareView()
+
+        viewModel.getMessages()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        tableView.contentInset = UIEdgeInsets(top: 15,
+                                              left: 0,
+                                              bottom: messageInputBar.intrinsicContentSize.height + 15,
+                                              right: 0)
+    }
+    // MARK: - ViewModel
+    private func prepareViewModel() {
+        viewModel.messagesUpdated = {
+            self.tableView.reloadData()
+        }
+    }
+
     // MARK: - View
     private func prepareView() {
         prepareTopBar()
+        prepareTableView()
         prepareInputBar()
     }
 
@@ -77,12 +97,35 @@ class ChatVC: UIViewController {
 
     }
 
-    // MARK: - Actions
-    @IBAction private func btnBackAllPressed(_ sender: UIButton) {
-        navigationController?.popViewController(animated: true)
+    private func prepareTableView() {
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = UITableView.automaticDimension
+        tableView.tableFooterView = UIView()
+        tableView.register(SendMessageCell.nib, forCellReuseIdentifier: SendMessageCell.ID)
+        tableView.register(ReceivedMessageCell.nib, forCellReuseIdentifier: ReceivedMessageCell.ID)
+    }
+}
+
+extension ChatVC: UITableViewDataSource {
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel.messageViewModels.count
     }
 
-    @IBAction private func btnCloseAllPressed(_ sender: UIButton) {
-        navigationController?.dismiss(animated: true, completion: nil)
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let messageViewModel = viewModel.messageViewModels[indexPath.row]
+
+        let cell: MessageCell
+
+        switch messageViewModel.alignment {
+        case .left:
+            cell = tableView.dequeueReusableCell(withIdentifier: ReceivedMessageCell.ID, for: indexPath) as! MessageCell
+        case .right:
+            cell = tableView.dequeueReusableCell(withIdentifier: SendMessageCell.ID, for: indexPath) as! MessageCell
+        }
+
+        cell.viewModel = messageViewModel
+
+        return cell
     }
 }

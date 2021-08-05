@@ -267,6 +267,10 @@
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="interactive" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="OPv-4u-xKb">
                                                 <rect key="frame" x="0.0" y="315" width="414" height="503"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <connections>
+                                                    <outlet property="dataSource" destination="Y6W-OH-hqX" id="X9z-Du-5F0"/>
+                                                    <outlet property="delegate" destination="Y6W-OH-hqX" id="r3L-cf-WcX"/>
+                                                </connections>
                                             </tableView>
                                         </subviews>
                                     </stackView>
@@ -284,6 +288,7 @@
                     </view>
                     <connections>
                         <outlet property="messageInputBar" destination="UbM-6T-m3n" id="xbc-Nd-cTf"/>
+                        <outlet property="tableView" destination="OPv-4u-xKb" id="BbO-HE-yTK"/>
                         <outlet property="viewTopWithLogo" destination="Nyx-0P-mtB" id="1wL-0n-Fgn"/>
                         <outlet property="viewTopWithoutLogo" destination="j7n-Jq-9j9" id="xfr-EH-8RN"/>
                     </connections>

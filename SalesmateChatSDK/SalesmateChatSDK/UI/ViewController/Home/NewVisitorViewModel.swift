@@ -17,11 +17,17 @@ class NewVisitorViewModel {
     private(set) var showPowerBy: Bool = false
     private(set) var buttonColorCode: String = ""
 
+    var startNewChat: (() -> Void)?
+
     // MARK: - Init
     init(config: Configeration) {
         self.config = config
 
         prepareProperties()
+    }
+
+    func didSelecctStartNewChat() {
+        startNewChat?()
     }
 
     private func prepareProperties() {

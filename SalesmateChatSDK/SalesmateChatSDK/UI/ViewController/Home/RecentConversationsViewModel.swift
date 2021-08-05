@@ -19,20 +19,29 @@ class RecentConversationsViewModel {
     private(set) var conversationViewModels: [ConversationCellViewModel] = []
 
     var showAllConversations: (() -> Void)?
-
-    let chatViewModel: ChatViewModel
+    var showConversation: ((ConversationID) -> Void)?
+    var startNewChat: (() -> Void)?
 
     // MARK: - Init
     init(config: Configeration, conversations: [Conversation]) {
         self.config = config
         self.conversations = conversations
 
-        chatViewModel = ChatViewModel(config: config)
         prepareProperties()
     }
 
     func didSelectViewAll() {
         showAllConversations?()
+    }
+
+    func didSelecctStartNewChat() {
+        startNewChat?()
+    }
+
+    func didSelecctConversation(at index: Int) {
+        let conversation = conversations[index]
+
+        showConversation?(conversation.id)
     }
 
     private func prepareProperties() {

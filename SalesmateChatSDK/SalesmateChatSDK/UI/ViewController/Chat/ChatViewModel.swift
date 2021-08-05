@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 class ChatViewModel {
 
     enum TopBarStyle {
@@ -17,17 +16,24 @@ class ChatViewModel {
     }
 
     // MARK: - Private Properties
+    private let conversationID: ConversationID?
     private let config: Configeration
-    // private let client: ChatClient
+    private let client: ChatClient
+    private let page = Page()
 
     let topbar: TopBarStyle
     let topViewModel: ChatTopViewModel
     let actionColorCode: String
 
+    private(set) var messageViewModels: [MessageViewModel] = []
+
+    var messagesUpdated: (() -> Void)?
+
     // MARK: - Init
-    init(config: Configeration) {
+    init(conversationID: ConversationID? = nil, config: Configeration, client: ChatClient) {
+        self.conversationID = conversationID
         self.config = config
-        // self.client = client
+        self.client = client
 
         topViewModel = ChatTopViewModel(config: config)
 
@@ -37,6 +43,36 @@ class ChatViewModel {
             topbar = .withoutLogo
         } else {
             topbar = .withLogo
+        }
+
+        self.client.clearMessages()
+    }
+
+    private func updateMessages() {
+        guard let look = config.look else { return }
+
+        let sortedMessage = client.messages.sorted(by: { $0.createdDate < $1.createdDate })
+
+        messageViewModels = sortedMessage.map { MessageViewModel(message: $0, look: look, users: config.users ?? []) }
+
+        OperationQueue.main.addOperation {
+            self.messagesUpdated?()
+        }
+    }
+}
+
+extension ChatViewModel {
+
+    func getMessages() {
+        guard let ID = conversationID else { return }
+
+        client.getMessages(of: ID, at: page) { result in
+            switch result {
+            case .success:
+                self.updateMessages()
+            case .failure:
+                break
+            }
         }
     }
 }

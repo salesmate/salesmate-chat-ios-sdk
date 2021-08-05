@@ -25,7 +25,10 @@ class HomeViewModel {
 
     var showNewVisitorView: ((NewVisitorViewModel) -> Void)?
     var showRecentConversationsView: ((RecentConversationsViewModel) -> Void)?
+
     var showAllConversations: ((ConversationsViewModel) -> Void)?
+    var startNewChat: ((ChatViewModel) -> Void)?
+    var showConversation: ((ChatViewModel) -> Void)?
 
     // MARK: - Init
     init(config: Configeration, client: ChatClient) {
@@ -54,6 +57,10 @@ class HomeViewModel {
     private func askToShowNewVisitorView() {
         let viewModel = NewVisitorViewModel(config: config)
 
+        viewModel.startNewChat = {
+            self.askToStartNewChat()
+        }
+
         OperationQueue.main.addOperation {
             self.showNewVisitorView?(viewModel)
         }
@@ -66,6 +73,14 @@ class HomeViewModel {
             self.askToShowAllConversations()
         }
 
+        viewModel.startNewChat = {
+            self.askToStartNewChat()
+        }
+
+        viewModel.showConversation = { ID in
+            self.askToShowConversation(with: ID)
+        }
+
         OperationQueue.main.addOperation {
             self.showRecentConversationsView?(viewModel)
         }
@@ -76,6 +91,22 @@ class HomeViewModel {
 
         OperationQueue.main.addOperation {
             self.showAllConversations?(viewModel)
+        }
+    }
+
+    private func askToStartNewChat() {
+        let viewModel = ChatViewModel(config: config, client: client)
+
+        OperationQueue.main.addOperation {
+            self.startNewChat?(viewModel)
+        }
+    }
+
+    private func askToShowConversation(with ID: ConversationID) {
+        let viewModel = ChatViewModel(conversationID: ID, config: config, client: client)
+
+        OperationQueue.main.addOperation {
+            self.showConversation?(viewModel)
         }
     }
 }

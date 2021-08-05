@@ -14,6 +14,10 @@ protocol ConversationFetcher {
     func getDetail(of conversation: ConversationID, completion: @escaping (Result<Conversation, ChatError>) -> Void)
 }
 
+protocol MessageFetcher {
+    func getMessages(of conversation: ConversationID, at page: Page, completion: @escaping (Result<[Message], ChatError>) -> Void)
+}
+
 protocol ChatDataSource {
     var conversations: Set<Conversation> { get }
     var messages: Set<Message> { get }
@@ -45,7 +49,7 @@ protocol ChatObservation {
     func register(observer: AnyObject, for events: [ChatEventToObserve], of conversation: ConversationID?, onEvent: @escaping (ChatEvent) -> Void)
 }
 
-protocol ChatClient: ConversationFetcher, ChatDataSource {
+protocol ChatClient: ConversationFetcher, MessageFetcher, ChatDataSource {
     func getConfigerations(completion: @escaping ((Result<JSONObject, ChatError>) -> Void))
     func connect(waitForFullConnection: Bool, completion: @escaping (Result<Void, ChatError>) -> Void)
 }

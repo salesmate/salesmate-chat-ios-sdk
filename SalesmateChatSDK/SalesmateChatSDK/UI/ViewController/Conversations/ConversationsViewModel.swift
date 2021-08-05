@@ -61,8 +61,14 @@ class ConversationsViewModel {
 
 extension ConversationsViewModel {
 
+    func chatViewModelForConversation(at index: Int) -> ChatViewModel {
+        let conversation = conversations[index]
+
+        return ChatViewModel(conversationID: conversation.id, config: config, client: client)
+    }
+
     func getRecentConversations() {
-        
+
         client.getConversations(at: Page(size: 10)) { result in
             switch result {
             case .success:

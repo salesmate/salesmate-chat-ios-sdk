@@ -68,6 +68,18 @@ class HomeVC: UIViewController {
 
             self.navigationController?.pushViewController(VC, animated: true)
         }
+
+        viewModel.startNewChat = { viewModel in
+            let VC = ChatVC.create(with: viewModel)
+
+            self.navigationController?.pushViewController(VC, animated: true)
+        }
+
+        viewModel.showConversation = { viewModel in
+            let VC = ChatVC.create(with: viewModel)
+
+            self.navigationController?.pushViewController(VC, animated: true)
+        }
     }
 
     private func prepareTopView() {

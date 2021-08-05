@@ -93,16 +93,16 @@ extension UIViewController {
 
 extension UIView {
 
-    func addAndFill(in other: UIView, with insets: UIEdgeInsets = .zero) {
+    func addAndFill(in parentView: UIView, with insets: UIEdgeInsets = .zero) {
         translatesAutoresizingMaskIntoConstraints = false
 
-        other.addSubview(self)
+        parentView.addSubview(self)
 
         NSLayoutConstraint.activate([
-            leadingAnchor.constraint(equalTo: other.leadingAnchor, constant: insets.left),
-            trailingAnchor.constraint(equalTo: other.trailingAnchor, constant: insets.right),
-            topAnchor.constraint(equalTo: other.topAnchor, constant: insets.top),
-            bottomAnchor.constraint(equalTo: other.bottomAnchor, constant: insets.bottom)
+            leadingAnchor.constraint(equalTo: parentView.leadingAnchor, constant: insets.left),
+            trailingAnchor.constraint(equalTo: parentView.trailingAnchor, constant: -insets.right),
+            topAnchor.constraint(equalTo: parentView.topAnchor, constant: insets.top),
+            bottomAnchor.constraint(equalTo: parentView.bottomAnchor, constant: -insets.bottom)
         ])
     }
 }

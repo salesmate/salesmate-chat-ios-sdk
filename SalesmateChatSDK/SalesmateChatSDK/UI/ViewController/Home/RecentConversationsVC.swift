@@ -56,9 +56,7 @@ class RecentConversationsVC: UIViewController {
     }
 
     @IBAction private func btnStartNewChatPressed(_ sender: UIButton) {
-        let VC = ChatVC.create(with: viewModel.chatViewModel)
-
-        parent?.navigationController?.pushViewController(VC, animated: true)
+        viewModel.didSelecctStartNewChat()
     }
 }
 
@@ -75,5 +73,13 @@ extension RecentConversationsVC: UITableViewDataSource {
         cell.viewModel = viewModel.conversationViewModels[indexPath.row]
 
         return cell
+    }
+}
+
+// MARK: - UITableViewDelegate
+extension RecentConversationsVC: UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        viewModel.didSelecctConversation(at: indexPath.row)
     }
 }

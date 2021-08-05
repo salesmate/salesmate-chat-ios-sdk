@@ -42,4 +42,9 @@ class NewVisitorVC: UIViewController {
         userView.viewModel = viewModel.availableuserViewModel
         btnStartChat.backgroundColor = UIColor(hex: viewModel.buttonColorCode)
     }
+
+    // MARK: - Actions
+    @IBAction private func btnStartNewChatPressed(_ sender: UIButton) {
+        viewModel.didSelecctStartNewChat()
+    }
 }

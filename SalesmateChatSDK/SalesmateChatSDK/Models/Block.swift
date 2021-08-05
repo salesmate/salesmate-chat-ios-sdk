@@ -47,7 +47,7 @@ struct Block: Codable {
     let blockType: BlockType
     let isDraft: Bool
     let orderedNo: IntegerID
-    let text: String?
+    let text: HTML?
     let file: File?
 
     enum CodingKeys: String, CodingKey {
