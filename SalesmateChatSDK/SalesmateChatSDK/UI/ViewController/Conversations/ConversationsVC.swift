@@ -54,6 +54,7 @@ class ConversationsVC: UIViewController {
     }
 
     private func prepareTableView() {
+        tableView.contentInset.bottom = 85
         tableView.tableFooterView = UIView()
         tableView.register(UINib(nibName: "ConversationCell", bundle: .salesmate),
                            forCellReuseIdentifier: ConversationCell.ID)

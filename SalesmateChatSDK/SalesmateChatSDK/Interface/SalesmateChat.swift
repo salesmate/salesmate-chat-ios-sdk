@@ -59,6 +59,14 @@ public class SalesmateChat {
     }
 
     private func presentMessenger(from viewController: UIViewController) {
+        if config.look == nil {
+            run(afterDelay: 1) {
+                self.presentMessenger(from: viewController)
+            }
+
+            return
+        }
+
         let VC = HomeVC.create(with: HomeViewModel(config: config, client: client))
         let NC = UINavigationController(rootViewController: VC)
 

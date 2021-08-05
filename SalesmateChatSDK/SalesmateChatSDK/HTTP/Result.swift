@@ -7,7 +7,7 @@
 
 import Foundation
 
-public typealias HTTPResult = Result<HTTPResponse, HTTPError>
+typealias HTTPResult = Result<HTTPResponse, HTTPError>
 
 extension HTTPResult {
 

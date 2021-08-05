@@ -1,5 +1,5 @@
 //
-//  ChatTextView.swift
+//  ChatAttributedTextsView.swift
 //  SalesmateChatSDK
 //
 //  Created by Chintan Dave on 04/08/21.

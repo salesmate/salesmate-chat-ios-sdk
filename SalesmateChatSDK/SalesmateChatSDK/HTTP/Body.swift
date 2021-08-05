@@ -7,30 +7,30 @@
 
 import Foundation
 
-public protocol HTTPBody {
+protocol HTTPBody {
     var headers: HTTPHeaders { get }
 
     func encode() throws -> Data
 }
 
-public struct JSONBody<T: Encodable>: HTTPBody {
-    public var headers: HTTPHeaders = [
+struct JSONBody<T: Encodable>: HTTPBody {
+    var headers: HTTPHeaders = [
         "Content-Type": "application/json; charset=utf-8"
     ]
 
     private let value: T
 
-    public init(_ value: T) {
+    init(_ value: T) {
         self.value = value
     }
 
-    public func encode() throws -> Data {
+    func encode() throws -> Data {
         try JSONEncoder().encode(value)
     }
 }
 
-public struct MultipartSingleFileBody: HTTPBody {
-    public var headers: HTTPHeaders {
+struct MultipartSingleFileBody: HTTPBody {
+    var headers: HTTPHeaders {
         ["Content-Type": "multipart/form-data; boundary=\(boundary)"]
     }
 
@@ -55,7 +55,7 @@ public struct MultipartSingleFileBody: HTTPBody {
       return boundary
     }
 
-    public func encode() throws -> Data {
+    func encode() throws -> Data {
         var data = Data()
 
         data.append("--\(boundary)\r\n".data(using: .utf8) ?? Data())

@@ -7,7 +7,16 @@
 
 import Foundation
 
-public protocol EndPoint {
+enum HTTPMethod: String {
+    case get = "GET"
+    case post = "POST"
+    case put = "PUT"
+    case delete = "DELETE"
+}
+
+typealias HTTPHeaders = [String: String]
+
+protocol EndPoint {
     var method: HTTPMethod { get }
     var url: URL { get }
     var queryItems: [URLQueryItem]? { get }
@@ -15,11 +24,11 @@ public protocol EndPoint {
     var body: HTTPBody? { get }
 }
 
-public protocol HTTPRequest: EndPoint {
+protocol HTTPRequest: EndPoint {
     var request: URLRequest? { get }
 }
 
-public extension HTTPRequest {
+extension HTTPRequest {
     var queryItems: [URLQueryItem]? { nil }
     var headers: HTTPHeaders? { nil }
     var body: HTTPBody? { nil }
@@ -57,7 +66,7 @@ public extension HTTPRequest {
 
 extension URLRequest {
 
-    public var curl: String {
+    var curl: String {
         guard let url = url else { return "" }
 
         var baseCommand = #"curl "\#(url.absoluteString)""#

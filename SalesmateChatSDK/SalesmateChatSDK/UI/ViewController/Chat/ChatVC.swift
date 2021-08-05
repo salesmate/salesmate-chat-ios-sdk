@@ -21,6 +21,8 @@ class ChatVC: UIViewController {
 
     // MARK: - Private Properties
     private var viewModel: ChatViewModel!
+    private var shouldScrollToBottom: Bool = true
+    private var shouldAdjustForKeyboard: Bool = false
 
     // MARK: - IBOutlets
     @IBOutlet private weak var viewTopWithoutLogo: ChatTopWithoutLogo!
@@ -40,22 +42,37 @@ class ChatVC: UIViewController {
 
         prepareViewModel()
         prepareView()
+        registerKeyboardNotifications()
 
         viewModel.getMessages()
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+        if shouldScrollToBottom {
+            shouldScrollToBottom = false
+            scrollToBottom(animated: false)
+        }
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        shouldAdjustForKeyboard = false
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        tableView.contentInset = UIEdgeInsets(top: 15,
-                                              left: 0,
-                                              bottom: messageInputBar.intrinsicContentSize.height + 15,
-                                              right: 0)
+        shouldAdjustForKeyboard = true
     }
+
     // MARK: - ViewModel
     private func prepareViewModel() {
         viewModel.messagesUpdated = {
             self.tableView.reloadData()
+            self.scrollToBottom(animated: false)
         }
     }
 
@@ -98,6 +115,7 @@ class ChatVC: UIViewController {
     }
 
     private func prepareTableView() {
+        tableView.contentInset.top = 20
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = UITableView.automaticDimension
         tableView.tableFooterView = UIView()
@@ -127,5 +145,62 @@ extension ChatVC: UITableViewDataSource {
         cell.viewModel = messageViewModel
 
         return cell
+    }
+}
+
+// MARK: - Scrolling
+extension ChatVC {
+
+    private var bottomOffset: CGPoint {
+        CGPoint(x: 0, y: max(-tableView.contentInset.top, tableView.contentSize.height - (tableView.bounds.size.height - tableView.contentInset.bottom)))
+    }
+
+    private func scrollToBottom(animated: Bool) {
+        view.layoutIfNeeded()
+        tableView.setContentOffset(bottomOffset, animated: animated)
+    }
+
+    private func registerKeyboardNotifications() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillShow(_:)),
+                                               name: UIResponder.keyboardWillShowNotification,
+                                               object: nil)
+
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillHide(_:)),
+                                               name: UIResponder.keyboardWillHideNotification,
+                                               object: nil)
+    }
+
+    @objc private func keyboardWillShow(_ notification: NSNotification) {
+        adjustContentForKeyboard(shown: true, notification: notification)
+    }
+
+    @objc private func keyboardWillHide(_ notification: NSNotification) {
+        adjustContentForKeyboard(shown: false, notification: notification)
+    }
+
+    private func adjustContentForKeyboard(shown: Bool, notification: NSNotification) {
+        guard let payload = KeyboardInfo(notification as Notification) else { return }
+
+        let keyboardHeight = shown ? payload.frameEnd.size.height : messageInputBar.bounds.size.height
+
+        if tableView.contentInset.bottom == keyboardHeight { return }
+
+        let distanceFromBottom = bottomOffset.y - tableView.contentOffset.y
+
+        var insets = tableView.contentInset
+
+        insets.bottom = keyboardHeight
+
+        UIView.animate(withDuration: payload.animationDuration, delay: 0, options: [payload.animationCurveOption], animations: {
+
+            self.tableView.contentInset = insets
+            self.tableView.scrollIndicatorInsets = insets
+
+            if distanceFromBottom < 10 {
+                self.tableView.contentOffset = self.bottomOffset
+            }
+        }, completion: nil)
     }
 }

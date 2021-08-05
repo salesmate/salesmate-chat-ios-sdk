@@ -7,7 +7,6 @@
 
 import Foundation
 @_implementationOnly import SwiftyJSON
-@_implementationOnly import HTTP
 
 struct HeaderKey {
     static let linkName = "x-linkname"

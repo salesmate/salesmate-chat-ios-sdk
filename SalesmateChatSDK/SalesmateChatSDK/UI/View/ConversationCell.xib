@@ -18,13 +18,13 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jzY-PM-UKz">
-                        <rect key="frame" x="0.0" y="25" width="384" height="45"/>
+                        <rect key="frame" x="0.0" y="20" width="384" height="55"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kyq-OP-Ijx">
-                                <rect key="frame" x="0.0" y="0.0" width="30" height="45"/>
+                                <rect key="frame" x="0.0" y="0.0" width="30" height="55"/>
                                 <subviews>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pVa-IV-Gyj">
-                                        <rect key="frame" x="11" y="18.5" width="8" height="8"/>
+                                        <rect key="frame" x="11" y="23.5" width="8" height="8"/>
                                         <color key="backgroundColor" systemColor="systemBlueColor"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="8" id="4rR-hh-dFp"/>
@@ -45,7 +45,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JPW-SY-OTv">
-                                <rect key="frame" x="30" y="0.0" width="40" height="45"/>
+                                <rect key="frame" x="30" y="0.0" width="40" height="55"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tpc-3K-8xQ" customClass="CirculerProfileView" customModule="SalesmateChatSDK" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
@@ -64,14 +64,14 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ocv-Lk-TQ9">
-                                <rect key="frame" x="70" y="0.0" width="15" height="45"/>
+                                <rect key="frame" x="70" y="0.0" width="15" height="55"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="15" id="VlO-pe-564"/>
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="faf-Ux-NOa">
-                                <rect key="frame" x="85" y="0.0" width="299" height="45"/>
+                                <rect key="frame" x="85" y="0.0" width="299" height="55"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CDm-em-5o9">
                                         <rect key="frame" x="0.0" y="0.0" width="299" height="18"/>
@@ -91,7 +91,7 @@
                                         </subviews>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Arx-g5-YGE">
-                                        <rect key="frame" x="0.0" y="23" width="299" height="22"/>
+                                        <rect key="frame" x="0.0" y="23" width="299" height="32"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" red="0.31372549019607843" green="0.37254901960784315" blue="0.47450980392156861" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -103,8 +103,8 @@
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="jzY-PM-UKz" secondAttribute="trailing" constant="30" id="1TC-oh-gbk"/>
-                    <constraint firstAttribute="bottom" secondItem="jzY-PM-UKz" secondAttribute="bottom" constant="25" id="T3o-Zu-pZo"/>
-                    <constraint firstItem="jzY-PM-UKz" firstAttribute="top" secondItem="WdA-Ur-XTB" secondAttribute="top" constant="25" id="knB-80-ubg"/>
+                    <constraint firstAttribute="bottom" secondItem="jzY-PM-UKz" secondAttribute="bottom" constant="20" id="T3o-Zu-pZo"/>
+                    <constraint firstItem="jzY-PM-UKz" firstAttribute="top" secondItem="WdA-Ur-XTB" secondAttribute="top" constant="20" id="knB-80-ubg"/>
                     <constraint firstItem="jzY-PM-UKz" firstAttribute="leading" secondItem="WdA-Ur-XTB" secondAttribute="leading" id="zjJ-Qu-bdm"/>
                 </constraints>
             </tableViewCellContentView>

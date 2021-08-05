@@ -53,14 +53,21 @@
                                             <constraint firstAttribute="trailing" secondItem="IdN-aw-rzy" secondAttribute="trailing" constant="30" id="p5d-XZ-92f"/>
                                         </constraints>
                                     </view>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oBH-Vz-fyZ">
-                                        <rect key="frame" x="0.0" y="84" width="414" height="604"/>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oBH-Vz-fyZ">
+                                        <rect key="frame" x="0.0" y="84" width="414" height="589"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <connections>
                                             <outlet property="dataSource" destination="Y6W-OH-hqX" id="MP3-uF-oyZ"/>
                                             <outlet property="delegate" destination="Y6W-OH-hqX" id="oiK-Cx-Tm7"/>
                                         </connections>
                                     </tableView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uby-R6-IJD">
+                                        <rect key="frame" x="0.0" y="673" width="414" height="15"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="15" id="Thi-l6-gzD"/>
+                                        </constraints>
+                                    </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="umW-2g-sl7">
                                         <rect key="frame" x="0.0" y="688" width="414" height="52"/>
                                         <subviews>
