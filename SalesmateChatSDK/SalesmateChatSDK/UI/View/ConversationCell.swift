@@ -19,17 +19,17 @@ class ConversationCellViewModel {
     let isRead: Bool
     let time: String
 
-    init(conversation: Conversation, user: User?) {
+    init(conversation: Conversation, user: User?, workspace: Configeration.Workspace) {
         self.conversation = conversation
         self.user = user
 
         if let user = user {
-            profileViewModel = CirculerUserProfileViewModel(user: user, borderWidth: 0)
+            profileViewModel = CirculerUserProfileViewModel(user: user)
+            name = "\(user.firstName) \(user.lastName)"
         } else {
-            profileViewModel = nil
+            profileViewModel = CirculerTextProfileViewModel(text: workspace.name)
+            name = workspace.name
         }
-
-        name = "\(user?.firstName ?? "") \(user?.lastName ?? "")"
 
         lastMessage = conversation.lastMessage?.messageSummary
         isRead = conversation.isRead

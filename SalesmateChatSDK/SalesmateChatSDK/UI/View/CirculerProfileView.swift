@@ -7,84 +7,6 @@
 
 import UIKit
 
-protocol CirculerProfileViewModelType {
-    var borderWidth: CGFloat { get }
-    var backgroundColorCode: String { get }
-
-    var imageURL: URL? { get }
-
-    var text: String? { get }
-    var textColorCode: String { get }
-    var textSize: CGFloat { get }
-}
-
-extension CirculerProfileViewModelType {
-
-    private static var colorCodesForProfilePicBG: [String] {[
-        "ff5622", "8157ff", "4d88ff",
-        "ff416a", "683ab7", "03a8f4",
-        "26c5da", "00ac7c", "c0ca33",
-        "ffb301", "00cc88"
-    ]}
-
-    static func profileBackgroundColorCode(for name: String) -> String {
-        var totalValue: Int = 0
-
-        for character in name.utf8 {
-            let stringSegment = "\(character)"
-            let intValue = Int(stringSegment)!
-            totalValue += intValue
-        }
-
-        let index = totalValue % colorCodesForProfilePicBG.count
-        return colorCodesForProfilePicBG[index]
-    }
-}
-
-class CirculerUserProfileViewModel: CirculerProfileViewModelType {
-
-    let borderWidth: CGFloat
-    let backgroundColorCode: String
-
-    let imageURL: URL?
-
-    let text: String?
-    let textColorCode: String = "FFFFFF"
-    let textSize: CGFloat = 18
-
-    private let user: User
-
-    init(user: User, borderWidth: CGFloat = 0) {
-        self.user = user
-        self.borderWidth = borderWidth
-
-        text = user.firstName.first?.description
-        imageURL = URL(string: user.profileUrl ?? "")
-        backgroundColorCode = Self.profileBackgroundColorCode(for: user.firstName)
-    }
-}
-
-class CirculerMoreProfileViewModel: CirculerProfileViewModelType {
-
-    let borderWidth: CGFloat
-    let backgroundColorCode: String = "EBECF0"
-
-    let imageURL: URL? = nil
-
-    let text: String?
-    let textSize: CGFloat = 18
-    let textColorCode: String = "505F79"
-
-    private let count: Int
-
-    init(count: Int, borderWidth: CGFloat = 0) {
-        self.count = count
-        self.borderWidth = borderWidth
-
-        text = "+\(count)"
-    }
-}
-
 class CirculerProfileView: UIView {
 
     var viewModel: CirculerProfileViewModelType? {
@@ -145,7 +67,7 @@ class CirculerProfileView: UIView {
         if let string = viewModel.text {
             label.isHidden = false
             label.text = string
-            label.font = UIFont.systemFont(ofSize: viewModel.textSize, weight: .bold)
+            label.font = UIFont.systemFont(ofSize: CGFloat(viewModel.textSize), weight: .bold)
             label.textColor = UIColor(hex: viewModel.textColorCode)
         }
 
@@ -155,7 +77,7 @@ class CirculerProfileView: UIView {
             imageView.setImage(from: imageURL)
         }
 
-        layer.borderWidth = viewModel.borderWidth
+        layer.borderWidth = CGFloat(viewModel.borderWidth)
         layer.borderColor = UIColor.white.withAlphaComponent(0.8).cgColor
     }
 }

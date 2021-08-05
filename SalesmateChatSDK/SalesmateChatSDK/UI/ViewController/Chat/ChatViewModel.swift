@@ -19,7 +19,7 @@ class ChatViewModel {
     private let conversationID: ConversationID?
     private let config: Configeration
     private let client: ChatClient
-    private var page = Page()
+    private var page = Page(size: 50)
 
     let topbar: TopBarStyle
     let topViewModel: ChatTopViewModel
@@ -71,10 +71,6 @@ extension ChatViewModel {
             case .success:
                 self.updateMessages()
                 self.page.next()
-
-                if self.page.offset < 50 {
-                    self.getMessages()
-                }
             case .failure:
                 break
             }

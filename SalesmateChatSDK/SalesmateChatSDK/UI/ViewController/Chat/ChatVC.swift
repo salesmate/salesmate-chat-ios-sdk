@@ -71,8 +71,13 @@ class ChatVC: UIViewController {
     // MARK: - ViewModel
     private func prepareViewModel() {
         viewModel.messagesUpdated = {
-            self.tableView.reloadData()
-            self.scrollToBottom(animated: false)
+            if self.tableView.visibleCells.isEmpty {
+                self.tableView.reloadData()
+                let indexpath = IndexPath(row: self.viewModel.messageViewModels.count - 1, section: 0)
+                self.tableView.scrollToRow(at: indexpath, at: .bottom, animated: false)
+            } else {
+                self.tableView.reloadData()
+            }
         }
     }
 

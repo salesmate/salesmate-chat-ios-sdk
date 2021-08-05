@@ -46,6 +46,7 @@ class RecentConversationsViewModel {
 
     private func prepareProperties() {
         guard let look = config.look else { return }
+        guard let workspace = config.workspace else { return }
 
         showPowerBy = look.showPoweredBy
         actionColorCode = look.actionColor
@@ -56,6 +57,6 @@ class RecentConversationsViewModel {
         let users: [User?] = conversationToShow.map { cid in config.users?.first(where: { $0.id == cid.ownerUserId }) }
         let zip = zip(conversationToShow, users)
 
-        conversationViewModels = zip.map { ConversationCellViewModel(conversation: $0, user: $1)}
+        conversationViewModels = zip.map { ConversationCellViewModel(conversation: $0, user: $1, workspace: workspace)}
     }
 }

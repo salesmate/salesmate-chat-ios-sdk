@@ -10,8 +10,8 @@ import UIKit
 class AvailableUsersViewModel {
 
     struct Attributes {
-        let spacing: CGFloat
-        let borderWidth: CGFloat
+        let spacing: Float
+        let borderWidth: Float
         let maxNumberUserToShow: Int
     }
 
@@ -72,7 +72,7 @@ class AvailableUsersView: UIView {
         guard let viewModel = viewModel else { return }
 
         stackView.subviews.forEach { $0.removeFromSuperview() }
-        stackView.spacing = viewModel.attributes.spacing
+        stackView.spacing = CGFloat(viewModel.attributes.spacing)
 
         profileViews = viewModel.profileViewModels.map { CirculerProfileView(viewModel: $0) }
 

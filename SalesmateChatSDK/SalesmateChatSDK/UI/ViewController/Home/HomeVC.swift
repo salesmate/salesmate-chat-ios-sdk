@@ -25,6 +25,7 @@ class HomeVC: UIViewController {
     // MARK: - IBOutlets
     @IBOutlet private weak var viewTop: UIView!
     @IBOutlet private weak var imgvTopPattern: UIImageView!
+    @IBOutlet private weak var btnClose: UIButton!
 
     @IBOutlet private weak var imgvLogoContainer: UIView!
     @IBOutlet private weak var imgvLogo: UIImageView!
@@ -51,6 +52,29 @@ class HomeVC: UIViewController {
         viewContainer.clipsToBounds = true
     }
 
+    private func prepareTopView() {
+        let backgroundColor = UIColor(hex: viewModel.backgroundColorCode)
+        let foregroundColor = backgroundColor?.foregroundColor
+
+        viewTop.backgroundColor = backgroundColor
+        imgvTopPattern.image = UIImage(viewModel.backgroundPatternName)
+
+        if let link = viewModel.headerLogoURL {
+            imgvLogoContainer.isHidden = false
+            imgvLogo.setImage(from: link)
+        } else {
+            imgvLogoContainer.isHidden = true
+        }
+
+        btnClose.tintColor = foregroundColor
+        lblGreeting.textColor = foregroundColor
+        lblTeamIntro.textColor = foregroundColor
+
+        lblGreeting.text = viewModel.greeting
+        lblTeamIntro.text = viewModel.teamIntro
+    }
+
+    // MARK: - ViewModel
     private func prepareViewModel() {
         viewModel.showNewVisitorView = { viewModel in
             let VC = NewVisitorVC.create(with: viewModel)
@@ -82,25 +106,8 @@ class HomeVC: UIViewController {
         }
     }
 
-    private func prepareTopView() {
-        viewTop.backgroundColor = UIColor(hex: viewModel.backgroundColorCode)
-
-        if viewTop.backgroundColor?.isDark ?? true {
-            lblGreeting.textColor = UIColor.white
-            lblTeamIntro.textColor = UIColor.white
-        } else {
-            lblGreeting.textColor = UIColor.black
-            lblTeamIntro.textColor = UIColor.black
-        }
-
-        if let link = viewModel.headerLogoURL {
-            imgvLogo.setImage(from: link)
-        }
-
-        imgvTopPattern.image = UIImage(viewModel.backgroundPatternName)
-        imgvLogoContainer.isHidden = (viewModel.headerLogoURL == nil)
-
-        lblGreeting.text = viewModel.greeting
-        lblTeamIntro.text = viewModel.teamIntro
+    // MARK: - Event
+    @IBAction private func btnClosePressed(_ sender: UIButton) {
+        navigationController?.dismiss(animated: true)
     }
 }

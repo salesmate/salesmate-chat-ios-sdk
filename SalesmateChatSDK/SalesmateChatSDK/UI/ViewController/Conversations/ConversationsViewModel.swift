@@ -52,10 +52,12 @@ class ConversationsViewModel {
     }
 
     private func prepareCellViewModels() {
+        guard let workspace = config.workspace else { return }
+
         let users: [User?] = conversations.map { cid in config.users?.first(where: { $0.id == cid.ownerUserId }) }
         let zip = zip(conversations, users)
 
-        conversationViewModels = zip.map { ConversationCellViewModel(conversation: $0, user: $1)}
+        conversationViewModels = zip.map { ConversationCellViewModel(conversation: $0, user: $1, workspace: workspace)}
     }
 }
 
