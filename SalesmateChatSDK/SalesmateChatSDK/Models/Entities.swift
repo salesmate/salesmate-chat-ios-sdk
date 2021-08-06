@@ -10,11 +10,16 @@ import Foundation
 // MARK: - User
 struct User: Codable {
 
+    enum Status: String, Codable {
+        case available
+        case away
+    }
+
     let id: IntegerID
     let firstName: String
     let lastName: String
     let profileUrl: String?
-    let status: String?
+    let status: Status?
 
     enum CodingKeys: String, CodingKey {
         case id

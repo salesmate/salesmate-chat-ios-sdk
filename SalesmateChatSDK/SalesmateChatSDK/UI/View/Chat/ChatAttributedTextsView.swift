@@ -9,7 +9,7 @@ import UIKit
 
 class ChatAttributedTextsView: UIView {
 
-    let stackView = UIStackView()
+    private let stackView = UIStackView()
 
     init() {
         super.init(frame: .zero)

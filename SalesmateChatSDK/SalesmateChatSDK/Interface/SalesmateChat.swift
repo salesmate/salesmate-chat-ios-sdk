@@ -27,6 +27,10 @@ public class SalesmateChat {
 
     private static var shared: SalesmateChat?
 
+    private var isLoading: Bool = false
+
+    private let rootNC = UINavigationController()
+
     init?(with settings: Settings) {
         self.config = Configeration(connection: settings, environment: Environment.current)
 
@@ -48,30 +52,52 @@ public class SalesmateChat {
     }
 
     private func updateCustomization() {
+        isLoading = true
+
         client.getConfigerations { result in
             switch result {
             case .success(let customization):
                 self.config.update(with: customization)
-                print("")
             case .failure: break
             }
+            self.isLoading = false
+            runOnMain { self.showHomeVC() }
         }
     }
 
     private func presentMessenger(from viewController: UIViewController) {
         if config.look == nil {
-            run(afterDelay: 1) {
-                self.presentMessenger(from: viewController)
+            showStartVC(from: viewController)
+
+            if !isLoading {
+                updateCustomization()
             }
 
-            return
+            client.connect(completion: { _ in })
+        } else {
+            showHomeVC(from: viewController)
         }
+    }
+
+    private func showStartVC(from viewController: UIViewController? = nil) {
+        if viewController == nil, rootNC.viewIfLoaded?.window == nil { return }
+
+        let VC = StartVC.create(with: StartViewModel())
+
+        rootNC.setViewControllers([VC], animated: true)
+        rootNC.navigationBar.isHidden = true
+
+        viewController?.present(rootNC, animated: true, completion: nil)
+    }
+
+    private func showHomeVC(from viewController: UIViewController? = nil) {
+        if viewController == nil, rootNC.viewIfLoaded?.window == nil { return }
 
         let VC = HomeVC.create(with: HomeViewModel(config: config, client: client))
-        let NC = UINavigationController(rootViewController: VC)
 
-        NC.navigationBar.isHidden = true
+        rootNC.setViewControllers([VC], animated: true)
+        rootNC.navigationBar.isHidden = true
 
-        viewController.present(NC, animated: true, completion: nil)
+        viewController?.present(rootNC, animated: true, completion: nil)
     }
 }

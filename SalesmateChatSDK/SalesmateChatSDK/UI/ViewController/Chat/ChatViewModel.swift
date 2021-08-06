@@ -15,37 +15,71 @@ class ChatViewModel {
         case assigned
     }
 
+    enum ChatOf {
+        case new
+        case conversation(Conversation)
+        case conversationID(ConversationID)
+    }
+
     // MARK: - Private Properties
-    private let conversationID: ConversationID?
+    private let chatOf: ChatOf
+    private let conversationID: ConversationID
     private let config: Configeration
     private let client: ChatClient
-    private var page = Page(size: 50)
 
-    let topbar: TopBarStyle
-    let topViewModel: ChatTopViewModel
+    private var page = Page(size: 50)
+    private var conversation: Conversation?
+
+    var topbar: TopBarStyle
+    var topViewModel: ChatTopViewModel
     let actionColorCode: String
+    let isNew: Bool
 
     private(set) var messageViewModels: [MessageViewModel] = []
 
     var messagesUpdated: (() -> Void)?
+    var topBarUpdated: (() -> Void)?
 
     // MARK: - Init
-    init(conversationID: ConversationID? = nil, config: Configeration, client: ChatClient) {
-        self.conversationID = conversationID
+    init(chatOf: ChatOf, config: Configeration, client: ChatClient) {
+        self.chatOf = chatOf
         self.config = config
         self.client = client
+        self.actionColorCode = config.look?.actionColor ?? ""
 
-        topViewModel = ChatTopViewModel(config: config)
-
-        actionColorCode = config.look?.actionColor ?? ""
-
-        if topViewModel.headerLogoURL == nil {
-            topbar = .withoutLogo
-        } else {
-            topbar = .withLogo
+        switch chatOf {
+        case .new:
+            conversationID = UUID().uuidString
+            isNew = true
+        case .conversation(let conversation):
+            conversationID = conversation.id
+            self.conversation = conversation
+            isNew = false
+        case .conversationID(let ID):
+            conversationID = ID
+            isNew = false
         }
 
+        self.topViewModel = ChatTopViewModel(config: config)
+        self.topbar = (topViewModel.headerLogoURL == nil) ? .withoutLogo : .withLogo
+
+        prepareTopViewModel()
+
         self.client.clearMessages()
+    }
+
+    private func prepareTopViewModel() {
+        if let user = config.users?.first(where: { $0.id == conversation?.lastUserId }) {
+            topbar = .assigned
+            topViewModel = ChatTopViewModel(config: config, user: user)
+        } else {
+            self.topViewModel = ChatTopViewModel(config: config)
+            self.topbar = (topViewModel.headerLogoURL == nil) ? .withoutLogo : .withLogo
+        }
+
+        OperationQueue.main.addOperation {
+            self.topBarUpdated?()
+        }
     }
 
     private func updateMessages() {
@@ -63,10 +97,21 @@ class ChatViewModel {
 
 extension ChatViewModel {
 
-    func getMessages() {
-        guard let ID = conversationID else { return }
+    func startLoadingDetails() {
+        client.getDetail(of: conversationID) { result in
+            switch result {
+            case .success(let detail):
+                self.conversation = detail
+                self.prepareTopViewModel()
+                self.getMessages()
+            case .failure:
+                break
+            }
+        }
+    }
 
-        client.getMessages(of: ID, at: page) { result in
+    func getMessages() {
+        client.getMessages(of: conversationID, at: page) { result in
             switch result {
             case .success:
                 self.updateMessages()

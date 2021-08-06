@@ -15,6 +15,7 @@ class ChatTopView: UIView {
     @IBOutlet fileprivate weak var btnBack: UIButton!
     @IBOutlet fileprivate weak var btnClose: UIButton!
 
+    // MARK: - Properties
     var viewModel: ChatTopViewModel? {
         didSet { display() }
     }
@@ -22,6 +23,7 @@ class ChatTopView: UIView {
     var didSelectBack: (() -> Void)?
     var didSelectClose: (() -> Void)?
 
+    // MARK: - Override
     override func awakeFromNib() {
         super.awakeFromNib()
 
@@ -29,6 +31,7 @@ class ChatTopView: UIView {
         btnClose.addTarget(self, action: #selector(btnClosePressed(_:)), for: .touchUpInside)
     }
 
+    // MARK: - View
     fileprivate func display() {
         guard let viewModel = viewModel else { return }
 
@@ -109,4 +112,43 @@ class ChatTopWithLogo: ChatTopView {
 
 class ChatTopWithUser: ChatTopView {
 
+    // MARK: - Properties
+    var didSelectExport: (() -> Void)?
+
+    // MARK: - Outlets
+    @IBOutlet private weak var viewProfile: CirculerProfileView!
+    @IBOutlet private weak var lblUserName: UILabel!
+    @IBOutlet private weak var lblStatus: UILabel!
+
+    @IBOutlet private weak var btnExport: UIButton!
+
+    // MARK: - Override
+    override func awakeFromNib() {
+        super.awakeFromNib()
+
+        btnExport.addTarget(self, action: #selector(btnExportPressed(_:)), for: .touchUpInside)
+    }
+
+    fileprivate override func display() {
+        super.display()
+
+        guard let viewModel = viewModel else { return }
+
+        let backgroundColor = UIColor(hex: viewModel.backgroundColorCode)
+
+        viewProfile.viewModel = viewModel.profileViewModel
+
+        lblUserName.text = viewModel.title
+        lblStatus.text = (viewModel.isUserAvailable ?? false) ? "Available" : "Away"
+
+        lblUserName.textColor = backgroundColor?.foregroundColor
+        lblStatus.textColor = backgroundColor?.secondaryForegroundColor
+
+        btnExport.tintColor = backgroundColor?.foregroundColor
+    }
+
+    // MARK: - Event
+    @objc private func btnExportPressed(_ sender: UIButton) {
+        didSelectExport?()
+    }
 }

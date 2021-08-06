@@ -82,6 +82,7 @@ extension UIImage {
     }
 
     static var startNewChat: UIImage { UIImage("ic-start-new-chat")! }
+    static var attachment: UIImage { UIImage("ic-attachment")! }
 }
 
 extension UIViewController {

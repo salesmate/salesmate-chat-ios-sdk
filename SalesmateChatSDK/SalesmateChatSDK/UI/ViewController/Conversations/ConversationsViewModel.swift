@@ -54,7 +54,7 @@ class ConversationsViewModel {
     private func prepareCellViewModels() {
         guard let workspace = config.workspace else { return }
 
-        let users: [User?] = conversations.map { cid in config.users?.first(where: { $0.id == cid.ownerUserId }) }
+        let users: [User?] = conversations.map { cid in config.users?.first(where: { $0.id == cid.lastUserId }) }
         let zip = zip(conversations, users)
 
         conversationViewModels = zip.map { ConversationCellViewModel(conversation: $0, user: $1, workspace: workspace)}
@@ -66,7 +66,7 @@ extension ConversationsViewModel {
     func chatViewModelForConversation(at index: Int) -> ChatViewModel {
         let conversation = conversations[index]
 
-        return ChatViewModel(conversationID: conversation.id, config: config, client: client)
+        return ChatViewModel(chatOf: .conversation(conversation), config: config, client: client)
     }
 
     func getRecentConversations() {

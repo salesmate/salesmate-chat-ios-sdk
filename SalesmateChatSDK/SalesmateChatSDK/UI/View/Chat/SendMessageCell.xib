@@ -31,20 +31,31 @@
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="90"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Ewi-d0-Vge">
-                                                <rect key="frame" x="0.0" y="0.0" width="50" height="85"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="50" height="71.5"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a13-3V-vp4" customClass="ChatAttributedTextsView" customModule="SalesmateChatSDK" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="50" height="85"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="50" height="71.5"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     </view>
                                                 </subviews>
                                             </stackView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="750" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ohS-iU-k9B">
-                                                <rect key="frame" x="20.5" y="90" width="29.5" height="0.0"/>
-                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="11"/>
-                                                <color key="textColor" red="0.52156862745098043" green="0.5607843137254902" blue="0.65098039215686276" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="yOj-OA-YPw">
+                                                <rect key="frame" x="0.0" y="76.5" width="50" height="13.5"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="750" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ohS-iU-k9B">
+                                                        <rect key="frame" x="0.0" y="0.0" width="29.5" height="13.5"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="11"/>
+                                                        <color key="textColor" red="0.52156862745098043" green="0.5607843137254902" blue="0.65098039215686276" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="750" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GnV-O6-0JL">
+                                                        <rect key="frame" x="34.5" y="0.0" width="15.5" height="13.5"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="11"/>
+                                                        <color key="textColor" red="0.52156862749999999" green="0.56078431370000004" blue="0.65098039220000004" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
                                         </subviews>
                                     </stackView>
                                 </subviews>
@@ -88,7 +99,8 @@
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
-                <outlet property="lbltime" destination="ohS-iU-k9B" id="Q6f-Oq-6fb"/>
+                <outlet property="lblSeen" destination="GnV-O6-0JL" id="0No-u2-PCw"/>
+                <outlet property="lblTime" destination="ohS-iU-k9B" id="fQU-eh-nuZ"/>
                 <outlet property="profileView" destination="3f1-a0-GFI" id="gZG-aD-wkL"/>
                 <outlet property="textContainer" destination="a13-3V-vp4" id="G4v-4d-X0M"/>
                 <outlet property="viewChatContent" destination="Ewi-d0-Vge" id="Q6M-g2-mDI"/>

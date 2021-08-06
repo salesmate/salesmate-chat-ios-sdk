@@ -15,10 +15,11 @@ class MessageCell: UITableViewCell {
     }
 
     // MARK: - Outlets
-    @IBOutlet fileprivate weak var profileView: CirculerProfileView!
-    @IBOutlet fileprivate weak var viewChatContent: UIStackView!
-    @IBOutlet fileprivate weak var textContainer: ChatAttributedTextsView!
-    @IBOutlet fileprivate weak var lbltime: UILabel!
+    @IBOutlet private weak var profileView: CirculerProfileView!
+    @IBOutlet private weak var viewChatContent: UIStackView!
+    @IBOutlet private weak var textContainer: ChatAttributedTextsView!
+    @IBOutlet private weak var lblTime: UILabel!
+    @IBOutlet private weak var lblSeen: UILabel!
 
     // MARK: - Override
     override func prepareForReuse() {
@@ -40,7 +41,7 @@ class MessageCell: UITableViewCell {
         case .no: showContents()
         }
 
-        lbltime.text = viewModel.time
+        lblTime.text = viewModel.time
     }
 
     private func updateProfileView() {

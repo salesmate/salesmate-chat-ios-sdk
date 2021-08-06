@@ -19,7 +19,7 @@ class RecentConversationsViewModel {
     private(set) var conversationViewModels: [ConversationCellViewModel] = []
 
     var showAllConversations: (() -> Void)?
-    var showConversation: ((ConversationID) -> Void)?
+    var showConversation: ((Conversation) -> Void)?
     var startNewChat: (() -> Void)?
 
     // MARK: - Init
@@ -41,7 +41,7 @@ class RecentConversationsViewModel {
     func didSelecctConversation(at index: Int) {
         let conversation = conversations[index]
 
-        showConversation?(conversation.id)
+        showConversation?(conversation)
     }
 
     private func prepareProperties() {
@@ -54,7 +54,7 @@ class RecentConversationsViewModel {
         shouldShowViewAll = conversations.count > 2
 
         let conversationToShow = conversations.prefix(2)
-        let users: [User?] = conversationToShow.map { cid in config.users?.first(where: { $0.id == cid.ownerUserId }) }
+        let users: [User?] = conversationToShow.map { cid in config.users?.first(where: { $0.id == cid.lastUserId }) }
         let zip = zip(conversationToShow, users)
 
         conversationViewModels = zip.map { ConversationCellViewModel(conversation: $0, user: $1, workspace: workspace)}

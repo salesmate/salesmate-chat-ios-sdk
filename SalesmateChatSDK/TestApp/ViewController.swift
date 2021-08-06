@@ -27,6 +27,6 @@ class ViewController: UIViewController {
     }
 
     @IBAction func showChatPressed(_ sender: UIButton) {
-        // SalesmateChat.presentMessenger(from: self)
+        SalesmateChat.presentMessenger(from: self)
     }
 }

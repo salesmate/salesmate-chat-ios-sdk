@@ -19,3 +19,7 @@ func print(_ items: Any..., separator: String = " ", terminator: String = "\n") 
 func run(afterDelay seconds: TimeInterval, execute work: @escaping @convention(block) () -> Void) {
     DispatchQueue.main.asyncAfter(deadline: .now() + seconds, execute: work)
 }
+
+func runOnMain(_ block: @escaping () -> Void) {
+    OperationQueue.main.addOperation(block)
+}

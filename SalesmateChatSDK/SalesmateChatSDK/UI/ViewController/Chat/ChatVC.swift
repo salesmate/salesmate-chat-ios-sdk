@@ -23,10 +23,12 @@ class ChatVC: UIViewController {
     private var viewModel: ChatViewModel!
     private var shouldScrollToBottom: Bool = true
     private var shouldAdjustForKeyboard: Bool = false
+    private let loading = ActivityIndicatorView(frame: .zero)
 
     // MARK: - IBOutlets
     @IBOutlet private weak var viewTopWithoutLogo: ChatTopWithoutLogo!
     @IBOutlet private weak var viewTopWithLogo: ChatTopWithLogo!
+    @IBOutlet private weak var viewTopWithUser: ChatTopWithUser!
 
     @IBOutlet private weak var tableView: UITableView!
 
@@ -43,8 +45,6 @@ class ChatVC: UIViewController {
         prepareViewModel()
         prepareView()
         registerKeyboardNotifications()
-
-        viewModel.getMessages()
     }
 
     override func viewDidLayoutSubviews() {
@@ -66,11 +66,21 @@ class ChatVC: UIViewController {
         super.viewDidAppear(animated)
 
         shouldAdjustForKeyboard = true
+
+        if tableView.visibleCells.isEmpty {
+            startLoading()
+        }
     }
 
     // MARK: - ViewModel
     private func prepareViewModel() {
+        viewModel.topBarUpdated = {
+            self.prepareTopBar()
+        }
+
         viewModel.messagesUpdated = {
+            self.tableView.tableFooterView = UIView()
+
             if self.tableView.visibleCells.isEmpty {
                 self.tableView.reloadData()
                 let indexpath = IndexPath(row: self.viewModel.messageViewModels.count - 1, section: 0)
@@ -91,6 +101,7 @@ class ChatVC: UIViewController {
     private func prepareTopBar() {
         viewTopWithLogo.isHidden = true
         viewTopWithoutLogo.isHidden = true
+        viewTopWithUser.isHidden = true
 
         let viewTop: ChatTopView?
 
@@ -100,7 +111,7 @@ class ChatVC: UIViewController {
         case .withLogo:
             viewTop = viewTopWithLogo
         case .assigned:
-            viewTop = nil
+            viewTop = viewTopWithUser
         }
 
         viewTop?.viewModel = viewModel.topViewModel
@@ -111,6 +122,7 @@ class ChatVC: UIViewController {
         }
 
         viewTop?.didSelectClose = {
+            self.resignFirstResponder()
             self.navigationController?.dismiss(animated: true)
         }
     }
@@ -126,6 +138,16 @@ class ChatVC: UIViewController {
         tableView.tableFooterView = UIView()
         tableView.register(SendMessageCell.nib, forCellReuseIdentifier: SendMessageCell.ID)
         tableView.register(ReceivedMessageCell.nib, forCellReuseIdentifier: ReceivedMessageCell.ID)
+    }
+
+    // MARK: - Data
+    private func startLoading() {
+        guard viewModel.isNew == false else { return }
+
+        tableView.tableFooterView = loading
+        loading.frame = tableView.bounds
+
+        viewModel.startLoadingDetails()
     }
 }
 

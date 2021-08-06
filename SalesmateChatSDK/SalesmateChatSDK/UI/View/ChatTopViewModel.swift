@@ -15,13 +15,14 @@ class ChatTopViewModel {
     let backgroundColorCode: String
     let backgroundPatternName: String
     let responseTime: String
+
     let availableuserViewModel: AvailableUsersViewModel?
-    let user: User? = nil
+    let profileViewModel: CirculerUserProfileViewModel?
+
+    let isUserAvailable: Bool?
 
     // MARK: - Init
-    init(config: Configeration) {
-        title = config.workspace?.name ?? ""
-
+    init(config: Configeration, user: User? = nil) {
         headerLogoURL = URL(string: config.look?.logourl ?? "")
         backgroundColorCode = config.look?.backgroundColor ?? ""
         backgroundPatternName = config.look?.messengerBackground ?? ""
@@ -41,5 +42,15 @@ class ChatTopViewModel {
         availableuserViewModel = AvailableUsersViewModel(users: config.users ?? [],
                                                          attributes: attributes)
 
+        if let user = user {
+            title = user.firstName + " " + user.lastName
+            profileViewModel = CirculerUserProfileViewModel(user: user, borderWidth: 1, shouldShowStatus: true)
+            profileViewModel?.statusBorderCode = config.look?.backgroundColor
+            isUserAvailable = user.status == .available
+        } else {
+            title = config.workspace?.name ?? ""
+            profileViewModel = nil
+            isUserAvailable = nil
+        }
     }
 }

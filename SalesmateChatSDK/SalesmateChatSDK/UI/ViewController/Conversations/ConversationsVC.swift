@@ -21,6 +21,7 @@ class ConversationsVC: UIViewController {
 
     // MARK: - Private Properties
     private var viewModel: ConversationsViewModel!
+    private let loading = ActivityIndicatorView(frame: .zero)
 
     // MARK: - IBOutlets
     @IBOutlet private weak var viewTop: UIView!
@@ -37,7 +38,7 @@ class ConversationsVC: UIViewController {
         super.viewDidLoad()
 
         prepareView()
-        viewModel.getRecentConversations()
+        startLoading()
     }
 
     // MARK: - View
@@ -49,6 +50,7 @@ class ConversationsVC: UIViewController {
 
     private func prepareViewModel() {
         viewModel.conversationsUpdated = {
+            self.tableView.tableFooterView = UIView()
             self.tableView.reloadData()
         }
     }
@@ -79,6 +81,13 @@ class ConversationsVC: UIViewController {
         btnStartChat.backgroundColor = UIColor(hex: viewModel.actionColorCode)
 
         imgvTopPattern.image = UIImage(viewModel.backgroundPatternName)
+    }
+
+    // MARK: - Loading
+    private func startLoading() {
+        tableView.tableFooterView = loading
+        loading.frame = tableView.bounds
+        viewModel.getRecentConversations()
     }
 
     // MARK: - Actions

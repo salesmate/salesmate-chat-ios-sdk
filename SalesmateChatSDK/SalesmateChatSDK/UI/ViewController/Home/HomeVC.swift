@@ -21,6 +21,7 @@ class HomeVC: UIViewController {
 
     // MARK: - Private Properties
     private var viewModel: HomeViewModel!
+    private let loading = ActivityIndicatorView(frame: .zero)
 
     // MARK: - IBOutlets
     @IBOutlet private weak var viewTop: UIView!
@@ -40,7 +41,7 @@ class HomeVC: UIViewController {
         super.viewDidLoad()
 
         prepareView()
-        viewModel.getRecentConversations()
+        startLoading()
     }
 
     // MARK: - View
@@ -77,33 +78,38 @@ class HomeVC: UIViewController {
     // MARK: - ViewModel
     private func prepareViewModel() {
         viewModel.showNewVisitorView = { viewModel in
+            self.loading.removeFromSuperview()
             let VC = NewVisitorVC.create(with: viewModel)
             self.add(child: VC, in: self.viewContainer)
         }
 
         viewModel.showRecentConversationsView = { viewModel in
+            self.loading.removeFromSuperview()
             let VC = RecentConversationsVC.create(with: viewModel)
-
             self.add(child: VC, in: self.viewContainer)
         }
 
         viewModel.showAllConversations = { viewModel in
             let VC = ConversationsVC.create(with: viewModel)
-
             self.navigationController?.pushViewController(VC, animated: true)
         }
 
         viewModel.startNewChat = { viewModel in
             let VC = ChatVC.create(with: viewModel)
-
             self.navigationController?.pushViewController(VC, animated: true)
         }
 
         viewModel.showConversation = { viewModel in
             let VC = ChatVC.create(with: viewModel)
-
             self.navigationController?.pushViewController(VC, animated: true)
         }
+    }
+
+    // MARK: - Loading
+    private func startLoading() {
+        viewContainer.addSubview(loading)
+        loading.frame = viewContainer.bounds
+        viewModel.getRecentConversations()
     }
 
     // MARK: - Event

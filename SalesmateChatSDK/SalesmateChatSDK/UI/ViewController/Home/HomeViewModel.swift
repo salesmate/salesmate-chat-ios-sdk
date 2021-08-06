@@ -77,8 +77,8 @@ class HomeViewModel {
             self.askToStartNewChat()
         }
 
-        viewModel.showConversation = { ID in
-            self.askToShowConversation(with: ID)
+        viewModel.showConversation = { conversation in
+            self.askToShow(conversation: conversation)
         }
 
         OperationQueue.main.addOperation {
@@ -95,15 +95,15 @@ class HomeViewModel {
     }
 
     private func askToStartNewChat() {
-        let viewModel = ChatViewModel(config: config, client: client)
+        let viewModel = ChatViewModel(chatOf: .new, config: config, client: client)
 
         OperationQueue.main.addOperation {
             self.startNewChat?(viewModel)
         }
     }
 
-    private func askToShowConversation(with ID: ConversationID) {
-        let viewModel = ChatViewModel(conversationID: ID, config: config, client: client)
+    private func askToShow(conversation: Conversation) {
+        let viewModel = ChatViewModel(chatOf: .conversation(conversation), config: config, client: client)
 
         OperationQueue.main.addOperation {
             self.showConversation?(viewModel)

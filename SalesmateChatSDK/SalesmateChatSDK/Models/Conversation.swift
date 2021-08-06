@@ -21,10 +21,11 @@ struct Conversation {
     let id: String
     let name: String
 
-    let uniqueId: String
     let contactId: IntegerID?
     let verifiedId: IntegerID?
+
     let ownerUserId: IntegerID?
+    let lastUserId: IntegerID?
 
     let lastMessageDate: Date
     let lastMessage: LastMessage?
@@ -41,7 +42,6 @@ extension Conversation: Codable {
 
     enum CodingKeys: String, CodingKey {
         case id
-        case uniqueId = "unique_id"
         case contactId = "contact_id"
         case verifiedId = "verified_id"
         case name
@@ -49,6 +49,7 @@ extension Conversation: Codable {
         case lastMessage = "lastMessageData"
         case isRead = "contact_has_read"
         case ownerUserId = "owner_user"
+        case lastUserId = "last_participating_user_id"
         case rating
         case remark
         case closedDate
