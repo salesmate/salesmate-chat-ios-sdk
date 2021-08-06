@@ -20,7 +20,30 @@ class MessageCell: UITableViewCell {
     @IBOutlet fileprivate weak var textContainer: ChatAttributedTextsView!
     @IBOutlet fileprivate weak var lbltime: UILabel!
 
+    // MARK: - Override
+    override func prepareForReuse() {
+        super.prepareForReuse()
+
+        clear()
+    }
+
+    // MARK: - View
     private func display() {
+        guard let viewModel = viewModel else { return }
+
+        updateProfileView()
+
+        textContainer.setAlignment(alignment: viewModel.alignment)
+
+        switch viewModel.isDeleted {
+        case .yes: showDeletedMessage()
+        case .no: showContents()
+        }
+
+        lbltime.text = viewModel.time
+    }
+
+    private func updateProfileView() {
         guard let viewModel = viewModel else { return }
 
         if let profileViewModel = viewModel.profileViewModel {
@@ -29,10 +52,23 @@ class MessageCell: UITableViewCell {
         } else {
             profileView.superview?.isHidden = true
         }
+    }
 
-        lbltime.text = viewModel.time
+    private func showDeletedMessage() {
+        guard let viewModel = viewModel else { return }
+        guard case .yes(let message, let alpha) = viewModel.isDeleted else { return }
 
-        textContainer.setAlignment(alignment: viewModel.alignment)
+        let attributes: [NSAttributedString.Key: Any] = [.font: UIFont.italicSystemFont(ofSize: 15)]
+        let attributedText = NSAttributedString(string: message, attributes: attributes)
+
+        textContainer.setBackgroundColor(code: viewModel.backgroundColorCode)
+        textContainer.add(attributedText)
+        textContainer.alpha = CGFloat(alpha) / 100.0
+    }
+
+    private func showContents() {
+        guard let viewModel = viewModel else { return }
+
         textContainer.setBackgroundColor(code: viewModel.backgroundColorCode)
 
         for content in viewModel.contents {
@@ -45,21 +81,6 @@ class MessageCell: UITableViewCell {
                 break
             }
         }
-
-        if case .yes(let message, let alpha) = viewModel.isDeleted {
-            let attributes: [NSAttributedString.Key: Any] = [.font: UIFont.italicSystemFont(ofSize: 15)]
-            let attributedText = NSAttributedString(string: message, attributes: attributes)
-
-            textContainer.setBackgroundColor(code: viewModel.backgroundColorCode)
-            textContainer.add(attributedText)
-            textContainer.alpha = CGFloat(alpha) / 100.0
-        }
-    }
-
-    override func prepareForReuse() {
-        super.prepareForReuse()
-
-        clear()
     }
 
     private func clear() {

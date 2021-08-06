@@ -23,13 +23,6 @@ class MessageViewModel {
     enum IsDeleted {
         case yes(String, Int) // Message, Transparency in percentage.
         case no
-
-        func callAsFunction() -> Bool {
-            switch self {
-            case .yes: return true
-            case .no: return false
-            }
-        }
     }
 
     // MARK: - Properties
