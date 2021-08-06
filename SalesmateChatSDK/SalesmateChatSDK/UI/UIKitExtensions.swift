@@ -10,28 +10,34 @@ import UIKit
 extension UIColor {
 
     convenience init?(hex: String) {
-        let red, green, blue: CGFloat
-        var hex = hex.trim()
+        var hexSanitized = hex.trimmingCharacters(in: .whitespacesAndNewlines)
+        hexSanitized = hexSanitized.replacingOccurrences(of: "#", with: "")
 
-        if hex.hasPrefix("#") {
-            hex.removeFirst()
+        var rgb: UInt32 = 0
+
+        var red: CGFloat = 0.0
+        var green: CGFloat = 0.0
+        var blue: CGFloat = 0.0
+        var alpha: CGFloat = 1.0
+
+        let length = hexSanitized.count
+
+        guard Scanner(string: hexSanitized).scanHexInt32(&rgb) else { return nil }
+
+        if length == 6 {
+            red = CGFloat((rgb & 0xFF0000) >> 16) / 255.0
+            green = CGFloat((rgb & 0x00FF00) >> 8) / 255.0
+            blue = CGFloat(rgb & 0x0000FF) / 255.0
+        } else if length == 8 {
+            red = CGFloat((rgb & 0xFF000000) >> 24) / 255.0
+            green = CGFloat((rgb & 0x00FF0000) >> 16) / 255.0
+            blue = CGFloat((rgb & 0x0000FF00) >> 8) / 255.0
+            alpha = CGFloat(rgb & 0x000000FF) / 255.0
+        } else {
+            return nil
         }
 
-        let start = hex.startIndex
-        let hexColor = String(hex[start...])
-
-        guard hexColor.count == 6 else { return nil }
-
-        let scanner = Scanner(string: hexColor)
-        var hexNumber: UInt32 = 0
-
-        guard scanner.scanHexInt32(&hexNumber) else { return nil }
-
-        red = CGFloat((hexNumber & 0xff0000) >> 16) / 255
-        green = CGFloat((hexNumber & 0x00ff00) >> 8) / 255
-        blue = CGFloat(hexNumber & 0x0000ff) / 255
-
-        self.init(red: red, green: green, blue: blue, alpha: 1)
+        self.init(red: red, green: green, blue: blue, alpha: alpha)
     }
 
     var isDark: Bool {
@@ -136,13 +142,13 @@ extension KeyboardInfo {
 
     init?(_ notification: Notification) {
         guard notification.name == UIResponder.keyboardWillShowNotification || notification.name == UIResponder.keyboardWillChangeFrameNotification else { return nil }
-        let u = notification.userInfo!
+        let userInfo = notification.userInfo!
 
-        animationCurve = UIView.AnimationCurve(rawValue: u[UIWindow.keyboardAnimationCurveUserInfoKey] as! Int)!
-        animationDuration = u[UIWindow.keyboardAnimationDurationUserInfoKey] as! Double
-        isLocal = u[UIWindow.keyboardIsLocalUserInfoKey] as! Bool
-        frameBegin = u[UIWindow.keyboardFrameBeginUserInfoKey] as! CGRect
-        frameEnd = u[UIWindow.keyboardFrameEndUserInfoKey] as! CGRect
+        animationCurve = UIView.AnimationCurve(rawValue: userInfo[UIWindow.keyboardAnimationCurveUserInfoKey] as! Int)!
+        animationDuration = userInfo[UIWindow.keyboardAnimationDurationUserInfoKey] as! Double
+        isLocal = userInfo[UIWindow.keyboardIsLocalUserInfoKey] as! Bool
+        frameBegin = userInfo[UIWindow.keyboardFrameBeginUserInfoKey] as! CGRect
+        frameEnd = userInfo[UIWindow.keyboardFrameEndUserInfoKey] as! CGRect
     }
 
     var animationCurveOption: UIView.AnimationOptions {

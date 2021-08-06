@@ -32,7 +32,8 @@ class MessageCell: UITableViewCell {
 
         lbltime.text = viewModel.time
 
-        textContainer.prepareBackground(for: viewModel)
+        textContainer.setAlignment(alignment: viewModel.alignment)
+        textContainer.setBackgroundColor(code: viewModel.backgroundColorCode)
 
         for content in viewModel.contents {
             switch content {
@@ -44,6 +45,15 @@ class MessageCell: UITableViewCell {
                 break
             }
         }
+
+        if case .yes(let message, let alpha) = viewModel.isDeleted {
+            let attributes: [NSAttributedString.Key: Any] = [.font: UIFont.italicSystemFont(ofSize: 15)]
+            let attributedText = NSAttributedString(string: message, attributes: attributes)
+
+            textContainer.setBackgroundColor(code: viewModel.backgroundColorCode)
+            textContainer.add(attributedText)
+            textContainer.alpha = CGFloat(alpha) / 100.0
+        }
     }
 
     override func prepareForReuse() {
@@ -53,6 +63,7 @@ class MessageCell: UITableViewCell {
     }
 
     private func clear() {
+        textContainer.alpha = 1
         textContainer.removeAllTexts()
 
         for subview in viewChatContent.subviews where subview != textContainer {

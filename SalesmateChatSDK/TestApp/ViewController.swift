@@ -20,7 +20,13 @@ class ViewController: UIViewController {
         SalesmateChat.setSalesmateChat(configeration: setting)
     }
 
-    @IBAction func showChatPressed(_ sender: UIButton) {
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
         SalesmateChat.presentMessenger(from: self)
+    }
+
+    @IBAction func showChatPressed(_ sender: UIButton) {
+        // SalesmateChat.presentMessenger(from: self)
     }
 }

@@ -28,6 +28,7 @@ class ChatAttributedTextsView: UIView {
 
     private func setup() {
         clipsToBounds = true
+        layer.cornerRadius = 15
 
         stackView.axis = .vertical
         stackView.distribution = .fill
@@ -53,16 +54,16 @@ class ChatAttributedTextsView: UIView {
         stackView.addArrangedSubview(label)
     }
 
-    func prepareBackground(for options: MessageViewModel) {
-        layer.cornerRadius = 15
-
-        switch options.alignment {
+    func setAlignment(alignment: MessageViewModel.Alignment) {
+        switch alignment {
         case .left:
             layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner, .layerMaxXMaxYCorner]
         case .right:
             layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMinYCorner]
         }
+    }
 
-        backgroundColor = UIColor(hex: options.backgroundColorCode)
+    func setBackgroundColor(code: String) {
+        backgroundColor = UIColor(hex: code)
     }
 }
