@@ -20,7 +20,7 @@ protocol MessageFetcher {
 
 protocol ChatDataSource {
     var conversations: Set<Conversation> { get }
-    var messages: Set<Message> { get }
+    var messages: [ConversationID: Set<Message>] { get }
 
     func clearConversations()
     func clearMessages()
@@ -49,7 +49,7 @@ protocol ChatObservation {
     func register(observer: AnyObject, for events: [ChatEventToObserve], of conversation: ConversationID?, onEvent: @escaping (ChatEvent) -> Void)
 }
 
-protocol ChatClient: ConversationFetcher, MessageFetcher, ChatDataSource {
+protocol ChatClient: ChatObservation, ConversationFetcher, MessageFetcher, ChatDataSource {
     func getConfigerations(completion: @escaping ((Result<JSONObject, ChatError>) -> Void))
     func connect(waitForFullConnection: Bool, completion: @escaping (Result<Void, ChatError>) -> Void)
 }

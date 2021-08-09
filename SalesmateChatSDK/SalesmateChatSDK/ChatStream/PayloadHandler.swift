@@ -56,7 +56,7 @@ enum PayloadHandler {
     static private func handleNewMessage(event data: JSON) -> ChatEvent? {
         guard let conversationID = data[Payload.Keys.conversationID].string else { return nil }
 
-        return .messageReceived(conversationID)
+        return .messageReceived(conversationID, nil)
     }
 
     static private func handleUserAvailabilityStatusUpdate(event data: JSON) -> ChatEvent? {

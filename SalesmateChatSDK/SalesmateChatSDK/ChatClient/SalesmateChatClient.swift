@@ -23,7 +23,7 @@ class SalesmateChatClient {
     }
 
     private(set) var conversations: Set<Conversation> = []
-    private(set) var messages: Set<Message> = []
+    private(set) var messages: [ConversationID: Set<Message>] = [:]
 }
 
 extension SalesmateChatClient: ChatDataSource {
@@ -33,7 +33,7 @@ extension SalesmateChatClient: ChatDataSource {
     }
 
     func clearMessages() {
-        messages = []
+        messages = [:]
     }
 }
 
@@ -106,7 +106,7 @@ extension SalesmateChatClient: ConversationFetcher {
         chatAPI.getMessages(of: conversation, at: page) { result in
             switch result {
             case .success(let messages):
-                self.messages.update(with: messages)
+                self.update(new: messages, of: conversation)
                 completion(.success(messages))
             case .failure(let error):
                 completion(.failure(error))
@@ -115,66 +115,52 @@ extension SalesmateChatClient: ConversationFetcher {
     }
 }
 
+extension SalesmateChatClient: ChatObservation {
+
+    func register(observer: AnyObject, for events: [ChatEventToObserve], of conversation: ConversationID?, onEvent: @escaping (ChatEvent) -> Void) {
+        let observation = ChatEventRelay.Observation(observer: observer,
+                                                     events: events,
+                                                     conversation: conversation,
+                                                     onEvent: onEvent)
+        relay.add(observation: observation)
+    }
+}
+
 extension SalesmateChatClient {
 
     private func prepareEventListener() {
-//        let events: [ChatEventToObserve] = [.disconnected, .conversationUpdated, .readStatusChange,
-//                                            .assign, .messageReceived, .typing, .messageDeleted]
-//
-//        chatStream.register(observer: self, for: events, of: nil) { event in
-//            switch event {
-//            case .disconnected:
-//                self.relay(event)
-//            case .conversationUpdated(let ID):
-//                if let ID = ID {
-//                    self.getConversation(by: ID)
-//                    self.getLatestMessages(of: ID)
-//                } else {
-//                    self.relay(event)
-//                }
-//            case .readStatusChange(let ID):
-//                self.getConversation(by: ID)
-//            case .assign(let assign):
-//                self.getConversation(by: assign.conversationId)
-//                self.getLatestMessages(of: assign.conversationId)
-//                self.relay(event)
-//            case .messageReceived(let conversationID):
-//                self.getConversation(by: conversationID)
-//                self.getLatestMessages(of: conversationID)
-//            case .messageDeleted(let conversationID, let messageID, let deletedBy, let deletedDate):
-//                self.getConversation(by: conversationID)
-//
-//                guard var message = Message.current.first(where: { $0.id == messageID }) else { return }
-//
-//                message.deletedBy = deletedBy
-//                message.deletedDate = deletedDate
-//
-//                Message.current.update(with: message)
-//
-//                self.relay(.messageesUpdated(conversationID, [message]))
-//            case .messageesUpdated:
-//                break
-//            case .typing:
-//                self.relay(event)
-//            case .offlineUsers:
-//                break
-//            }
-//        }
+        let events: [ChatEventToObserve] = [.messageReceived]
+
+        chatStream.register(observer: self, for: events, of: nil) { event in
+            switch event {
+            case .messageReceived(let CID, _):
+                self.getNewMessages(of: CID)
+            default:
+                print("This event(\(event)) is not observed by SalesmateChatClient")
+            }
+        }
     }
 
-    /**
-     Get updated detail and latest messages of given `ConversationID`.
-     
-     - Parameter ID: ID of Conversation for which update is require.
-     - Parameter force:
-        - false: Update will be loaded only if `chatStream` is not ready.
-        - true: Update will be loaded without checking `chatStream` status.
+    private func getNewMessages(of conversation: ConversationID) {
+        let messages = self.messages[conversation] ?? []
+        let lastDate = messages.reduce(Date(timeIntervalSince1970: 0)) { $0 > $1.createdDate ? $0 : $1.createdDate }
 
-     */
-    private func getUpdate(for ID: ConversationID, force: Bool = false) {
-//        guard force || !chatStream.isReady else { return }
-//
-//        getConversation(by: ID)
-//        getLatestMessages(of: ID)
+        chatAPI.getMessages(of: conversation, from: lastDate) { result in
+            switch result {
+            case .success(let messages):
+                self.update(new: messages, of: conversation)
+                self.relay(.messageReceived(conversation, messages))
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+
+    private func update(new messages: [Message], of conversation: ConversationID) {
+        var messagesOfConversations = self.messages[conversation] ?? []
+
+        messagesOfConversations.update(with: messages)
+
+        self.messages[conversation] = messagesOfConversations
     }
 }

@@ -83,6 +83,10 @@ class ChatVC: UIViewController {
         viewModel.messagesUpdated = {
             self.displayMessages()
         }
+
+        viewModel.newMessagesUpdated = {
+            self.displayNewMessages()
+        }
     }
 
     // MARK: - View
@@ -178,6 +182,21 @@ class ChatVC: UIViewController {
         }
     }
 
+    private func displayNewMessages() {
+        let indexPathsLastRow = tableView.indexPathForLastRow
+        let indexPathsLastVisibleRow = tableView.indexPathsForVisibleRows?.last
+
+        let isLastVisiable: Bool = (indexPathsLastRow == indexPathsLastVisibleRow)
+
+        rows = viewModel.messageViewModels
+
+        tableView.reloadData {
+            if isLastVisiable {
+                self.scrollToBottom(animated: true)
+            }
+        }
+    }
+
     @objc private func loadMoreMessages(_ sender: Any) {
         viewModel.getMessages()
     }
@@ -219,7 +238,7 @@ extension ChatVC {
 
         view.layoutIfNeeded()
 
-        tableView.safeScrollToRow(at: indexPath, at: .bottom, animated: false)
+        tableView.safeScrollToRow(at: indexPath, at: .bottom, animated: animated)
     }
 
     private func registerKeyboardNotifications() {

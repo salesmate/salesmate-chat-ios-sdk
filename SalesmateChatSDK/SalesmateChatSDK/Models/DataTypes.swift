@@ -59,9 +59,8 @@ enum ChatEvent {
     case readStatusChange(ConversationID)
     case assign(Assign)
 
-    case messageReceived(ConversationID)
+    case messageReceived(ConversationID, [Message]?)
     case messageDeleted(ConversationID, MessageID, IntegerID, Date)
-    case messageesUpdated(ConversationID, [Message])
 
     case typing(ConversationID, UserID?)
 
@@ -77,11 +76,9 @@ enum ChatEvent {
             if conversationID == ID { return true }
         case .assign(let assign):
             if assign.conversationId == ID { return true }
-        case .messageReceived(let conversationID):
+        case .messageReceived(let conversationID, _):
             if conversationID == ID { return true }
         case .messageDeleted(let conversationID, _, _, _):
-            if conversationID == ID { return true }
-        case .messageesUpdated(let conversationID, _):
             if conversationID == ID { return true }
         case .typing(let conversationID, _):
             if conversationID == ID { return true }

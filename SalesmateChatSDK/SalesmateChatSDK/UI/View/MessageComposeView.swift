@@ -20,7 +20,7 @@ class MessageComposeView: UIView {
     func setActionColor(_ color: UIColor) {
         btnSend.setTitleColor(color, for: .normal)
     }
-    
+
     // MARK: - override
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -62,7 +62,7 @@ extension MessageComposeView: UITextViewDelegate {
             textViewHeight.constant = contentHeight
             layoutIfNeeded()
         }
-        
+
         btnSend.isEnabled = !textView.text.isEmpty
     }
 }

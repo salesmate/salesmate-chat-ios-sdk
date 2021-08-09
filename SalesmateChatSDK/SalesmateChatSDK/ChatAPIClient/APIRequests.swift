@@ -97,3 +97,19 @@ struct GetMessagesRequest: HTTPRequest {
         headers = common.headers
     }
 }
+
+struct GetLatestMessagesRequest: HTTPRequest {
+
+    var method: HTTPMethod = .get
+    var url: URL
+    var queryItems: [URLQueryItem]?
+    var headers: HTTPHeaders?
+
+    init(conversationID: String, fromDate: Date, common: CAC = common) {
+        url = URL(string: "messenger/v1/widget/conversations/\(conversationID)/messages", relativeTo: common.base)!
+        queryItems = [URLQueryItem(name: "rows", value: "10"),
+                      URLQueryItem(name: "offset", value: "0"),
+                      URLQueryItem(name: "lastMessageDate", value: fromDate.stringAsISO8601Format)]
+        headers = common.headers
+    }
+}

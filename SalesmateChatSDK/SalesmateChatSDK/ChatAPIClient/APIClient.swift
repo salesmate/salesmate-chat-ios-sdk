@@ -98,4 +98,19 @@ extension ChatAPIClient: ChatAPI {
             }
         }
     }
+
+    func getMessages(of conversation: ConversationID, from date: Date, completion: @escaping (Result<[Message], ChatError>) -> Void) {
+        let request = GetLatestMessagesRequest(conversationID: conversation, fromDate: date)
+
+        loader.load(request: request) { (result) in
+            switch result {
+            case .success(let response):
+                guard let allMessages = response.json as? JSONArray else { return }
+                let messages = allMessages.compactMap { Message(from: $0) }
+                completion(.success(messages))
+            case .failure:
+                completion(.failure(.unknown))
+            }
+        }
+    }
 }

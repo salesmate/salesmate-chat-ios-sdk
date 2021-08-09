@@ -41,6 +41,7 @@ class ChatViewModel {
     private(set) var messageViewModels: [MessageViewModel] = []
 
     var messagesUpdated: (() -> Void)?
+    var newMessagesUpdated: (() -> Void)?
     var topBarUpdated: (() -> Void)?
 
     // MARK: - Init
@@ -67,8 +68,7 @@ class ChatViewModel {
         self.topbar = (topViewModel.headerLogoURL == nil) ? .withoutLogo : .withLogo
 
         prepareTopViewModel()
-
-        self.client.clearMessages()
+        prepareClient()
     }
 
     private func prepareTopViewModel() {
@@ -85,13 +85,40 @@ class ChatViewModel {
         }
     }
 
-    private func updateMessages() {
-        guard let look = config.look else { return }
+    private func prepareClient() {
+        client.clearMessages()
 
-        let sortedMessage = client.messages.sorted(by: { $0.createdDate < $1.createdDate })
+        client.register(observer: self, for: [.messageReceived], of: conversationID) { event in
+            switch event {
+            case .messageReceived(_, let messages):
+                guard let messages = messages, !messages.isEmpty else { return }
+                self.newMessagesReceived()
+            default:
+                print("This event(\(event)) is not observed by SalesmateChatClient")
+            }
+        }
+    }
+
+    private func updateMessageViewModels() {
+        guard let look = config.look else { return }
+        guard let messages = client.messages[conversationID] else { return }
+
+        let sortedMessage = messages.sorted(by: { $0.createdDate < $1.createdDate })
 
         messageViewModels = sortedMessage.map { MessageViewModel(message: $0, look: look, users: config.users ?? []) }
+    }
+    
+    private func newMessagesReceived() {
+        updateMessageViewModels()
+        
+        OperationQueue.main.addOperation {
+            self.newMessagesUpdated?()
+        }
+    }
 
+    private func updateMessages() {
+        updateMessageViewModels()
+        
         OperationQueue.main.addOperation {
             self.messagesUpdated?()
         }
