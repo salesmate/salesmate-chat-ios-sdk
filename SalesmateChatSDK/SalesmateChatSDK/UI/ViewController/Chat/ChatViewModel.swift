@@ -21,19 +21,22 @@ class ChatViewModel {
         case conversationID(ConversationID)
     }
 
+    private static let pageSize = 50
+
     // MARK: - Private Properties
     private let chatOf: ChatOf
     private let conversationID: ConversationID
     private let config: Configeration
     private let client: ChatClient
 
-    private var page = Page(size: 50)
+    private var page = Page(size: ChatViewModel.pageSize)
     private var conversation: Conversation?
 
     var topbar: TopBarStyle
     var topViewModel: ChatTopViewModel
     let actionColorCode: String
     let isNew: Bool
+    let pageSize = ChatViewModel.pageSize
 
     private(set) var messageViewModels: [MessageViewModel] = []
 

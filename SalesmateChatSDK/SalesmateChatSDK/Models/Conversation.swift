@@ -34,8 +34,6 @@ struct Conversation {
 
     let rating: String?
     let remark: String?
-
-    let closedDate: Date?
 }
 
 extension Conversation: Codable {
@@ -52,7 +50,6 @@ extension Conversation: Codable {
         case lastUserId = "last_participating_user_id"
         case rating
         case remark
-        case closedDate
     }
 }
 

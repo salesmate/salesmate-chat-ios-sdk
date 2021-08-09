@@ -24,6 +24,8 @@ class ChatVC: UIViewController {
     private var shouldScrollToBottom: Bool = true
     private var shouldAdjustForKeyboard: Bool = false
     private let loading = ActivityIndicatorView(frame: .zero)
+    private var rows: [MessageViewModel] = []
+    private let refreshControl = UIRefreshControl()
 
     // MARK: - IBOutlets
     @IBOutlet private weak var viewTopWithoutLogo: ChatTopWithoutLogo!
@@ -79,15 +81,7 @@ class ChatVC: UIViewController {
         }
 
         viewModel.messagesUpdated = {
-            self.tableView.tableFooterView = UIView()
-
-            if self.tableView.visibleCells.isEmpty {
-                self.tableView.reloadData()
-                let indexpath = IndexPath(row: self.viewModel.messageViewModels.count - 1, section: 0)
-                self.tableView.scrollToRow(at: indexpath, at: .bottom, animated: false)
-            } else {
-                self.tableView.reloadData()
-            }
+            self.displayMessages()
         }
     }
 
@@ -96,6 +90,8 @@ class ChatVC: UIViewController {
         prepareTopBar()
         prepareTableView()
         prepareInputBar()
+
+        loading.loading.color = UIColor(hex: viewModel.actionColorCode)
     }
 
     private func prepareTopBar() {
@@ -128,7 +124,9 @@ class ChatVC: UIViewController {
     }
 
     private func prepareInputBar() {
-
+        if let actionColor = UIColor(hex: viewModel.actionColorCode) {
+            messageInputBar.setActionColor(actionColor)
+        }
     }
 
     private func prepareTableView() {
@@ -136,8 +134,16 @@ class ChatVC: UIViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = UITableView.automaticDimension
         tableView.tableFooterView = UIView()
-        tableView.register(SendMessageCell.nib, forCellReuseIdentifier: SendMessageCell.ID)
-        tableView.register(ReceivedMessageCell.nib, forCellReuseIdentifier: ReceivedMessageCell.ID)
+        tableView.register(nibWithCellClass: SendMessageCell.self)
+        tableView.register(nibWithCellClass: ReceivedMessageCell.self)
+    }
+
+    private func addRefreshControl() {
+        guard viewModel.pageSize <= tableView.numberOfRows(inSection: 0) else { return }
+
+        refreshControl.tintColor = UIColor(hex: viewModel.actionColorCode)
+        tableView.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(loadMoreMessages(_:)), for: .valueChanged)
     }
 
     // MARK: - Data
@@ -149,24 +155,50 @@ class ChatVC: UIViewController {
 
         viewModel.startLoadingDetails()
     }
+
+    private func displayMessages() {
+        let isFirst = (rows.count == 0)
+        let newItemCount = viewModel.messageViewModels.count - rows.count
+        let initialContentOffSet = tableView.contentOffset.y < 0 ? 0 : tableView.contentOffset.y
+
+        rows = viewModel.messageViewModels
+
+        tableView.removeTableFooterView()
+        refreshControl.endRefreshing()
+
+        tableView.reloadData {
+            if isFirst {
+                self.scrollToBottom(animated: false)
+                self.addRefreshControl()
+            } else {
+                self.tableView.safeScrollToRow(at: IndexPath(row: newItemCount, section: 0), at: .top, animated: false)
+                self.tableView.contentOffset.y += initialContentOffSet
+                self.tableView.safeScrollToRow(at: IndexPath(row: newItemCount - 1, section: 0), at: .top, animated: true)
+            }
+        }
+    }
+
+    @objc private func loadMoreMessages(_ sender: Any) {
+        viewModel.getMessages()
+    }
 }
 
 extension ChatVC: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.messageViewModels.count
+        return rows.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let messageViewModel = viewModel.messageViewModels[indexPath.row]
+        let messageViewModel = rows[indexPath.row]
 
         let cell: MessageCell
 
         switch messageViewModel.alignment {
         case .left:
-            cell = tableView.dequeueReusableCell(withIdentifier: ReceivedMessageCell.ID, for: indexPath) as! MessageCell
+            cell = tableView.dequeueReusableCell(withClass: ReceivedMessageCell.self, for: indexPath)
         case .right:
-            cell = tableView.dequeueReusableCell(withIdentifier: SendMessageCell.ID, for: indexPath) as! MessageCell
+            cell = tableView.dequeueReusableCell(withClass: SendMessageCell.self, for: indexPath)
         }
 
         cell.viewModel = messageViewModel
@@ -183,8 +215,11 @@ extension ChatVC {
     }
 
     private func scrollToBottom(animated: Bool) {
+        guard let indexPath = tableView.indexPathForLastRow else { return }
+
         view.layoutIfNeeded()
-        tableView.setContentOffset(bottomOffset, animated: animated)
+
+        tableView.safeScrollToRow(at: indexPath, at: .bottom, animated: false)
     }
 
     private func registerKeyboardNotifications() {

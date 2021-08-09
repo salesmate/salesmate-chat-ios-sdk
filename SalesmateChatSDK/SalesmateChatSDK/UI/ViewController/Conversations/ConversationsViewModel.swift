@@ -12,6 +12,7 @@ class ConversationsViewModel {
     // MARK: - Private Properties
     private let config: Configeration
     private let client: ChatClient
+    private var page = Page(size: 10)
 
     private var conversations: [Conversation] = [] {
         didSet { prepareCellViewModels() }
@@ -70,11 +71,16 @@ extension ConversationsViewModel {
     }
 
     func getRecentConversations() {
-
-        client.getConversations(at: Page(size: 10)) { result in
+        client.getConversations(at: page) { result in
             switch result {
-            case .success:
+            case .success(let conversations):
                 self.updateConversations()
+
+                // Load next page automatically
+                if !conversations.isEmpty {
+                    self.page.next()
+                    self.getRecentConversations()
+                }
             case .failure:
                 break
             }

@@ -16,6 +16,11 @@ class MessageComposeView: UIView {
     @IBOutlet private weak var btnAttactment: UIButton!
     @IBOutlet private weak var textViewHeight: NSLayoutConstraint!
 
+    // MARK: - Customization
+    func setActionColor(_ color: UIColor) {
+        btnSend.setTitleColor(color, for: .normal)
+    }
+    
     // MARK: - override
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -45,7 +50,7 @@ class MessageComposeView: UIView {
     }
 }
 
-// MARK: -
+// MARK: - UITextViewDelegate
 extension MessageComposeView: UITextViewDelegate {
 
     func textViewDidChange(_ textView: UITextView) {
@@ -57,5 +62,7 @@ extension MessageComposeView: UITextViewDelegate {
             textViewHeight.constant = contentHeight
             layoutIfNeeded()
         }
+        
+        btnSend.isEnabled = !textView.text.isEmpty
     }
 }
