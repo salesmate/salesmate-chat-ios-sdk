@@ -62,7 +62,7 @@ class HomeVC: UIViewController {
 
         if let link = viewModel.headerLogoURL {
             imgvLogoContainer.isHidden = false
-            imgvLogo.setImage(from: link)
+            imgvLogo.loadImage(with: link)
         } else {
             imgvLogoContainer.isHidden = true
         }

@@ -2,6 +2,15 @@
   "object": {
     "pins": [
       {
+        "package": "Nuke",
+        "repositoryURL": "https://github.com/kean/Nuke.git",
+        "state": {
+          "branch": null,
+          "revision": "83e1edaa5a30c567eb129c21c6d00f2f552d2c6f",
+          "version": "10.3.1"
+        }
+      },
+      {
         "package": "Starscream",
         "repositoryURL": "https://github.com/daltoniam/Starscream",
         "state": {

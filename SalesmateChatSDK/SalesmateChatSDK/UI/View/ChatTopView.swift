@@ -97,7 +97,7 @@ class ChatTopWithLogo: ChatTopView {
         let backgroundColor = UIColor(hex: viewModel.backgroundColorCode)
 
         if let link = viewModel.headerLogoURL {
-            imgvLogo.setImage(from: link)
+            imgvLogo.loadImage(with: link)
         }
 
         userView.viewModel = viewModel.availableuserViewModel

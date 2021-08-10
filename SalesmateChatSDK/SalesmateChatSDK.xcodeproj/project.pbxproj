@@ -75,6 +75,7 @@
 		9BD7753726B2D1A8002BA2AD /* RecentConversationsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD7753626B2D1A8002BA2AD /* RecentConversationsVC.swift */; };
 		9BD7753926B2D1B2002BA2AD /* RecentConversationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD7753826B2D1B2002BA2AD /* RecentConversationsViewModel.swift */; };
 		9BD7753B26B2D1FC002BA2AD /* NewChatButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD7753A26B2D1FC002BA2AD /* NewChatButton.swift */; };
+		9BDC254126C2C75B00256719 /* Nuke in Frameworks */ = {isa = PBXBuildFile; productRef = 9BDC254026C2C75B00256719 /* Nuke */; };
 		9BDD51B626B19CA2002C2307 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BDD51B526B19CA2002C2307 /* Media.xcassets */; };
 		9BE7183426B1897900DD3113 /* NewVisitor.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BE7183326B1897900DD3113 /* NewVisitor.storyboard */; };
 		9BE7183626B1898800DD3113 /* NewVisitorVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE7183526B1898800DD3113 /* NewVisitorVC.swift */; };
@@ -239,6 +240,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9BDC254126C2C75B00256719 /* Nuke in Frameworks */,
 				9B3A9B6826A7007400EB7C10 /* SwiftyJSON in Frameworks */,
 				9BD2AC5F26A6FA3600EF6628 /* Starscream in Frameworks */,
 			);
@@ -569,6 +571,7 @@
 			packageProductDependencies = (
 				9BD2AC5E26A6FA3600EF6628 /* Starscream */,
 				9B3A9B6726A7007400EB7C10 /* SwiftyJSON */,
+				9BDC254026C2C75B00256719 /* Nuke */,
 			);
 			productName = SalesmateChatSDK;
 			productReference = 9BB117E926A1A45500E0B242 /* SalesmateChatSDK.framework */;
@@ -625,6 +628,7 @@
 			packageReferences = (
 				9BD2AC5D26A6FA3600EF6628 /* XCRemoteSwiftPackageReference "Starscream" */,
 				9B3A9B6626A7007400EB7C10 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
+				9BDC253F26C2C75A00256719 /* XCRemoteSwiftPackageReference "Nuke" */,
 			);
 			productRefGroup = 9BB117EA26A1A45500E0B242 /* Products */;
 			projectDirPath = "";
@@ -1380,6 +1384,14 @@
 				version = 4.0.4;
 			};
 		};
+		9BDC253F26C2C75A00256719 /* XCRemoteSwiftPackageReference "Nuke" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kean/Nuke.git";
+			requirement = {
+				kind = exactVersion;
+				version = 10.3.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1392,6 +1404,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9BD2AC5D26A6FA3600EF6628 /* XCRemoteSwiftPackageReference "Starscream" */;
 			productName = Starscream;
+		};
+		9BDC254026C2C75B00256719 /* Nuke */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9BDC253F26C2C75A00256719 /* XCRemoteSwiftPackageReference "Nuke" */;
+			productName = Nuke;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

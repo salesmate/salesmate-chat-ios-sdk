@@ -90,7 +90,7 @@ class CirculerProfileView: UIView {
         if let imageURL = viewModel.imageURL {
             imageView.isHidden = false
             imageView.image = nil
-            imageView.setImage(from: imageURL)
+            imageView.loadImage(with: imageURL)
         }
 
         if viewModel.shouldShowStatus {

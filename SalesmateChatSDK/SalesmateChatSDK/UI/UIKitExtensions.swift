@@ -6,6 +6,7 @@
 //
 
 import UIKit
+@_implementationOnly import Nuke
 
 extension UIColor {
 
@@ -51,23 +52,12 @@ extension UIColor {
 
 extension UIImageView {
 
-    // load image async from internet
-    func setImage(from link: URL) {
-        // Request
-        let request = URLRequest(url: link)
-
-        // Session
-        let session = URLSession.shared
-
-        // Data task
-        let datatask = session.dataTask(with: request) { (data, _, error) -> Void in
-            guard let data = data, error == nil else { return }
-            guard let image = UIImage(data: data) else { return }
-
-            OperationQueue.main.addOperation { self.image = image }
+    func loadImage(with link: URL, completion: ((_ result: Result<ImageResponse, ImagePipeline.Error>) -> Void)? = nil) {
+        if let completion = completion {
+            Nuke.loadImage(with: link, into: self, completion: completion)
+        } else {
+            Nuke.loadImage(with: link, into: self)
         }
-
-        datatask.resume()
     }
 }
 
