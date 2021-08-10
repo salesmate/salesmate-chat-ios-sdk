@@ -45,7 +45,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="kBy-WH-rV6">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="34"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="c1Y-hf-EFl">
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="c1Y-hf-EFl">
                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="15.5"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bl3-Wt-5zM" customClass="ChatAttributedTextsView" customModule="SalesmateChatSDK" customModuleProvider="target">

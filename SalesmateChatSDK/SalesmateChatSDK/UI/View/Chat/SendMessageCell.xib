@@ -21,17 +21,17 @@
                         <rect key="frame" x="20" y="5" width="374" height="90"/>
                         <subviews>
                             <view contentMode="scaleToFill" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" placeholderIntrinsicWidth="300" placeholderIntrinsicHeight="90" translatesAutoresizingMaskIntoConstraints="NO" id="MLo-AQ-Ub3">
-                                <rect key="frame" x="0.0" y="0.0" width="280" height="90"/>
+                                <rect key="frame" x="0.0" y="0.0" width="300" height="90"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="Nv5-gb-Uyj">
-                                <rect key="frame" x="290" y="0.0" width="50" height="90"/>
+                                <rect key="frame" x="310" y="0.0" width="64" height="90"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="XlW-Xa-Fl5">
-                                        <rect key="frame" x="0.0" y="0.0" width="50" height="90"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="64" height="90"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Ewi-d0-Vge">
-                                                <rect key="frame" x="0.0" y="0.0" width="50" height="71.5"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Ewi-d0-Vge">
+                                                <rect key="frame" x="14" y="0.0" width="50" height="71.5"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a13-3V-vp4" customClass="ChatAttributedTextsView" customModule="SalesmateChatSDK" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="50" height="71.5"/>
@@ -40,7 +40,7 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="yOj-OA-YPw">
-                                                <rect key="frame" x="0.0" y="76.5" width="50" height="13.5"/>
+                                                <rect key="frame" x="0.0" y="76.5" width="64" height="13.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="750" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ohS-iU-k9B">
                                                         <rect key="frame" x="0.0" y="0.0" width="29.5" height="13.5"/>
@@ -49,7 +49,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="750" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GnV-O6-0JL">
-                                                        <rect key="frame" x="34.5" y="0.0" width="15.5" height="13.5"/>
+                                                        <rect key="frame" x="34.5" y="0.0" width="29.5" height="13.5"/>
                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="11"/>
                                                         <color key="textColor" red="0.52156862749999999" green="0.56078431370000004" blue="0.65098039220000004" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -67,25 +67,6 @@
                                     <constraint firstAttribute="bottom" secondItem="XlW-Xa-Fl5" secondAttribute="bottom" id="t6Z-lX-vrn"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4tG-he-DDp">
-                                <rect key="frame" x="350" y="0.0" width="24" height="90"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3f1-a0-GFI" customClass="CirculerProfileView" customModule="SalesmateChatSDK" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="10" width="24" height="24"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="24" id="isU-QT-lCu"/>
-                                            <constraint firstAttribute="height" constant="24" id="pK4-sx-Dar"/>
-                                        </constraints>
-                                    </view>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="3f1-a0-GFI" secondAttribute="trailing" id="4qz-TB-Lqd"/>
-                                    <constraint firstItem="3f1-a0-GFI" firstAttribute="leading" secondItem="4tG-he-DDp" secondAttribute="leading" id="PL9-nn-qHm"/>
-                                    <constraint firstItem="3f1-a0-GFI" firstAttribute="top" secondItem="4tG-he-DDp" secondAttribute="top" constant="10" id="qTF-Xx-fVB"/>
-                                </constraints>
-                            </view>
                         </subviews>
                     </stackView>
                 </subviews>
@@ -101,7 +82,6 @@
             <connections>
                 <outlet property="lblSeen" destination="GnV-O6-0JL" id="0No-u2-PCw"/>
                 <outlet property="lblTime" destination="ohS-iU-k9B" id="fQU-eh-nuZ"/>
-                <outlet property="profileView" destination="3f1-a0-GFI" id="gZG-aD-wkL"/>
                 <outlet property="textContainer" destination="a13-3V-vp4" id="G4v-4d-X0M"/>
                 <outlet property="viewChatContent" destination="Ewi-d0-Vge" id="Q6M-g2-mDI"/>
             </connections>

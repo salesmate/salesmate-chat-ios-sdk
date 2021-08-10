@@ -7,6 +7,18 @@
 
 import Foundation
 
+class ChatAttachmentViewModel {
+    private let file: File
+
+    let filename: String
+
+    init(file: File) {
+        self.file = file
+
+        filename = file.name ?? ""
+    }
+}
+
 class MessageViewModel {
 
     enum Alignment {
@@ -16,8 +28,8 @@ class MessageViewModel {
 
     enum Content {
         case html(NSAttributedString)
-        case image
-        case file
+        case image(ChatAttachmentViewModel)
+        case file(ChatAttachmentViewModel)
     }
 
     enum IsDeleted {
@@ -73,12 +85,13 @@ class MessageViewModel {
             switch block.blockType {
             case .text, .html, .orderedList, .unorderedList:
                 guard let text = block.text?.attributedString else { continue }
-
                 contents.append(.html(text))
             case .image:
-                break
+                guard let file = block.file else { continue }
+                contents.append(.file(ChatAttachmentViewModel(file: file)))
             case .file:
-                break
+                guard let file = block.file else { continue }
+                contents.append(.file(ChatAttachmentViewModel(file: file)))
             }
         }
 

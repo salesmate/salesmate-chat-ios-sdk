@@ -15,9 +15,8 @@ class MessageCell: UITableViewCell {
     }
 
     // MARK: - Outlets
-    @IBOutlet private weak var profileView: CirculerProfileView!
-    @IBOutlet private weak var viewChatContent: UIStackView!
-    @IBOutlet private weak var textContainer: ChatAttributedTextsView!
+    @IBOutlet private var textContainer: ChatAttributedTextsView!
+    @IBOutlet fileprivate weak var viewChatContent: UIStackView!
     @IBOutlet private weak var lblTime: UILabel!
     @IBOutlet private weak var lblSeen: UILabel!
 
@@ -29,10 +28,8 @@ class MessageCell: UITableViewCell {
     }
 
     // MARK: - View
-    private func display() {
+    fileprivate func display() {
         guard let viewModel = viewModel else { return }
-
-        updateProfileView()
 
         textContainer.setAlignment(alignment: viewModel.alignment)
 
@@ -42,17 +39,6 @@ class MessageCell: UITableViewCell {
         }
 
         lblTime.text = viewModel.time
-    }
-
-    private func updateProfileView() {
-        guard let viewModel = viewModel else { return }
-
-        if let profileViewModel = viewModel.profileViewModel {
-            profileView.superview?.isHidden = false
-            profileView.viewModel = profileViewModel
-        } else {
-            profileView.superview?.isHidden = true
-        }
     }
 
     private func showDeletedMessage() {
@@ -75,31 +61,84 @@ class MessageCell: UITableViewCell {
         for content in viewModel.contents {
             switch content {
             case .html(let text):
-                textContainer.add(text)
-            case .image:
-                break
-            case .file:
-                break
+                addText(text: text)
+            case .image(let viewModel):
+                addFile(viewModel: viewModel)
+            case .file(let viewModel):
+                addFile(viewModel: viewModel)
             }
         }
+    }
+
+    private func addText(text: NSAttributedString) {
+        if textContainer.superview == nil {
+            viewChatContent.addArrangedSubview(textContainer)
+        }
+
+        textContainer.add(text)
+    }
+
+    private func addFile(viewModel: ChatAttachmentViewModel) {
+        guard let messageViewModel = self.viewModel else { return }
+
+        let fileView = ChatFileView(frame: .zero)
+
+        fileView.setBackgroundColor(code: messageViewModel.backgroundColorCode)
+        fileView.setAlignment(alignment: messageViewModel.alignment)
+        fileView.viewModel = viewModel
+
+        viewChatContent.addArrangedSubview(fileView)
     }
 
     private func clear() {
         textContainer.alpha = 1
         textContainer.removeAllTexts()
 
-        for subview in viewChatContent.subviews where subview != textContainer {
+        for subview in viewChatContent.subviews {
             subview.removeFromSuperview()
         }
     }
 }
 
 class SendMessageCell: MessageCell {
+
     static let nib: UINib = UINib(nibName: "SendMessageCell", bundle: .salesmate)
     static let ID = "SendMessageCell"
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+
+        viewChatContent.alignment = .trailing
+    }
 }
 
 class ReceivedMessageCell: MessageCell {
+
+    @IBOutlet private weak var profileView: CirculerProfileView!
+
     static let nib: UINib = UINib(nibName: "ReceivedMessageCell", bundle: .salesmate)
     static let ID = "ReceivedMessageCell"
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+
+        viewChatContent.alignment = .leading
+    }
+
+    override func display() {
+        super.display()
+
+        updateProfileView()
+    }
+
+    private func updateProfileView() {
+        guard let viewModel = viewModel else { return }
+
+        if let profileViewModel = viewModel.profileViewModel {
+            profileView.superview?.isHidden = false
+            profileView.viewModel = profileViewModel
+        } else {
+            profileView.superview?.isHidden = true
+        }
+    }
 }

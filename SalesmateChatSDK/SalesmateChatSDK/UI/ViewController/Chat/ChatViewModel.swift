@@ -107,10 +107,10 @@ class ChatViewModel {
 
         messageViewModels = sortedMessage.map { MessageViewModel(message: $0, look: look, users: config.users ?? []) }
     }
-    
+
     private func newMessagesReceived() {
         updateMessageViewModels()
-        
+
         OperationQueue.main.addOperation {
             self.newMessagesUpdated?()
         }
@@ -118,7 +118,7 @@ class ChatViewModel {
 
     private func updateMessages() {
         updateMessageViewModels()
-        
+
         OperationQueue.main.addOperation {
             self.messagesUpdated?()
         }
