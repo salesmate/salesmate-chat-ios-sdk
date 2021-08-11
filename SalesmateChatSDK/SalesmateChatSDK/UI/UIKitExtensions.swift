@@ -103,6 +103,14 @@ extension UIView {
             bottomAnchor.constraint(equalTo: parentView.bottomAnchor, constant: -insets.bottom)
         ])
     }
+
+    static func loadFromNib() -> Self {
+        let named = String(describing: Self.self)
+        guard let view = UINib(nibName: named, bundle: .salesmate).instantiate(withOwner: nil, options: nil)[0] as? Self else {
+            fatalError("First element in xib file \(named) is not of type \(named)")
+        }
+        return view
+    }
 }
 
 extension UIColor {

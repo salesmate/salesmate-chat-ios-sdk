@@ -15,10 +15,11 @@ class MessageCell: UITableViewCell {
     }
 
     // MARK: - Outlets
-    @IBOutlet private var textContainer: ChatAttributedTextsView!
     @IBOutlet fileprivate weak var viewChatContent: UIStackView!
     @IBOutlet private weak var lblTime: UILabel!
     @IBOutlet private weak var lblSeen: UILabel!
+
+    private var textContainer = ChatAttributedTextsView()
 
     // MARK: - Override
     override func prepareForReuse() {
@@ -49,8 +50,9 @@ class MessageCell: UITableViewCell {
         let attributedText = NSAttributedString(string: message, attributes: attributes)
 
         textContainer.setBackgroundColor(code: viewModel.backgroundColorCode)
-        textContainer.add(attributedText)
         textContainer.alpha = CGFloat(alpha) / 100.0
+
+        addText(text: attributedText)
     }
 
     private func showContents() {
@@ -63,7 +65,7 @@ class MessageCell: UITableViewCell {
             case .html(let text):
                 addText(text: text)
             case .image(let viewModel):
-                addFile(viewModel: viewModel)
+                addImage(viewModel: viewModel)
             case .file(let viewModel):
                 addFile(viewModel: viewModel)
             }
@@ -82,6 +84,18 @@ class MessageCell: UITableViewCell {
         guard let messageViewModel = self.viewModel else { return }
 
         let fileView = ChatFileView(frame: .zero)
+
+        fileView.setBackgroundColor(code: messageViewModel.backgroundColorCode)
+        fileView.setAlignment(alignment: messageViewModel.alignment)
+        fileView.viewModel = viewModel
+
+        viewChatContent.addArrangedSubview(fileView)
+    }
+
+    private func addImage(viewModel: ChatAttachmentViewModel) {
+        guard let messageViewModel = self.viewModel else { return }
+
+        let fileView = ChatImageView(frame: .zero)
 
         fileView.setBackgroundColor(code: messageViewModel.backgroundColorCode)
         fileView.setAlignment(alignment: messageViewModel.alignment)
@@ -129,6 +143,10 @@ class ReceivedMessageCell: MessageCell {
         super.display()
 
         updateProfileView()
+
+        if viewModel?.askEmail ?? false {
+            viewChatContent.addArrangedSubview(AskEmailView())
+        }
     }
 
     private func updateProfileView() {

@@ -122,3 +122,19 @@ class CirculerTextProfileViewModel: CirculerProfileViewModelType {
         self.backgroundColorCode = Self.profileBackgroundColorCode(for: text)
     }
 }
+
+class CirculerBotProfileViewModel: CirculerProfileViewModelType {
+
+    let borderWidth: Float = 0
+    let backgroundColorCode: String
+
+    let imageURL: URL? = nil
+
+    let text: String? = "B"
+    let textColorCode: String = "FFFFFF"
+    let textSize: Float = 14
+
+    init() {
+        self.backgroundColorCode = Self.profileBackgroundColorCode(for: "Bot")
+    }
+}

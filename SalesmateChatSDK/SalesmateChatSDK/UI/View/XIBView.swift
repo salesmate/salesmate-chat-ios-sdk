@@ -13,6 +13,11 @@ class XIBView: UIView {
 
     private(set) var contentView: UIView?
 
+    init() {
+        super.init(frame: .zero)
+        setup()
+    }
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -23,7 +28,7 @@ class XIBView: UIView {
         setup()
     }
 
-    private func setup() {
+    func setup() {
         guard let contentView = loadViewFromNib() else { return }
 
         contentView.frame = bounds

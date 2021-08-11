@@ -11,11 +11,12 @@ class ChatAttachmentViewModel {
     private let file: File
 
     let filename: String
+    let url: URL?
 
     init(file: File) {
         self.file = file
-
-        filename = file.name ?? ""
+        self.filename = file.name ?? ""
+        self.url = file.locationURL
     }
 }
 
@@ -44,6 +45,7 @@ class MessageViewModel {
     let backgroundColorCode: String
     let time: String
     let isDeleted: IsDeleted
+    let askEmail: Bool
 
     // MARK: - Private Properties
     private let message: Message
@@ -59,13 +61,18 @@ class MessageViewModel {
         self.backgroundColorCode = Self.backgroundColorCode(for: message, look: look)
         self.contents = Self.contentViewModels(for: message)
         self.isDeleted = (message.deletedDate == nil) ? .no : .yes("This message was deleted.", 50)
+        self.askEmail = message.type == .emailAsked
     }
 
     private static func alignment(for message: Message) -> Alignment {
-        message.userID == nil ? .right : .left
+        message.userID == nil && !message.isBot ? .right : .left
     }
 
     private static func profileViewModel(for message: Message, users: [User]) -> CirculerProfileViewModelType? {
+        if message.isBot {
+            return CirculerBotProfileViewModel()
+        }
+
         guard let userID = message.userID else { return nil }
         guard let user = users.first(where: { $0.id == userID }) else { return nil }
 
@@ -73,7 +80,7 @@ class MessageViewModel {
     }
 
     private static func backgroundColorCode(for message: Message, look: Configeration.LookAndFeel) -> String {
-        message.userID == nil ? look.actionColor : "EDF0F7"
+        message.userID == nil && !message.isBot ? look.actionColor : "EDF0F7"
     }
 
     private static func contentViewModels(for message: Message) -> [Content] {
@@ -88,7 +95,7 @@ class MessageViewModel {
                 contents.append(.html(text))
             case .image:
                 guard let file = block.file else { continue }
-                contents.append(.file(ChatAttachmentViewModel(file: file)))
+                contents.append(.image(ChatAttachmentViewModel(file: file)))
             case .file:
                 guard let file = block.file else { continue }
                 contents.append(.file(ChatAttachmentViewModel(file: file)))

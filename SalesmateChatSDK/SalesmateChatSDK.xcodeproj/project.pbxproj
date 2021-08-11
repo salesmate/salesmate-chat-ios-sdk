@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		9B1B121C26AEB01500ABC3FB /* ChatEventRelay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1B121B26AEB01500ABC3FB /* ChatEventRelay.swift */; };
+		9B29413826C3D84B00866911 /* ChatImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B29413726C3D84B00866911 /* ChatImageView.swift */; };
+		9B29413A26C3D86A00866911 /* AskEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B29413926C3D86A00866911 /* AskEmailView.swift */; };
+		9B29413C26C3DB2500866911 /* AskEmailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B29413B26C3DB2500866911 /* AskEmailView.xib */; };
 		9B2B4F7726B1B126008AA860 /* UIKitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2B4F7626B1B126008AA860 /* UIKitExtensions.swift */; };
 		9B3A9B6226A6FF4200EB7C10 /* WebSocketEventCreation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3A9B5E26A6FF4200EB7C10 /* WebSocketEventCreation.swift */; };
 		9B3A9B6326A6FF4200EB7C10 /* PayloadHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3A9B5F26A6FF4200EB7C10 /* PayloadHandler.swift */; };
@@ -138,6 +141,9 @@
 
 /* Begin PBXFileReference section */
 		9B1B121B26AEB01500ABC3FB /* ChatEventRelay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatEventRelay.swift; sourceTree = "<group>"; };
+		9B29413726C3D84B00866911 /* ChatImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatImageView.swift; sourceTree = "<group>"; };
+		9B29413926C3D86A00866911 /* AskEmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskEmailView.swift; sourceTree = "<group>"; };
+		9B29413B26C3DB2500866911 /* AskEmailView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AskEmailView.xib; sourceTree = "<group>"; };
 		9B2B4F7626B1B126008AA860 /* UIKitExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKitExtensions.swift; sourceTree = "<group>"; };
 		9B3A9B5E26A6FF4200EB7C10 /* WebSocketEventCreation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebSocketEventCreation.swift; sourceTree = "<group>"; };
 		9B3A9B5F26A6FF4200EB7C10 /* PayloadHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PayloadHandler.swift; sourceTree = "<group>"; };
@@ -380,6 +386,9 @@
 				9B82163A26BAB560002E86E6 /* ReceivedMessageCell.xib */,
 				9B82163626BAA1F1002E86E6 /* ChatAttributedTextsView.swift */,
 				9B83EAB726BD132B00C269DB /* ChatFileView.swift */,
+				9B29413726C3D84B00866911 /* ChatImageView.swift */,
+				9B29413926C3D86A00866911 /* AskEmailView.swift */,
+				9B29413B26C3DB2500866911 /* AskEmailView.xib */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -664,6 +673,7 @@
 				9BDD51B626B19CA2002C2307 /* Media.xcassets in Resources */,
 				9BD7753526B2D18A002BA2AD /* RecentConversations.storyboard in Resources */,
 				9B6A0EC426BD5F13000B68B4 /* Start.storyboard in Resources */,
+				9B29413C26C3DB2500866911 /* AskEmailView.xib in Resources */,
 				9BFC63CC26B128B400976141 /* Home.storyboard in Resources */,
 				9BF260DD26B3D56600D21C75 /* Conversations.storyboard in Resources */,
 			);
@@ -730,6 +740,7 @@
 				9B82163726BAA1F1002E86E6 /* ChatAttributedTextsView.swift in Sources */,
 				9B85939B26AFE96200D035AD /* Entities.swift in Sources */,
 				9BF260E226B3D5A400D21C75 /* ConversationsViewModel.swift in Sources */,
+				9B29413A26C3D86A00866911 /* AskEmailView.swift in Sources */,
 				9B65E01026A58615001F3928 /* APIRequestLoader.swift in Sources */,
 				9BAD6E6E26B7F8380072EC83 /* ChatViewModel.swift in Sources */,
 				9B3A9B8E26A701E600EB7C10 /* Miscellaneous.swift in Sources */,
@@ -757,6 +768,7 @@
 				9B6BE39326BA6F320099ACA0 /* ChatTopViewModel.swift in Sources */,
 				9B6A0EC926BD5F41000B68B4 /* StartViewModel.swift in Sources */,
 				9BFCCA1326BC1E070051DF6D /* Error.swift in Sources */,
+				9B29413826C3D84B00866911 /* ChatImageView.swift in Sources */,
 				9BFCCA1126BC1E020051DF6D /* Request.swift in Sources */,
 				9BB189A926A70A2700D7F7FD /* ChatClient.swift in Sources */,
 				9B3A9B8326A701D200EB7C10 /* Payload.swift in Sources */,

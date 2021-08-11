@@ -4,7 +4,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -21,26 +20,20 @@
                         <rect key="frame" x="20" y="5" width="374" height="90"/>
                         <subviews>
                             <view contentMode="scaleToFill" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" placeholderIntrinsicWidth="300" placeholderIntrinsicHeight="90" translatesAutoresizingMaskIntoConstraints="NO" id="MLo-AQ-Ub3">
-                                <rect key="frame" x="0.0" y="0.0" width="300" height="90"/>
+                                <rect key="frame" x="0.0" y="0.0" width="33" height="90"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="Nv5-gb-Uyj">
-                                <rect key="frame" x="310" y="0.0" width="64" height="90"/>
+                                <rect key="frame" x="43" y="0.0" width="331" height="90"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="XlW-Xa-Fl5">
-                                        <rect key="frame" x="0.0" y="0.0" width="64" height="90"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="331" height="90"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Ewi-d0-Vge">
-                                                <rect key="frame" x="14" y="0.0" width="50" height="71.5"/>
-                                                <subviews>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a13-3V-vp4" customClass="ChatAttributedTextsView" customModule="SalesmateChatSDK" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="50" height="71.5"/>
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                    </view>
-                                                </subviews>
+                                                <rect key="frame" x="281" y="0.0" width="50" height="71.5"/>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="yOj-OA-YPw">
-                                                <rect key="frame" x="0.0" y="76.5" width="64" height="13.5"/>
+                                                <rect key="frame" x="267" y="76.5" width="64" height="13.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="750" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ohS-iU-k9B">
                                                         <rect key="frame" x="0.0" y="0.0" width="29.5" height="13.5"/>
@@ -79,18 +72,15 @@
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="Nv5-gb-Uyj" firstAttribute="width" relation="lessThanOrEqual" secondItem="yzf-Rd-rF5" secondAttribute="width" multiplier="0.8" id="VbS-DF-Dnr"/>
+            </constraints>
             <connections>
                 <outlet property="lblSeen" destination="GnV-O6-0JL" id="0No-u2-PCw"/>
                 <outlet property="lblTime" destination="ohS-iU-k9B" id="fQU-eh-nuZ"/>
-                <outlet property="textContainer" destination="a13-3V-vp4" id="G4v-4d-X0M"/>
                 <outlet property="viewChatContent" destination="Ewi-d0-Vge" id="Q6M-g2-mDI"/>
             </connections>
             <point key="canvasLocation" x="132" y="113"/>
         </tableViewCell>
     </objects>
-    <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-    </resources>
 </document>

@@ -6,14 +6,25 @@
 //
 
 import Foundation
+import UIKit
 
 typealias HTML = String
 
 extension HTML {
 
+    // MARK: - Static
+    private static var approxMaxWidth: Float {
+        let screenWidth = UIScreen.main.bounds.width
+        let widthA = Float(screenWidth - 114)
+        let widthB = Float(screenWidth * 0.80 - 30)
+
+        return Swift.min(widthA, widthB)
+    }
+
+    // MARK: - Instance
     private var parser: HTMLParser.Type { FoundationHTMLParser.self }
 
-    fileprivate func insertPhoneLinks() -> String {
+    private func insertPhoneLinks() -> String {
         let text = NSMutableString(string: self)
 
         let phonePattern = #"""
@@ -30,6 +41,33 @@ extension HTML {
         return String(text)
     }
 
+    func preProcessedHTML() -> HTML {
+        let HTMLWithPhone = self.insertPhoneLinks()
+
+        let processedHTML = """
+            <html>
+            <head>
+            <style>
+            body {
+                font-size: 15;
+                font-family:'-apple-system';
+                font-weight: normal;
+            }
+            img {
+                width: \(Self.approxMaxWidth) !important;
+                height: auto !important;
+            }
+            </style>
+            </head>
+            <body>
+            \(HTMLWithPhone)
+            </body>
+            </html>
+            """
+        print(Self.approxMaxWidth)
+        return processedHTML
+    }
+
     var attributedString: NSAttributedString? {
         parser.attributedString(from: self)
     }
@@ -42,14 +80,13 @@ private protocol HTMLParser {
 private struct FoundationHTMLParser: HTMLParser {
 
     static func attributedString(from html: HTML) -> NSAttributedString? {
-        let htmlWithLink = html.insertPhoneLinks()
-        let htmlWithSpan = "<span style=\"font-size:15;font-family:'-apple-system';font-weight: normal;\">" + htmlWithLink + "</span>"
+        let preProcessedHTML = html.preProcessedHTML()
 
         let options: [NSAttributedString.DocumentReadingOptionKey: Any] =
             [.documentType: NSAttributedString.DocumentType.html,
              .characterEncoding: String.Encoding.utf8.rawValue]
 
-        guard let textData = htmlWithSpan.data(using: .utf8) else { return nil }
+        guard let textData = preProcessedHTML.data(using: .utf8) else { return nil }
         guard let attributedText = try? NSAttributedString(data: textData,
                                                            options: options,
                                                            documentAttributes: nil) else { return nil }

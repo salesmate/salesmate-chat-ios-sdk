@@ -31,6 +31,7 @@ class ChatViewModel {
 
     private var page = Page(size: ChatViewModel.pageSize)
     private var conversation: Conversation?
+    private var emailTimer: Timer?
 
     var topbar: TopBarStyle
     var topViewModel: ChatTopViewModel
@@ -123,6 +124,19 @@ class ChatViewModel {
             self.messagesUpdated?()
         }
     }
+
+    private func startAskEmailTimer() {
+        guard emailTimer == nil else { return }
+
+        emailTimer = Timer.scheduledTimer(withTimeInterval: 2 * 60, repeats: false, block: { [weak self] _ in
+            self?.emailTimer?.invalidate()
+            self?.emailTimer = nil
+
+            self?.askEmail()
+        })
+    }
+
+    private func askEmail() { }
 }
 
 extension ChatViewModel {
@@ -149,6 +163,12 @@ extension ChatViewModel {
             case .failure:
                 break
             }
+        }
+    }
+
+    func sendMessage() {
+        if isNew && messageViewModels.isEmpty {
+            startAskEmailTimer()
         }
     }
 }
