@@ -7,26 +7,39 @@
 
 import UIKit
 
+protocol MessageComposeViewDelegate: AnyObject {
+    func didTapSend(with text: String)
+    func didTapAttachment()
+}
+
 class MessageComposeView: UIView {
 
     // MARK: - Outlets
     @IBOutlet private weak var lblPlaceholder: UIView!
     @IBOutlet private weak var txtvMessage: UITextView!
     @IBOutlet private weak var btnSend: UIButton!
-    @IBOutlet private weak var btnAttactment: UIButton!
+    @IBOutlet private weak var btnAttachment: UIButton!
     @IBOutlet private weak var textViewHeight: NSLayoutConstraint!
 
-    // MARK: - Customization
+    // MARK: - Properties
+    weak var delegate: MessageComposeViewDelegate?
+
+    // MARK: - Interface
     func setActionColor(_ color: UIColor) {
         btnSend.setTitleColor(color, for: .normal)
     }
 
-    // MARK: - override
+    func clear() {
+        txtvMessage.text = ""
+    }
+
+    // MARK: - Override
     override func awakeFromNib() {
         super.awakeFromNib()
 
         txtvMessage.textContainerInset = .zero
         txtvMessage.textContainer.lineFragmentPadding = 0
+        btnSend.isEnabled = !txtvMessage.text.isEmpty
     }
 
     override func didMoveToWindow() {
@@ -47,6 +60,17 @@ class MessageComposeView: UIView {
                           height: CGFloat.greatestFiniteMagnitude)
         let textSize = txtvMessage.sizeThatFits(size)
         return CGSize(width: bounds.width, height: textSize.height)
+    }
+
+    // MARK: - Event
+    @IBAction private func btnSendPressed(_ sender: UIButton) {
+        guard let text = txtvMessage.text?.trim(), !text.isEmpty else { return }
+
+        delegate?.didTapSend(with: text)
+    }
+
+    @IBAction private func btnAttachmentPressed(_ sender: UIButton) {
+        delegate?.didTapAttachment()
     }
 }
 

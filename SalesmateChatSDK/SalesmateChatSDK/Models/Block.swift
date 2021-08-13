@@ -44,7 +44,7 @@ struct BlockToSend: Codable {
 struct Block: Codable {
 
     let id: String
-    let blockType: BlockType
+    let type: BlockType
     let isDraft: Bool
     let orderedNo: IntegerID
     let text: HTML?
@@ -52,7 +52,7 @@ struct Block: Codable {
 
     enum CodingKeys: String, CodingKey {
         case id = "id"
-        case blockType = "block_type"
+        case type = "block_type"
         case isDraft = "is_draft"
         case orderedNo = "ordered_no"
         case text = "text"

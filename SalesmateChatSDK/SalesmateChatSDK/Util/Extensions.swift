@@ -24,3 +24,7 @@ extension String {
         trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
     }
 }
+
+extension UUID {
+    static var new: String { UUID().uuidString.lowercased() }
+}

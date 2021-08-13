@@ -7,6 +7,34 @@
 
 import Foundation
 
+enum Alignment {
+    case left
+    case right
+}
+
+enum Content {
+    case html(NSAttributedString)
+    case image(ChatAttachmentViewModel)
+    case file(ChatAttachmentViewModel)
+}
+
+enum IsDeleted {
+    case yes(String, Int) // Message, Transparency in percentage.
+    case no
+}
+
+protocol MessageViewModelType {
+    var id: MessageID { get }
+
+    var profileViewModel: CirculerProfileViewModelType? { get }
+    var contents: [Content] { get }
+    var alignment: Alignment { get }
+    var backgroundColorCode: String { get }
+    var time: String { get }
+    var isDeleted: IsDeleted { get }
+    var askEmail: Bool { get }
+}
+
 class ChatAttachmentViewModel {
     private let file: File
 
@@ -20,25 +48,10 @@ class ChatAttachmentViewModel {
     }
 }
 
-class MessageViewModel {
-
-    enum Alignment {
-        case left
-        case right
-    }
-
-    enum Content {
-        case html(NSAttributedString)
-        case image(ChatAttachmentViewModel)
-        case file(ChatAttachmentViewModel)
-    }
-
-    enum IsDeleted {
-        case yes(String, Int) // Message, Transparency in percentage.
-        case no
-    }
+class MessageViewModel: MessageViewModelType {
 
     // MARK: - Properties
+    let id: MessageID
     let profileViewModel: CirculerProfileViewModelType?
     let contents: [Content]
     let alignment: Alignment
@@ -55,6 +68,8 @@ class MessageViewModel {
     init(message: Message, look: Configeration.LookAndFeel, users: [User]) {
         self.message = message
         self.look = look
+
+        self.id = message.id
         self.time = message.createdDate.durationString
         self.alignment = Self.alignment(for: message)
         self.profileViewModel = Self.profileViewModel(for: message, users: users)
@@ -89,7 +104,7 @@ class MessageViewModel {
         var contents: [Content] = []
 
         for block in messageContent {
-            switch block.blockType {
+            switch block.type {
             case .text, .html, .orderedList, .unorderedList:
                 guard let text = block.text?.attributedString else { continue }
                 contents.append(.html(text))
@@ -99,6 +114,54 @@ class MessageViewModel {
             case .file:
                 guard let file = block.file else { continue }
                 contents.append(.file(ChatAttachmentViewModel(file: file)))
+            }
+        }
+
+        return contents
+    }
+}
+
+class SendingMessageViewModel: MessageViewModelType {
+
+    // MARK: - Properties
+    let id: MessageID
+    let profileViewModel: CirculerProfileViewModelType? = nil
+    let contents: [Content]
+    let alignment: Alignment = .right
+    let backgroundColorCode: String
+    let time: String
+    let isDeleted: IsDeleted = .no
+    let askEmail: Bool = false
+
+    // MARK: - Private Properties
+    private let message: MessageToSend
+    private let look: Configeration.LookAndFeel
+
+    // MARK: - Init
+    init(message: MessageToSend, look: Configeration.LookAndFeel, users: [User]) {
+        self.message = message
+        self.look = look
+
+        self.id = message.id
+        self.time = message.createdDate.durationString
+        self.backgroundColorCode = look.actionColor
+        self.contents = Self.contentViewModels(for: message)
+    }
+
+    private static func contentViewModels(for message: MessageToSend) -> [Content] {
+        guard !message.contents.isEmpty else { return [] }
+
+        var contents: [Content] = []
+
+        for block in message.contents {
+            switch block.type {
+            case .text, .html, .orderedList, .unorderedList:
+                guard let text = block.text?.attributedString else { continue }
+                contents.append(.html(text))
+            case .image:
+                break
+            case .file:
+                break
             }
         }
 

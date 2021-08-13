@@ -10,7 +10,7 @@ import UIKit
 class MessageCell: UITableViewCell {
 
     // MARK: - Properties
-    var viewModel: MessageViewModel? {
+    var viewModel: MessageViewModelType? {
         didSet { display() }
     }
 

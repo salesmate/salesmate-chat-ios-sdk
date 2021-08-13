@@ -20,9 +20,8 @@ struct MessageToSend: Codable, Hashable {
         case id = "message_id"
         case type = "message_type"
         case contents = "blocks"
-        case referencedUsers = "referenced_users"
-        case referencedTeams = "referenced_teams"
-        case cannedResponseId = "canned_response_id"
+        case isBot = "is_bot"
+        case isInbound = "is_inbound"
     }
 
     enum SendStatus {
@@ -34,19 +33,18 @@ struct MessageToSend: Codable, Hashable {
     let id: String
     let type: MessageType
     let contents: [BlockToSend]
-    let referencedUsers: [RefUser]?
-    let referencedTeams: [RefTeam]?
-    let cannedResponseId: String?
+    let isBot: Bool
+    let isInbound: Bool
+
     let createdDate: Date = Date()
     var status: SendStatus = .sending
 
-    init(type: MessageType, contents: [BlockToSend], referencedUsers: [RefUser]? = nil, referencedTeams: [RefTeam]? = nil, cannedResponseId: String? = nil) {
-        self.id = UUID().uuidString.lowercased()
+    init(type: MessageType, contents: [BlockToSend], isBot: Bool = false, isInbound: Bool = true) {
+        self.id = UUID.new
         self.type = type
         self.contents = contents
-        self.referencedUsers = referencedUsers
-        self.referencedTeams = referencedTeams
-        self.cannedResponseId = cannedResponseId
+        self.isBot = isBot
+        self.isInbound = isInbound
     }
 
     func hash(into hasher: inout Hasher) {
@@ -89,4 +87,8 @@ struct Message: Codable, Hashable {
     static func == (lhs: Message, rhs: Message) -> Bool {
         lhs.id == rhs.id
     }
+}
+
+func == (lhs: Message, rhs: MessageToSend) -> Bool {
+    lhs.id == rhs.id
 }

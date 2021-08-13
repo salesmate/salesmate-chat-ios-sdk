@@ -113,4 +113,15 @@ extension ChatAPIClient: ChatAPI {
             }
         }
     }
+
+    func send(message: MessageToSend, to conversation: ConversationID, completion: @escaping (Result<Void, ChatError>) -> Void) {
+        let request = SendMessagesRequest(conversationID: conversation, message: message)
+
+        loader.load(request: request) { (result) in
+            switch result {
+            case .success: completion(.success(()))
+            case .failure: completion(.failure(.unknown))
+            }
+        }
+    }
 }

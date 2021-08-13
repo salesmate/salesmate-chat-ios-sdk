@@ -15,16 +15,19 @@ class ChatVC: UIViewController {
         let VC = storyboard.instantiateInitialViewController() as! Self
 
         VC.viewModel = viewModel
+        VC.controller = viewModel.getController()
 
         return VC
     }
 
     // MARK: - Private Properties
     private var viewModel: ChatViewModel!
+    private var controller: ChatController!
+
     private var shouldScrollToBottom: Bool = true
     private var shouldAdjustForKeyboard: Bool = false
     private let loading = ActivityIndicatorView(frame: .zero)
-    private var rows: [MessageViewModel] = []
+    private var rows: [MessageViewModelType] = []
     private let refreshControl = UIRefreshControl()
 
     // MARK: - IBOutlets
@@ -87,6 +90,10 @@ class ChatVC: UIViewController {
         viewModel.newMessagesUpdated = {
             self.displayNewMessages()
         }
+
+        viewModel.sendingMessagesUpdated = {
+            self.displayNewMessages()
+        }
     }
 
     // MARK: - View
@@ -131,6 +138,8 @@ class ChatVC: UIViewController {
         if let actionColor = UIColor(hex: viewModel.actionColorCode) {
             messageInputBar.setActionColor(actionColor)
         }
+
+        messageInputBar.delegate = self
     }
 
     private func prepareTableView() {
@@ -143,7 +152,7 @@ class ChatVC: UIViewController {
     }
 
     private func addRefreshControl() {
-        guard viewModel.pageSize <= tableView.numberOfRows(inSection: 0) else { return }
+        guard controller.page.size <= tableView.numberOfRows(inSection: 0) else { return }
 
         refreshControl.tintColor = UIColor(hex: viewModel.actionColorCode)
         tableView.refreshControl = refreshControl
@@ -157,7 +166,7 @@ class ChatVC: UIViewController {
         tableView.tableFooterView = loading
         loading.frame = tableView.bounds
 
-        viewModel.startLoadingDetails()
+        controller.startLoadingDetails()
     }
 
     private func displayMessages() {
@@ -198,7 +207,7 @@ class ChatVC: UIViewController {
     }
 
     @objc private func loadMoreMessages(_ sender: Any) {
-        viewModel.getMessages()
+        controller.getMessages()
     }
 }
 
@@ -283,5 +292,18 @@ extension ChatVC {
                 self.tableView.contentOffset = self.bottomOffset
             }
         }, completion: nil)
+    }
+}
+
+extension ChatVC: MessageComposeViewDelegate {
+
+    func didTapSend(with text: String) {
+        controller.send(text)
+
+        messageInputBar.clear()
+    }
+
+    func didTapAttachment() {
+        print("Select Attactment")
     }
 }

@@ -457,6 +457,9 @@
                                             </constraints>
                                             <color key="tintColor" red="0.52156862745098043" green="0.5607843137254902" blue="0.65098039215686276" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <state key="normal" image="ic-attachment"/>
+                                            <connections>
+                                                <action selector="btnAttachmentPressed:" destination="UbM-6T-m3n" eventType="touchUpInside" id="rDC-oa-emc"/>
+                                            </connections>
                                         </button>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VQN-cL-Ia2">
                                             <rect key="frame" x="24" y="0.0" width="310" height="25"/>
@@ -471,6 +474,9 @@
                                             <state key="disabled">
                                                 <color key="titleColor" red="0.52156862749999999" green="0.56078431370000004" blue="0.65098039220000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </state>
+                                            <connections>
+                                                <action selector="btnSendPressed:" destination="UbM-6T-m3n" eventType="touchUpInside" id="NUB-YZ-xKE"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <constraints>
@@ -492,7 +498,7 @@
                         <constraint firstItem="YJg-CR-K5S" firstAttribute="leading" secondItem="UbM-6T-m3n" secondAttribute="leading" constant="20" id="pWl-KF-FT3"/>
                     </constraints>
                     <connections>
-                        <outlet property="btnAttactment" destination="wJl-Yw-ZSh" id="oC9-jg-Bsu"/>
+                        <outlet property="btnAttachment" destination="wJl-Yw-ZSh" id="oC9-jg-Bsu"/>
                         <outlet property="btnSend" destination="Yq9-ny-5S9" id="Zfn-yl-8aR"/>
                         <outlet property="lblPlaceholder" destination="JfT-l5-wQM" id="lsY-hH-k4p"/>
                         <outlet property="textViewHeight" destination="pOp-Ok-3XW" id="SQe-Xm-piC"/>

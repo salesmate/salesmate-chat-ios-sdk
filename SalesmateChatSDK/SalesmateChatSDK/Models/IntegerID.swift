@@ -18,11 +18,11 @@ extension IntegerID: ExpressibleByIntegerLiteral {
     }
 }
 
-extension IntegerID: ExpressibleByStringLiteral {
+ extension IntegerID: ExpressibleByStringLiteral {
     init(stringLiteral value: StringLiteralType) {
         self.value = value
     }
-}
+ }
 
 extension IntegerID: LosslessStringConvertible {
     init?(_ description: String) {

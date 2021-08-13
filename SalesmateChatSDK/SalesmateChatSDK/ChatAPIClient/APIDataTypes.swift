@@ -28,8 +28,8 @@ struct ResponseKeyValue {
 }
 
 struct Page {
-    private let size: Int
-    private var page: Int = 0
+    let size: Int
+    private(set) var page: Int = 0
 
     var offset: Int { page * size}
     var rows: Int { size }

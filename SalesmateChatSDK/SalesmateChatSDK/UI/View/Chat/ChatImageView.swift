@@ -43,7 +43,7 @@ class ChatImageView: UIView {
         }
     }
 
-    func setAlignment(alignment: MessageViewModel.Alignment) {
+    func setAlignment(alignment: Alignment) {
         switch alignment {
         case .left:
             layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner, .layerMaxXMaxYCorner]

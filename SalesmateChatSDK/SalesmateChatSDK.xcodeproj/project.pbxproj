@@ -48,6 +48,7 @@
 		9B6A0EC926BD5F41000B68B4 /* StartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6A0EC826BD5F41000B68B4 /* StartViewModel.swift */; };
 		9B6A0ECB26BD7203000B68B4 /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6A0ECA26BD7203000B68B4 /* ActivityIndicatorView.swift */; };
 		9B6BE39326BA6F320099ACA0 /* ChatTopViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6BE39226BA6F320099ACA0 /* ChatTopViewModel.swift */; };
+		9B7DE67D26C6A0DE009BE523 /* ChatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7DE67C26C6A0DE009BE523 /* ChatController.swift */; };
 		9B82163126BA85A9002E86E6 /* HTML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B82163026BA85A9002E86E6 /* HTML.swift */; };
 		9B82163726BAA1F1002E86E6 /* ChatAttributedTextsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B82163626BAA1F1002E86E6 /* ChatAttributedTextsView.swift */; };
 		9B82163926BAB546002E86E6 /* SendMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B82163826BAB546002E86E6 /* SendMessageCell.xib */; };
@@ -188,6 +189,7 @@
 		9B6A0EC826BD5F41000B68B4 /* StartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewModel.swift; sourceTree = "<group>"; };
 		9B6A0ECA26BD7203000B68B4 /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
 		9B6BE39226BA6F320099ACA0 /* ChatTopViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTopViewModel.swift; sourceTree = "<group>"; };
+		9B7DE67C26C6A0DE009BE523 /* ChatController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatController.swift; sourceTree = "<group>"; };
 		9B82163026BA85A9002E86E6 /* HTML.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTML.swift; sourceTree = "<group>"; };
 		9B82163626BAA1F1002E86E6 /* ChatAttributedTextsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatAttributedTextsView.swift; sourceTree = "<group>"; };
 		9B82163826BAB546002E86E6 /* SendMessageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendMessageCell.xib; sourceTree = "<group>"; };
@@ -399,6 +401,7 @@
 				9BAD6E7126B7F9EC0072EC83 /* Chat.storyboard */,
 				9BAD6E6F26B7F84B0072EC83 /* ChatVC.swift */,
 				9BAD6E6D26B7F8380072EC83 /* ChatViewModel.swift */,
+				9B7DE67C26C6A0DE009BE523 /* ChatController.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -734,6 +737,7 @@
 				9BFCCA1526BC1E0B0051DF6D /* RequestLoader.swift in Sources */,
 				9B86734C26B83575002C7959 /* MessageComposeView.swift in Sources */,
 				9B4AD3EC26B959B600EA32DB /* HexColor.swift in Sources */,
+				9B7DE67D26C6A0DE009BE523 /* ChatController.swift in Sources */,
 				9B3A9B6526A6FF4200EB7C10 /* StarscreamChatStream.swift in Sources */,
 				9B3A9B8F26A701E600EB7C10 /* DateTime.swift in Sources */,
 				9BD7753B26B2D1FC002BA2AD /* NewChatButton.swift in Sources */,

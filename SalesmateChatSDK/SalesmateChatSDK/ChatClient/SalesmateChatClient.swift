@@ -101,6 +101,9 @@ extension SalesmateChatClient: ConversationFetcher {
             }
         }
     }
+}
+
+extension SalesmateChatClient: MessageFetcher {
 
     func getMessages(of conversation: ConversationID, at page: Page, completion: @escaping (Result<[Message], ChatError>) -> Void) {
         chatAPI.getMessages(of: conversation, at: page) { result in
@@ -112,6 +115,13 @@ extension SalesmateChatClient: ConversationFetcher {
                 completion(.failure(error))
             }
         }
+    }
+}
+
+extension SalesmateChatClient: MessageOperation {
+
+    func send(message: MessageToSend, to conversation: ConversationID, completion: @escaping (Result<Void, ChatError>) -> Void) {
+        chatAPI.send(message: message, to: conversation, completion: completion)
     }
 }
 

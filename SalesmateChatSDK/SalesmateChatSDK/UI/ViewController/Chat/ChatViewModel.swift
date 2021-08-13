@@ -21,7 +21,11 @@ class ChatViewModel {
         case conversationID(ConversationID)
     }
 
-    private static let pageSize = 50
+    enum MessageUpdateEvent {
+        case pageLoading
+        case newMessage
+        case sending
+    }
 
     // MARK: - Private Properties
     private let chatOf: ChatOf
@@ -29,20 +33,18 @@ class ChatViewModel {
     private let config: Configeration
     private let client: ChatClient
 
-    private var page = Page(size: ChatViewModel.pageSize)
     private var conversation: Conversation?
-    private var emailTimer: Timer?
 
     var topbar: TopBarStyle
     var topViewModel: ChatTopViewModel
     let actionColorCode: String
     let isNew: Bool
-    let pageSize = ChatViewModel.pageSize
 
-    private(set) var messageViewModels: [MessageViewModel] = []
+    private(set) var messageViewModels: [MessageViewModelType] = []
 
     var messagesUpdated: (() -> Void)?
     var newMessagesUpdated: (() -> Void)?
+    var sendingMessagesUpdated: (() -> Void)?
     var topBarUpdated: (() -> Void)?
 
     // MARK: - Init
@@ -54,7 +56,7 @@ class ChatViewModel {
 
         switch chatOf {
         case .new:
-            conversationID = UUID().uuidString
+            conversationID = UUID.new
             isNew = true
         case .conversation(let conversation):
             conversationID = conversation.id
@@ -69,8 +71,32 @@ class ChatViewModel {
         self.topbar = (topViewModel.headerLogoURL == nil) ? .withoutLogo : .withLogo
 
         prepareTopViewModel()
-        prepareClient()
     }
+
+    func getController() -> ChatController {
+        ChatController(viewModel: self, client: client, conversationID: conversationID)
+    }
+
+    func update(_ conversation: Conversation) {
+        guard conversation.id == conversationID else { return }
+
+        self.conversation = conversation
+    }
+
+    func update(_ messages: Set<Message>, sendingMessages: Set<MessageToSend>, for event: MessageUpdateEvent) {
+        updateMessageViewModels(for: messages, sendingMessages: sendingMessages)
+
+        OperationQueue.main.addOperation {
+            switch event {
+            case .pageLoading: self.newMessagesUpdated?()
+            case .newMessage: self.newMessagesUpdated?()
+            case .sending: self.sendingMessagesUpdated?()
+            }
+        }
+    }
+}
+
+extension ChatViewModel {
 
     private func prepareTopViewModel() {
         if let user = config.users?.first(where: { $0.id == conversation?.lastUserId }) {
@@ -86,89 +112,15 @@ class ChatViewModel {
         }
     }
 
-    private func prepareClient() {
-        client.clearMessages()
-
-        client.register(observer: self, for: [.messageReceived], of: conversationID) { event in
-            switch event {
-            case .messageReceived(_, let messages):
-                guard let messages = messages, !messages.isEmpty else { return }
-                self.newMessagesReceived()
-            default:
-                print("This event(\(event)) is not observed by SalesmateChatClient")
-            }
-        }
-    }
-
-    private func updateMessageViewModels() {
+    private func updateMessageViewModels(for messages: Set<Message>, sendingMessages: Set<MessageToSend>) {
         guard let look = config.look else { return }
-        guard let messages = client.messages[conversationID] else { return }
 
         let sortedMessage = messages.sorted(by: { $0.createdDate < $1.createdDate })
+        let sortedsendingMessage = sendingMessages.sorted(by: { $0.createdDate < $1.createdDate })
 
-        messageViewModels = sortedMessage.map { MessageViewModel(message: $0, look: look, users: config.users ?? []) }
-    }
+        let messageViewModels = sortedMessage.map { MessageViewModel(message: $0, look: look, users: config.users ?? []) }
+        let sendingViewModels = sortedsendingMessage.map { SendingMessageViewModel(message: $0, look: look, users: config.users ?? []) }
 
-    private func newMessagesReceived() {
-        updateMessageViewModels()
-
-        OperationQueue.main.addOperation {
-            self.newMessagesUpdated?()
-        }
-    }
-
-    private func updateMessages() {
-        updateMessageViewModels()
-
-        OperationQueue.main.addOperation {
-            self.messagesUpdated?()
-        }
-    }
-
-    private func startAskEmailTimer() {
-        guard emailTimer == nil else { return }
-
-        emailTimer = Timer.scheduledTimer(withTimeInterval: 2 * 60, repeats: false, block: { [weak self] _ in
-            self?.emailTimer?.invalidate()
-            self?.emailTimer = nil
-
-            self?.askEmail()
-        })
-    }
-
-    private func askEmail() { }
-}
-
-extension ChatViewModel {
-
-    func startLoadingDetails() {
-        client.getDetail(of: conversationID) { result in
-            switch result {
-            case .success(let detail):
-                self.conversation = detail
-                self.prepareTopViewModel()
-                self.getMessages()
-            case .failure:
-                break
-            }
-        }
-    }
-
-    func getMessages() {
-        client.getMessages(of: conversationID, at: page) { result in
-            switch result {
-            case .success:
-                self.updateMessages()
-                self.page.next()
-            case .failure:
-                break
-            }
-        }
-    }
-
-    func sendMessage() {
-        if isNew && messageViewModels.isEmpty {
-            startAskEmailTimer()
-        }
+        self.messageViewModels = messageViewModels + sendingViewModels
     }
 }

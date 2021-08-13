@@ -113,3 +113,18 @@ struct GetLatestMessagesRequest: HTTPRequest {
         headers = common.headers
     }
 }
+
+struct SendMessagesRequest: HTTPRequest {
+
+    var method: HTTPMethod = .post
+    var url: URL
+    var queryItems: [URLQueryItem]?
+    var headers: HTTPHeaders?
+    var body: HTTPBody?
+
+    init(conversationID: String, message: MessageToSend, common: CAC = common) {
+        url = URL(string: "messenger/v1/conversations/\(conversationID)/message", relativeTo: common.base)!
+        headers = common.headers
+        body = JSONBody(message)
+    }
+}
