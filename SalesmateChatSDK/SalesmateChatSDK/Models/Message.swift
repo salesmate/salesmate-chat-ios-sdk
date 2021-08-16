@@ -32,9 +32,12 @@ struct MessageToSend: Codable, Hashable {
 
     let id: String
     let type: MessageType
-    let contents: [BlockToSend]
+    var contents: [BlockToSend]
     let isBot: Bool
     let isInbound: Bool
+
+    var fileToUpload: FileToUpload?
+    var uploadedFile: UploadedFile?
 
     let createdDate: Date = Date()
     var status: SendStatus = .sending

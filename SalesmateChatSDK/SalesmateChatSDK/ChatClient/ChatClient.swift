@@ -22,6 +22,16 @@ protocol MessageOperation {
     func send(message: MessageToSend, to conversation: ConversationID, completion: @escaping (Result<Void, ChatError>) -> Void)
 }
 
+protocol FileOperation {
+    func upload(file: FileToUpload, completion: @escaping (Result<UploadedFile, ChatError>) -> Void, progress: ((Float) -> Void)?)
+}
+
+extension FileOperation {
+    func upload(file: FileToUpload, completion: @escaping (Result<UploadedFile, ChatError>) -> Void, progress: ((Float) -> Void)? = nil) {
+        self.upload(file: file, completion: completion, progress: progress)
+    }
+}
+
 protocol ChatDataSource {
     var conversations: Set<Conversation> { get }
     var messages: [ConversationID: Set<Message>] { get }
@@ -53,7 +63,7 @@ protocol ChatObservation {
     func register(observer: AnyObject, for events: [ChatEventToObserve], of conversation: ConversationID?, onEvent: @escaping (ChatEvent) -> Void)
 }
 
-protocol ChatClient: ChatObservation, ConversationFetcher, MessageFetcher, MessageOperation, ChatDataSource {
+protocol ChatClient: ChatObservation, ConversationFetcher, MessageFetcher, MessageOperation, ChatDataSource, FileOperation {
     func getConfigerations(completion: @escaping ((Result<JSONObject, ChatError>) -> Void))
     func connect(waitForFullConnection: Bool, completion: @escaping (Result<Void, ChatError>) -> Void)
 }

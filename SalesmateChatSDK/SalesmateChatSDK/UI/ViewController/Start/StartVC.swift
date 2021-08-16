@@ -22,8 +22,4 @@ class StartVC: UIViewController {
     var viewModel: StartViewModel!
 
     @IBOutlet private weak var loading: UIActivityIndicatorView!
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
 }

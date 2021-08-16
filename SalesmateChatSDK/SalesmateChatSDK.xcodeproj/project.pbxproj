@@ -39,6 +39,7 @@
 		9B4B632A26B02D6700203172 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B4B632826B02D6700203172 /* LaunchScreen.storyboard */; };
 		9B4B633026B02D7200203172 /* SalesmateChatSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BB117E926A1A45500E0B242 /* SalesmateChatSDK.framework */; };
 		9B4B633126B02D7200203172 /* SalesmateChatSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9BB117E926A1A45500E0B242 /* SalesmateChatSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9B59F38C26CA4B0700BE7A79 /* FilePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B59F38B26CA4B0700BE7A79 /* FilePickerController.swift */; };
 		9B65E00E26A58615001F3928 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B65E00326A58615001F3928 /* APIClient.swift */; };
 		9B65E00F26A58615001F3928 /* APIRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B65E00426A58615001F3928 /* APIRequests.swift */; };
 		9B65E01026A58615001F3928 /* APIRequestLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B65E00526A58615001F3928 /* APIRequestLoader.swift */; };
@@ -174,6 +175,7 @@
 		9B4B632626B02D6700203172 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9B4B632926B02D6700203172 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9B4B632B26B02D6700203172 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9B59F38B26CA4B0700BE7A79 /* FilePickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilePickerController.swift; sourceTree = "<group>"; };
 		9B65DFFA26A58615001F3928 /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		9B65DFFB26A58615001F3928 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		9B65DFFC26A58615001F3928 /* RequestLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestLoader.swift; sourceTree = "<group>"; };
@@ -402,6 +404,7 @@
 				9BAD6E6F26B7F84B0072EC83 /* ChatVC.swift */,
 				9BAD6E6D26B7F8380072EC83 /* ChatViewModel.swift */,
 				9B7DE67C26C6A0DE009BE523 /* ChatController.swift */,
+				9B59F38B26CA4B0700BE7A79 /* FilePickerController.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -738,6 +741,7 @@
 				9B86734C26B83575002C7959 /* MessageComposeView.swift in Sources */,
 				9B4AD3EC26B959B600EA32DB /* HexColor.swift in Sources */,
 				9B7DE67D26C6A0DE009BE523 /* ChatController.swift in Sources */,
+				9B59F38C26CA4B0700BE7A79 /* FilePickerController.swift in Sources */,
 				9B3A9B6526A6FF4200EB7C10 /* StarscreamChatStream.swift in Sources */,
 				9B3A9B8F26A701E600EB7C10 /* DateTime.swift in Sources */,
 				9BD7753B26B2D1FC002BA2AD /* NewChatButton.swift in Sources */,

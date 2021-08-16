@@ -128,3 +128,18 @@ struct SendMessagesRequest: HTTPRequest {
         body = JSONBody(message)
     }
 }
+
+struct SingleFileUploadRequest: HTTPRequest {
+
+    var method: HTTPMethod = .post
+    var url: URL
+    var queryItems: [URLQueryItem]? = [URLQueryItem(name: "make_public", value: "true")]
+    var headers: HTTPHeaders?
+    var body: HTTPBody?
+
+    init(fileName: String, fileData: Data, mimeType: String, common: CAC = common) {
+        url = URL(string: "/messenger/v1/upload-file", relativeTo: common.base)!
+        headers = common.headers
+        body = MultipartSingleFileBody(fileName: fileName, fileData: fileData, mimeType: mimeType)
+    }
+}

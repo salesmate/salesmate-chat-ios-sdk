@@ -54,27 +54,35 @@ class ChatController {
         }
     }
 
-    func send(_ text: String) {
+    func send(_ text: String, with file: FileToUpload? = nil) {
         func updateMesages() {
             guard let messages = client.messages[conversationID] else { return }
             viewModel?.update(messages, sendingMessages: sendingMessages, for: .sending)
         }
 
-        var message = MessageToSend(type: .comment, contents: [BlockToSend(text: text)])
+        let message = MessageToSend(type: .comment, contents: [BlockToSend(text: text)])
 
         sendingMessages.update(with: message)
 
         updateMesages()
 
-        client.send(message: message, to: conversationID) { result in
-            switch result {
-            case .success: message.status = .sent
-            case .failure: message.status = .fail
-            }
+        send(message)
+    }
 
-            self.sendingMessages.update(with: message)
-            updateMesages()
+    func send(file: FileToUpload? = nil) {
+        func updateMesages() {
+            guard let messages = client.messages[conversationID] else { return }
+            viewModel?.update(messages, sendingMessages: sendingMessages, for: .sending)
         }
+
+        var message = MessageToSend(type: .comment, contents: [])
+
+        sendingMessages.update(with: message)
+
+        updateMesages()
+
+        message.fileToUpload = file
+        uploadFile(for: message)
     }
 }
 
@@ -96,6 +104,46 @@ extension ChatController {
             default:
                 print("This event(\(event)) is not observed by SalesmateChatClient")
             }
+        }
+    }
+
+    private func uploadFile(for message: MessageToSend) {
+        var message = message
+
+        guard let file = message.fileToUpload else { return }
+
+        client.upload(file: file) { result in
+            switch result {
+            case .success(let uploadedFile):
+                message.fileToUpload = nil
+                message.contents.append(BlockToSend(from: uploadedFile))
+                self.sendingMessages.update(with: message)
+                self.send(message)
+            case .failure:
+                message.status = .fail
+                self.sendingMessages.update(with: message)
+            }
+        } progress: { progress in
+            print("File Upload Progress: \(progress)")
+        }
+    }
+
+    private func send(_ message: MessageToSend) {
+        func updateMesages() {
+            guard let messages = client.messages[conversationID] else { return }
+            viewModel?.update(messages, sendingMessages: sendingMessages, for: .sending)
+        }
+
+        var message = message
+
+        client.send(message: message, to: conversationID) { result in
+            switch result {
+            case .success: message.status = .sent
+            case .failure: message.status = .fail
+            }
+
+            self.sendingMessages.update(with: message)
+            updateMesages()
         }
     }
 }

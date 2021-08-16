@@ -49,7 +49,6 @@ struct UploadedFile: Codable {
         case location = "url"
         case thumbnailPath = "thumbnailPath"
         case thumbnailUrl = "thumbnailUrl"
-        case fileId = "file_id"
     }
 
     let path: String
@@ -58,7 +57,6 @@ struct UploadedFile: Codable {
     let location: String
     let thumbnailPath: String?
     let thumbnailUrl: String?
-    let fileId: String?
     var refID: UUID?
 }
 
@@ -85,7 +83,6 @@ struct FileToSend: Codable {
         case mimeType = "content_type"
         case thumbnail = "thumbnail"
         case gcpThumbnailName = "gcp_thumbnail_file_name"
-        case fileId = "file_id"
     }
 
     let name: String
@@ -93,7 +90,6 @@ struct FileToSend: Codable {
     let mimeType: String
     let thumbnail: String?
     let gcpThumbnailName: String?
-    let fileId: String?
 
     // For internal use only
     private(set) var location: String?
@@ -104,7 +100,6 @@ struct FileToSend: Codable {
         self.mimeType = file.mimeType
         self.thumbnail = file.thumbnailUrl
         self.gcpThumbnailName = file.thumbnailPath
-        self.fileId = file.fileId
 
         self.location = file.location
     }

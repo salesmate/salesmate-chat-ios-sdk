@@ -87,7 +87,7 @@ public class SalesmateChat {
         rootNC.setViewControllers([VC], animated: true)
         rootNC.navigationBar.isHidden = true
 
-        viewController?.present(rootNC, animated: true, completion: nil)
+        viewController?.present(rootNC, animated: false, completion: nil)
     }
 
     private func showHomeVC(from viewController: UIViewController? = nil) {

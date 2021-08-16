@@ -136,6 +136,13 @@ extension SalesmateChatClient: ChatObservation {
     }
 }
 
+extension SalesmateChatClient: FileOperation {
+
+    func upload(file: FileToUpload, completion: @escaping (Result<UploadedFile, ChatError>) -> Void, progress: ((Float) -> Void)? = nil) {
+        chatAPI.upload(file: file, progress: progress, completion: completion)
+    }
+}
+
 extension SalesmateChatClient {
 
     private func prepareEventListener() {

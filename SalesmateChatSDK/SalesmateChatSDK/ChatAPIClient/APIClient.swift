@@ -124,4 +124,20 @@ extension ChatAPIClient: ChatAPI {
             }
         }
     }
+
+    func upload(file: FileToUpload, progress: ((Float) -> Void)?, completion: @escaping (Result<UploadedFile, ChatError>) -> Void) {
+        let request = SingleFileUploadRequest(fileName: file.fileName, fileData: file.fileData, mimeType: file.mimeType)
+
+        loader.upload(request: request, progress: progress) { (result) in
+            switch result {
+            case .success(let response):
+                guard let aFile = response.json as? JSONObject else { return }
+                guard var uploadedFile = UploadedFile(from: aFile) else { return }
+                uploadedFile.refID = file.id
+                completion(.success(uploadedFile))
+            case .failure:
+                completion(.failure(.unknown))
+            }
+        }
+    }
 }

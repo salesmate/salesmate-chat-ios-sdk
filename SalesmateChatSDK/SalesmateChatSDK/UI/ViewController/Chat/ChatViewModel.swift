@@ -88,7 +88,7 @@ class ChatViewModel {
 
         OperationQueue.main.addOperation {
             switch event {
-            case .pageLoading: self.newMessagesUpdated?()
+            case .pageLoading: self.messagesUpdated?()
             case .newMessage: self.newMessagesUpdated?()
             case .sending: self.sendingMessagesUpdated?()
             }
@@ -116,7 +116,11 @@ extension ChatViewModel {
         guard let look = config.look else { return }
 
         let sortedMessage = messages.sorted(by: { $0.createdDate < $1.createdDate })
-        let sortedsendingMessage = sendingMessages.sorted(by: { $0.createdDate < $1.createdDate })
+        var sortedsendingMessage = sendingMessages.sorted(by: { $0.createdDate < $1.createdDate })
+
+        let sendingMessageIDs = sortedsendingMessage.map { $0.id }
+        let commonIDs = sortedMessage.filter { sendingMessageIDs.contains($0.id)}.map { $0.id }
+        sortedsendingMessage.removeAll(where: { commonIDs.contains($0.id) })
 
         let messageViewModels = sortedMessage.map { MessageViewModel(message: $0, look: look, users: config.users ?? []) }
         let sendingViewModels = sortedsendingMessage.map { SendingMessageViewModel(message: $0, look: look, users: config.users ?? []) }

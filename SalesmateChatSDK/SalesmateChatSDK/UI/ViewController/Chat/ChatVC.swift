@@ -29,6 +29,9 @@ class ChatVC: UIViewController {
     private let loading = ActivityIndicatorView(frame: .zero)
     private var rows: [MessageViewModelType] = []
     private let refreshControl = UIRefreshControl()
+    private lazy var filePicker: FilePickerController = {
+       FilePickerController(presenter: self)
+    }()
 
     // MARK: - IBOutlets
     @IBOutlet private weak var viewTopWithoutLogo: ChatTopWithoutLogo!
@@ -196,12 +199,28 @@ class ChatVC: UIViewController {
         let indexPathsLastVisibleRow = tableView.indexPathsForVisibleRows?.last
 
         let isLastVisiable: Bool = (indexPathsLastRow == indexPathsLastVisibleRow)
+        let rowsCount = rows.count
 
         rows = viewModel.messageViewModels
 
-        tableView.reloadData {
-            if isLastVisiable {
-                self.scrollToBottom(animated: true)
+        let newRowsCount = rows.count
+        let diff = newRowsCount - rowsCount
+
+        if diff > 0 {
+            let indexPaths = (rowsCount..<newRowsCount).map { IndexPath(row: $0, section: 0) }
+
+            tableView.performBatchUpdates {
+                tableView.insertRows(at: indexPaths, with: .bottom)
+            } completion: { _ in
+                if isLastVisiable {
+                    self.scrollToBottom(animated: true)
+                }
+            }
+        } else {
+            tableView.reloadData {
+                if isLastVisiable && (rowsCount < self.rows.count) {
+                    self.scrollToBottom(animated: true)
+                }
             }
         }
     }
@@ -295,6 +314,13 @@ extension ChatVC {
     }
 }
 
+extension ChatVC: FilePickerControllerPresenter {
+
+    func filePicker(_ picker: FilePickerController, didSelecte file: FileToUpload) {
+        controller.send(file: file)
+    }
+}
+
 extension ChatVC: MessageComposeViewDelegate {
 
     func didTapSend(with text: String) {
@@ -304,6 +330,31 @@ extension ChatVC: MessageComposeViewDelegate {
     }
 
     func didTapAttachment() {
-        print("Select Attactment")
+        askAttachmentSource()
+    }
+
+    private func askAttachmentSource() {
+        let sheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+
+        let photos = UIAlertAction(title: "Take from photos", style: .default) { _ in
+            self.filePicker.showMediaPicker()
+        }
+
+        let camera = UIAlertAction(title: "Capture from camera", style: .default) { _ in
+            self.filePicker.showCamera()
+        }
+
+        let document = UIAlertAction(title: "Select document", style: .default) { _ in
+            self.filePicker.showDocumentPicker()
+        }
+
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel)
+
+        sheet.addAction(photos)
+        sheet.addAction(camera)
+        sheet.addAction(document)
+        sheet.addAction(cancel)
+
+        present(sheet, animated: true)
     }
 }
