@@ -7,15 +7,20 @@
 
 import Foundation
 
-enum Alignment {
+enum CellAlignment {
     case left
     case right
 }
 
-enum Content {
+enum CellContent {
     case html(NSAttributedString)
     case image(ChatAttachmentViewModel)
     case file(ChatAttachmentViewModel)
+}
+
+enum CellBottom {
+    case text(String)
+    case retry
 }
 
 enum IsDeleted {
@@ -27,24 +32,52 @@ protocol MessageViewModelType {
     var id: MessageID { get }
 
     var profileViewModel: CirculerProfileViewModelType? { get }
-    var contents: [Content] { get }
-    var alignment: Alignment { get }
+    var contents: [CellContent] { get }
+    var alignment: CellAlignment { get }
     var backgroundColorCode: String { get }
-    var time: String { get }
     var isDeleted: IsDeleted { get }
     var askEmail: Bool { get }
+    var bottom: CellBottom? { get }
 }
 
 class ChatAttachmentViewModel {
-    private let file: File
+
+    private let file: File?
+    private let fileToSend: FileToUpload?
+    private let uploadedFile: UploadedFile?
 
     let filename: String
+    let data: Data?
     let url: URL?
 
     init(file: File) {
         self.file = file
+        self.fileToSend = nil
+        self.uploadedFile = nil
+
         self.filename = file.name ?? ""
         self.url = file.locationURL
+        self.data = nil
+    }
+
+    init(file: FileToUpload) {
+        self.file = nil
+        self.fileToSend = file
+        self.uploadedFile = nil
+
+        self.filename = file.fileName
+        self.url = nil
+        self.data = file.fileData
+    }
+
+    init(file: UploadedFile) {
+        self.file = nil
+        self.fileToSend = nil
+        self.uploadedFile = file
+
+        self.filename = file.name
+        self.url = URL(string: file.location)
+        self.data = nil
     }
 }
 
@@ -53,12 +86,12 @@ class MessageViewModel: MessageViewModelType {
     // MARK: - Properties
     let id: MessageID
     let profileViewModel: CirculerProfileViewModelType?
-    let contents: [Content]
-    let alignment: Alignment
+    let contents: [CellContent]
+    let alignment: CellAlignment
     let backgroundColorCode: String
-    let time: String
     let isDeleted: IsDeleted
     let askEmail: Bool
+    let bottom: CellBottom?
 
     // MARK: - Private Properties
     private let message: Message
@@ -70,7 +103,7 @@ class MessageViewModel: MessageViewModelType {
         self.look = look
 
         self.id = message.id
-        self.time = message.createdDate.durationString
+        self.bottom = .text(message.createdDate.durationString)
         self.alignment = Self.alignment(for: message)
         self.profileViewModel = Self.profileViewModel(for: message, users: users)
         self.backgroundColorCode = Self.backgroundColorCode(for: message, look: look)
@@ -79,7 +112,7 @@ class MessageViewModel: MessageViewModelType {
         self.askEmail = message.type == .emailAsked
     }
 
-    private static func alignment(for message: Message) -> Alignment {
+    private static func alignment(for message: Message) -> CellAlignment {
         message.userID == nil && !message.isBot ? .right : .left
     }
 
@@ -98,10 +131,10 @@ class MessageViewModel: MessageViewModelType {
         message.userID == nil && !message.isBot ? look.actionColor : "EDF0F7"
     }
 
-    private static func contentViewModels(for message: Message) -> [Content] {
+    private static func contentViewModels(for message: Message) -> [CellContent] {
         guard let messageContent = message.contents, !messageContent.isEmpty else { return [] }
 
-        var contents: [Content] = []
+        var contents: [CellContent] = []
 
         for block in messageContent {
             switch block.type {
@@ -126,12 +159,12 @@ class SendingMessageViewModel: MessageViewModelType {
     // MARK: - Properties
     let id: MessageID
     let profileViewModel: CirculerProfileViewModelType? = nil
-    let contents: [Content]
-    let alignment: Alignment = .right
+    let contents: [CellContent]
+    let alignment: CellAlignment = .right
     let backgroundColorCode: String
-    let time: String
     let isDeleted: IsDeleted = .no
     let askEmail: Bool = false
+    let bottom: CellBottom?
 
     // MARK: - Private Properties
     private let message: MessageToSend
@@ -143,28 +176,49 @@ class SendingMessageViewModel: MessageViewModelType {
         self.look = look
 
         self.id = message.id
-        self.time = message.createdDate.durationString
         self.backgroundColorCode = look.actionColor
         self.contents = Self.contentViewModels(for: message)
+        self.bottom = Self.cellBottom(for: message)
     }
 
-    private static func contentViewModels(for message: MessageToSend) -> [Content] {
-        guard !message.contents.isEmpty else { return [] }
-
-        var contents: [Content] = []
+    private static func contentViewModels(for message: MessageToSend) -> [CellContent] {
+        var contents: [CellContent] = []
 
         for block in message.contents {
             switch block.type {
-            case .text, .html, .orderedList, .unorderedList:
+            case .text:
                 guard let text = block.text?.attributedString else { continue }
                 contents.append(.html(text))
-            case .image:
-                break
-            case .file:
+            default:
                 break
             }
         }
 
+        if let file = message.fileToUpload {
+            if file.mimeType.contains("image") {
+                contents.append(.image(ChatAttachmentViewModel(file: file)))
+            } else {
+                contents.append(.file(ChatAttachmentViewModel(file: file)))
+            }
+        } else if let file = message.uploadedFile {
+            if file.mimeType.contains("image") {
+                contents.append(.image(ChatAttachmentViewModel(file: file)))
+            } else {
+                contents.append(.file(ChatAttachmentViewModel(file: file)))
+            }
+        }
+
         return contents
+    }
+
+    private static func cellBottom(for message: MessageToSend) -> CellBottom {
+        switch message.status {
+        case .sending:
+            return .text("Sending...")
+        case .sent:
+            return .text("\(message.createdDate.durationString) Not seen yet")
+        case .fail:
+            return .retry
+        }
     }
 }

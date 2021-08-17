@@ -16,8 +16,7 @@ class MessageCell: UITableViewCell {
 
     // MARK: - Outlets
     @IBOutlet fileprivate weak var viewChatContent: UIStackView!
-    @IBOutlet private weak var lblTime: UILabel!
-    @IBOutlet private weak var lblSeen: UILabel!
+    @IBOutlet private weak var lblBottomText: UILabel!
 
     private var textContainer = ChatAttributedTextsView()
 
@@ -39,7 +38,11 @@ class MessageCell: UITableViewCell {
         case .no: showContents()
         }
 
-        lblTime.text = viewModel.time
+        if case .text(let bottomText) = viewModel.bottom {
+            lblBottomText.text = bottomText
+        } else {
+            lblBottomText.text = nil
+        }
     }
 
     private func showDeletedMessage() {

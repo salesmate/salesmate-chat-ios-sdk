@@ -33,18 +33,12 @@
                                                 <rect key="frame" x="281" y="0.0" width="50" height="71.5"/>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="yOj-OA-YPw">
-                                                <rect key="frame" x="267" y="76.5" width="64" height="13.5"/>
+                                                <rect key="frame" x="301.5" y="76.5" width="29.5" height="13.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="750" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ohS-iU-k9B">
                                                         <rect key="frame" x="0.0" y="0.0" width="29.5" height="13.5"/>
                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="11"/>
                                                         <color key="textColor" red="0.52156862745098043" green="0.5607843137254902" blue="0.65098039215686276" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="750" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GnV-O6-0JL">
-                                                        <rect key="frame" x="34.5" y="0.0" width="29.5" height="13.5"/>
-                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="11"/>
-                                                        <color key="textColor" red="0.52156862749999999" green="0.56078431370000004" blue="0.65098039220000004" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
@@ -76,8 +70,7 @@
                 <constraint firstItem="Nv5-gb-Uyj" firstAttribute="width" relation="lessThanOrEqual" secondItem="yzf-Rd-rF5" secondAttribute="width" multiplier="0.8" id="VbS-DF-Dnr"/>
             </constraints>
             <connections>
-                <outlet property="lblSeen" destination="GnV-O6-0JL" id="0No-u2-PCw"/>
-                <outlet property="lblTime" destination="ohS-iU-k9B" id="fQU-eh-nuZ"/>
+                <outlet property="lblBottomText" destination="ohS-iU-k9B" id="RP8-M5-ZSD"/>
                 <outlet property="viewChatContent" destination="Ewi-d0-Vge" id="Q6M-g2-mDI"/>
             </connections>
             <point key="canvasLocation" x="132" y="113"/>

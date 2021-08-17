@@ -54,7 +54,7 @@ class ChatController {
         }
     }
 
-    func send(_ text: String, with file: FileToUpload? = nil) {
+    func sendMessage(with text: String) {
         func updateMesages() {
             guard let messages = client.messages[conversationID] else { return }
             viewModel?.update(messages, sendingMessages: sendingMessages, for: .sending)
@@ -69,19 +69,18 @@ class ChatController {
         send(message)
     }
 
-    func send(file: FileToUpload? = nil) {
+    func sendMessage(with file: FileToUpload) {
         func updateMesages() {
             guard let messages = client.messages[conversationID] else { return }
             viewModel?.update(messages, sendingMessages: sendingMessages, for: .sending)
         }
 
-        var message = MessageToSend(type: .comment, contents: [])
+        let message = MessageToSend(type: .comment, contents: [], file: file)
 
         sendingMessages.update(with: message)
 
         updateMesages()
 
-        message.fileToUpload = file
         uploadFile(for: message)
     }
 }
@@ -115,7 +114,7 @@ extension ChatController {
         client.upload(file: file) { result in
             switch result {
             case .success(let uploadedFile):
-                message.fileToUpload = nil
+                message.uploadedFile = uploadedFile
                 message.contents.append(BlockToSend(from: uploadedFile))
                 self.sendingMessages.update(with: message)
                 self.send(message)

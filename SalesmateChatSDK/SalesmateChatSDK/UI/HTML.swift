@@ -64,7 +64,6 @@ extension HTML {
             </body>
             </html>
             """
-        print(Self.approxMaxWidth)
         return processedHTML
     }
 

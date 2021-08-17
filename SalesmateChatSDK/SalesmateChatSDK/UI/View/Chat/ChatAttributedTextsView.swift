@@ -54,7 +54,7 @@ class ChatAttributedTextsView: UIView {
         stackView.addArrangedSubview(label)
     }
 
-    func setAlignment(alignment: Alignment) {
+    func setAlignment(alignment: CellAlignment) {
         switch alignment {
         case .left:
             layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner, .layerMaxXMaxYCorner]

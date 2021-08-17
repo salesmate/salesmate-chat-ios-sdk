@@ -42,10 +42,11 @@ struct MessageToSend: Codable, Hashable {
     let createdDate: Date = Date()
     var status: SendStatus = .sending
 
-    init(type: MessageType, contents: [BlockToSend], isBot: Bool = false, isInbound: Bool = true) {
+    init(type: MessageType, contents: [BlockToSend], file: FileToUpload? = nil, isBot: Bool = false, isInbound: Bool = true) {
         self.id = UUID.new
         self.type = type
         self.contents = contents
+        self.fileToUpload = file
         self.isBot = isBot
         self.isInbound = isInbound
     }

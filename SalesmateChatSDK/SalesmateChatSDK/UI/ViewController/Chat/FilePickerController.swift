@@ -80,10 +80,10 @@ extension FilePickerController {
     }
 
     private func didSelect(_ image: UIImage) {
-        guard let data = image.pngData() else { return }
+        guard let data = image.jpegData(compressionQuality: 0.9) else { return }
 
-        let name = "\(Date().timeIntervalSince1970).png"
-        let file = FileToUpload(fileName: name, fileData: data, mimeType: "image/png")
+        let name = "Image_\(Int(Date().timeIntervalSinceReferenceDate)).jpeg"
+        let file = FileToUpload(fileName: name, fileData: data, mimeType: "image/jpeg")
 
         if Self.isValidateSize(of: file) {
             presenter.filePicker(self, didSelecte: file)
@@ -93,10 +93,6 @@ extension FilePickerController {
     }
 
     private func didSelect(_ url: URL) {
-//        guard url.startAccessingSecurityScopedResource() else { return }
-//
-//        defer { url.stopAccessingSecurityScopedResource() }
-
         var error: NSError?
 
         NSFileCoordinator().coordinate(readingItemAt: url, error: &error) { (url) in

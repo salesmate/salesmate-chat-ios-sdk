@@ -317,14 +317,14 @@ extension ChatVC {
 extension ChatVC: FilePickerControllerPresenter {
 
     func filePicker(_ picker: FilePickerController, didSelecte file: FileToUpload) {
-        controller.send(file: file)
+        controller.sendMessage(with: file)
     }
 }
 
 extension ChatVC: MessageComposeViewDelegate {
 
     func didTapSend(with text: String) {
-        controller.send(text)
+        controller.sendMessage(with: text)
 
         messageInputBar.clear()
     }

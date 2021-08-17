@@ -9,7 +9,8 @@ import UIKit
 
 class ChatImageView: UIView {
 
-    private let imageView: UIImageView = UIImageView(frame: .zero)
+    private let imageView = UIImageView(frame: .zero)
+    private let loading = UIActivityIndicatorView(frame: .zero)
 
     var viewModel: ChatAttachmentViewModel? {
         didSet { display() }
@@ -35,24 +36,49 @@ class ChatImageView: UIView {
         layer.cornerRadius = 15
 
         imageView.addAndFill(in: self, with: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
+
+        let screenSize = UIScreen.main.bounds.size
+        let width = screenSize.width * 0.80 - 30
+        let height = width / 2
+
+        imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = 5
+        imageView.backgroundColor = .white
+        imageView.contentMode = .scaleAspectFit
+        imageView.widthAnchor.constraint(equalToConstant: width).isActive = true
+        imageView.heightAnchor.constraint(equalToConstant: height).isActive = true
+
+        loading.hidesWhenStopped = true
+        loading.addAndFill(in: self)
     }
 
     private func display() {
-        if let link = viewModel?.url {
-            imageView.loadImage(with: link)
+        loading.startAnimating()
+
+        if let data = viewModel?.data, let image = UIImage(data: data) {
+            imageView.image = image
+        } else if let link = viewModel?.url {
+            imageView.loadImage(with: link) {
+                self.loading.stopAnimating()
+            }
+        } else {
+            loading.stopAnimating()
         }
     }
 
-    func setAlignment(alignment: Alignment) {
+    func setAlignment(alignment: CellAlignment) {
         switch alignment {
         case .left:
             layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner, .layerMaxXMaxYCorner]
+            imageView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner, .layerMaxXMaxYCorner]
         case .right:
             layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMinYCorner]
+            imageView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMinYCorner]
         }
     }
 
     func setBackgroundColor(code: String) {
         backgroundColor = UIColor(hex: code)
+        loading.color = backgroundColor
     }
 }

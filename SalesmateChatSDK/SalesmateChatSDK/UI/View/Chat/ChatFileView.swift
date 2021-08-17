@@ -71,7 +71,7 @@ class ChatFileView: UIView {
         lblName.text = viewModel?.filename
     }
 
-    func setAlignment(alignment: Alignment) {
+    func setAlignment(alignment: CellAlignment) {
         switch alignment {
         case .left:
             layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner, .layerMaxXMaxYCorner]

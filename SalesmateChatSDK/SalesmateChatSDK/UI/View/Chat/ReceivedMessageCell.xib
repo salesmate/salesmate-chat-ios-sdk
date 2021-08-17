@@ -45,19 +45,13 @@
                                         <rect key="frame" x="0.0" y="0.0" width="291" height="34"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="c1Y-hf-EFl">
-                                                <rect key="frame" x="0.0" y="0.0" width="50" height="15.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="50" height="29"/>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="yEc-uU-RqD">
-                                                <rect key="frame" x="0.0" y="20.5" width="64" height="13.5"/>
+                                                <rect key="frame" x="0.0" y="34" width="29.5" height="0.0"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="750" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZGf-Bw-K0x">
-                                                        <rect key="frame" x="0.0" y="0.0" width="29.5" height="13.5"/>
-                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="11"/>
-                                                        <color key="textColor" red="0.52156862749999999" green="0.56078431370000004" blue="0.65098039220000004" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="750" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rRj-Wu-CjB">
-                                                        <rect key="frame" x="34.5" y="0.0" width="29.5" height="13.5"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="29.5" height="0.0"/>
                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="11"/>
                                                         <color key="textColor" red="0.52156862749999999" green="0.56078431370000004" blue="0.65098039220000004" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -93,8 +87,7 @@
                 <constraint firstItem="FJA-qb-AzT" firstAttribute="width" relation="lessThanOrEqual" secondItem="79a-IC-7Iv" secondAttribute="width" multiplier="0.8" id="TV4-EF-qJs"/>
             </constraints>
             <connections>
-                <outlet property="lblSeen" destination="rRj-Wu-CjB" id="4W3-0T-VlW"/>
-                <outlet property="lblTime" destination="ZGf-Bw-K0x" id="nR8-F9-tsk"/>
+                <outlet property="lblBottomText" destination="ZGf-Bw-K0x" id="S9l-Wi-guf"/>
                 <outlet property="profileView" destination="Oc3-j6-GGo" id="xZu-Yv-N8P"/>
                 <outlet property="viewChatContent" destination="c1Y-hf-EFl" id="2qw-Ym-p7T"/>
             </connections>
