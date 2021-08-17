@@ -10,11 +10,30 @@ import UIKit
 
 class Configeration {
 
+    enum AskEmailSetting: String {
+        case outsideOfficeHours = "only_outside_of_office_hours"
+        case always = "always"
+        case never = "never"
+    }
+
     struct Availability {
+        enum WeekDayName: String, Codable {
+            case monday
+            case tuesday
+            case wednesday
+            case thursday
+            case friday
+            case saturday
+            case sunday
+
+            case weekdays
+            case weekends
+        }
+
         struct OfficeHour {
             let endTime: String
             let startTime: String
-            let weekName: String
+            let weekName: WeekDayName
         }
 
         let replyTime: String
@@ -62,10 +81,12 @@ class Configeration {
     var unread: [ConversationID]?
     var contact: Contact?
     var rating: [Rating]?
+    var askEmail: AskEmailSetting?
 
-    let uniqueID: String = "7caf763b-f7eb-4c54-8a99-8dcc0c120ee4"// UIDevice.current.identifierForVendor?.uuidString
+    /// We are assuming that we will alwayes get identifierForVendor because the chances of that is very low.
+    let uniqueID: String = UIDevice.current.identifierForVendor?.uuidString ?? ""
     var contactID: IntegerID? { self.contact?.id }
-    var verifiedID: String? = "102"
+    var verifiedID: String?
 
     var socketAuthToken: String?
     var pseudoName: String?
@@ -110,6 +131,10 @@ class Configeration {
 
         if json["emojiMapping"].exists() {
             self.rating = json["emojiMapping"].arrayValue.compactMap { Rating(from: $0) }
+        }
+
+        if let emailFrequency = json["upfrontEmailCollection"]["frequency"].string {
+            self.askEmail = AskEmailSetting(rawValue: emailFrequency)
         }
     }
 }
@@ -171,4 +196,13 @@ extension Configeration.Rating: Codable {
         case label
         case unicode
     }
+}
+
+extension Configeration.Availability.WeekDayName {
+
+    static let allWeekDays: [Self] = [.monday, .tuesday, .wednesday, .thursday, .friday]
+    static let allWeekEndsDays: [Self] = [.saturday, .sunday]
+
+    var isWeekDay: Bool { Self.allWeekDays.contains(self) }
+    var isWeekendDay: Bool { Self.allWeekEndsDays.contains(self) }
 }

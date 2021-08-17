@@ -53,16 +53,18 @@ class ChatImageView: UIView {
     }
 
     private func display() {
-        loading.startAnimating()
+        if self.loading.isAnimating {
+            self.loading.stopAnimating()
+        }
 
         if let data = viewModel?.data, let image = UIImage(data: data) {
             imageView.image = image
         } else if let link = viewModel?.url {
+            loading.startAnimating()
+
             imageView.loadImage(with: link) {
                 self.loading.stopAnimating()
             }
-        } else {
-            loading.stopAnimating()
         }
     }
 

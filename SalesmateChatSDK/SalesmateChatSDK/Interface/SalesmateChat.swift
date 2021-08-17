@@ -51,6 +51,13 @@ public class SalesmateChat {
         shared?.presentMessenger(from: viewController)
     }
 
+    public static func setVerifiedID(_ ID: String) {
+        shared?.config.verifiedID = ID
+    }
+}
+
+extension SalesmateChat {
+
     private func updateCustomization() {
         isLoading = true
 
@@ -87,6 +94,10 @@ public class SalesmateChat {
         rootNC.setViewControllers([VC], animated: true)
         rootNC.navigationBar.isHidden = true
 
+        if UIDevice.current.isIPad {
+            rootNC.modalPresentationStyle = .fullScreen
+        }
+
         viewController?.present(rootNC, animated: false, completion: nil)
     }
 
@@ -97,6 +108,10 @@ public class SalesmateChat {
 
         rootNC.setViewControllers([VC], animated: true)
         rootNC.navigationBar.isHidden = true
+
+        if UIDevice.current.isIPad {
+            rootNC.modalPresentationStyle = .fullScreen
+        }
 
         viewController?.present(rootNC, animated: true, completion: nil)
     }

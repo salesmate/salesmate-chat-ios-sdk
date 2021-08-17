@@ -278,3 +278,8 @@ public extension UITableView {
         scrollToRow(at: indexPath, at: scrollPosition, animated: animated)
     }
 }
+
+extension UIDevice {
+    var isIPhone: Bool { userInterfaceIdiom == .phone }
+    var isIPad: Bool { userInterfaceIdiom == .pad }
+}
