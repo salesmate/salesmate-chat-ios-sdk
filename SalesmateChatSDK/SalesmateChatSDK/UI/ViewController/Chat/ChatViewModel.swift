@@ -39,6 +39,7 @@ class ChatViewModel {
     var topViewModel: ChatTopViewModel
     let actionColorCode: String
     let isNew: Bool
+    let allowAttachment: Bool
 
     private(set) var messageViewModels: [MessageViewModelType] = []
 
@@ -53,6 +54,7 @@ class ChatViewModel {
         self.config = config
         self.client = client
         self.actionColorCode = config.look?.actionColor ?? ""
+        self.allowAttachment = config.security?.canUploadAttachment ?? false
 
         switch chatOf {
         case .new:
@@ -74,7 +76,7 @@ class ChatViewModel {
     }
 
     func getController() -> ChatController {
-        ChatController(viewModel: self, client: client, conversationID: conversationID)
+        ChatController(viewModel: self, config: config, client: client, conversationID: conversationID)
     }
 
     func update(_ conversation: Conversation) {

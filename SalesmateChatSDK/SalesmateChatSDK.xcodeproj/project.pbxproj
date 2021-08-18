@@ -60,6 +60,7 @@
 		9B85939926AFE4BF00D035AD /* Configeration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B85939826AFE4BF00D035AD /* Configeration.swift */; };
 		9B85939B26AFE96200D035AD /* Entities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B85939A26AFE96200D035AD /* Entities.swift */; };
 		9B86734C26B83575002C7959 /* MessageComposeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B86734B26B83575002C7959 /* MessageComposeView.swift */; };
+		9BAB61B726CCCB89001B5B8C /* DataPersistency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BAB61B626CCCB89001B5B8C /* DataPersistency.swift */; };
 		9BAD6E6E26B7F8380072EC83 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BAD6E6D26B7F8380072EC83 /* ChatViewModel.swift */; };
 		9BAD6E7026B7F84B0072EC83 /* ChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BAD6E6F26B7F84B0072EC83 /* ChatVC.swift */; };
 		9BAD6E7226B7F9EC0072EC83 /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BAD6E7126B7F9EC0072EC83 /* Chat.storyboard */; };
@@ -202,6 +203,7 @@
 		9B85939826AFE4BF00D035AD /* Configeration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configeration.swift; sourceTree = "<group>"; };
 		9B85939A26AFE96200D035AD /* Entities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entities.swift; sourceTree = "<group>"; };
 		9B86734B26B83575002C7959 /* MessageComposeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageComposeView.swift; sourceTree = "<group>"; };
+		9BAB61B626CCCB89001B5B8C /* DataPersistency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataPersistency.swift; sourceTree = "<group>"; };
 		9BAD6E6D26B7F8380072EC83 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
 		9BAD6E6F26B7F84B0072EC83 /* ChatVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatVC.swift; sourceTree = "<group>"; };
 		9BAD6E7126B7F9EC0072EC83 /* Chat.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Chat.storyboard; sourceTree = "<group>"; };
@@ -316,6 +318,7 @@
 			isa = PBXGroup;
 			children = (
 				9B3A9B8826A701E600EB7C10 /* MIME.swift */,
+				9BAB61B626CCCB89001B5B8C /* DataPersistency.swift */,
 				9B3A9B8926A701E600EB7C10 /* Extensions.swift */,
 				9B3A9B8A26A701E600EB7C10 /* Miscellaneous.swift */,
 				9B3A9B8B26A701E600EB7C10 /* DateTime.swift */,
@@ -768,6 +771,7 @@
 				9B83EAB826BD132B00C269DB /* ChatFileView.swift in Sources */,
 				9BD7752D26B27BEE002BA2AD /* XIBView.swift in Sources */,
 				9B3A9B7D26A701D200EB7C10 /* Block.swift in Sources */,
+				9BAB61B726CCCB89001B5B8C /* DataPersistency.swift in Sources */,
 				9B65E01226A58C64001F3928 /* APIDataTypes.swift in Sources */,
 				9BD7753926B2D1B2002BA2AD /* RecentConversationsViewModel.swift in Sources */,
 				9B2B4F7726B1B126008AA860 /* UIKitExtensions.swift in Sources */,
@@ -926,7 +930,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.salesmateapp.www.SalesmateChatSDK;
+				PRODUCT_BUNDLE_IDENTIFIER = com.salesmate.chat;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
@@ -1266,7 +1270,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.salesmateapp.www.SalesmateChatSDK;
+				PRODUCT_BUNDLE_IDENTIFIER = com.salesmate.chat;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
@@ -1295,7 +1299,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.salesmateapp.www.SalesmateChatSDK;
+				PRODUCT_BUNDLE_IDENTIFIER = com.salesmate.chat;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;

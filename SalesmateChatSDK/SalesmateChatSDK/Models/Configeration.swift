@@ -70,18 +70,24 @@ class Configeration {
         let unicode: String
     }
 
+    struct Security {
+        let canUploadAttachment: Bool
+    }
+
     let identity: Settings
     let environment: Environment
+    let local: Storage
 
-    var availability: Availability?
-    var look: LookAndFeel?
-    var welcome: Welcome?
-    var workspace: Workspace?
-    var users: [User]?
-    var unread: [ConversationID]?
-    var contact: Contact?
-    var rating: [Rating]?
-    var askEmail: AskEmailSetting?
+    private(set) var availability: Availability?
+    private(set) var look: LookAndFeel?
+    private(set) var welcome: Welcome?
+    private(set) var workspace: Workspace?
+    private(set) var users: [User]?
+    private(set) var unread: [ConversationID]?
+    private(set) var contact: Contact?
+    private(set) var rating: [Rating]?
+    private(set) var askEmail: AskEmailSetting?
+    private(set) var security: Security?
 
     /// We are assuming that we will alwayes get identifierForVendor because the chances of that is very low.
     let uniqueID: String = UIDevice.current.identifierForVendor?.uuidString ?? ""
@@ -92,9 +98,23 @@ class Configeration {
     var pseudoName: String?
     var channels: [String]?
 
-    init(connection: Settings, environment: Environment) {
+    init(connection: Settings, environment: Environment, local: Storage = UserDefaultStorage()) {
         self.identity = connection
         self.environment = environment
+        self.local = local
+
+        if let pseudoName = local.pseudoName {
+            self.pseudoName = pseudoName
+        }
+
+        if let socketAuthToken = local.socketAuthToken {
+            self.socketAuthToken = socketAuthToken
+        }
+    }
+
+    func saveRequireDataLocally() {
+        local.pseudoName = pseudoName
+        local.socketAuthToken = socketAuthToken
     }
 
     func update(with detail: JSONObject) {
@@ -135,6 +155,10 @@ class Configeration {
 
         if let emailFrequency = json["upfrontEmailCollection"]["frequency"].string {
             self.askEmail = AskEmailSetting(rawValue: emailFrequency)
+        }
+
+        if json["securitySettings"].exists() {
+            self.security = Security(from: json["securitySettings"])
         }
     }
 }
@@ -195,6 +219,13 @@ extension Configeration.Rating: Codable {
         case id
         case label
         case unicode
+    }
+}
+
+extension Configeration.Security: Codable {
+
+    enum CodingKeys: String, CodingKey {
+        case canUploadAttachment = "can_upload_attachment"
     }
 }
 

@@ -34,8 +34,8 @@ extension ChatAPIClient: ChatAPI {
         }
     }
 
-    func getAuthToken(completion: @escaping (Result<(pseudoName: String, authToken: String, channels: [String]), ChatError>) -> Void) {
-        let request = GetSCAuthTokenRequest()
+    func getAuthToken(with socketAuthToken: String?, pseudoName: String?, completion: @escaping (Result<(pseudoName: String, authToken: String, channels: [String]), ChatError>) -> Void) {
+        let request = GetSCAuthTokenRequest(socketAuthToken: socketAuthToken, pseudoName: pseudoName)
 
         loader.load(request: request) { (result) in
             switch result {

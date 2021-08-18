@@ -143,6 +143,7 @@ class ChatVC: UIViewController {
         }
 
         messageInputBar.delegate = self
+        messageInputBar.showAttachmentOption(viewModel.allowAttachment)
     }
 
     private func prepareTableView() {
@@ -150,6 +151,7 @@ class ChatVC: UIViewController {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = UITableView.automaticDimension
         tableView.tableFooterView = UIView()
+
         tableView.register(nibWithCellClass: SendMessageCell.self)
         tableView.register(nibWithCellClass: ReceivedMessageCell.self)
     }
@@ -239,16 +241,27 @@ extension ChatVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let messageViewModel = rows[indexPath.row]
 
-        let cell: MessageCell
-
         switch messageViewModel.alignment {
-        case .left:
-            cell = tableView.dequeueReusableCell(withClass: ReceivedMessageCell.self, for: indexPath)
-        case .right:
-            cell = tableView.dequeueReusableCell(withClass: SendMessageCell.self, for: indexPath)
+        case .left: return getReceivedMessageCell(for: messageViewModel, for: indexPath)
+        case .right: return getSendMessageCell(for: messageViewModel, for: indexPath)
         }
+    }
 
-        cell.viewModel = messageViewModel
+    private func getReceivedMessageCell(for viewModel: MessageViewModelType, for indexPath: IndexPath) -> MessageCell {
+        let cell = tableView.dequeueReusableCell(withClass: ReceivedMessageCell.self, for: indexPath)
+
+        cell.viewModel = viewModel
+
+        return cell
+    }
+
+    private func getSendMessageCell(for viewModel: MessageViewModelType, for indexPath: IndexPath) -> MessageCell {
+        let cell = tableView.dequeueReusableCell(withClass: SendMessageCell.self, for: indexPath)
+
+        cell.viewModel = viewModel
+        cell.shouldRetry = { messageViewModel in
+            self.controller.retryMessage(of: messageViewModel)
+        }
 
         return cell
     }

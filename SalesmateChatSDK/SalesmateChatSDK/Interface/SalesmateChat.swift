@@ -65,7 +65,8 @@ extension SalesmateChat {
             switch result {
             case .success(let customization):
                 self.config.update(with: customization)
-            case .failure: break
+            case .failure:
+                break
             }
             self.isLoading = false
             runOnMain { self.showHomeVC() }
@@ -87,8 +88,6 @@ extension SalesmateChat {
     }
 
     private func showStartVC(from viewController: UIViewController? = nil) {
-        if viewController == nil, rootNC.viewIfLoaded?.window == nil { return }
-
         let VC = StartVC.create(with: StartViewModel())
 
         rootNC.setViewControllers([VC], animated: true)
@@ -102,8 +101,6 @@ extension SalesmateChat {
     }
 
     private func showHomeVC(from viewController: UIViewController? = nil) {
-        if viewController == nil, rootNC.viewIfLoaded?.window == nil { return }
-
         let VC = HomeVC.create(with: HomeViewModel(config: config, client: client))
 
         rootNC.setViewControllers([VC], animated: true)

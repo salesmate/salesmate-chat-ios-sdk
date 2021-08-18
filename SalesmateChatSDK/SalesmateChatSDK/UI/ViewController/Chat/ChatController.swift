@@ -11,15 +11,17 @@ class ChatController {
 
     private weak var viewModel: ChatViewModel?
 
+    private let config: Configeration
     private let client: ChatClient
     private let conversationID: ConversationID
     private var sendingMessages: Set<MessageToSend> = []
 
     private(set) var page = Page(size: 50)
 
-    init(viewModel: ChatViewModel, client: ChatClient, conversationID: ConversationID) {
+    init(viewModel: ChatViewModel, config: Configeration, client: ChatClient, conversationID: ConversationID) {
         self.viewModel = viewModel
         self.client = client
+        self.config = config
         self.conversationID = conversationID
 
         prepareClient()
@@ -38,15 +40,10 @@ class ChatController {
     }
 
     func getMessages() {
-        func updateMesages() {
-            guard let messages = client.messages[conversationID] else { return }
-            viewModel?.update(messages, sendingMessages: sendingMessages, for: .pageLoading)
-        }
-
         client.getMessages(of: conversationID, at: page) { result in
             switch result {
             case .success:
-                updateMesages()
+                self.updateMesages(for: .pageLoading)
                 self.page.next()
             case .failure:
                 break
@@ -55,51 +52,62 @@ class ChatController {
     }
 
     func sendMessage(with text: String) {
-        func updateMesages() {
-            guard let messages = client.messages[conversationID] else { return }
-            viewModel?.update(messages, sendingMessages: sendingMessages, for: .sending)
-        }
-
-        let message = MessageToSend(type: .comment, contents: [BlockToSend(text: text)])
+        let message = MessageToSend(type: .comment,
+                                    contents: [BlockToSend(text: text)],
+                                    conversationName: config.pseudoName ?? "")
 
         sendingMessages.update(with: message)
 
-        updateMesages()
+        updateMesages(for: .sending)
 
         send(message)
     }
 
     func sendMessage(with file: FileToUpload) {
-        func updateMesages() {
-            guard let messages = client.messages[conversationID] else { return }
-            viewModel?.update(messages, sendingMessages: sendingMessages, for: .sending)
-        }
-
-        let message = MessageToSend(type: .comment, contents: [], file: file)
+        let message = MessageToSend(type: .comment,
+                                    contents: [],
+                                    conversationName: config.pseudoName ?? "",
+                                    file: file)
 
         sendingMessages.update(with: message)
 
-        updateMesages()
+        updateMesages(for: .sending)
 
         uploadFile(for: message)
+    }
+
+    func retryMessage(of viewModel: SendingMessageViewModel) {
+        guard var message = sendingMessages.first(where: { $0.id == viewModel.id }) else { return }
+
+        message.status = .sending
+
+        sendingMessages.update(with: message)
+
+        updateMesages(for: .sending)
+
+        if message.fileToUpload == nil {
+            send(message)
+        } else {
+            uploadFile(for: message)
+        }
     }
 }
 
 extension ChatController {
 
-    private func prepareClient() {
-        func updateNewMesages() {
-            guard let messages = client.messages[conversationID] else { return }
-            viewModel?.update(messages, sendingMessages: sendingMessages, for: .newMessage)
-        }
+    private func updateMesages(for event: ChatViewModel.MessageUpdateEvent) {
+        guard let messages = client.messages[conversationID] else { return }
+        viewModel?.update(messages, sendingMessages: sendingMessages, for: event)
+    }
 
+    private func prepareClient() {
         client.clearMessages()
 
         client.register(observer: self, for: [.messageReceived], of: conversationID) { event in
             switch event {
             case .messageReceived(_, let messages):
                 guard let messages = messages, !messages.isEmpty else { return }
-                updateNewMesages()
+                self.updateMesages(for: .newMessage)
             default:
                 print("This event(\(event)) is not observed by SalesmateChatClient")
             }
@@ -114,13 +122,17 @@ extension ChatController {
         client.upload(file: file) { result in
             switch result {
             case .success(let uploadedFile):
+                message.fileToUpload = nil
                 message.uploadedFile = uploadedFile
                 message.contents.append(BlockToSend(from: uploadedFile))
+
                 self.sendingMessages.update(with: message)
                 self.send(message)
             case .failure:
                 message.status = .fail
+
                 self.sendingMessages.update(with: message)
+                self.updateMesages(for: .sending)
             }
         } progress: { progress in
             print("File Upload Progress: \(progress)")
@@ -128,11 +140,6 @@ extension ChatController {
     }
 
     private func send(_ message: MessageToSend) {
-        func updateMesages() {
-            guard let messages = client.messages[conversationID] else { return }
-            viewModel?.update(messages, sendingMessages: sendingMessages, for: .sending)
-        }
-
         var message = message
 
         client.send(message: message, to: conversationID) { result in
@@ -142,7 +149,7 @@ extension ChatController {
             }
 
             self.sendingMessages.update(with: message)
-            updateMesages()
+            self.updateMesages(for: .sending)
         }
     }
 }

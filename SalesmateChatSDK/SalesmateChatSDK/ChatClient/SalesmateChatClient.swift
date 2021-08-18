@@ -56,22 +56,19 @@ extension SalesmateChatClient: ChatClient {
             }
         }
 
-        if config.socketAuthToken == nil {
-            chatAPI.getAuthToken { result in
-                switch result {
-                case .success((let pseudoName, let authToken, let channels)):
-                    self.config.pseudoName = pseudoName
-                    self.config.socketAuthToken = authToken
-                    self.config.channels = channels
+        chatAPI.getAuthToken(with: config.socketAuthToken, pseudoName: config.pseudoName) { result in
+            switch result {
+            case .success((let pseudoName, let authToken, let channels)):
+                self.config.pseudoName = pseudoName
+                self.config.socketAuthToken = authToken
+                self.config.channels = channels
+                self.config.saveRequireDataLocally()
 
-                    whenAuthTokenAvailable()
-                case .failure(let error):
-                    print(error)
-                    completion(.failure(ChatError.unknown))
-                }
+                whenAuthTokenAvailable()
+            case .failure(let error):
+                print(error)
+                completion(.failure(ChatError.unknown))
             }
-        } else {
-            whenAuthTokenAvailable()
         }
     }
 }

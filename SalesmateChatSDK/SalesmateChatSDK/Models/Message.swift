@@ -22,6 +22,7 @@ struct MessageToSend: Codable, Hashable {
         case contents = "blocks"
         case isBot = "is_bot"
         case isInbound = "is_inbound"
+        case conversationName = "conversation_name"
     }
 
     enum SendStatus {
@@ -35,6 +36,7 @@ struct MessageToSend: Codable, Hashable {
     var contents: [BlockToSend]
     let isBot: Bool
     let isInbound: Bool
+    let conversationName: String
 
     var fileToUpload: FileToUpload?
     var uploadedFile: UploadedFile?
@@ -42,13 +44,14 @@ struct MessageToSend: Codable, Hashable {
     let createdDate: Date = Date()
     var status: SendStatus = .sending
 
-    init(type: MessageType, contents: [BlockToSend], file: FileToUpload? = nil, isBot: Bool = false, isInbound: Bool = true) {
+    init(type: MessageType, contents: [BlockToSend], conversationName: String, file: FileToUpload? = nil, isBot: Bool = false, isInbound: Bool = true) {
         self.id = UUID.new
         self.type = type
         self.contents = contents
         self.fileToUpload = file
         self.isBot = isBot
         self.isInbound = isInbound
+        self.conversationName = conversationName
     }
 
     func hash(into hasher: inout Hasher) {

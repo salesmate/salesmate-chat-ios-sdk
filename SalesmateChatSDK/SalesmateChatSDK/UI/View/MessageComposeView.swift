@@ -33,6 +33,10 @@ class MessageComposeView: UIView {
         txtvMessage.text = ""
     }
 
+    func showAttachmentOption(_ show: Bool) {
+        btnAttachment.isHidden = !show
+    }
+
     // MARK: - Override
     override func awakeFromNib() {
         super.awakeFromNib()

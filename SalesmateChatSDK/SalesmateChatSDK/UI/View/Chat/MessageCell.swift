@@ -119,23 +119,70 @@ class MessageCell: UITableViewCell {
 
 class SendMessageCell: MessageCell {
 
+    // MARK: - Constants
     static let nib: UINib = UINib(nibName: "SendMessageCell", bundle: .salesmate)
     static let ID = "SendMessageCell"
 
+    // MARK: - Outlets
+    @IBOutlet private weak var retryView: UIView!
+    @IBOutlet private weak var btnRetry: UIButton!
+
+    // MARK: - Property
+    var shouldRetry: ((SendingMessageViewModel) -> Void)?
+
+    // MARK: - Override
     override func awakeFromNib() {
         super.awakeFromNib()
 
         viewChatContent.alignment = .trailing
+
+        setRetryTitle()
+    }
+
+    // MARK: - View
+    private func setRetryTitle() {
+        let retryTitle = "Retry"
+        let titleRange = NSRange(location: 0, length: retryTitle.count)
+        let attributedTitle = NSMutableAttributedString(string: retryTitle)
+
+        attributedTitle.addAttribute(NSAttributedString.Key.underlineStyle,
+                                     value: NSUnderlineStyle.single.rawValue,
+                                     range: titleRange)
+
+        btnRetry.setAttributedTitle(attributedTitle, for: .normal)
+    }
+
+    // MARK: - View
+    override func display() {
+        super.display()
+
+        guard let viewModel = viewModel else { return }
+
+        if case .retry = viewModel.bottom {
+            retryView.isHidden = false
+        } else {
+            retryView.isHidden = true
+        }
+    }
+
+    // MARK: - Event
+    @IBAction private func btnRetryPressed(_ sender: UIButton) {
+        guard let viewModel = viewModel as? SendingMessageViewModel else { return }
+
+        shouldRetry?(viewModel)
     }
 }
 
 class ReceivedMessageCell: MessageCell {
 
-    @IBOutlet private weak var profileView: CirculerProfileView!
-
+    // MARK: - Constants
     static let nib: UINib = UINib(nibName: "ReceivedMessageCell", bundle: .salesmate)
     static let ID = "ReceivedMessageCell"
 
+    // MARK: - Outlets
+    @IBOutlet private weak var profileView: CirculerProfileView!
+
+    // MARK: - Override
     override func awakeFromNib() {
         super.awakeFromNib()
 
@@ -152,6 +199,7 @@ class ReceivedMessageCell: MessageCell {
         }
     }
 
+    // MARK: - View
     private func updateProfileView() {
         guard let viewModel = viewModel else { return }
 

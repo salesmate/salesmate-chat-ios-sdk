@@ -47,10 +47,10 @@ struct GetSCAuthTokenRequest: HTTPRequest {
     var headers: HTTPHeaders?
     var body: HTTPBody?
 
-    init(common: CAC = common) {
+    init(socketAuthToken: String?, pseudoName: String?, common: CAC = common) {
         url = URL(string: "messenger/v1/widget/generate-token", relativeTo: common.base)!
         headers = common.headers
-        body = JSONBody(["referer": common.config?.identity.tenantID ?? ""])
+        body = JSONBody(["accessToken": socketAuthToken, "pseudo_name": pseudoName])
     }
 }
 
