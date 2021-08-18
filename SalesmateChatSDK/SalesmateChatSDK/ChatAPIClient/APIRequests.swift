@@ -143,3 +143,17 @@ struct SingleFileUploadRequest: HTTPRequest {
         body = MultipartSingleFileBody(fileName: fileName, fileData: fileData, mimeType: mimeType)
     }
 }
+
+struct ConnectEmailRequest: HTTPRequest {
+
+    var method: HTTPMethod = .post
+    var url: URL
+    var headers: HTTPHeaders?
+    var body: HTTPBody?
+
+    init(email: String, conversationID: String?, common: CAC = common) {
+        url = URL(string: "/messenger/v1/contact", relativeTo: common.base)!
+        headers = common.headers
+        body = JSONBody(["email": email, "conversation_id": conversationID])
+    }
+}

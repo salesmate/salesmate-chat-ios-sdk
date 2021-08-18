@@ -15,7 +15,7 @@ protocol MessageComposeViewDelegate: AnyObject {
 class MessageComposeView: UIView {
 
     // MARK: - Outlets
-    @IBOutlet private weak var lblPlaceholder: UIView!
+    @IBOutlet private weak var lblPlaceholder: UILabel!
     @IBOutlet private weak var txtvMessage: UITextView!
     @IBOutlet private weak var btnSend: UIButton!
     @IBOutlet private weak var btnAttachment: UIButton!
@@ -35,6 +35,14 @@ class MessageComposeView: UIView {
 
     func showAttachmentOption(_ show: Bool) {
         btnAttachment.isHidden = !show
+    }
+
+    func enableEmailMode(_ enable: Bool) {
+        if enable {
+            lblPlaceholder.text = "Enter your email address"
+        } else {
+            lblPlaceholder.text = "Start typing..."
+        }
     }
 
     // MARK: - Override

@@ -163,6 +163,20 @@ class Configeration {
     }
 }
 
+extension Configeration {
+
+    func isEmailAddressMandatory() -> Bool {
+        guard contact?.email == nil else { return false }
+        guard let askEmail = askEmail else { return false }
+
+        switch askEmail {
+        case .outsideOfficeHours: return true
+        case .always: return true
+        case .never: return false
+        }
+    }
+}
+
 extension Configeration.Availability: Codable {
 
     enum CodingKeys: String, CodingKey {

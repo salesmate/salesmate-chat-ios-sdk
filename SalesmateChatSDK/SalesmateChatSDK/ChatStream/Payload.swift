@@ -41,7 +41,6 @@ struct Payload {
         case newMessage = "NEW_MESSAGE"
         case availableStatusUpdate = "USER_AVAILABILITY_STATUS_UPDATED"
         case conversationHasRead = "CONVERSATION_HAS_READ"
-        case assign = "CHANGE_ASSIGNEE"
         case conversationStatusUpdate = "CONVERSATION_STATUS_UPDATE"
         case messageDeleted = "MESSAGE_DELETED"
     }

@@ -144,6 +144,7 @@ class ChatVC: UIViewController {
 
         messageInputBar.delegate = self
         messageInputBar.showAttachmentOption(viewModel.allowAttachment)
+        messageInputBar.enableEmailMode(viewModel.isEmailAddressMandatory)
     }
 
     private func prepareTableView() {
@@ -194,6 +195,8 @@ class ChatVC: UIViewController {
                 self.tableView.safeScrollToRow(at: IndexPath(row: newItemCount - 1, section: 0), at: .top, animated: true)
             }
         }
+
+        messageInputBar.enableEmailMode(viewModel.isEmailAddressMandatory)
     }
 
     private func displayNewMessages() {
@@ -225,6 +228,8 @@ class ChatVC: UIViewController {
                 }
             }
         }
+
+        messageInputBar.enableEmailMode(viewModel.isEmailAddressMandatory)
     }
 
     @objc private func loadMoreMessages(_ sender: Any) {
@@ -337,9 +342,17 @@ extension ChatVC: FilePickerControllerPresenter {
 extension ChatVC: MessageComposeViewDelegate {
 
     func didTapSend(with text: String) {
-        controller.sendMessage(with: text)
-
-        messageInputBar.clear()
+        if viewModel.isEmailAddressMandatory {
+            if let email = EmailAddress(rawValue: text) {
+                controller.sendMessage(with: email.rawValue)
+                messageInputBar.clear()
+            } else {
+                showAlert(title: "Email", message: "That email doesn't look quite right.")
+            }
+        } else {
+            controller.sendMessage(with: text)
+            messageInputBar.clear()
+        }
     }
 
     func didTapAttachment() {

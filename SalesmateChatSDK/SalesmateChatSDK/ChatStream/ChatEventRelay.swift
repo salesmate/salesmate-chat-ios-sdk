@@ -27,7 +27,6 @@ func == (lhs: ChatEventToObserve, rhs: ChatEvent) -> Bool {
     case (.disconnected, .disconnected): return true
     case (.conversationUpdated, .conversationUpdated): return true
     case (.readStatusChange, .readStatusChange): return true
-    case (.assign, .assign): return true
     case (.messageReceived, .messageReceived): return true
     case (.messageDeleted, .messageDeleted): return true
     case (.typing, .typing): return true

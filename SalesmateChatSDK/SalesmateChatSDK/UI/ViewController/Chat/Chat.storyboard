@@ -47,20 +47,20 @@
                                                                 <rect key="frame" x="45" y="0.0" width="319" height="45"/>
                                                                 <subviews>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="85I-74-Fk2" customClass="AvailableUsersView" customModule="SalesmateChatSDK" customModuleProvider="target">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="154" height="45"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="273.5" height="45"/>
                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     </view>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="mFa-MH-xPf">
-                                                                        <rect key="frame" x="164" y="0.0" width="155" height="45"/>
+                                                                        <rect key="frame" x="283.5" y="0.0" width="35.5" height="45"/>
                                                                         <subviews>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your conversations" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="65x-mB-7WT">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="155" height="21.5"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="35.5" height="21.5"/>
                                                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <nil key="highlightedColor"/>
                                                                             </label>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VPZ-V5-MRb">
-                                                                                <rect key="frame" x="0.0" y="21.5" width="155" height="23.5"/>
+                                                                                <rect key="frame" x="0.0" y="21.5" width="35.5" height="23.5"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <nil key="highlightedColor"/>

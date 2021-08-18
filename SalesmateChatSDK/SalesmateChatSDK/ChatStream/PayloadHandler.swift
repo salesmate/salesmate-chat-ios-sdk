@@ -28,8 +28,6 @@ enum PayloadHandler {
                     return handleUserAvailabilityStatusUpdate(event: innerData)
                 case .conversationHasRead:
                     return handleConversationHasRead(event: innerData)
-                case .assign:
-                    return handleAssign(event: innerData)
                 case .conversationStatusUpdate:
                     return handleConversationStatusUpdate(event: innerData)
                 case .messageDeleted:
@@ -70,13 +68,6 @@ enum PayloadHandler {
         guard let userHasRead = data["userHasRead"].bool, userHasRead else { return nil }
 
         return .readStatusChange(conversationId)
-    }
-
-    static private func handleAssign(event data: JSON) -> ChatEvent? {
-        guard let assignObject = data.object as? JSONObject else { return nil }
-        guard let assign = Assign(from: assignObject) else { return nil }
-
-        return .assign(assign)
     }
 
     static private func handleConversationStatusUpdate(event data: JSON) -> ChatEvent? {

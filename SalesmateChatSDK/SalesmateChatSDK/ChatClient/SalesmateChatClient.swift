@@ -71,6 +71,10 @@ extension SalesmateChatClient: ChatClient {
             }
         }
     }
+
+    func link(email: String, in conversation: ConversationID?, completion: @escaping (Result<Void, ChatError>) -> Void) {
+        chatAPI.link(email: email, in: conversation, completion: completion)
+    }
 }
 
 extension SalesmateChatClient: ConversationFetcher {

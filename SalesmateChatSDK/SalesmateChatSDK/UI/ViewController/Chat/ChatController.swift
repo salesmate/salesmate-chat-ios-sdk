@@ -91,12 +91,18 @@ class ChatController {
             uploadFile(for: message)
         }
     }
+
+    func send(_ email: EmailAddress) {
+        sendMessage(with: email.rawValue)
+
+        client.link(email: email.rawValue, in: conversationID) { _ in }
+    }
 }
 
 extension ChatController {
 
     private func updateMesages(for event: ChatViewModel.MessageUpdateEvent) {
-        guard let messages = client.messages[conversationID] else { return }
+        let messages = client.messages[conversationID] ?? []
         viewModel?.update(messages, sendingMessages: sendingMessages, for: event)
     }
 

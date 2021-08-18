@@ -37,9 +37,12 @@ class ChatViewModel {
 
     var topbar: TopBarStyle
     var topViewModel: ChatTopViewModel
+
     let actionColorCode: String
     let isNew: Bool
     let allowAttachment: Bool
+
+    var isEmailAddressMandatory: Bool { isNew && config.isEmailAddressMandatory() && messageViewModels.isEmpty }
 
     private(set) var messageViewModels: [MessageViewModelType] = []
 

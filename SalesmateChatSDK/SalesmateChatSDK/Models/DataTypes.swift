@@ -57,7 +57,6 @@ enum ChatEvent {
 
     case conversationUpdated(ConversationID?)
     case readStatusChange(ConversationID)
-    case assign(Assign)
 
     case messageReceived(ConversationID, [Message]?)
     case messageDeleted(ConversationID, MessageID, IntegerID, Date)
@@ -74,8 +73,6 @@ enum ChatEvent {
             if conversationID == ID { return true }
         case .readStatusChange(let conversationID):
             if conversationID == ID { return true }
-        case .assign(let assign):
-            if assign.conversationId == ID { return true }
         case .messageReceived(let conversationID, _):
             if conversationID == ID { return true }
         case .messageDeleted(let conversationID, _, _, _):
@@ -121,75 +118,18 @@ extension Decodable {
     }
 }
 
-struct RefUser: Codable {
-    let id: IntegerID
-    let name: String
+struct EmailAddress: RawRepresentable, Codable {
 
-    init(id: IntegerID, name: String) {
-        self.id = id
-        self.name = name
-    }
-}
+    let rawValue: String
 
-struct RefTeam: Codable {
-    let id: IntegerID
-    let name: String
+    init?(rawValue: String) {
+        let detector = try? NSDataDetector(types: NSTextCheckingResult.CheckingType.link.rawValue)
+        let range = NSRange(rawValue.startIndex..<rawValue.endIndex, in: rawValue)
+        let matches = detector?.matches(in: rawValue, options: [], range: range)
 
-    init(id: IntegerID, name: String) {
-        self.id = id
-        self.name = name
-    }
-}
+        guard let match = matches?.first, matches?.count == 1 else { return nil }
+        guard match.url?.scheme == "mailto", match.range == range else { return nil }
 
-struct Assign: Codable {
-
-    enum CodingKeys: String, CodingKey {
-        case conversationId
-        case userId
-        case referencedUsers
-        case referencedTeams
-        case message = "messageSummary"
-    }
-
-    let conversationId: ConversationID
-    let userId: IntegerID
-    let referencedUsers: [RefUser]?
-    let referencedTeams: [RefTeam]?
-    let message: String
-}
-
-struct Team: Codable {
-    let id: IntegerID
-    let name: String
-
-    init(id: IntegerID, name: String) {
-        self.id = id
-        self.name = name
-    }
-}
-
-struct Teammate: Codable {
-
-    let id: IntegerID
-    let firstName: String
-    let lastName: String
-    let imagePath: String?
-    let email: String?
-
-    var name: String {
-        (firstName + " " + lastName).trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-    }
-
-    var imageURL: URL? {
-        guard let imagePath = imagePath else { return nil }
-        return URL(string: imagePath)
-    }
-
-    init(id: IntegerID, firstName: String, lastName: String, imagePath: String? = nil, email: String? = nil) {
-        self.id = id
-        self.firstName = firstName
-        self.lastName = lastName
-        self.imagePath = imagePath
-        self.email = email
+        self.rawValue = rawValue
     }
 }
