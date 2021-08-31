@@ -40,6 +40,7 @@ class ChatVC: UIViewController {
 
     @IBOutlet private weak var tableView: UITableView!
 
+    @IBOutlet private weak var typingAnimation: ChatTypingAnimationView!
     @IBOutlet private weak var messageInputBar: MessageComposeView!
 
     // MARK: - Override
@@ -96,6 +97,11 @@ class ChatVC: UIViewController {
 
         viewModel.sendingMessagesUpdated = {
             self.displayNewMessages()
+        }
+
+        viewModel.typing = { profileViewModel in
+            self.typingAnimation.profileViewModel = profileViewModel
+            self.showTypingAnimation()
         }
     }
 
@@ -182,6 +188,7 @@ class ChatVC: UIViewController {
 
         rows = viewModel.messageViewModels
 
+        hideTypingAnimation()
         tableView.removeTableFooterView()
         refreshControl.endRefreshing()
 
@@ -207,6 +214,8 @@ class ChatVC: UIViewController {
         let rowsCount = rows.count
 
         rows = viewModel.messageViewModels
+
+        hideTypingAnimation()
 
         let newRowsCount = rows.count
         let diff = newRowsCount - rowsCount
@@ -237,10 +246,11 @@ class ChatVC: UIViewController {
     }
 }
 
+// MARK: - UITableViewDataSource
 extension ChatVC: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return rows.count
+        rows.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -335,6 +345,7 @@ extension ChatVC {
     }
 }
 
+// MARK: - FilePickerControllerPresenter
 extension ChatVC: FilePickerControllerPresenter {
 
     func filePicker(_ picker: FilePickerController, didSelecte file: FileToUpload) {
@@ -342,6 +353,7 @@ extension ChatVC: FilePickerControllerPresenter {
     }
 }
 
+// MARK: - MessageComposeViewDelegate
 extension ChatVC: MessageComposeViewDelegate {
 
     func didTapSend(with text: String) {
@@ -383,6 +395,7 @@ extension ChatVC: MessageComposeViewDelegate {
     }
 }
 
+// MARK: - Mail
 extension ChatVC {
 
     private func sendEmail(_ email: String, asMessage: Bool = true) {
@@ -392,5 +405,30 @@ extension ChatVC {
         } else {
             showAlert(title: "Email", message: "That email doesn't look quite right.")
         }
+    }
+}
+
+// MARK: - Typing Animation
+extension ChatVC {
+
+    private func showTypingAnimation() {
+        guard !typingAnimation.isAnimating else { return }
+
+        tableView.tableFooterView = typingAnimation
+
+        typingAnimation.frame.size = CGSize(width: tableView.bounds.width, height: 45)
+
+        typingAnimation.start()
+
+        tableView.scrollRectToVisible(tableView.tableFooterView!.frame, animated: true)
+
+        run(afterDelay: 5) { [weak self] in
+            self?.hideTypingAnimation()
+        }
+    }
+
+    private func hideTypingAnimation() {
+        typingAnimation.stop()
+        tableView.removeTableFooterView()
     }
 }

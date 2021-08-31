@@ -42,8 +42,6 @@ enum PayloadHandler {
                     return ID.isEmpty ? nil : ID
                 }()
 
-                guard userID == nil else { return nil }
-
                 return .typing(conversationID, userID)
             }
         default:

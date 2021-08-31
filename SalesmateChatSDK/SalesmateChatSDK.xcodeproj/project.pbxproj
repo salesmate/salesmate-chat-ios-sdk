@@ -40,6 +40,9 @@
 		9B4B633026B02D7200203172 /* SalesmateChatSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9BB117E926A1A45500E0B242 /* SalesmateChatSDK.framework */; };
 		9B4B633126B02D7200203172 /* SalesmateChatSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9BB117E926A1A45500E0B242 /* SalesmateChatSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9B59F38C26CA4B0700BE7A79 /* FilePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B59F38B26CA4B0700BE7A79 /* FilePickerController.swift */; };
+		9B5DF75F26DE58570057E276 /* RatingReviewView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B5DF75E26DE58570057E276 /* RatingReviewView.xib */; };
+		9B5DF76126DE58690057E276 /* RatingReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5DF76026DE58690057E276 /* RatingReviewView.swift */; };
+		9B5DF76326DE8D6D0057E276 /* TypingAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5DF76226DE8D6D0057E276 /* TypingAnimationView.swift */; };
 		9B65E00E26A58615001F3928 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B65E00326A58615001F3928 /* APIClient.swift */; };
 		9B65E00F26A58615001F3928 /* APIRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B65E00426A58615001F3928 /* APIRequests.swift */; };
 		9B65E01026A58615001F3928 /* APIRequestLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B65E00526A58615001F3928 /* APIRequestLoader.swift */; };
@@ -177,6 +180,9 @@
 		9B4B632926B02D6700203172 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9B4B632B26B02D6700203172 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9B59F38B26CA4B0700BE7A79 /* FilePickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilePickerController.swift; sourceTree = "<group>"; };
+		9B5DF75E26DE58570057E276 /* RatingReviewView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RatingReviewView.xib; sourceTree = "<group>"; };
+		9B5DF76026DE58690057E276 /* RatingReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingReviewView.swift; sourceTree = "<group>"; };
+		9B5DF76226DE8D6D0057E276 /* TypingAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypingAnimationView.swift; sourceTree = "<group>"; };
 		9B65DFFA26A58615001F3928 /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		9B65DFFB26A58615001F3928 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		9B65DFFC26A58615001F3928 /* RequestLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestLoader.swift; sourceTree = "<group>"; };
@@ -394,8 +400,10 @@
 				9B82163626BAA1F1002E86E6 /* ChatAttributedTextsView.swift */,
 				9B83EAB726BD132B00C269DB /* ChatFileView.swift */,
 				9B29413726C3D84B00866911 /* ChatImageView.swift */,
-				9B29413926C3D86A00866911 /* AskEmailView.swift */,
 				9B29413B26C3DB2500866911 /* AskEmailView.xib */,
+				9B29413926C3D86A00866911 /* AskEmailView.swift */,
+				9B5DF75E26DE58570057E276 /* RatingReviewView.xib */,
+				9B5DF76026DE58690057E276 /* RatingReviewView.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -533,6 +541,7 @@
 				9BD7753026B2A986002BA2AD /* CirculerProfileView.swift */,
 				9BF64A1F26BC44F0001F7FB0 /* CirculerProfileViewModels.swift */,
 				9B6A0ECA26BD7203000B68B4 /* ActivityIndicatorView.swift */,
+				9B5DF76226DE8D6D0057E276 /* TypingAnimationView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -685,6 +694,7 @@
 				9B29413C26C3DB2500866911 /* AskEmailView.xib in Resources */,
 				9BFC63CC26B128B400976141 /* Home.storyboard in Resources */,
 				9BF260DD26B3D56600D21C75 /* Conversations.storyboard in Resources */,
+				9B5DF75F26DE58570057E276 /* RatingReviewView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -773,6 +783,7 @@
 				9B3A9B7D26A701D200EB7C10 /* Block.swift in Sources */,
 				9BAB61B726CCCB89001B5B8C /* DataPersistency.swift in Sources */,
 				9B65E01226A58C64001F3928 /* APIDataTypes.swift in Sources */,
+				9B5DF76126DE58690057E276 /* RatingReviewView.swift in Sources */,
 				9BD7753926B2D1B2002BA2AD /* RecentConversationsViewModel.swift in Sources */,
 				9B2B4F7726B1B126008AA860 /* UIKitExtensions.swift in Sources */,
 				9BAD6E7026B7F84B0072EC83 /* ChatVC.swift in Sources */,
@@ -799,6 +810,7 @@
 				9B3A9B8626A701D200EB7C10 /* DataTypes.swift in Sources */,
 				9BD7753126B2A986002BA2AD /* CirculerProfileView.swift in Sources */,
 				9B4B630B26B0106000203172 /* ChatAPI.swift in Sources */,
+				9B5DF76326DE8D6D0057E276 /* TypingAnimationView.swift in Sources */,
 				9B3A9B6326A6FF4200EB7C10 /* PayloadHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

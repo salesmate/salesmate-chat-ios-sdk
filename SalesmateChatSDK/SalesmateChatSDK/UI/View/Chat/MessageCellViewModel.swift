@@ -40,6 +40,7 @@ protocol MessageViewModelType {
     var askEmail: Bool { get }
     var email: String? { get }
     var bottom: CellBottom? { get }
+    var ratingViewModel: RatingReviewViewModel? { get }
 }
 
 class ChatAttachmentViewModel {
@@ -96,13 +97,14 @@ class MessageViewModel: MessageViewModelType {
     let askEmail: Bool
     let email: String?
     let bottom: CellBottom?
+    let ratingViewModel: RatingReviewViewModel?
 
     // MARK: - Private Properties
     private let message: Message
     private let look: Configeration.LookAndFeel
 
     // MARK: - Init
-    init(message: Message, look: Configeration.LookAndFeel, users: [User]) {
+    init(message: Message, look: Configeration.LookAndFeel, users: [User], ratings: [Configeration.Rating]) {
         self.message = message
         self.look = look
 
@@ -116,6 +118,7 @@ class MessageViewModel: MessageViewModelType {
         self.isDeleted = (message.deletedDate == nil) ? .no : .yes("This message was deleted.", 50)
         self.askEmail = message.type == .emailAsked
         self.email = message.contactEmail
+        self.ratingViewModel = Self.ratingViewModel(for: message, ratings: ratings)
     }
 
     private static func alignment(for message: Message) -> CellAlignment {
@@ -162,6 +165,15 @@ class MessageViewModel: MessageViewModelType {
 
         return contents
     }
+
+    private static func ratingViewModel(for message: Message, ratings: [Configeration.Rating]) -> RatingReviewViewModel? {
+
+        if message.type == .ratingAsked {
+            return RatingReviewViewModel(config: ratings)
+        }
+
+        return nil
+    }
 }
 
 class SendingMessageViewModel: MessageViewModelType {
@@ -177,6 +189,7 @@ class SendingMessageViewModel: MessageViewModelType {
     let askEmail: Bool = false
     let email: String? = nil
     let bottom: CellBottom?
+    let ratingViewModel: RatingReviewViewModel? = nil
 
     // MARK: - Private Properties
     private let message: MessageToSend

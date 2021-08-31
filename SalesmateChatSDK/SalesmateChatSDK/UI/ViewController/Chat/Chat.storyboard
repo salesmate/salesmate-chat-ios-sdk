@@ -392,6 +392,7 @@
                     <connections>
                         <outlet property="messageInputBar" destination="UbM-6T-m3n" id="xbc-Nd-cTf"/>
                         <outlet property="tableView" destination="OPv-4u-xKb" id="BbO-HE-yTK"/>
+                        <outlet property="typingAnimation" destination="14P-jP-vmN" id="uko-J6-VbH"/>
                         <outlet property="viewTopWithLogo" destination="Nyx-0P-mtB" id="1wL-0n-Fgn"/>
                         <outlet property="viewTopWithUser" destination="FOh-es-GlW" id="XMg-rt-vKl"/>
                         <outlet property="viewTopWithoutLogo" destination="j7n-Jq-9j9" id="xfr-EH-8RN"/>
@@ -503,6 +504,66 @@
                         <outlet property="lblPlaceholder" destination="JfT-l5-wQM" id="lsY-hH-k4p"/>
                         <outlet property="textViewHeight" destination="pOp-Ok-3XW" id="SQe-Xm-piC"/>
                         <outlet property="txtvMessage" destination="qlh-gT-rXV" id="4HI-Iw-70i"/>
+                    </connections>
+                </view>
+                <view contentMode="scaleToFill" id="14P-jP-vmN" customClass="ChatTypingAnimationView" customModule="SalesmateChatSDK" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="SLL-mT-CRs">
+                            <rect key="frame" x="20" y="0.0" width="220" height="128"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y2I-tU-B7n">
+                                    <rect key="frame" x="0.0" y="0.0" width="24" height="128"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hvz-w6-DXA" customClass="CirculerProfileView" customModule="SalesmateChatSDK" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="10" width="24" height="24"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="24" id="YL4-UG-bjq"/>
+                                                <constraint firstAttribute="width" constant="24" id="iyB-gk-4gQ"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstItem="Hvz-w6-DXA" firstAttribute="top" secondItem="y2I-tU-B7n" secondAttribute="top" constant="10" id="Siy-l4-8fL"/>
+                                        <constraint firstItem="Hvz-w6-DXA" firstAttribute="leading" secondItem="y2I-tU-B7n" secondAttribute="leading" id="hhZ-mC-8l1"/>
+                                        <constraint firstAttribute="trailing" secondItem="Hvz-w6-DXA" secondAttribute="trailing" id="hs4-6n-hGf"/>
+                                    </constraints>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yyw-uK-cOs">
+                                    <rect key="frame" x="39" y="0.0" width="181" height="128"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FhK-6r-y2a" customClass="TypingAnimationView" customModule="SalesmateChatSDK" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="59" width="30" height="10"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="10" id="cIc-js-5dk"/>
+                                                <constraint firstAttribute="width" constant="30" id="nLB-tt-q70"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstItem="FhK-6r-y2a" firstAttribute="centerY" secondItem="yyw-uK-cOs" secondAttribute="centerY" id="r0K-wN-bPU"/>
+                                        <constraint firstItem="FhK-6r-y2a" firstAttribute="leading" secondItem="yyw-uK-cOs" secondAttribute="leading" id="rBO-O8-6VC"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                    <viewLayoutGuide key="safeArea" id="3Fa-Rh-Jcc"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="3Fa-Rh-Jcc" firstAttribute="bottom" secondItem="SLL-mT-CRs" secondAttribute="bottom" id="1i9-Vm-0OZ"/>
+                        <constraint firstItem="SLL-mT-CRs" firstAttribute="leading" secondItem="3Fa-Rh-Jcc" secondAttribute="leading" constant="20" id="TCd-al-gIW"/>
+                        <constraint firstItem="3Fa-Rh-Jcc" firstAttribute="trailing" secondItem="SLL-mT-CRs" secondAttribute="trailing" id="coG-mm-SF8"/>
+                        <constraint firstItem="SLL-mT-CRs" firstAttribute="top" secondItem="14P-jP-vmN" secondAttribute="top" id="eLV-cI-TLf"/>
+                    </constraints>
+                    <connections>
+                        <outlet property="animationView" destination="FhK-6r-y2a" id="2f8-6H-sVI"/>
+                        <outlet property="profileView" destination="Hvz-w6-DXA" id="yBr-mo-tte"/>
                     </connections>
                 </view>
             </objects>

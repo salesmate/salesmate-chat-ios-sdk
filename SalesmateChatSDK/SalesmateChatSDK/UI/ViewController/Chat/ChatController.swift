@@ -112,11 +112,20 @@ extension ChatController {
     private func prepareClient() {
         client.clearMessages()
 
-        client.register(observer: self, for: [.messageReceived], of: conversationID) { event in
+        client.register(observer: self, for: [.messageReceived, .typing], of: conversationID) { event in
             switch event {
             case .messageReceived(_, let messages):
                 guard let messages = messages, !messages.isEmpty else { return }
                 self.updateMesages(for: .newMessage)
+            case .typing(_, let userID):
+                guard let userID = userID else { return }
+                guard let user = self.config.users?.first(where: { $0.id == userID }) else { return }
+
+                let userViewModel = CirculerUserProfileViewModel(user: user)
+
+                OperationQueue.main.addOperation {
+                    self.viewModel?.typing?(userViewModel)
+                }
             default:
                 print("This event(\(event)) is not observed by SalesmateChatClient")
             }

@@ -67,9 +67,10 @@ extension UIImage {
         self.init(named: name, in: .salesmate, compatibleWith: nil)
     }
 
-    static var startNewChat: UIImage { UIImage("ic-start-new-chat")! }
-    static var attachment: UIImage { UIImage("ic-attachment")! }
-    static var smallAttachment: UIImage { UIImage("ic-attachment-small")! }
+    static var startNewChat = UIImage("ic-start-new-chat")!
+    static var attachment = UIImage("ic-attachment")!
+    static var smallAttachment = UIImage("ic-attachment-small")!
+    static var typingDot = UIImage("typing-animation-dot")!
 }
 
 extension UIViewController {

@@ -50,6 +50,7 @@ class ChatViewModel {
     var newMessagesUpdated: (() -> Void)?
     var sendingMessagesUpdated: (() -> Void)?
     var topBarUpdated: (() -> Void)?
+    var typing: ((CirculerUserProfileViewModel) -> Void)?
 
     // MARK: - Init
     init(chatOf: ChatOf, config: Configeration, client: ChatClient) {
@@ -127,7 +128,7 @@ extension ChatViewModel {
         let commonIDs = sortedMessage.filter { sendingMessageIDs.contains($0.id)}.map { $0.id }
         sortedsendingMessage.removeAll(where: { commonIDs.contains($0.id) })
 
-        let messageViewModels = sortedMessage.map { MessageViewModel(message: $0, look: look, users: config.users ?? []) }
+        let messageViewModels = sortedMessage.map { MessageViewModel(message: $0, look: look, users: config.users ?? [], ratings: config.rating ?? []) }
         let sendingViewModels = sortedsendingMessage.map { SendingMessageViewModel(message: $0, look: look, users: config.users ?? []) }
 
         self.messageViewModels = messageViewModels + sendingViewModels

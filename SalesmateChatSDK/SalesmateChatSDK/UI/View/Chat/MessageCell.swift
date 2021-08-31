@@ -214,6 +214,14 @@ class ReceivedMessageCell: MessageCell {
 
             viewChatContent.addArrangedSubview(view)
         }
+
+        if let viewModel = viewModel?.ratingViewModel {
+            let view = RatingReviewView()
+
+            view.viewModel = viewModel
+
+            viewChatContent.addArrangedSubview(view)
+        }
     }
 
     // MARK: - View
