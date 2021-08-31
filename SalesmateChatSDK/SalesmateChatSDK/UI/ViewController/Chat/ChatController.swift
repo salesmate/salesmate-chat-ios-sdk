@@ -15,6 +15,7 @@ class ChatController {
     private let client: ChatClient
     private let conversationID: ConversationID
     private var sendingMessages: Set<MessageToSend> = []
+    private var askEmailTimer: Timer?
 
     private(set) var page = Page(size: 50)
 
@@ -92,10 +93,12 @@ class ChatController {
         }
     }
 
-    func send(_ email: EmailAddress) {
-        sendMessage(with: email.rawValue)
+    func send(_ email: EmailAddress, asMessage: Bool = true) {
+        if asMessage {
+            sendMessage(with: email.rawValue)
+        }
 
-        client.link(email: email.rawValue, in: conversationID) { _ in }
+        client.createContact(with: email.rawValue, in: conversationID) { _ in }
     }
 }
 
@@ -150,12 +153,49 @@ extension ChatController {
 
         client.send(message: message, to: conversationID) { result in
             switch result {
-            case .success: message.status = .sent
-            case .failure: message.status = .fail
+            case .success:
+                message.status = .sent
+                self.startAskEmailTimesIfRequire()
+            case .failure:
+                message.status = .fail
             }
 
             self.sendingMessages.update(with: message)
             self.updateMesages(for: .sending)
+        }
+    }
+
+    private func startAskEmailTimesIfRequire() {
+        func askEmail() {
+            let message1 = MessageToSend(type: .comment,
+                                         contents: [BlockToSend(text: "Give the team a way to reach you:")],
+                                         conversationName: config.pseudoName ?? "",
+                                         isBot: true)
+
+            let message2 = MessageToSend(type: .emailAsked,
+                                         contents: [],
+                                         conversationName: config.pseudoName ?? "",
+                                         isBot: true)
+
+            send(message1)
+            send(message2)
+        }
+
+        guard config.askEmail == .never else { return }
+        guard config.contact?.email == nil else { return }
+        guard askEmailTimer == nil else { return }
+
+        let messages = client.messages[conversationID] ?? []
+        let hasNoReply = messages.allSatisfy({ $0.userID == nil })
+        let haventAsked = messages.allSatisfy({ $0.type != .emailAsked })
+
+        guard hasNoReply, haventAsked else { return }
+
+        DispatchQueue.main.async {
+            self.askEmailTimer = Timer.scheduledTimer(withTimeInterval: 5, repeats: false, block: { timer in
+                askEmail()
+                timer.invalidate()
+            })
         }
     }
 }

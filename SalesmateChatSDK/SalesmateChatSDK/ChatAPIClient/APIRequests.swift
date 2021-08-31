@@ -144,7 +144,7 @@ struct SingleFileUploadRequest: HTTPRequest {
     }
 }
 
-struct ConnectEmailRequest: HTTPRequest {
+struct CreateContactRequest: HTTPRequest {
 
     var method: HTTPMethod = .post
     var url: URL

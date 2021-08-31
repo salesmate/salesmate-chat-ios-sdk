@@ -256,6 +256,9 @@ extension ChatVC: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withClass: ReceivedMessageCell.self, for: indexPath)
 
         cell.viewModel = viewModel
+        cell.sendEmailAddress = { email in
+            self.sendEmail(email, asMessage: false)
+        }
 
         return cell
     }
@@ -343,12 +346,7 @@ extension ChatVC: MessageComposeViewDelegate {
 
     func didTapSend(with text: String) {
         if viewModel.isEmailAddressMandatory {
-            if let email = EmailAddress(rawValue: text) {
-                controller.sendMessage(with: email.rawValue)
-                messageInputBar.clear()
-            } else {
-                showAlert(title: "Email", message: "That email doesn't look quite right.")
-            }
+            sendEmail(text)
         } else {
             controller.sendMessage(with: text)
             messageInputBar.clear()
@@ -382,5 +380,17 @@ extension ChatVC: MessageComposeViewDelegate {
         sheet.addAction(cancel)
 
         present(sheet, animated: true)
+    }
+}
+
+extension ChatVC {
+
+    private func sendEmail(_ email: String, asMessage: Bool = true) {
+        if let email = EmailAddress(rawValue: email) {
+            controller.send(email, asMessage: asMessage)
+            messageInputBar.clear()
+        } else {
+            showAlert(title: "Email", message: "That email doesn't look quite right.")
+        }
     }
 }

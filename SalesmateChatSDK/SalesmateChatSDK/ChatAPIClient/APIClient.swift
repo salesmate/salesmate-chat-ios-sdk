@@ -141,8 +141,8 @@ extension ChatAPIClient: ChatAPI {
         }
     }
 
-    func link(email: String, in conversation: ConversationID?, completion: @escaping (Result<Void, ChatError>) -> Void) {
-        let request = ConnectEmailRequest(email: email, conversationID: conversation)
+    func createContact(with email: String, in conversation: ConversationID?, completion: @escaping (Result<Void, ChatError>) -> Void) {
+        let request = CreateContactRequest(email: email, conversationID: conversation)
 
         loader.load(request: request) { (result) in
             switch result {

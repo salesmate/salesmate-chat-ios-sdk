@@ -19,9 +19,9 @@ class ViewController: UIViewController {
 
         SalesmateChat.setSalesmateChat(configeration: setting)
 
-        if let id = UIDevice.current.identifierForVendor?.uuidString {
-            SalesmateChat.setVerifiedID(id)
-        }
+//        if let id = UIDevice.current.identifierForVendor?.uuidString {
+//            SalesmateChat.setVerifiedID(id)
+//        }
     }
 
     override func viewDidAppear(_ animated: Bool) {

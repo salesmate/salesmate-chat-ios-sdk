@@ -10,6 +10,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AskEmailView" customModule="SalesmateChatSDK" customModuleProvider="target">
             <connections>
+                <outlet property="btnSend" destination="1ns-xb-9r6" id="9rx-gh-eo4"/>
+                <outlet property="txtEmail" destination="B5q-Zr-9bC" id="N3T-6g-p82"/>
                 <outlet property="viewEmail" destination="liT-5Q-Izm" id="0Lk-hQ-OM8"/>
             </connections>
         </placeholder>
@@ -47,6 +49,9 @@
                                                     <color key="textColor" red="0.035294117649999998" green="0.1176470588" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="textDidChange:" destination="-1" eventType="editingChanged" id="T6G-9h-G6t"/>
+                                                    </connections>
                                                 </textField>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1ns-xb-9r6">
                                                     <rect key="frame" x="209" y="0.0" width="28" height="28"/>
@@ -62,6 +67,9 @@
                                                             <integer key="value" value="6"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
+                                                    <connections>
+                                                        <action selector="btnSendPressed:" destination="-1" eventType="touchUpInside" id="34g-du-SUs"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                         </stackView>

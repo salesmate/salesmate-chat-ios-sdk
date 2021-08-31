@@ -66,7 +66,7 @@ protocol ChatObservation {
 protocol ChatClient: ChatObservation, ConversationFetcher, MessageFetcher, MessageOperation, ChatDataSource, FileOperation {
     func getConfigerations(completion: @escaping ((Result<JSONObject, ChatError>) -> Void))
     func connect(waitForFullConnection: Bool, completion: @escaping (Result<Void, ChatError>) -> Void)
-    func link(email: String, in conversation: ConversationID?, completion: @escaping (Result<Void, ChatError>) -> Void)
+    func createContact(with email: String, in conversation: ConversationID?, completion: @escaping (Result<Void, ChatError>) -> Void)
 }
 
 extension ChatClient {

@@ -76,6 +76,9 @@ struct Message: Codable, Hashable {
     let userID: IntegerID?
     var deletedDate: Date?
 
+    let contactName: String?
+    let contactEmail: String?
+
     enum CodingKeys: String, CodingKey {
         case id = "id"
         case isInternalMessage = "is_internal_message"
@@ -85,6 +88,8 @@ struct Message: Codable, Hashable {
         case contents = "blockData"
         case userID = "user_id"
         case deletedDate = "deleted_date"
+        case contactName = "contact_name"
+        case contactEmail = "contact_email"
     }
 
     func hash(into hasher: inout Hasher) {

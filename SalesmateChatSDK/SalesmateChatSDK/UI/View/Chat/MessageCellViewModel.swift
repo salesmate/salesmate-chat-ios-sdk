@@ -35,8 +35,10 @@ protocol MessageViewModelType {
     var contents: [CellContent] { get }
     var alignment: CellAlignment { get }
     var backgroundColorCode: String { get }
+    var actionColorCode: String { get }
     var isDeleted: IsDeleted { get }
     var askEmail: Bool { get }
+    var email: String? { get }
     var bottom: CellBottom? { get }
 }
 
@@ -89,8 +91,10 @@ class MessageViewModel: MessageViewModelType {
     let contents: [CellContent]
     let alignment: CellAlignment
     let backgroundColorCode: String
+    let actionColorCode: String
     let isDeleted: IsDeleted
     let askEmail: Bool
+    let email: String?
     let bottom: CellBottom?
 
     // MARK: - Private Properties
@@ -107,9 +111,11 @@ class MessageViewModel: MessageViewModelType {
         self.alignment = Self.alignment(for: message)
         self.profileViewModel = Self.profileViewModel(for: message, users: users)
         self.backgroundColorCode = Self.backgroundColorCode(for: message, look: look)
+        self.actionColorCode = Self.actionColorCode(for: message, look: look)
         self.contents = Self.contentViewModels(for: message)
         self.isDeleted = (message.deletedDate == nil) ? .no : .yes("This message was deleted.", 50)
         self.askEmail = message.type == .emailAsked
+        self.email = message.contactEmail
     }
 
     private static func alignment(for message: Message) -> CellAlignment {
@@ -129,6 +135,10 @@ class MessageViewModel: MessageViewModelType {
 
     private static func backgroundColorCode(for message: Message, look: Configeration.LookAndFeel) -> String {
         message.userID == nil && !message.isBot ? look.actionColor : "EDF0F7"
+    }
+
+    private static func actionColorCode(for message: Message, look: Configeration.LookAndFeel) -> String {
+        look.actionColor
     }
 
     private static func contentViewModels(for message: Message) -> [CellContent] {
@@ -162,8 +172,10 @@ class SendingMessageViewModel: MessageViewModelType {
     let contents: [CellContent]
     let alignment: CellAlignment = .right
     let backgroundColorCode: String
+    let actionColorCode: String
     let isDeleted: IsDeleted = .no
     let askEmail: Bool = false
+    let email: String? = nil
     let bottom: CellBottom?
 
     // MARK: - Private Properties
@@ -177,6 +189,7 @@ class SendingMessageViewModel: MessageViewModelType {
 
         self.id = message.id
         self.backgroundColorCode = look.actionColor
+        self.actionColorCode = look.actionColor
         self.contents = Self.contentViewModels(for: message)
         self.bottom = Self.cellBottom(for: message)
     }

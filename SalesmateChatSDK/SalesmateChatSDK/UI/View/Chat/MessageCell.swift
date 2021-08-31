@@ -123,12 +123,12 @@ class SendMessageCell: MessageCell {
     static let nib: UINib = UINib(nibName: "SendMessageCell", bundle: .salesmate)
     static let ID = "SendMessageCell"
 
+    // MARK: - Property
+    var shouldRetry: ((SendingMessageViewModel) -> Void)?
+
     // MARK: - Outlets
     @IBOutlet private weak var retryView: UIView!
     @IBOutlet private weak var btnRetry: UIButton!
-
-    // MARK: - Property
-    var shouldRetry: ((SendingMessageViewModel) -> Void)?
 
     // MARK: - Override
     override func awakeFromNib() {
@@ -179,6 +179,9 @@ class ReceivedMessageCell: MessageCell {
     static let nib: UINib = UINib(nibName: "ReceivedMessageCell", bundle: .salesmate)
     static let ID = "ReceivedMessageCell"
 
+    // MARK: - Property
+    var sendEmailAddress: ((String) -> Void)?
+
     // MARK: - Outlets
     @IBOutlet private weak var profileView: CirculerProfileView!
 
@@ -195,7 +198,21 @@ class ReceivedMessageCell: MessageCell {
         updateProfileView()
 
         if viewModel?.askEmail ?? false {
-            viewChatContent.addArrangedSubview(AskEmailView())
+            let view = AskEmailView()
+
+            if let color = UIColor(hex: viewModel?.actionColorCode ?? "") {
+                view.setActionColor(color)
+            }
+
+            if let email = viewModel?.email {
+                view.setEmailAddress(email)
+            } else {
+                view.sendEmailAddress = { email in
+                    self.sendEmailAddress?(email)
+                }
+            }
+
+            viewChatContent.addArrangedSubview(view)
         }
     }
 
