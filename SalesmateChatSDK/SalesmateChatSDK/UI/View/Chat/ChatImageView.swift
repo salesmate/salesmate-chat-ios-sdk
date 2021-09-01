@@ -12,6 +12,8 @@ class ChatImageView: UIView {
     private let imageView = UIImageView(frame: .zero)
     private let loading = UIActivityIndicatorView(frame: .zero)
 
+    var didTapImage: ((URL) -> Void)?
+
     var viewModel: ChatAttachmentViewModel? {
         didSet { display() }
     }
@@ -47,9 +49,20 @@ class ChatImageView: UIView {
         imageView.contentMode = .scaleAspectFit
         imageView.widthAnchor.constraint(equalToConstant: width).isActive = true
         imageView.heightAnchor.constraint(equalToConstant: height).isActive = true
+        imageView.isUserInteractionEnabled = true
 
         loading.hidesWhenStopped = true
         loading.addAndFill(in: self)
+
+        let tap = UITapGestureRecognizer(target: self, action: #selector(didTap))
+
+        imageView.addGestureRecognizer(tap)
+    }
+
+    @objc private func didTap() {
+        guard let url = viewModel?.url else { return }
+
+        didTapImage?(url)
     }
 
     private func display() {

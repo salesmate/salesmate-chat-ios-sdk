@@ -14,6 +14,8 @@ class MessageCell: UITableViewCell {
         didSet { display() }
     }
 
+    var didSelectFile: ((URL) -> Void)?
+
     // MARK: - Outlets
     @IBOutlet fileprivate weak var viewChatContent: UIStackView!
     @IBOutlet private weak var lblBottomText: UILabel!
@@ -91,6 +93,7 @@ class MessageCell: UITableViewCell {
         fileView.setBackgroundColor(code: messageViewModel.backgroundColorCode)
         fileView.setAlignment(alignment: messageViewModel.alignment)
         fileView.viewModel = viewModel
+        fileView.didTapImage = { self.didSelectFile?($0) }
 
         viewChatContent.addArrangedSubview(fileView)
     }
@@ -103,6 +106,7 @@ class MessageCell: UITableViewCell {
         fileView.setBackgroundColor(code: messageViewModel.backgroundColorCode)
         fileView.setAlignment(alignment: messageViewModel.alignment)
         fileView.viewModel = viewModel
+        fileView.didTapImage = { self.didSelectFile?($0) }
 
         viewChatContent.addArrangedSubview(fileView)
     }

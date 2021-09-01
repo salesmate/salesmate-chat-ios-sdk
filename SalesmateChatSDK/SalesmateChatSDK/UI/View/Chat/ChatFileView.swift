@@ -13,6 +13,8 @@ class ChatFileView: UIView {
     private let imgvIcon: UIImageView = UIImageView(image: UIImage.smallAttachment)
     private let lblName: UILabel = UILabel(frame: .zero)
 
+    var didTapImage: ((URL) -> Void)?
+
     var viewModel: ChatAttachmentViewModel? {
         didSet { display() }
     }

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import QuickLook
 
 class ChatVC: UIViewController {
 
@@ -29,6 +30,7 @@ class ChatVC: UIViewController {
     private let loading = ActivityIndicatorView(frame: .zero)
     private var rows: [MessageViewModelType] = []
     private let refreshControl = UIRefreshControl()
+    private var previewFileURL: URL?
     private lazy var filePicker: FilePickerController = {
        FilePickerController(presenter: self)
     }()
@@ -269,7 +271,8 @@ extension ChatVC: UITableViewDataSource {
         cell.sendEmailAddress = { email in
             self.sendEmail(email, asMessage: false)
         }
-
+        cell.didSelectFile = { self.downloadAndPreviewFile(at: $0) }
+        
         return cell
     }
 
@@ -280,7 +283,7 @@ extension ChatVC: UITableViewDataSource {
         cell.shouldRetry = { messageViewModel in
             self.controller.retryMessage(of: messageViewModel)
         }
-
+        
         return cell
     }
 }
@@ -430,5 +433,37 @@ extension ChatVC {
     private func hideTypingAnimation() {
         typingAnimation.stop()
         tableView.removeTableFooterView()
+    }
+}
+
+// MARK: - File Preview
+extension ChatVC {
+    
+    private func downloadAndPreviewFile(at url: URL) {
+        url.downloadAndSave { result in
+            switch result {
+            case .success(let filePath):
+                self.previewFile(at: filePath)
+            case .failure:
+                break
+            }
+        }
+    }
+    
+    private func previewFile(at url: URL) {
+        let VC = QLPreviewController()
+        
+        previewFileURL = url
+        
+        present(VC, animated: true, completion: nil)
+    }
+}
+
+extension ChatVC: QLPreviewControllerDataSource {
+    
+    func numberOfPreviewItems(in controller: QLPreviewController) -> Int { 1 }
+    
+    func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
+        previewFileURL! as NSURL
     }
 }
