@@ -271,8 +271,10 @@ extension ChatVC: UITableViewDataSource {
         cell.sendEmailAddress = { email in
             self.sendEmail(email, asMessage: false)
         }
-        cell.didSelectFile = { self.downloadAndPreviewFile(at: $0) }
-        
+        cell.didSelectFile = {
+            self.downloadAndPreviewFile(at: $0)
+        }
+
         return cell
     }
 
@@ -283,7 +285,10 @@ extension ChatVC: UITableViewDataSource {
         cell.shouldRetry = { messageViewModel in
             self.controller.retryMessage(of: messageViewModel)
         }
-        
+        cell.didSelectFile = {
+            self.downloadAndPreviewFile(at: $0)
+        }
+
         return cell
     }
 }
@@ -438,7 +443,7 @@ extension ChatVC {
 
 // MARK: - File Preview
 extension ChatVC {
-    
+
     private func downloadAndPreviewFile(at url: URL) {
         url.downloadAndSave { result in
             switch result {
@@ -449,20 +454,22 @@ extension ChatVC {
             }
         }
     }
-    
+
     private func previewFile(at url: URL) {
-        let VC = QLPreviewController()
-        
         previewFileURL = url
-        
-        present(VC, animated: true, completion: nil)
+
+        OperationQueue.main.addOperation {
+            let VC = QLPreviewController()
+            VC.dataSource = self
+            self.present(VC, animated: true, completion: nil)
+        }
     }
 }
 
 extension ChatVC: QLPreviewControllerDataSource {
-    
+
     func numberOfPreviewItems(in controller: QLPreviewController) -> Int { 1 }
-    
+
     func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
         previewFileURL! as NSURL
     }

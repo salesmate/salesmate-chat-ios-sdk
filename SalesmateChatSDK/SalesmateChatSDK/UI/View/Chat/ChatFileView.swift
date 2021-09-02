@@ -67,6 +67,16 @@ class ChatFileView: UIView {
             imgvIcon.widthAnchor.constraint(equalToConstant: 30),
             imgvIcon.heightAnchor.constraint(equalToConstant: 30)
         ])
+
+        let tap = UITapGestureRecognizer(target: self, action: #selector(didTap))
+
+        addGestureRecognizer(tap)
+    }
+
+    @objc private func didTap() {
+        guard let url = viewModel?.url else { return }
+
+        didTapImage?(url)
     }
 
     private func display() {

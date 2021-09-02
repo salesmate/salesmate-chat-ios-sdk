@@ -167,12 +167,8 @@ class MessageViewModel: MessageViewModelType {
     }
 
     private static func ratingViewModel(for message: Message, ratings: [Configeration.Rating]) -> RatingReviewViewModel? {
-
-        if message.type == .ratingAsked {
-            return RatingReviewViewModel(config: ratings)
-        }
-
-        return nil
+        guard message.type == .ratingAsked else { return nil }
+        return RatingReviewViewModel(config: ratings)
     }
 }
 

@@ -32,8 +32,7 @@ extension UUID {
 extension URL {
 
     func downloadAndSave(completion: @escaping (Result<URL, Error>) -> Void) {
-        let downloadTask = URLSession.shared.downloadTask(with: self) {
-            urlOrNil, _, errorOrNil in
+        let downloadTask = URLSession.shared.downloadTask(with: self) { urlOrNil, _, errorOrNil in
             guard let fileURL = urlOrNil else {
                 if let error = errorOrNil {
                     completion(.failure(error))
@@ -47,10 +46,12 @@ extension URL {
                                             in: .userDomainMask,
                                             appropriateFor: nil,
                                             create: true)
-                let savedURL = documentsURL.appendingPathComponent(fileURL.lastPathComponent)
+                let savedURL = documentsURL.appendingPathComponent(self.lastPathComponent)
+                try? FileManager.default.removeItem(at: savedURL)
                 try FileManager.default.moveItem(at: fileURL, to: savedURL)
                 completion(.success(savedURL))
             } catch {
+                print(error)
                 completion(.failure(error))
             }
         }

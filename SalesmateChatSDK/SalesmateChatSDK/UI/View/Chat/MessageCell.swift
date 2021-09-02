@@ -106,7 +106,9 @@ class MessageCell: UITableViewCell {
         fileView.setBackgroundColor(code: messageViewModel.backgroundColorCode)
         fileView.setAlignment(alignment: messageViewModel.alignment)
         fileView.viewModel = viewModel
-        fileView.didTapImage = { self.didSelectFile?($0) }
+        fileView.didTapImage = {
+            self.didSelectFile?($0)
+        }
 
         viewChatContent.addArrangedSubview(fileView)
     }

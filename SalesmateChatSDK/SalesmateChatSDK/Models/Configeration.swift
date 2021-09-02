@@ -61,7 +61,7 @@ class Configeration {
         let id: String
         let linkname: String
         let name: String
-        let workspaceDescription: String
+        let workspaceDescription: String?
     }
 
     struct Rating {
