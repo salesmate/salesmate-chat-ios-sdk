@@ -130,6 +130,10 @@ class ChatVC: UIViewController {
             viewTop = viewTopWithLogo
         case .assigned:
             viewTop = viewTopWithUser
+
+            viewTopWithUser.didSelectExport = {
+                self.downloadAndPreviewTranscript()
+            }
         }
 
         viewTop?.viewModel = viewModel.topViewModel
@@ -444,6 +448,20 @@ extension ChatVC {
 // MARK: - File Preview
 extension ChatVC {
 
+    private func downloadAndPreviewTranscript() {
+        showHUD()
+
+        controller.getTranscript { location in
+            self.hideHUD()
+
+            if let location = location {
+                self.previewFile(at: location)
+            } else {
+                // TODO: Show error.
+            }
+        }
+    }
+
     private func downloadAndPreviewFile(at url: URL) {
         url.downloadAndSave { result in
             switch result {
@@ -458,7 +476,7 @@ extension ChatVC {
     private func previewFile(at url: URL) {
         previewFileURL = url
 
-        OperationQueue.main.addOperation {
+        runOnMain {
             let VC = QLPreviewController()
             VC.dataSource = self
             self.present(VC, animated: true, completion: nil)

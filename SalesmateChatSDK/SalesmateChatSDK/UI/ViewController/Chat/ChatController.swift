@@ -100,6 +100,22 @@ class ChatController {
 
         client.createContact(with: email.rawValue, in: conversationID) { _ in }
     }
+
+    func getTranscript(completion: @escaping ((URL?) -> Void)) {
+        client.downloadTranscript(of: conversationID) { result in
+            switch result {
+            case .success(let transcript):
+                if let urlToSave = try? FileManager.default.getURLInCachesDirectory(for: self.conversationID + ".txt") {
+                    try? transcript.write(to: urlToSave, atomically: true, encoding: .utf8)
+                    completion(urlToSave)
+                } else {
+                    completion(nil)
+                }
+            case .failure:
+                completion(nil)
+            }
+        }
+    }
 }
 
 extension ChatController {
@@ -123,7 +139,7 @@ extension ChatController {
 
                 let userViewModel = CirculerUserProfileViewModel(user: user)
 
-                OperationQueue.main.addOperation {
+                runOnMain {
                     self.viewModel?.typing?(userViewModel)
                 }
             default:

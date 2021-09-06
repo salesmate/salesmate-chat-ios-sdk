@@ -14,6 +14,7 @@ protocol ChatAPI: AnyObject {
 
     func getConversations(at page: Page, completion: @escaping (Result<[Conversation], ChatError>) -> Void)
     func getDetail(of conversation: ConversationID, completion: @escaping (Result<Conversation, ChatError>) -> Void)
+    func downloadTranscript(of ID: ConversationID, completion: @escaping ((Result<String, ChatError>) -> Void))
 
     func getMessages(of conversation: ConversationID, at page: Page, completion: @escaping (Result<[Message], ChatError>) -> Void)
     func getMessages(of conversation: ConversationID, from date: Date, completion: @escaping (Result<[Message], ChatError>) -> Void)

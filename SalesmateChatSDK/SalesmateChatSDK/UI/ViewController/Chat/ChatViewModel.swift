@@ -92,7 +92,7 @@ class ChatViewModel {
     func update(_ messages: Set<Message>, sendingMessages: Set<MessageToSend>, for event: MessageUpdateEvent) {
         updateMessageViewModels(for: messages, sendingMessages: sendingMessages)
 
-        OperationQueue.main.addOperation {
+        runOnMain {
             switch event {
             case .pageLoading: self.messagesUpdated?()
             case .newMessage: self.newMessagesUpdated?()
@@ -113,7 +113,7 @@ extension ChatViewModel {
             self.topbar = (topViewModel.headerLogoURL == nil) ? .withoutLogo : .withLogo
         }
 
-        OperationQueue.main.addOperation {
+        runOnMain {
             self.topBarUpdated?()
         }
     }

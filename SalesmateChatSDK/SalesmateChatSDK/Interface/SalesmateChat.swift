@@ -68,7 +68,15 @@ extension SalesmateChat {
             case .failure:
                 break
             }
+
             self.isLoading = false
+
+            if let look = self.config.look {
+                runOnMain {
+                    HUDVC.shared = HUDVC.create(with: HUDViewModel(look: look))
+                }
+            }
+
             runOnMain { self.showHomeVC() }
         }
     }

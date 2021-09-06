@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9B09C2C626E632D20007B005 /* HUD.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B09C2C526E632D20007B005 /* HUD.storyboard */; };
+		9B09C2C826E632E60007B005 /* HUDVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B09C2C726E632E60007B005 /* HUDVC.swift */; };
 		9B1B121C26AEB01500ABC3FB /* ChatEventRelay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1B121B26AEB01500ABC3FB /* ChatEventRelay.swift */; };
 		9B29413826C3D84B00866911 /* ChatImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B29413726C3D84B00866911 /* ChatImageView.swift */; };
 		9B29413A26C3D86A00866911 /* AskEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B29413926C3D86A00866911 /* AskEmailView.swift */; };
@@ -146,6 +148,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		9B09C2C526E632D20007B005 /* HUD.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HUD.storyboard; sourceTree = "<group>"; };
+		9B09C2C726E632E60007B005 /* HUDVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HUDVC.swift; sourceTree = "<group>"; };
 		9B1B121B26AEB01500ABC3FB /* ChatEventRelay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatEventRelay.swift; sourceTree = "<group>"; };
 		9B29413726C3D84B00866911 /* ChatImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatImageView.swift; sourceTree = "<group>"; };
 		9B29413926C3D86A00866911 /* AskEmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskEmailView.swift; sourceTree = "<group>"; };
@@ -275,6 +279,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9B09C2C426E632C70007B005 /* HUD */ = {
+			isa = PBXGroup;
+			children = (
+				9B09C2C526E632D20007B005 /* HUD.storyboard */,
+				9B09C2C726E632E60007B005 /* HUDVC.swift */,
+			);
+			path = HUD;
+			sourceTree = "<group>";
+		};
 		9B20482E26A6F23A001EC729 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -518,6 +531,7 @@
 		9BFC63C826B1282800976141 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				9B09C2C426E632C70007B005 /* HUD */,
 				9B6A0EC526BD5F1D000B68B4 /* Start */,
 				9BE7183226B1892000DD3113 /* Home */,
 				9BF260DE26B3D57200D21C75 /* Conversations */,
@@ -691,6 +705,7 @@
 				9BDD51B626B19CA2002C2307 /* Media.xcassets in Resources */,
 				9BD7753526B2D18A002BA2AD /* RecentConversations.storyboard in Resources */,
 				9B6A0EC426BD5F13000B68B4 /* Start.storyboard in Resources */,
+				9B09C2C626E632D20007B005 /* HUD.storyboard in Resources */,
 				9B29413C26C3DB2500866911 /* AskEmailView.xib in Resources */,
 				9BFC63CC26B128B400976141 /* Home.storyboard in Resources */,
 				9BF260DD26B3D56600D21C75 /* Conversations.storyboard in Resources */,
@@ -781,6 +796,7 @@
 				9B83EAB826BD132B00C269DB /* ChatFileView.swift in Sources */,
 				9BD7752D26B27BEE002BA2AD /* XIBView.swift in Sources */,
 				9B3A9B7D26A701D200EB7C10 /* Block.swift in Sources */,
+				9B09C2C826E632E60007B005 /* HUDVC.swift in Sources */,
 				9BAB61B726CCCB89001B5B8C /* DataPersistency.swift in Sources */,
 				9B65E01226A58C64001F3928 /* APIDataTypes.swift in Sources */,
 				9B5DF76126DE58690057E276 /* RatingReviewView.swift in Sources */,

@@ -84,6 +84,24 @@ extension UIViewController {
 
         child.didMove(toParent: self)
     }
+
+    func showHUD() {
+        runOnMain {
+            guard let hud = HUDVC.shared else { return }
+
+            hud.modalPresentationStyle = .overFullScreen
+
+            self.present(hud, animated: false, completion: nil)
+        }
+    }
+
+    func hideHUD() {
+        runOnMain {
+            if self.presentedViewController is HUDVC {
+                self.dismiss(animated: false, completion: nil)
+            }
+        }
+    }
 }
 
 extension UIView {

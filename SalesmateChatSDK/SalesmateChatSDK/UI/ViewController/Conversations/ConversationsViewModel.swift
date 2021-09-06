@@ -47,7 +47,7 @@ class ConversationsViewModel {
         conversations = Array(self.client.conversations)
         conversations.sort(by: { $0.lastMessageDate > $1.lastMessageDate })
 
-        OperationQueue.main.addOperation {
+        runOnMain {
             self.conversationsUpdated?()
         }
     }

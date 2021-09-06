@@ -12,6 +12,7 @@ var enableLog: Bool = true
 protocol ConversationFetcher {
     func getConversations(at page: Page, completion: @escaping (Result<[Conversation], ChatError>) -> Void)
     func getDetail(of conversation: ConversationID, completion: @escaping (Result<Conversation, ChatError>) -> Void)
+    func downloadTranscript(of ID: ConversationID, completion: @escaping ((Result<String, ChatError>) -> Void))
 }
 
 protocol MessageFetcher {

@@ -84,6 +84,23 @@ extension ChatAPIClient: ChatAPI {
         }
     }
 
+    func downloadTranscript(of ID: ConversationID, completion: @escaping ((Result<String, ChatError>) -> Void)) {
+        let request = DownloadTranscriptRequest(conversationID: ID)
+
+        loader.load(request: request) { result in
+            switch result {
+            case .success(let response):
+                guard let base64EncodedString = response.body?.utf8 else { return }
+                guard let data = Data(base64Encoded: base64EncodedString, options: .ignoreUnknownCharacters) else { return }
+                guard let decodedString = String(data: data, encoding: .utf8) else { return }
+
+                completion(.success(decodedString))
+            case .failure:
+                completion(.failure(.unknown))
+            }
+        }
+    }
+
     func getMessages(of conversation: ConversationID, at page: Page, completion: @escaping (Result<[Message], ChatError>) -> Void) {
         let request = GetMessagesRequest(conversationID: conversation, rows: page.rows, offset: page.offset)
 

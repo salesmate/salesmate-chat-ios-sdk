@@ -102,6 +102,10 @@ extension SalesmateChatClient: ConversationFetcher {
             }
         }
     }
+
+    func downloadTranscript(of ID: ConversationID, completion: @escaping ((Result<String, ChatError>) -> Void)) {
+        chatAPI.downloadTranscript(of: ID, completion: completion)
+    }
 }
 
 extension SalesmateChatClient: MessageFetcher {

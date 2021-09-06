@@ -41,12 +41,7 @@ extension URL {
             }
 
             do {
-                let documentsURL = try
-                    FileManager.default.url(for: .cachesDirectory,
-                                            in: .userDomainMask,
-                                            appropriateFor: nil,
-                                            create: true)
-                let savedURL = documentsURL.appendingPathComponent(self.lastPathComponent)
+                let savedURL = try FileManager.default.getURLInCachesDirectory(for: lastPathComponent)
                 try? FileManager.default.removeItem(at: savedURL)
                 try FileManager.default.moveItem(at: fileURL, to: savedURL)
                 completion(.success(savedURL))
@@ -57,5 +52,17 @@ extension URL {
         }
 
         downloadTask.resume()
+    }
+
+}
+
+extension FileManager {
+
+    func getURLInCachesDirectory(for fileName: String) throws -> URL {
+        let documentsURL = try url(for: .cachesDirectory,
+                                   in: .userDomainMask,
+                                   appropriateFor: nil,
+                                   create: true)
+        return documentsURL.appendingPathComponent(fileName)
     }
 }

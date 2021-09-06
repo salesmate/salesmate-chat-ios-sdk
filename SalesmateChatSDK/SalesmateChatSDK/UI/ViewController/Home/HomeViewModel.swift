@@ -61,7 +61,7 @@ class HomeViewModel {
             self.askToStartNewChat()
         }
 
-        OperationQueue.main.addOperation {
+        runOnMain {
             self.showNewVisitorView?(viewModel)
         }
     }
@@ -81,7 +81,7 @@ class HomeViewModel {
             self.askToShow(conversation: conversation)
         }
 
-        OperationQueue.main.addOperation {
+        runOnMain {
             self.showRecentConversationsView?(viewModel)
         }
     }
@@ -89,7 +89,7 @@ class HomeViewModel {
     private func askToShowAllConversations() {
         let viewModel = ConversationsViewModel(config: self.config, client: self.client)
 
-        OperationQueue.main.addOperation {
+        runOnMain {
             self.showAllConversations?(viewModel)
         }
     }
@@ -97,7 +97,7 @@ class HomeViewModel {
     private func askToStartNewChat() {
         let viewModel = ChatViewModel(chatOf: .new, config: config, client: client)
 
-        OperationQueue.main.addOperation {
+        runOnMain {
             self.startNewChat?(viewModel)
         }
     }
@@ -105,7 +105,7 @@ class HomeViewModel {
     private func askToShow(conversation: Conversation) {
         let viewModel = ChatViewModel(chatOf: .conversation(conversation), config: config, client: client)
 
-        OperationQueue.main.addOperation {
+        runOnMain {
             self.showConversation?(viewModel)
         }
     }

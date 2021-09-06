@@ -157,3 +157,15 @@ struct CreateContactRequest: HTTPRequest {
         body = JSONBody(["email": email, "conversation_id": conversationID])
     }
 }
+
+struct DownloadTranscriptRequest: HTTPRequest {
+
+    var method: HTTPMethod = .post
+    var url: URL
+    var headers: HTTPHeaders?
+
+    init(conversationID: String, common: CAC = common) {
+        url = URL(string: "/messenger/v1/conversations/\(conversationID)/download-transcript", relativeTo: common.base)!
+        headers = common.headers
+    }
+}
