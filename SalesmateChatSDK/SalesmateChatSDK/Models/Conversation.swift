@@ -32,8 +32,8 @@ struct Conversation {
 
     let isRead: Bool
 
-    let rating: String?
-    let remark: String?
+    var rating: String?
+    var remark: String?
 }
 
 extension Conversation: Codable {

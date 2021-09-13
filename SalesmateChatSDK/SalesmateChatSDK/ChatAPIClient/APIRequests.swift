@@ -169,3 +169,31 @@ struct DownloadTranscriptRequest: HTTPRequest {
         headers = common.headers
     }
 }
+
+struct UpdateRatingRequest: HTTPRequest {
+
+    var method: HTTPMethod = .post
+    var url: URL
+    var headers: HTTPHeaders?
+    var body: HTTPBody?
+
+    init(conversationID: String, rating: Int, common: CAC = common) {
+        url = URL(string: "/messenger/v1/conversations/\(conversationID)/rating", relativeTo: common.base)!
+        headers = common.headers
+        body = JSONBody(["rating": rating])
+    }
+}
+
+struct UpdateRemarkRequest: HTTPRequest {
+
+    var method: HTTPMethod = .post
+    var url: URL
+    var headers: HTTPHeaders?
+    var body: HTTPBody?
+
+    init(conversationID: String, remark: String, common: CAC = common) {
+        url = URL(string: "/messenger/v1/conversations/\(conversationID)/remark", relativeTo: common.base)!
+        headers = common.headers
+        body = JSONBody(["remark": remark])
+    }
+}

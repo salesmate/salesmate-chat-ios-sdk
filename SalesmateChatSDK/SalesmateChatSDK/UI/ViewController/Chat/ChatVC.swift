@@ -28,12 +28,15 @@ class ChatVC: UIViewController {
     private var shouldScrollToBottom: Bool = true
     private var shouldAdjustForKeyboard: Bool = false
     private let loading = ActivityIndicatorView(frame: .zero)
-    private var rows: [MessageViewModelType] = []
+    private var rows: [ChatRow] = []
     private let refreshControl = UIRefreshControl()
     private var previewFileURL: URL?
     private lazy var filePicker: FilePickerController = {
        FilePickerController(presenter: self)
     }()
+
+    private let askEmailCell: AskEmailCell? = AskEmailCell.instantiate()
+    private let ratingCell: AskRatingCell? = AskRatingCell.instantiate()
 
     // MARK: - IBOutlets
     @IBOutlet private weak var viewTopWithoutLogo: ChatTopWithoutLogo!
@@ -189,10 +192,10 @@ class ChatVC: UIViewController {
 
     private func displayMessages() {
         let isFirst = (rows.count == 0)
-        let newItemCount = viewModel.messageViewModels.count - rows.count
+        let newItemCount = viewModel.rows.count - rows.count
         let initialContentOffSet = tableView.contentOffset.y < 0 ? 0 : tableView.contentOffset.y
 
-        rows = viewModel.messageViewModels
+        rows = viewModel.rows
 
         hideTypingAnimation()
         tableView.removeTableFooterView()
@@ -219,7 +222,7 @@ class ChatVC: UIViewController {
         let isLastVisiable: Bool = (indexPathsLastRow == indexPathsLastVisibleRow)
         let rowsCount = rows.count
 
-        rows = viewModel.messageViewModels
+        rows = viewModel.rows
 
         hideTypingAnimation()
 
@@ -260,11 +263,21 @@ extension ChatVC: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let messageViewModel = rows[indexPath.row]
+        let row = rows[indexPath.row]
 
-        switch messageViewModel.alignment {
-        case .left: return getReceivedMessageCell(for: messageViewModel, for: indexPath)
-        case .right: return getSendMessageCell(for: messageViewModel, for: indexPath)
+        switch row {
+        case .message: return getMessageCell(for: row, at: indexPath)
+        case .askEmail: return getAskEmailCell(for: row)
+        case .askRating: return getAskRatingCell(for: row)
+        }
+    }
+
+    private func getMessageCell(for row: ChatRow, at indexPath: IndexPath) -> UITableViewCell {
+        guard case .message(let viewModel) = row else { return UITableViewCell() }
+
+        switch viewModel.alignment {
+        case .left: return getReceivedMessageCell(for: viewModel, for: indexPath)
+        case .right: return getSendMessageCell(for: viewModel, for: indexPath)
         }
     }
 
@@ -294,6 +307,36 @@ extension ChatVC: UITableViewDataSource {
         }
 
         return cell
+    }
+
+    private func getAskEmailCell(for row: ChatRow) -> UITableViewCell {
+        guard case .askEmail(let viewModel) = row else { return UITableViewCell() }
+
+        if let email = self.viewModel.email?.rawValue {
+            viewModel.email = email
+        }
+
+        askEmailCell?.viewModel = viewModel
+        askEmailCell?.sendEmailAddress = { email in
+            self.sendEmail(email)
+        }
+
+        return askEmailCell ?? UITableViewCell()
+    }
+
+    private func getAskRatingCell(for row: ChatRow) -> UITableViewCell {
+        guard case .askRating(let viewModel) = row else { return UITableViewCell() }
+
+        ratingCell?.viewModel = viewModel
+        ratingCell?.sendRating = { rating in
+            guard let rating = Int(rating) else { return }
+            self.controller.sendRating(rating)
+        }
+        ratingCell?.sendRemark = { remark in
+            self.controller.sendRemark(remark)
+        }
+
+        return ratingCell ?? UITableViewCell()
     }
 }
 

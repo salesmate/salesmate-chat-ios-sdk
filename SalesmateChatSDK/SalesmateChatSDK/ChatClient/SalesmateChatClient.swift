@@ -108,6 +108,21 @@ extension SalesmateChatClient: ConversationFetcher {
     }
 }
 
+extension SalesmateChatClient: ConversationOperation {
+
+    func updateRating(of ID: ConversationID, to rating: Int, completion: @escaping ((Result<Void, ChatError>) -> Void)) {
+        chatAPI.updateRating(of: ID, to: rating) { result in
+            completion(result)
+        }
+    }
+
+    func updateRemark(of ID: ConversationID, to remark: String, completion: @escaping ((Result<Void, ChatError>) -> Void)) {
+        chatAPI.updateRemark(of: ID, to: remark) { result in
+            completion(result)
+        }
+    }
+}
+
 extension SalesmateChatClient: MessageFetcher {
 
     func getMessages(of conversation: ConversationID, at page: Page, completion: @escaping (Result<[Message], ChatError>) -> Void) {

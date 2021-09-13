@@ -116,6 +116,30 @@ class ChatController {
             }
         }
     }
+
+    func sendRating(_ rating: Int) {
+        client.updateRating(of: conversationID, to: rating) { result in
+            switch result {
+            case .success:
+                self.viewModel?.updateRating(to: rating)
+                self.updateMesages(for: .newMessage)
+            case .failure:
+                break
+            }
+        }
+    }
+
+    func sendRemark(_ remark: String) {
+        client.updateRemark(of: conversationID, to: remark) { result in
+            switch result {
+            case .success:
+                self.viewModel?.updateRemark(to: remark)
+                self.updateMesages(for: .newMessage)
+            case .failure:
+                break
+            }
+        }
+    }
 }
 
 extension ChatController {

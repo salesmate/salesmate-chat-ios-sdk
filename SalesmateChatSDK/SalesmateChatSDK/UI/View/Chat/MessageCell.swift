@@ -202,32 +202,6 @@ class ReceivedMessageCell: MessageCell {
         super.display()
 
         updateProfileView()
-
-        if viewModel?.askEmail ?? false {
-            let view = AskEmailView()
-
-            if let color = UIColor(hex: viewModel?.actionColorCode ?? "") {
-                view.setActionColor(color)
-            }
-
-            if let email = viewModel?.email {
-                view.setEmailAddress(email)
-            } else {
-                view.sendEmailAddress = { email in
-                    self.sendEmailAddress?(email)
-                }
-            }
-
-            viewChatContent.addArrangedSubview(view)
-        }
-
-        if let viewModel = viewModel?.ratingViewModel {
-            let view = RatingReviewView()
-
-            view.viewModel = viewModel
-
-            viewChatContent.addArrangedSubview(view)
-        }
     }
 
     // MARK: - View

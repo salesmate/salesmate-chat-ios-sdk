@@ -15,6 +15,11 @@ protocol ConversationFetcher {
     func downloadTranscript(of ID: ConversationID, completion: @escaping ((Result<String, ChatError>) -> Void))
 }
 
+protocol ConversationOperation {
+    func updateRating(of ID: ConversationID, to rating: Int, completion: @escaping ((Result<Void, ChatError>) -> Void))
+    func updateRemark(of ID: ConversationID, to remark: String, completion: @escaping ((Result<Void, ChatError>) -> Void))
+}
+
 protocol MessageFetcher {
     func getMessages(of conversation: ConversationID, at page: Page, completion: @escaping (Result<[Message], ChatError>) -> Void)
 }
@@ -64,7 +69,7 @@ protocol ChatObservation {
     func register(observer: AnyObject, for events: [ChatEventToObserve], of conversation: ConversationID?, onEvent: @escaping (ChatEvent) -> Void)
 }
 
-protocol ChatClient: ChatObservation, ConversationFetcher, MessageFetcher, MessageOperation, ChatDataSource, FileOperation {
+protocol ChatClient: ChatObservation, ConversationFetcher, ConversationOperation, MessageFetcher, MessageOperation, ChatDataSource, FileOperation {
     func getConfigerations(completion: @escaping ((Result<JSONObject, ChatError>) -> Void))
     func connect(waitForFullConnection: Bool, completion: @escaping (Result<Void, ChatError>) -> Void)
     func createContact(with email: String, in conversation: ConversationID?, completion: @escaping (Result<Void, ChatError>) -> Void)

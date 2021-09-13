@@ -7,6 +7,12 @@
 
 import Foundation
 
+enum ChatRow {
+    case message(MessageViewModelType)
+    case askEmail(AskEmailViewModel)
+    case askRating(AskRatingViewModel)
+}
+
 enum CellAlignment {
     case left
     case right
@@ -28,19 +34,62 @@ enum IsDeleted {
     case no
 }
 
-protocol MessageViewModelType {
+protocol ChatContentViewModelType {
     var id: MessageID { get }
-
     var profileViewModel: CirculerProfileViewModelType? { get }
-    var contents: [CellContent] { get }
+}
+
+class AskEmailViewModel: ChatContentViewModelType {
+    let id: MessageID
+    let profileViewModel: CirculerProfileViewModelType?
+    let actionColorCode: String
+    var email: String? = ""
+
+    init(message: Message, look: Configeration.LookAndFeel) {
+        id = message.id
+        profileViewModel = CirculerBotProfileViewModel()
+        actionColorCode = look.actionColor
+    }
+}
+
+class AskRatingViewModel: ChatContentViewModelType {
+    private let config: [Configeration.Rating]
+
+    let id: MessageID = ""
+    let profileViewModel: CirculerProfileViewModelType? = CirculerBotProfileViewModel()
+    let actionColorCode: String
+    let ratingEmojies: [String]
+
+    private(set) var rating: Int?
+    private(set) var ratingText: String?
+    private(set) var remark: String?
+
+    init(config: [Configeration.Rating], look: Configeration.LookAndFeel, rating: String? = nil, remark: String? = nil) {
+        self.config = config
+        self.actionColorCode = look.actionColor
+
+        if let rating = rating {
+            self.rating = Int(rating)
+            self.ratingText = config.first(where: { $0.id == rating })?.label
+        }
+
+        self.ratingEmojies = config.map({ rating in
+            String(UnicodeScalar(Int(rating.unicode, radix: 16)!)!) + "\u{FE0F}"
+        })
+        self.remark = remark
+    }
+}
+
+protocol MessageViewModelType: ChatContentViewModelType {
     var alignment: CellAlignment { get }
+    var contents: [CellContent] { get }
+
     var backgroundColorCode: String { get }
     var actionColorCode: String { get }
+
     var isDeleted: IsDeleted { get }
-    var askEmail: Bool { get }
     var email: String? { get }
     var bottom: CellBottom? { get }
-    var ratingViewModel: RatingReviewViewModel? { get }
 }
 
 class ChatAttachmentViewModel {
@@ -94,10 +143,8 @@ class MessageViewModel: MessageViewModelType {
     let backgroundColorCode: String
     let actionColorCode: String
     let isDeleted: IsDeleted
-    let askEmail: Bool
     let email: String?
     let bottom: CellBottom?
-    let ratingViewModel: RatingReviewViewModel?
 
     // MARK: - Private Properties
     private let message: Message
@@ -116,9 +163,7 @@ class MessageViewModel: MessageViewModelType {
         self.actionColorCode = Self.actionColorCode(for: message, look: look)
         self.contents = Self.contentViewModels(for: message)
         self.isDeleted = (message.deletedDate == nil) ? .no : .yes("This message was deleted.", 50)
-        self.askEmail = message.type == .emailAsked
         self.email = message.contactEmail
-        self.ratingViewModel = Self.ratingViewModel(for: message, ratings: ratings)
     }
 
     private static func alignment(for message: Message) -> CellAlignment {
@@ -165,11 +210,6 @@ class MessageViewModel: MessageViewModelType {
 
         return contents
     }
-
-    private static func ratingViewModel(for message: Message, ratings: [Configeration.Rating]) -> RatingReviewViewModel? {
-        guard message.type == .ratingAsked else { return nil }
-        return RatingReviewViewModel(config: ratings)
-    }
 }
 
 class SendingMessageViewModel: MessageViewModelType {
@@ -182,10 +222,8 @@ class SendingMessageViewModel: MessageViewModelType {
     let backgroundColorCode: String
     let actionColorCode: String
     let isDeleted: IsDeleted = .no
-    let askEmail: Bool = false
     let email: String? = nil
     let bottom: CellBottom?
-    let ratingViewModel: RatingReviewViewModel? = nil
 
     // MARK: - Private Properties
     private let message: MessageToSend

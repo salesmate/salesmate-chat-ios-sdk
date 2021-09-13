@@ -101,6 +101,28 @@ extension ChatAPIClient: ChatAPI {
         }
     }
 
+    func updateRating(of ID: ConversationID, to rating: Int, completion: @escaping ((Result<Void, ChatError>) -> Void)) {
+        let request = UpdateRatingRequest(conversationID: ID, rating: rating)
+
+        loader.load(request: request) { result in
+            switch result {
+            case .success: completion(.success(()))
+            case .failure: completion(.failure(.unknown))
+            }
+        }
+    }
+
+    func updateRemark(of ID: ConversationID, to remark: String, completion: @escaping ((Result<Void, ChatError>) -> Void)) {
+        let request = UpdateRemarkRequest(conversationID: ID, remark: remark)
+
+        loader.load(request: request) { result in
+            switch result {
+            case .success: completion(.success(()))
+            case .failure: completion(.failure(.unknown))
+            }
+        }
+    }
+
     func getMessages(of conversation: ConversationID, at page: Page, completion: @escaping (Result<[Message], ChatError>) -> Void) {
         let request = GetMessagesRequest(conversationID: conversation, rows: page.rows, offset: page.offset)
 
