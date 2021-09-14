@@ -32,9 +32,7 @@ struct Payload {
         case handshake = "#handshake"
         case subscribe = "#subscribe"
         case publish = "#publish"
-        case tenantIsTyping = "tenant-user-is-typing"
-        case visitorIsTyping = "visitor-is-typing"
-        case tenantIsPresent = "tenant-user-presence"
+        // case visitorIsTyping = "visitor-is-typing"
     }
 
     enum PublishType: String {

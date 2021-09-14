@@ -10,7 +10,6 @@ import Foundation
 protocol ChatStreamPayloadMaker {
     func handshakeObject() -> Data?
     func subscribeObjects() -> [Data]?
-    func presenceObject() -> Data?
     func typingObject(for conversation: ConversationID, and uniqueID: String) -> Data?
 }
 
@@ -59,15 +58,6 @@ class PayloadMaker: ChatStreamPayloadMaker {
         return events?.compactMap {
             try? JSONSerialization.data(withJSONObject: $0, options: [])
         }
-    }
-
-    func presenceObject() -> Data? {
-        let event: [String: Any?] = [
-            Payload.Keys.event: Payload.Event.tenantIsPresent.rawValue,
-            Payload.Keys.data: nil
-        ]
-
-        return try? JSONSerialization.data(withJSONObject: event, options: [])
     }
 
     func typingObject(for conversation: ConversationID, and uniqueID: String) -> Data? {

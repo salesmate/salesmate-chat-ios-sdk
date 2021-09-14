@@ -170,6 +170,8 @@ extension ChatViewModel {
         self.rows = allMessageViewModels.compactMap({ viewModel -> ChatRow? in
             if let viewModel = viewModel as? MessageViewModel {
                 return .message(viewModel)
+            } else if let viewModel = viewModel as? SendingMessageViewModel {
+                return .message(viewModel)
             } else if let viewModel = viewModel as? AskEmailViewModel {
                 return .askEmail(viewModel)
             } else if let viewModel = viewModel as? AskRatingViewModel {

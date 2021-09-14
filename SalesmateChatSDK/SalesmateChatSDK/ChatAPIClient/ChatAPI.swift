@@ -18,6 +18,7 @@ protocol ChatAPI: AnyObject {
 
     func updateRating(of ID: ConversationID, to rating: Int, completion: @escaping ((Result<Void, ChatError>) -> Void))
     func updateRemark(of ID: ConversationID, to remark: String, completion: @escaping ((Result<Void, ChatError>) -> Void))
+    func readConversation(ID: ConversationID, completion: @escaping ((Result<Void, ChatError>) -> Void))
 
     func getMessages(of conversation: ConversationID, at page: Page, completion: @escaping (Result<[Message], ChatError>) -> Void)
     func getMessages(of conversation: ConversationID, from date: Date, completion: @escaping (Result<[Message], ChatError>) -> Void)

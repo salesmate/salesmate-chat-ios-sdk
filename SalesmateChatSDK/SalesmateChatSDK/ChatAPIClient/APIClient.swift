@@ -123,6 +123,17 @@ extension ChatAPIClient: ChatAPI {
         }
     }
 
+    func readConversation(ID: ConversationID, completion: @escaping ((Result<Void, ChatError>) -> Void)) {
+        let request = ReadConversationRequest(conversationID: ID)
+
+        loader.load(request: request) { result in
+            switch result {
+            case .success: completion(.success(()))
+            case .failure: completion(.failure(.unknown))
+            }
+        }
+    }
+
     func getMessages(of conversation: ConversationID, at page: Page, completion: @escaping (Result<[Message], ChatError>) -> Void) {
         let request = GetMessagesRequest(conversationID: conversation, rows: page.rows, offset: page.offset)
 

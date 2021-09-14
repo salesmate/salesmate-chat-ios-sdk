@@ -131,17 +131,6 @@ extension StarscreamChatStream: WebSocketDelegate {
 
 extension StarscreamChatStream {
 
-    private func sendPresence(at interval: TimeInterval = 60) {
-        guard status.isConnected else { return }
-        guard let text = payloads.presenceObject()?.utf8 else { return }
-
-        socket?.write(string: text)
-
-        run(afterDelay: interval) {
-            self.sendPresence()
-        }
-    }
-
     private func monitorInternet() {
         internetMonitor.pathUpdateHandler = { path in
             print((path.status == .satisfied) ? "Internet Connected" : "Internet Disconnected")
@@ -180,7 +169,6 @@ extension StarscreamChatStream {
             onConnect = nil
 
             subscribe()
-            sendPresence()
             monitorInternet()
         } else if json[Payload.Keys.event].exists() {
             let payload = Payload(from: json)

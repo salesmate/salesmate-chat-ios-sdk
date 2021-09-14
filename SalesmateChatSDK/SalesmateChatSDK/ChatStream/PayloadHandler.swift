@@ -65,7 +65,7 @@ enum PayloadHandler {
 
     static private func handleConversationHasRead(event data: JSON) -> ChatEvent? {
         guard let conversationId = data["conversationId"].string else { return nil }
-        guard let userHasRead = data["userHasRead"].bool, userHasRead else { return nil }
+        guard let contactHasRead = data["contactHasRead"].bool, contactHasRead else { return nil }
 
         return .readStatusChange(conversationId)
     }

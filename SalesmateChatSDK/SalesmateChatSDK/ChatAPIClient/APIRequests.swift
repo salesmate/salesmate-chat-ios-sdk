@@ -197,3 +197,17 @@ struct UpdateRemarkRequest: HTTPRequest {
         body = JSONBody(["remark": remark])
     }
 }
+
+struct ReadConversationRequest: HTTPRequest {
+
+    var method: HTTPMethod = .post
+    var url: URL
+    var headers: HTTPHeaders?
+    var body: HTTPBody?
+
+    init(conversationID: String, common: CAC = common) {
+        url = URL(string: "/messenger/v1/widget/read-conversation-for-visitor", relativeTo: common.base)!
+        headers = common.headers
+        body = JSONBody(["conversation_id": conversationID])
+    }
+}

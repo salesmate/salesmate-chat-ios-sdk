@@ -18,6 +18,7 @@ protocol ConversationFetcher {
 protocol ConversationOperation {
     func updateRating(of ID: ConversationID, to rating: Int, completion: @escaping ((Result<Void, ChatError>) -> Void))
     func updateRemark(of ID: ConversationID, to remark: String, completion: @escaping ((Result<Void, ChatError>) -> Void))
+    func readConversation(ID: ConversationID, completion: ((Result<Void, ChatError>) -> Void)?)
 }
 
 protocol MessageFetcher {
@@ -56,8 +57,6 @@ protocol ChatObservation {
      - `conversationUpdated`
      - `messageesUpdated`
      - `typing`
-     - `assign`
-     - `disconnected`
      
      Other event are for internal use only.
      

@@ -46,6 +46,7 @@ class ChatController {
             case .success:
                 self.updateMesages(for: .pageLoading)
                 self.page.next()
+                self.client.readConversation(ID: self.conversationID, completion: nil)
             case .failure:
                 break
             }
@@ -157,6 +158,7 @@ extension ChatController {
             case .messageReceived(_, let messages):
                 guard let messages = messages, !messages.isEmpty else { return }
                 self.updateMesages(for: .newMessage)
+                self.client.readConversation(ID: self.conversationID, completion: nil)
             case .typing(_, let userID):
                 guard let userID = userID else { return }
                 guard let user = self.config.users?.first(where: { $0.id == userID }) else { return }

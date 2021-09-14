@@ -111,13 +111,16 @@ extension SalesmateChatClient: ConversationFetcher {
 extension SalesmateChatClient: ConversationOperation {
 
     func updateRating(of ID: ConversationID, to rating: Int, completion: @escaping ((Result<Void, ChatError>) -> Void)) {
-        chatAPI.updateRating(of: ID, to: rating) { result in
-            completion(result)
-        }
+        chatAPI.updateRating(of: ID, to: rating, completion: completion)
     }
 
     func updateRemark(of ID: ConversationID, to remark: String, completion: @escaping ((Result<Void, ChatError>) -> Void)) {
-        chatAPI.updateRemark(of: ID, to: remark) { result in
+        chatAPI.updateRemark(of: ID, to: remark, completion: completion)
+    }
+
+    func readConversation(ID: ConversationID, completion: ((Result<Void, ChatError>) -> Void)?) {
+        chatAPI.readConversation(ID: ID) { result in
+            guard let completion = completion else { return }
             completion(result)
         }
     }
@@ -166,13 +169,15 @@ extension SalesmateChatClient: FileOperation {
 extension SalesmateChatClient {
 
     private func prepareEventListener() {
-        let events: [ChatEventToObserve] = [.messageReceived, .typing, .conversationUpdated]
+        let events: [ChatEventToObserve] = [.messageReceived, .typing, .conversationUpdated, .readStatusChange]
 
         chatStream.register(observer: self, for: events, of: nil) { event in
             switch event {
             case .messageReceived(let CID, _):
                 self.getNewMessages(of: CID)
             case .conversationUpdated(let ID):
+                self.updateDetail(of: ID)
+            case .readStatusChange(let ID):
                 self.updateDetail(of: ID)
             default:
                 self.relay(event)
