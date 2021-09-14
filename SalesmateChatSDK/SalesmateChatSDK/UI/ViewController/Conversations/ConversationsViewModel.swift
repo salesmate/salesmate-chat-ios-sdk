@@ -60,6 +60,17 @@ class ConversationsViewModel {
 
         conversationViewModels = zip.map { ConversationCellViewModel(conversation: $0, user: $1, workspace: workspace)}
     }
+
+    private func startObservingConversations() {
+        client.register(observer: self, for: [.conversationUpdated], of: nil) { event in
+            switch event {
+            case .conversationUpdated:
+                self.updateConversations()
+            default:
+                break
+            }
+        }
+    }
 }
 
 extension ConversationsViewModel {
@@ -75,6 +86,7 @@ extension ConversationsViewModel {
             switch result {
             case .success(let conversations):
                 self.updateConversations()
+                self.startObservingConversations()
 
                 // Load next page automatically
                 if !conversations.isEmpty {

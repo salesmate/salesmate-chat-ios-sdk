@@ -55,7 +55,7 @@ enum ChatError: Error {
 enum ChatEvent {
     case disconnected
 
-    case conversationUpdated(ConversationID?)
+    case conversationUpdated(ConversationID)
     case readStatusChange(ConversationID)
 
     case messageReceived(ConversationID, [Message]?)

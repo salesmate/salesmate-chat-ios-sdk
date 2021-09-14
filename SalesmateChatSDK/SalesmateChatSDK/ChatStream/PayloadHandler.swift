@@ -32,6 +32,8 @@ enum PayloadHandler {
                     return handleConversationStatusUpdate(event: innerData)
                 case .messageDeleted:
                     return handleDeleteMessage(event: innerData)
+                case .updateConversationsList:
+                    return handleConversationStatusUpdate(event: innerData)
                 }
             } else {
                 // Typing event

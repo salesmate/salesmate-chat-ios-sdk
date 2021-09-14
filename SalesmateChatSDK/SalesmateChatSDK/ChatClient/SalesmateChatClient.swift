@@ -166,16 +166,28 @@ extension SalesmateChatClient: FileOperation {
 extension SalesmateChatClient {
 
     private func prepareEventListener() {
-        let events: [ChatEventToObserve] = [.messageReceived, .typing]
+        let events: [ChatEventToObserve] = [.messageReceived, .typing, .conversationUpdated]
 
         chatStream.register(observer: self, for: events, of: nil) { event in
             switch event {
             case .messageReceived(let CID, _):
                 self.getNewMessages(of: CID)
-            case .typing:
-                self.relay(event)
+            case .conversationUpdated(let ID):
+                self.updateDetail(of: ID)
             default:
-                print("This event(\(event)) is not observed by SalesmateChatClient")
+                self.relay(event)
+            }
+        }
+    }
+
+    private func updateDetail(of ID: ConversationID) {
+        self.getDetail(of: ID) { result in
+            switch result {
+            case .success(let conversation):
+                self.conversations.update(with: conversation)
+                self.relay(.conversationUpdated(ID))
+            case .failure(let error):
+                print(error)
             }
         }
     }

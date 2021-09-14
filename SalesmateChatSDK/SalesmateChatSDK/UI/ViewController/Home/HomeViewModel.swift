@@ -109,6 +109,17 @@ class HomeViewModel {
             self.showConversation?(viewModel)
         }
     }
+
+    private func startObservingConversations() {
+        client.register(observer: self, for: [.conversationUpdated], of: nil) { event in
+            switch event {
+            case .conversationUpdated:
+                self.getRecentConversations()
+            default:
+                break
+            }
+        }
+    }
 }
 
 extension HomeViewModel {
@@ -122,6 +133,7 @@ extension HomeViewModel {
                 } else {
                     self.askToShowRecentConversationsView(with: conversations)
                 }
+                self.startObservingConversations()
             case .failure:
                 break
             }
