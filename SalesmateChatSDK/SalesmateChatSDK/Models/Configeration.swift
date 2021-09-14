@@ -161,6 +161,11 @@ class Configeration {
             self.security = Security(from: json["securitySettings"])
         }
     }
+
+    func updateStatus(of user: UserID, to status: User.Status) {
+        guard let index = users?.firstIndex(where: { $0.id == user }) else { return }
+        users?[index].status = status
+    }
 }
 
 extension Configeration {

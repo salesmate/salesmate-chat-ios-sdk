@@ -19,7 +19,7 @@ struct User: Codable {
     let firstName: String
     let lastName: String
     let profileUrl: String?
-    let status: Status?
+    var status: Status?
 
     enum CodingKeys: String, CodingKey {
         case id

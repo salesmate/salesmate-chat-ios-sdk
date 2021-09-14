@@ -169,7 +169,7 @@ extension SalesmateChatClient: FileOperation {
 extension SalesmateChatClient {
 
     private func prepareEventListener() {
-        let events: [ChatEventToObserve] = [.messageReceived, .typing, .conversationUpdated, .readStatusChange]
+        let events: [ChatEventToObserve] = [.messageReceived, .typing, .conversationUpdated, .readStatusChange, .onlineUsers, .offlineUsers]
 
         chatStream.register(observer: self, for: events, of: nil) { event in
             switch event {
@@ -179,8 +179,10 @@ extension SalesmateChatClient {
                 self.updateDetail(of: ID)
             case .readStatusChange(let ID):
                 self.updateDetail(of: ID)
-            default:
+            case .onlineUsers, .offlineUsers:
                 self.relay(event)
+            default:
+                break
             }
         }
     }

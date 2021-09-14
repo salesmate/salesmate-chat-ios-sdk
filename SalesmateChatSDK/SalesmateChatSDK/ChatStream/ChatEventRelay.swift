@@ -19,6 +19,7 @@ enum ChatEventToObserve {
 
     case typing
 
+    case onlineUsers
     case offlineUsers
 }
 
@@ -30,6 +31,7 @@ func == (lhs: ChatEventToObserve, rhs: ChatEvent) -> Bool {
     case (.messageReceived, .messageReceived): return true
     case (.messageDeleted, .messageDeleted): return true
     case (.typing, .typing): return true
+    case (.onlineUsers, .onlineUsers): return true
     case (.offlineUsers, .offlineUsers): return true
     default: return false
     }

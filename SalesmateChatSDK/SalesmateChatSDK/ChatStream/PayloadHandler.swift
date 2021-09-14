@@ -58,9 +58,16 @@ enum PayloadHandler {
     }
 
     static private func handleUserAvailabilityStatusUpdate(event data: JSON) -> ChatEvent? {
+        guard let status = data["status"].string else { return nil }
         guard let userIDs = data["userIds"].arrayObject as? [String] else { return nil }
 
-        return .offlineUsers(userIDs.compactMap({ IntegerID($0) }))
+        if status == "available" {
+            return .onlineUsers(userIDs.compactMap({ IntegerID($0) }))
+        } else if status == "away" {
+            return .offlineUsers(userIDs.compactMap({ IntegerID($0) }))
+        }
+
+        return nil
     }
 
     static private func handleConversationHasRead(event data: JSON) -> ChatEvent? {

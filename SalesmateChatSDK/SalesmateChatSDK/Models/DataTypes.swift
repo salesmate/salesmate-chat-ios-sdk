@@ -63,12 +63,13 @@ enum ChatEvent {
 
     case typing(ConversationID, UserID?)
 
+    case onlineUsers([IntegerID])
     case offlineUsers([IntegerID])
 
     func hasAssociatedConversation(ID: ConversationID) -> Bool {
         switch self {
         case .disconnected:
-            return false
+            return true
         case .conversationUpdated(let conversationID):
             if conversationID == ID { return true }
         case .readStatusChange(let conversationID):
@@ -79,8 +80,8 @@ enum ChatEvent {
             if conversationID == ID { return true }
         case .typing(let conversationID, _):
             if conversationID == ID { return true }
-        case .offlineUsers:
-            return false
+        case .onlineUsers, .offlineUsers:
+            return true
         }
 
         return false

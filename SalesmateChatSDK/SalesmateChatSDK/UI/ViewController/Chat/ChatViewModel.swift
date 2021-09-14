@@ -102,6 +102,10 @@ class ChatViewModel {
         self.conversation?.remark = remark
     }
 
+    func updateTopBar() {
+        prepareTopViewModel()
+    }
+
     func update(_ messages: Set<Message>, sendingMessages: Set<MessageToSend>, for event: MessageUpdateEvent) {
         updateMessageViewModels(for: messages, sendingMessages: sendingMessages)
 
