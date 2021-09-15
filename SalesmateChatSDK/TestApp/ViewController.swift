@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AudioToolbox
 import SalesmateChatSDK
 
 class ViewController: UIViewController {
@@ -22,6 +23,7 @@ class ViewController: UIViewController {
 //        if let id = UIDevice.current.identifierForVendor?.uuidString {
 //            SalesmateChat.setVerifiedID(id)
 //        }
+//        playAllSound()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -32,5 +34,15 @@ class ViewController: UIViewController {
 
     @IBAction func showChatPressed(_ sender: UIButton) {
         SalesmateChat.presentMessenger(from: self)
+    }
+
+    private var soundID: Int = 1007
+
+    private func playAllSound () {
+        print(soundID)
+        AudioServicesPlayAlertSoundWithCompletion(SystemSoundID(soundID)) {
+            self.soundID += 1
+            self.playAllSound()
+        }
     }
 }

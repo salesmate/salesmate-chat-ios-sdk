@@ -14,16 +14,19 @@ class ChatController {
     private let config: Configeration
     private let client: ChatClient
     private let conversationID: ConversationID
+    private let player: SimpleSoundPlayer.Type
+
     private var sendingMessages: Set<MessageToSend> = []
     private var askEmailTimer: Timer?
 
     private(set) var page = Page(size: 50)
 
-    init(viewModel: ChatViewModel, config: Configeration, client: ChatClient, conversationID: ConversationID) {
+    init(viewModel: ChatViewModel, config: Configeration, client: ChatClient, conversationID: ConversationID, player: SimpleSoundPlayer.Type = AudioToolboxSoundPlayer.self) {
         self.viewModel = viewModel
         self.client = client
         self.config = config
         self.conversationID = conversationID
+        self.player = player
 
         prepareClient()
     }
@@ -147,6 +150,12 @@ extension ChatController {
 
     private func updateMesages(for event: ChatViewModel.MessageUpdateEvent) {
         let messages = client.messages[conversationID] ?? []
+
+        let sendingMessageIDs = sendingMessages.map { $0.id }
+        let commonIDs = messages.filter { sendingMessageIDs.contains($0.id)}.map { $0.id }
+
+        sendingMessages = sendingMessages.filter({ !commonIDs.contains($0.id) })
+
         viewModel?.update(messages, sendingMessages: sendingMessages, for: event)
     }
 
@@ -157,6 +166,11 @@ extension ChatController {
             switch event {
             case .messageReceived(_, let messages):
                 guard let messages = messages, !messages.isEmpty else { return }
+
+                if let last = messages.last, !self.sendingMessages.contains(where: { $0.id == last.id }) {
+                    self.playReceivedSound()
+                }
+
                 self.updateMesages(for: .newMessage)
                 self.client.readConversation(ID: self.conversationID, completion: nil)
             case .typing(_, let userID):
@@ -213,8 +227,10 @@ extension ChatController {
             case .success:
                 message.status = .sent
                 self.startAskEmailTimesIfRequire()
+                self.playSendSound()
             case .failure:
                 message.status = .fail
+                self.playFailSound()
             }
 
             self.sendingMessages.update(with: message)
@@ -249,10 +265,25 @@ extension ChatController {
         guard hasNoReply, haventAsked else { return }
 
         DispatchQueue.main.async {
-            self.askEmailTimer = Timer.scheduledTimer(withTimeInterval: 5, repeats: false, block: { timer in
+            self.askEmailTimer = Timer.scheduledTimer(withTimeInterval: 60 * 2, repeats: false, block: { timer in
                 askEmail()
                 timer.invalidate()
             })
         }
+    }
+}
+
+extension ChatController {
+
+    private func playSendSound() {
+        player.play(sound: .sent)
+    }
+
+    private func playReceivedSound() {
+        player.play(sound: .reacived)
+    }
+
+    private func playFailSound() {
+        player.play(sound: .fail)
     }
 }

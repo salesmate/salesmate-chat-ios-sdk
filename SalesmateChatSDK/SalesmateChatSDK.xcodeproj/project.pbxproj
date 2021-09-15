@@ -95,6 +95,7 @@
 		9BF260E026B3D59000D21C75 /* ConversationsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF260DF26B3D59000D21C75 /* ConversationsVC.swift */; };
 		9BF260E226B3D5A400D21C75 /* ConversationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF260E126B3D5A400D21C75 /* ConversationsViewModel.swift */; };
 		9BF64A2026BC44F0001F7FB0 /* CirculerProfileViewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF64A1F26BC44F0001F7FB0 /* CirculerProfileViewModels.swift */; };
+		9BF6EFEA26F1C3B5007A0216 /* SimpleSound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF6EFE926F1C3B5007A0216 /* SimpleSound.swift */; };
 		9BFC63CC26B128B400976141 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BFC63CB26B128B400976141 /* Home.storyboard */; };
 		9BFC63CE26B128C600976141 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BFC63CD26B128C600976141 /* HomeVC.swift */; };
 		9BFC63D126B128F600976141 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BFC63D026B128F600976141 /* HomeViewModel.swift */; };
@@ -244,6 +245,7 @@
 		9BF260DF26B3D59000D21C75 /* ConversationsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsVC.swift; sourceTree = "<group>"; };
 		9BF260E126B3D5A400D21C75 /* ConversationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsViewModel.swift; sourceTree = "<group>"; };
 		9BF64A1F26BC44F0001F7FB0 /* CirculerProfileViewModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CirculerProfileViewModels.swift; sourceTree = "<group>"; };
+		9BF6EFE926F1C3B5007A0216 /* SimpleSound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleSound.swift; sourceTree = "<group>"; };
 		9BFC63CB26B128B400976141 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		9BFC63CD26B128C600976141 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		9BFC63D026B128F600976141 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
@@ -342,6 +344,7 @@
 				9B3A9B8A26A701E600EB7C10 /* Miscellaneous.swift */,
 				9B3A9B8B26A701E600EB7C10 /* DateTime.swift */,
 				9B4AD3EB26B959B600EA32DB /* HexColor.swift */,
+				9BF6EFE926F1C3B5007A0216 /* SimpleSound.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -796,6 +799,7 @@
 				9B83EAB826BD132B00C269DB /* ChatFileView.swift in Sources */,
 				9BD7752D26B27BEE002BA2AD /* XIBView.swift in Sources */,
 				9B3A9B7D26A701D200EB7C10 /* Block.swift in Sources */,
+				9BF6EFEA26F1C3B5007A0216 /* SimpleSound.swift in Sources */,
 				9B09C2C826E632E60007B005 /* HUDVC.swift in Sources */,
 				9BAB61B726CCCB89001B5B8C /* DataPersistency.swift in Sources */,
 				9B65E01226A58C64001F3928 /* APIDataTypes.swift in Sources */,
