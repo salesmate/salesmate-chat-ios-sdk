@@ -74,6 +74,17 @@ class Configeration {
         let canUploadAttachment: Bool
     }
 
+    struct ClosedConversation {
+        let preventRepliesForContacts: Bool
+        let preventRepliesForVisitors: Bool
+        let preventRepliesInDaysForContacts: Int
+        let preventRepliesInDaysForVisitors: Int
+    }
+
+    struct MICS {
+        let shouldPlaySoundsForMessage: Bool
+    }
+
     let identity: Settings
     let environment: Environment
     let local: Storage
@@ -88,7 +99,8 @@ class Configeration {
     private(set) var rating: [Rating]?
     private(set) var askEmail: AskEmailSetting?
     private(set) var security: Security?
-
+    private(set) var other: MICS?
+    
     /// We are assuming that we will alwayes get identifierForVendor because the chances of that is very low.
     let uniqueID: String = UIDevice.current.identifierForVendor?.uuidString ?? ""
     var contactID: IntegerID? { self.contact?.id }
@@ -159,6 +171,10 @@ class Configeration {
 
         if json["securitySettings"].exists() {
             self.security = Security(from: json["securitySettings"])
+        }
+        
+        if json["misc"].exists() {
+            self.other = MICS(from: json["misc"])
         }
     }
 
@@ -248,6 +264,23 @@ extension Configeration.Security: Codable {
     }
 }
 
+extension Configeration.ClosedConversation: Codable {
+    
+    enum CodingKeys: String, CodingKey {
+        case preventRepliesForContacts = "prevent_replies_to_close_conversations_for_contacts"
+        case preventRepliesForVisitors = "prevent_replies_to_close_conversations_for_visitors"
+        case preventRepliesInDaysForContacts = "prevent_replies_to_close_conversations_within_number_of_days_for_contacts"
+        case preventRepliesInDaysForVisitors = "prevent_replies_to_close_conversations_within_number_of_days_for_visitors"
+    }
+}
+
+extension Configeration.MICS: Codable {
+
+    enum CodingKeys: String, CodingKey {
+        case shouldPlaySoundsForMessage = "play_sounds_for_messenger"
+    }
+}
+
 extension Configeration.Availability.WeekDayName {
 
     static let allWeekDays: [Self] = [.monday, .tuesday, .wednesday, .thursday, .friday]
@@ -255,4 +288,8 @@ extension Configeration.Availability.WeekDayName {
 
     var isWeekDay: Bool { Self.allWeekDays.contains(self) }
     var isWeekendDay: Bool { Self.allWeekEndsDays.contains(self) }
+}
+
+extension Configeration.ClosedConversation {
+    
 }

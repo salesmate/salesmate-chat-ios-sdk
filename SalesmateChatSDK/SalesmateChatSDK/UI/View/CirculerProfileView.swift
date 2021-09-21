@@ -87,10 +87,10 @@ class CirculerProfileView: UIView {
             label.textColor = UIColor(hex: viewModel.textColorCode)
         }
 
-        if let imageURL = viewModel.imageURL {
+        if let imageSource = viewModel.image {
             imageView.isHidden = false
             imageView.image = nil
-            imageView.loadImage(with: imageURL)
+            imageView.loadImage(from: imageSource)
         }
 
         if viewModel.shouldShowStatus {

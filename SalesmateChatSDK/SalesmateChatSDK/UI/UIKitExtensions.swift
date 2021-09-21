@@ -52,6 +52,18 @@ extension UIColor {
 
 extension UIImageView {
 
+    func loadImage(from source: ImageSource, completion: (() -> Void)? = nil) {
+        switch source {
+        case .url(let link):
+            self.loadImage(with: link, completion: completion)
+        case .local(let name):
+            if let image = UIImage(name) {
+                self.image = image
+            }
+            completion?()
+        }
+    }
+
     func loadImage(with link: URL, completion: (() -> Void)? = nil) {
         Nuke.loadImage(with: link, into: self) { _ in completion?() }
     }

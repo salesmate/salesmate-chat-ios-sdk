@@ -173,8 +173,6 @@
 		9B3A9B8926A701E600EB7C10 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		9B3A9B8A26A701E600EB7C10 /* Miscellaneous.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Miscellaneous.swift; sourceTree = "<group>"; };
 		9B3A9B8B26A701E600EB7C10 /* DateTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateTime.swift; sourceTree = "<group>"; };
-		9B488BC426AAC51200FDD21C /* HTTPTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPTests.swift; sourceTree = "<group>"; };
-		9B488BC626AAC51200FDD21C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9B4AD3EB26B959B600EA32DB /* HexColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexColor.swift; sourceTree = "<group>"; };
 		9B4B630A26B0106000203172 /* ChatAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatAPI.swift; sourceTree = "<group>"; };
 		9B4B631B26B02D6500203172 /* TestApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -362,15 +360,6 @@
 			path = HTTP;
 			sourceTree = "<group>";
 		};
-		9B488BC326AAC51200FDD21C /* HTTPTests */ = {
-			isa = PBXGroup;
-			children = (
-				9B488BC426AAC51200FDD21C /* HTTPTests.swift */,
-				9B488BC626AAC51200FDD21C /* Info.plist */,
-			);
-			path = HTTPTests;
-			sourceTree = "<group>";
-		};
 		9B4B631C26B02D6500203172 /* TestApp */ = {
 			isa = PBXGroup;
 			children = (
@@ -441,7 +430,6 @@
 			children = (
 				9BB117EB26A1A45500E0B242 /* SalesmateChatSDK */,
 				9BB117F626A1A45500E0B242 /* SalesmateChatSDKTests */,
-				9B488BC326AAC51200FDD21C /* HTTPTests */,
 				9B4B631C26B02D6500203172 /* TestApp */,
 				9BB117EA26A1A45500E0B242 /* Products */,
 				9B20482E26A6F23A001EC729 /* Frameworks */,

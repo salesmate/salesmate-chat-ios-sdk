@@ -11,7 +11,7 @@ protocol CirculerProfileViewModelType {
     var borderWidth: Float { get }
     var backgroundColorCode: String { get }
 
-    var imageURL: URL? { get }
+    var image: ImageSource? { get }
 
     var text: String? { get }
     var textColorCode: String { get }
@@ -54,7 +54,7 @@ class CirculerUserProfileViewModel: CirculerProfileViewModelType {
     let borderWidth: Float
     let backgroundColorCode: String
 
-    let imageURL: URL?
+    let image: ImageSource?
 
     let text: String?
     let textColorCode: String = "FFFFFF"
@@ -80,7 +80,13 @@ class CirculerUserProfileViewModel: CirculerProfileViewModelType {
         self.userStatus = user.status
 
         text = user.firstName.first?.description
-        imageURL = URL(string: user.profileUrl ?? "")
+
+        if let url = URL(string: user.profileUrl ?? "") {
+            image = .url(url)
+        } else {
+            image = nil
+        }
+
         backgroundColorCode = Self.profileBackgroundColorCode(for: user.firstName)
     }
 }
@@ -90,7 +96,7 @@ class CirculerMoreProfileViewModel: CirculerProfileViewModelType {
     let borderWidth: Float
     let backgroundColorCode: String = "EBECF0"
 
-    let imageURL: URL? = nil
+    let image: ImageSource? = nil
 
     let text: String?
     let textSize: Float = 18
@@ -111,7 +117,7 @@ class CirculerTextProfileViewModel: CirculerProfileViewModelType {
     let borderWidth: Float = 0
     let backgroundColorCode: String
 
-    let imageURL: URL? = nil
+    let image: ImageSource? = nil
 
     let text: String?
     let textColorCode: String = "FFFFFF"
@@ -128,7 +134,7 @@ class CirculerBotProfileViewModel: CirculerProfileViewModelType {
     let borderWidth: Float = 0
     let backgroundColorCode: String
 
-    let imageURL: URL? = nil
+    let image: ImageSource? = .local("img-bot-avatar")
 
     let text: String? = "B"
     let textColorCode: String = "FFFFFF"

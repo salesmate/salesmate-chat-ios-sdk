@@ -134,3 +134,8 @@ struct EmailAddress: RawRepresentable, Codable {
         self.rawValue = rawValue
     }
 }
+
+enum ImageSource {
+    case url(URL)
+    case local(String)
+}

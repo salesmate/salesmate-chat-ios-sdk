@@ -141,12 +141,7 @@ extension ChatViewModel {
 
         // Sort
         let sortedMessage = messages.sorted(by: { $0.createdDate < $1.createdDate })
-        var sortedsendingMessage = sendingMessages.sorted(by: { $0.createdDate < $1.createdDate })
-
-//        // Remove duplicate from sending messages
-//        let sendingMessageIDs = sortedsendingMessage.map { $0.id }
-//        let commonIDs = sortedMessage.filter { sendingMessageIDs.contains($0.id)}.map { $0.id }
-//        sortedsendingMessage.removeAll(where: { commonIDs.contains($0.id) })
+        let sortedsendingMessage = sendingMessages.sorted(by: { $0.createdDate < $1.createdDate })
 
         // Create View Models
         let messageViewModels = sortedMessage.map { message -> ChatContentViewModelType in
