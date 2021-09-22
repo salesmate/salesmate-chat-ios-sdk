@@ -99,6 +99,7 @@ class Configeration {
     private(set) var rating: [Rating]?
     private(set) var askEmail: AskEmailSetting?
     private(set) var security: Security?
+    private(set) var closed: ClosedConversation?
     private(set) var other: MICS?
     private(set) var canStartNewConversation: Bool = false
 
@@ -172,6 +173,10 @@ class Configeration {
 
         if json["securitySettings"].exists() {
             self.security = Security(from: json["securitySettings"])
+        }
+
+        if json["conversationsSettings"].exists() {
+            self.closed = ClosedConversation(from: json["conversationsSettings"])
         }
 
         if json["misc"].exists() {
@@ -293,6 +298,21 @@ extension Configeration.Availability.WeekDayName {
     var isWeekendDay: Bool { Self.allWeekEndsDays.contains(self) }
 }
 
-extension Configeration.ClosedConversation {
+extension Configeration {
 
+    var shouldPreventReplies: Bool {
+        if contactID == nil {
+            return closed?.preventRepliesForVisitors ?? false
+        } else {
+            return closed?.preventRepliesForContacts ?? false
+        }
+    }
+
+    var preventRepliesInDays: Int {
+        if contactID == nil {
+            return closed?.preventRepliesInDaysForVisitors ?? 0
+        } else {
+            return closed?.preventRepliesInDaysForContacts ?? 0
+        }
+    }
 }

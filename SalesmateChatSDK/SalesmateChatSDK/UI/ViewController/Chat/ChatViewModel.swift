@@ -27,6 +27,12 @@ class ChatViewModel {
         case sending
     }
 
+    enum Bottom {
+        case message
+        case askContactDetail
+        case startNewChat
+    }
+
     // MARK: - Private Properties
     private let chatOf: ChatOf
     private let conversationID: ConversationID
@@ -42,16 +48,22 @@ class ChatViewModel {
     let isNew: Bool
     let allowAttachment: Bool
 
-    var isEmailAddressMandatory: Bool { isNew && config.isEmailAddressMandatory() && rows.isEmpty }
+    // var isEmailAddressMandatory: Bool { isNew && config.isEmailAddressMandatory() && rows.isEmpty }
 
     private(set) var rows: [ChatRow] = []
     private(set) var email: EmailAddress?
+    private(set) var showStartNewChat: Bool = false
+    private(set) var bottom: Bottom = .message {
+        didSet { runOnMain { self.bottomBarUpdated?(self.bottom) } }
+    }
 
     var messagesUpdated: (() -> Void)?
     var newMessagesUpdated: (() -> Void)?
     var sendingMessagesUpdated: (() -> Void)?
     var topBarUpdated: (() -> Void)?
+    var bottomBarUpdated: ((Bottom) -> Void)?
     var typing: ((CirculerUserProfileViewModel) -> Void)?
+    var newChatViewModel: ChatViewModel { ChatViewModel(chatOf: .new, config: config, client: client) }
 
     // MARK: - Init
     init(chatOf: ChatOf, config: Configeration, client: ChatClient) {
@@ -77,11 +89,14 @@ class ChatViewModel {
         self.topViewModel = ChatTopViewModel(config: config)
         self.topbar = (topViewModel.headerLogoURL == nil) ? .withoutLogo : .withLogo
 
+        self.showStartNewChat = config.canStartNewConversation
+
         if let email = config.contact?.email {
             self.email = EmailAddress(rawValue: email)
         }
 
         prepareTopViewModel()
+        prepareBottomOption()
     }
 
     func getController() -> ChatController {
@@ -92,6 +107,8 @@ class ChatViewModel {
         guard conversation.id == conversationID else { return }
 
         self.conversation = conversation
+
+        prepareBottomOption()
     }
 
     func updateRating(to rating: Int) {
@@ -132,6 +149,18 @@ extension ChatViewModel {
 
         runOnMain {
             self.topBarUpdated?()
+        }
+    }
+
+    private func prepareBottomOption() {
+        let daysInterval: TimeInterval = TimeInterval(config.preventRepliesInDays * 24 * 60 * 60)
+
+        if config.shouldPreventReplies,
+           let closedDate = conversation?.closedDate,
+           abs(closedDate.timeIntervalSinceNow) > daysInterval {
+            bottom = .startNewChat
+        } else {
+            bottom = .message
         }
     }
 

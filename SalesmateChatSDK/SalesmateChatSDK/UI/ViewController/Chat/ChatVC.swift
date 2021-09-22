@@ -8,6 +8,33 @@
 import UIKit
 import QuickLook
 
+protocol CloseConversationViewDelegate: AnyObject {
+    func didTapStartChat()
+}
+
+class CloseConversationView: UIView {
+
+    // MARK: - IBOutlets
+    @IBOutlet private weak var btnStartChat: UIButton!
+
+    // MARK: - Properties
+    weak var delegate: CloseConversationViewDelegate?
+
+    // MARK: - Interface
+    func setActionColor(_ color: UIColor) {
+        btnStartChat.backgroundColor = color
+    }
+
+    func shouldShowStartChat(_ show: Bool) {
+        btnStartChat.isHidden = !show
+    }
+
+    // MARK: - Actions
+    @IBAction private func btnStartNewChatPressed(_ sender: UIButton) {
+        delegate?.didTapStartChat()
+    }
+}
+
 class ChatVC: UIViewController {
 
     // MARK: - Static Functions
@@ -47,6 +74,7 @@ class ChatVC: UIViewController {
 
     @IBOutlet private weak var typingAnimation: ChatTypingAnimationView!
     @IBOutlet private weak var messageInputBar: MessageComposeView!
+    @IBOutlet private weak var closeConversationView: CloseConversationView!
 
     // MARK: - Override
     override var canBecomeFirstResponder: Bool { true }
@@ -108,6 +136,10 @@ class ChatVC: UIViewController {
             self.typingAnimation.profileViewModel = profileViewModel
             self.showTypingAnimation()
         }
+
+        viewModel.bottomBarUpdated = { bottom in
+            self.updateBottomBar(to: bottom)
+        }
     }
 
     // MARK: - View
@@ -115,6 +147,7 @@ class ChatVC: UIViewController {
         prepareTopBar()
         prepareTableView()
         prepareInputBar()
+        updateBottomBar(to: viewModel.bottom)
 
         loading.loading.color = UIColor(hex: viewModel.actionColorCode)
     }
@@ -155,11 +188,12 @@ class ChatVC: UIViewController {
     private func prepareInputBar() {
         if let actionColor = UIColor(hex: viewModel.actionColorCode) {
             messageInputBar.setActionColor(actionColor)
+            closeConversationView.setActionColor(actionColor)
         }
 
+        closeConversationView.delegate = self
         messageInputBar.delegate = self
         messageInputBar.showAttachmentOption(viewModel.allowAttachment)
-        messageInputBar.enableEmailMode(viewModel.isEmailAddressMandatory)
     }
 
     private func prepareTableView() {
@@ -178,6 +212,21 @@ class ChatVC: UIViewController {
         refreshControl.tintColor = UIColor(hex: viewModel.actionColorCode)
         tableView.refreshControl = refreshControl
         refreshControl.addTarget(self, action: #selector(loadMoreMessages(_:)), for: .valueChanged)
+    }
+
+    private func updateBottomBar(to bottom: ChatViewModel.Bottom) {
+        switch bottom {
+        case .message:
+            closeConversationView.isHidden = true
+            self.becomeFirstResponder()
+        case .askContactDetail:
+            closeConversationView.isHidden = true
+            self.resignFirstResponder()
+        case .startNewChat:
+            closeConversationView.isHidden = false
+            closeConversationView.shouldShowStartChat(viewModel.showStartNewChat)
+            self.resignFirstResponder()
+        }
     }
 
     // MARK: - Data
@@ -211,8 +260,6 @@ class ChatVC: UIViewController {
                 self.tableView.safeScrollToRow(at: IndexPath(row: newItemCount - 1, section: 0), at: .top, animated: true)
             }
         }
-
-        messageInputBar.enableEmailMode(viewModel.isEmailAddressMandatory)
     }
 
     private func displayNewMessages() {
@@ -246,8 +293,6 @@ class ChatVC: UIViewController {
                 }
             }
         }
-
-        messageInputBar.enableEmailMode(viewModel.isEmailAddressMandatory)
     }
 
     @objc private func loadMoreMessages(_ sender: Any) {
@@ -412,12 +457,8 @@ extension ChatVC: FilePickerControllerPresenter {
 extension ChatVC: MessageComposeViewDelegate {
 
     func didTapSend(with text: String) {
-        if viewModel.isEmailAddressMandatory {
-            sendEmail(text)
-        } else {
-            controller.sendMessage(with: text)
-            messageInputBar.clear()
-        }
+        controller.sendMessage(with: text)
+        messageInputBar.clear()
     }
 
     func didTapAttachment() {
@@ -533,5 +574,19 @@ extension ChatVC: QLPreviewControllerDataSource {
 
     func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
         previewFileURL! as NSURL
+    }
+}
+
+extension ChatVC: CloseConversationViewDelegate {
+
+    func didTapStartChat() {
+        let VC = ChatVC.create(with: viewModel.newChatViewModel)
+
+        guard var viewControllers = navigationController?.viewControllers else { return }
+
+        _ = viewControllers.popLast()
+        viewControllers.append(VC)
+
+        navigationController?.setViewControllers(viewControllers, animated: true)
     }
 }

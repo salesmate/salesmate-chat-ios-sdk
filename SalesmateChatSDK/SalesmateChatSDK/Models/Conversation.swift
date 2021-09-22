@@ -30,6 +30,20 @@ struct Conversation {
     let lastMessageDate: Date
     let lastMessage: LastMessage?
 
+    private let closedDateString: String?
+    public var closedDate: Date? {
+        guard let closedDateString = closedDateString else { return nil }
+        if let date = DateFormatter.fullISO8601NoFraction.date(from: closedDateString) {
+            return date
+        } else if let date = DateFormatter.fullISO8601.date(from: closedDateString) {
+            return date
+        } else if let date = DateFormatter.fullISO8601WithoutZ.date(from: closedDateString) {
+            return date
+        }
+
+        return nil
+    }
+
     let isRead: Bool
 
     var rating: String?
@@ -45,6 +59,7 @@ extension Conversation: Codable {
         case name
         case lastMessageDate = "last_message_date"
         case lastMessage = "lastMessageData"
+        case closedDateString = "closedDate"
         case isRead = "contact_has_read"
         case ownerUserId = "owner_user"
         case lastUserId = "last_participating_user_id"

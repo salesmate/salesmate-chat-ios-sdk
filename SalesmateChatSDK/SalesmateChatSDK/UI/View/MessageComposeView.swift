@@ -37,14 +37,6 @@ class MessageComposeView: UIView {
         btnAttachment.isHidden = !show
     }
 
-    func enableEmailMode(_ enable: Bool) {
-        if enable {
-            lblPlaceholder.text = "Enter your email address"
-        } else {
-            lblPlaceholder.text = "Start typing..."
-        }
-    }
-
     // MARK: - Override
     override func awakeFromNib() {
         super.awakeFromNib()

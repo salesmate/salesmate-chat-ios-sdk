@@ -365,7 +365,7 @@
                                         </subviews>
                                     </stackView>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="interactive" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="OPv-4u-xKb">
-                                        <rect key="frame" x="0.0" y="439" width="414" height="379"/>
+                                        <rect key="frame" x="0.0" y="439" width="414" height="247"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -377,6 +377,58 @@
                                             <outlet property="delegate" destination="Y6W-OH-hqX" id="r3L-cf-WcX"/>
                                         </connections>
                                     </tableView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gpg-L2-5Ht" customClass="CloseConversationView" customModule="SalesmateChatSDK" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="666" width="414" height="152"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iUO-7Q-7OS">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="1"/>
+                                                <color key="backgroundColor" red="0.87450980389999999" green="0.88235294119999996" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="1" id="YYk-39-hTl"/>
+                                                </constraints>
+                                            </view>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="aWd-tf-Dgi">
+                                                <rect key="frame" x="59.5" y="30" width="295" height="92"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This conversation is closed" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tVP-HM-hS9">
+                                                        <rect key="frame" x="0.0" y="0.0" width="295" height="20"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="20" id="Y9o-mG-CHD"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                        <color key="textColor" red="0.035294117647058823" green="0.11764705882352941" blue="0.25882352941176467" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qqq-wU-NZ4" customClass="NewChatButton" customModule="SalesmateChatSDK" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="40" width="295" height="52"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="52" id="tFD-PL-IB3"/>
+                                                            <constraint firstAttribute="width" constant="295" id="yAs-0m-N5g"/>
+                                                        </constraints>
+                                                        <state key="normal" title="Start New Chat">
+                                                            <color key="titleColor" systemColor="systemBlueColor"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="btnStartNewChatPressed:" destination="Gpg-L2-5Ht" eventType="touchUpInside" id="El3-Uy-MRD"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstItem="aWd-tf-Dgi" firstAttribute="centerX" secondItem="Gpg-L2-5Ht" secondAttribute="centerX" id="5BN-J1-poG"/>
+                                            <constraint firstItem="iUO-7Q-7OS" firstAttribute="top" secondItem="Gpg-L2-5Ht" secondAttribute="top" id="8q5-A4-3Ak"/>
+                                            <constraint firstAttribute="height" constant="152" id="FGa-lq-enu"/>
+                                            <constraint firstItem="iUO-7Q-7OS" firstAttribute="leading" secondItem="Gpg-L2-5Ht" secondAttribute="leading" id="GfT-X2-SqZ"/>
+                                            <constraint firstItem="aWd-tf-Dgi" firstAttribute="top" secondItem="Gpg-L2-5Ht" secondAttribute="top" constant="30" id="HCE-tT-6iM"/>
+                                            <constraint firstAttribute="trailing" secondItem="iUO-7Q-7OS" secondAttribute="trailing" id="qOe-Oy-J9K"/>
+                                            <constraint firstAttribute="bottom" secondItem="aWd-tf-Dgi" secondAttribute="bottom" constant="30" id="wP3-3E-ah7"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="btnStartChat" destination="qqq-wU-NZ4" id="O6l-lF-0kk"/>
+                                        </connections>
+                                    </view>
                                 </subviews>
                             </stackView>
                         </subviews>
@@ -390,6 +442,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="closeConversationView" destination="Gpg-L2-5Ht" id="koR-Je-653"/>
                         <outlet property="messageInputBar" destination="UbM-6T-m3n" id="xbc-Nd-cTf"/>
                         <outlet property="tableView" destination="OPv-4u-xKb" id="BbO-HE-yTK"/>
                         <outlet property="typingAnimation" destination="14P-jP-vmN" id="uko-J6-VbH"/>
@@ -577,6 +630,9 @@
         <image name="ic-download" width="18" height="18"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
