@@ -37,6 +37,7 @@ class NewVisitorVC: UIViewController {
 
     // MARK: - View
     private func prepareView() {
+        btnStartChat.isHidden = !viewModel.showStartNewChat
         lblResponseTime.text = viewModel.responseTime
         lblPowerBy.isHidden = !viewModel.showPowerBy
         userView.viewModel = viewModel.availableuserViewModel

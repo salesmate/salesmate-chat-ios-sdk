@@ -18,6 +18,8 @@ class ConversationsViewModel {
         didSet { prepareCellViewModels() }
     }
 
+    private(set) var showStartNewChat: Bool = false
+
     private(set) var backgroundColorCode: String = ""
     private(set) var backgroundPatternName: String = ""
 
@@ -36,6 +38,8 @@ class ConversationsViewModel {
 
     private func prepareProperties() {
         guard let look = config.look else { return }
+
+        showStartNewChat = config.canStartNewConversation
 
         backgroundColorCode = look.backgroundColor
         backgroundPatternName = look.messengerBackground

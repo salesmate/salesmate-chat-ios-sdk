@@ -100,7 +100,8 @@ class Configeration {
     private(set) var askEmail: AskEmailSetting?
     private(set) var security: Security?
     private(set) var other: MICS?
-    
+    private(set) var canStartNewConversation: Bool = false
+
     /// We are assuming that we will alwayes get identifierForVendor because the chances of that is very low.
     let uniqueID: String = UIDevice.current.identifierForVendor?.uuidString ?? ""
     var contactID: IntegerID? { self.contact?.id }
@@ -172,10 +173,12 @@ class Configeration {
         if json["securitySettings"].exists() {
             self.security = Security(from: json["securitySettings"])
         }
-        
+
         if json["misc"].exists() {
             self.other = MICS(from: json["misc"])
         }
+
+        canStartNewConversation = json["canVisitorOrContactStartNewConversation"].bool ?? false
     }
 
     func updateStatus(of user: UserID, to status: User.Status) {
@@ -265,7 +268,7 @@ extension Configeration.Security: Codable {
 }
 
 extension Configeration.ClosedConversation: Codable {
-    
+
     enum CodingKeys: String, CodingKey {
         case preventRepliesForContacts = "prevent_replies_to_close_conversations_for_contacts"
         case preventRepliesForVisitors = "prevent_replies_to_close_conversations_for_visitors"
@@ -291,5 +294,5 @@ extension Configeration.Availability.WeekDayName {
 }
 
 extension Configeration.ClosedConversation {
-    
+
 }

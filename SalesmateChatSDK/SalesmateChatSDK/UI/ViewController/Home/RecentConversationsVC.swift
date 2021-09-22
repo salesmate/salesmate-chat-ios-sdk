@@ -39,6 +39,7 @@ class RecentConversationsVC: UIViewController {
     private func prepareView() {
         prepareTableView()
 
+        btnStartChat.isHidden = !viewModel.showStartNewChat
         lblPowerBy.isHidden = !viewModel.showPowerBy
         btnStartChat.backgroundColor = UIColor(hex: viewModel.actionColorCode)
         btnViewAll.setTitleColor(UIColor(hex: viewModel.actionColorCode), for: .normal)

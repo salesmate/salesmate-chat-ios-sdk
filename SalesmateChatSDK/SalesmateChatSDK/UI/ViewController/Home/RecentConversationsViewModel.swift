@@ -13,6 +13,7 @@ class RecentConversationsViewModel {
     private let config: Configeration
     private let conversations: [Conversation]
 
+    private(set) var showStartNewChat: Bool = false
     private(set) var showPowerBy: Bool = false
     private(set) var actionColorCode: String = ""
     private(set) var shouldShowViewAll: Bool = true
@@ -48,6 +49,7 @@ class RecentConversationsViewModel {
         guard let look = config.look else { return }
         guard let workspace = config.workspace else { return }
 
+        showStartNewChat = config.canStartNewConversation
         showPowerBy = look.showPoweredBy
         actionColorCode = look.actionColor
 

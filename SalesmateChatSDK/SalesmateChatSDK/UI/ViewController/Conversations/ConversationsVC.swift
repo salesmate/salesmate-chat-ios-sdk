@@ -63,6 +63,8 @@ class ConversationsVC: UIViewController {
     }
 
     private func applyCustomization() {
+        btnStartChat.isHidden = !viewModel.showStartNewChat
+
         viewTop.backgroundColor = UIColor(hex: viewModel.backgroundColorCode)
 
         let backgroundColor = UIColor(hex: viewModel.backgroundColorCode)

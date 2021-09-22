@@ -14,6 +14,7 @@ class NewVisitorViewModel {
 
     private(set) var responseTime: String = ""
     private(set) var availableuserViewModel = AvailableUsersViewModel(users: [], attributes: AvailableUsersViewModel.Attributes(spacing: -10, borderWidth: 1, maxNumberUserToShow: 2))
+    private(set) var showStartNewChat: Bool = false
     private(set) var showPowerBy: Bool = false
     private(set) var buttonColorCode: String = ""
 
@@ -37,6 +38,7 @@ class NewVisitorViewModel {
         responseTime = "The team typically replies \(availability.replyTime)"
         showPowerBy = look.showPoweredBy
         buttonColorCode = look.actionColor
+        showStartNewChat = config.canStartNewConversation
 
         availableuserViewModel = AvailableUsersViewModel(users: config.users ?? [],
                                                          attributes: AvailableUsersViewModel.Attributes(spacing: -10, borderWidth: 1, maxNumberUserToShow: 2))
