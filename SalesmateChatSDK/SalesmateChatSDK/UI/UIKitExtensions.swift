@@ -343,3 +343,7 @@ extension UIViewController {
         return alertController
     }
 }
+
+extension UITextField {
+    var isEmpty: Bool { text?.isEmpty ?? false }
+}

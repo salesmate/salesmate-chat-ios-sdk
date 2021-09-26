@@ -31,10 +31,7 @@ class XIBView: UIView {
     func setup() {
         guard let contentView = loadViewFromNib() else { return }
 
-        contentView.frame = bounds
-        contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-
-        addSubview(contentView)
+        contentView.addAndFill(in: self)
 
         self.contentView = contentView
     }

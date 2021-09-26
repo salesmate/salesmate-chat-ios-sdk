@@ -62,8 +62,10 @@ class ChatVC: UIViewController {
        FilePickerController(presenter: self)
     }()
 
-    private let askEmailCell: AskEmailCell? = AskEmailCell.instantiate()
+    private let askEmailCell: AskContactDetailCell? = AskContactDetailCell.instantiate()
     private let ratingCell: AskRatingCell? = AskRatingCell.instantiate()
+
+    private var _inputAccessoryView: UIView?
 
     // MARK: - IBOutlets
     @IBOutlet private weak var viewTopWithoutLogo: ChatTopWithoutLogo!
@@ -75,11 +77,12 @@ class ChatVC: UIViewController {
     @IBOutlet private weak var typingAnimation: ChatTypingAnimationView!
     @IBOutlet private weak var messageInputBar: MessageComposeView!
     @IBOutlet private weak var closeConversationView: CloseConversationView!
+    @IBOutlet private weak var askContactDetailView: UIView!
 
     // MARK: - Override
     override var canBecomeFirstResponder: Bool { true }
     override var canResignFirstResponder: Bool { true }
-    override var inputAccessoryView: UIView? { messageInputBar }
+    override var inputAccessoryView: UIView? { _inputAccessoryView }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -217,15 +220,20 @@ class ChatVC: UIViewController {
     private func updateBottomBar(to bottom: ChatViewModel.Bottom) {
         switch bottom {
         case .message:
+            resignFirstResponder()
             closeConversationView.isHidden = true
-            self.becomeFirstResponder()
+            _inputAccessoryView = messageInputBar
+            becomeFirstResponder()
         case .askContactDetail:
+            resignFirstResponder()
             closeConversationView.isHidden = true
-            self.resignFirstResponder()
+            _inputAccessoryView = askContactDetailView
+            becomeFirstResponder()
         case .startNewChat:
             closeConversationView.isHidden = false
             closeConversationView.shouldShowStartChat(viewModel.showStartNewChat)
-            self.resignFirstResponder()
+            _inputAccessoryView = nil
+            resignFirstResponder()
         }
     }
 
@@ -362,8 +370,8 @@ extension ChatVC: UITableViewDataSource {
         }
 
         askEmailCell?.viewModel = viewModel
-        askEmailCell?.sendEmailAddress = { email in
-            self.sendEmail(email)
+        askEmailCell?.submitContactDetail = { _, email in
+            self.sendEmail(email.rawValue)
         }
 
         return askEmailCell ?? UITableViewCell()

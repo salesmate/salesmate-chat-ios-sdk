@@ -194,11 +194,12 @@ class Configeration {
 
 extension Configeration {
 
-    func isEmailAddressMandatory() -> Bool {
+    func isContactDetailMandatory() -> Bool {
         guard contact?.email == nil else { return false }
         guard let askEmail = askEmail else { return false }
 
         switch askEmail {
+        // TODO: Write logic for outsideOfficeHours which return based on values of `Availability`.
         case .outsideOfficeHours: return true
         case .always: return true
         case .never: return false

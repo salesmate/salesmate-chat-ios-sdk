@@ -11,8 +11,8 @@
 		9B09C2C826E632E60007B005 /* HUDVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B09C2C726E632E60007B005 /* HUDVC.swift */; };
 		9B1B121C26AEB01500ABC3FB /* ChatEventRelay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1B121B26AEB01500ABC3FB /* ChatEventRelay.swift */; };
 		9B29413826C3D84B00866911 /* ChatImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B29413726C3D84B00866911 /* ChatImageView.swift */; };
-		9B29413A26C3D86A00866911 /* AskEmailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B29413926C3D86A00866911 /* AskEmailCell.swift */; };
-		9B29413C26C3DB2500866911 /* AskEmailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B29413B26C3DB2500866911 /* AskEmailCell.xib */; };
+		9B29413A26C3D86A00866911 /* AskContactDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B29413926C3D86A00866911 /* AskContactDetailCell.swift */; };
+		9B29413C26C3DB2500866911 /* AskContactDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B29413B26C3DB2500866911 /* AskContactDetailCell.xib */; };
 		9B2B4F7726B1B126008AA860 /* UIKitExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2B4F7626B1B126008AA860 /* UIKitExtensions.swift */; };
 		9B3A9B6226A6FF4200EB7C10 /* WebSocketEventCreation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3A9B5E26A6FF4200EB7C10 /* WebSocketEventCreation.swift */; };
 		9B3A9B6326A6FF4200EB7C10 /* PayloadHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3A9B5F26A6FF4200EB7C10 /* PayloadHandler.swift */; };
@@ -54,6 +54,8 @@
 		9B6A0EC926BD5F41000B68B4 /* StartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6A0EC826BD5F41000B68B4 /* StartViewModel.swift */; };
 		9B6A0ECB26BD7203000B68B4 /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6A0ECA26BD7203000B68B4 /* ActivityIndicatorView.swift */; };
 		9B6BE39326BA6F320099ACA0 /* ChatTopViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6BE39226BA6F320099ACA0 /* ChatTopViewModel.swift */; };
+		9B7D7ED9270043DB008C943F /* ContactDetailForm.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B7D7ED8270043DB008C943F /* ContactDetailForm.xib */; };
+		9B7D7EDB270045E6008C943F /* ContactDetailForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7D7EDA270045E6008C943F /* ContactDetailForm.swift */; };
 		9B7DE67D26C6A0DE009BE523 /* ChatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B7DE67C26C6A0DE009BE523 /* ChatController.swift */; };
 		9B82163126BA85A9002E86E6 /* HTML.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B82163026BA85A9002E86E6 /* HTML.swift */; };
 		9B82163726BAA1F1002E86E6 /* ChatAttributedTextsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B82163626BAA1F1002E86E6 /* ChatAttributedTextsView.swift */; };
@@ -153,8 +155,8 @@
 		9B09C2C726E632E60007B005 /* HUDVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HUDVC.swift; sourceTree = "<group>"; };
 		9B1B121B26AEB01500ABC3FB /* ChatEventRelay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatEventRelay.swift; sourceTree = "<group>"; };
 		9B29413726C3D84B00866911 /* ChatImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatImageView.swift; sourceTree = "<group>"; };
-		9B29413926C3D86A00866911 /* AskEmailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskEmailCell.swift; sourceTree = "<group>"; };
-		9B29413B26C3DB2500866911 /* AskEmailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AskEmailCell.xib; sourceTree = "<group>"; };
+		9B29413926C3D86A00866911 /* AskContactDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskContactDetailCell.swift; sourceTree = "<group>"; };
+		9B29413B26C3DB2500866911 /* AskContactDetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AskContactDetailCell.xib; sourceTree = "<group>"; };
 		9B2B4F7626B1B126008AA860 /* UIKitExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKitExtensions.swift; sourceTree = "<group>"; };
 		9B3A9B5E26A6FF4200EB7C10 /* WebSocketEventCreation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebSocketEventCreation.swift; sourceTree = "<group>"; };
 		9B3A9B5F26A6FF4200EB7C10 /* PayloadHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PayloadHandler.swift; sourceTree = "<group>"; };
@@ -201,6 +203,8 @@
 		9B6A0EC826BD5F41000B68B4 /* StartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewModel.swift; sourceTree = "<group>"; };
 		9B6A0ECA26BD7203000B68B4 /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
 		9B6BE39226BA6F320099ACA0 /* ChatTopViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTopViewModel.swift; sourceTree = "<group>"; };
+		9B7D7ED8270043DB008C943F /* ContactDetailForm.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactDetailForm.xib; sourceTree = "<group>"; };
+		9B7D7EDA270045E6008C943F /* ContactDetailForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDetailForm.swift; sourceTree = "<group>"; };
 		9B7DE67C26C6A0DE009BE523 /* ChatController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatController.swift; sourceTree = "<group>"; };
 		9B82163026BA85A9002E86E6 /* HTML.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTML.swift; sourceTree = "<group>"; };
 		9B82163626BAA1F1002E86E6 /* ChatAttributedTextsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatAttributedTextsView.swift; sourceTree = "<group>"; };
@@ -405,8 +409,8 @@
 				9B82163626BAA1F1002E86E6 /* ChatAttributedTextsView.swift */,
 				9B83EAB726BD132B00C269DB /* ChatFileView.swift */,
 				9B29413726C3D84B00866911 /* ChatImageView.swift */,
-				9B29413B26C3DB2500866911 /* AskEmailCell.xib */,
-				9B29413926C3D86A00866911 /* AskEmailCell.swift */,
+				9B29413B26C3DB2500866911 /* AskContactDetailCell.xib */,
+				9B29413926C3D86A00866911 /* AskContactDetailCell.swift */,
 				9B5DF75E26DE58570057E276 /* AskRatingCell.xib */,
 				9B5DF76026DE58690057E276 /* AskRatingCell.swift */,
 			);
@@ -547,6 +551,8 @@
 				9BF64A1F26BC44F0001F7FB0 /* CirculerProfileViewModels.swift */,
 				9B6A0ECA26BD7203000B68B4 /* ActivityIndicatorView.swift */,
 				9B5DF76226DE8D6D0057E276 /* TypingAnimationView.swift */,
+				9B7D7ED8270043DB008C943F /* ContactDetailForm.xib */,
+				9B7D7EDA270045E6008C943F /* ContactDetailForm.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -697,10 +703,11 @@
 				9BD7753526B2D18A002BA2AD /* RecentConversations.storyboard in Resources */,
 				9B6A0EC426BD5F13000B68B4 /* Start.storyboard in Resources */,
 				9B09C2C626E632D20007B005 /* HUD.storyboard in Resources */,
-				9B29413C26C3DB2500866911 /* AskEmailCell.xib in Resources */,
+				9B29413C26C3DB2500866911 /* AskContactDetailCell.xib in Resources */,
 				9BFC63CC26B128B400976141 /* Home.storyboard in Resources */,
 				9BF260DD26B3D56600D21C75 /* Conversations.storyboard in Resources */,
 				9B5DF75F26DE58570057E276 /* AskRatingCell.xib in Resources */,
+				9B7D7ED9270043DB008C943F /* ContactDetailForm.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -767,7 +774,7 @@
 				9B82163726BAA1F1002E86E6 /* ChatAttributedTextsView.swift in Sources */,
 				9B85939B26AFE96200D035AD /* Entities.swift in Sources */,
 				9BF260E226B3D5A400D21C75 /* ConversationsViewModel.swift in Sources */,
-				9B29413A26C3D86A00866911 /* AskEmailCell.swift in Sources */,
+				9B29413A26C3D86A00866911 /* AskContactDetailCell.swift in Sources */,
 				9B65E01026A58615001F3928 /* APIRequestLoader.swift in Sources */,
 				9BAD6E6E26B7F8380072EC83 /* ChatViewModel.swift in Sources */,
 				9B3A9B8E26A701E600EB7C10 /* Miscellaneous.swift in Sources */,
@@ -808,6 +815,7 @@
 				9B3A9B7B26A701D200EB7C10 /* Configuration.swift in Sources */,
 				9B3A9B8C26A701E600EB7C10 /* MIME.swift in Sources */,
 				9BFC63CE26B128C600976141 /* HomeVC.swift in Sources */,
+				9B7D7EDB270045E6008C943F /* ContactDetailForm.swift in Sources */,
 				9BF260E026B3D59000D21C75 /* ConversationsVC.swift in Sources */,
 				9BE7183826B1899900DD3113 /* NewVisitorViewModel.swift in Sources */,
 				9B3A9B8D26A701E600EB7C10 /* Extensions.swift in Sources */,

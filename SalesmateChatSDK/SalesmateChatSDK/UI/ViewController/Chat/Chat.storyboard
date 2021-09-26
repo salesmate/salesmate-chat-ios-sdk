@@ -442,6 +442,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="askContactDetailView" destination="6rX-BP-qej" id="dNQ-An-BEj"/>
                         <outlet property="closeConversationView" destination="Gpg-L2-5Ht" id="koR-Je-653"/>
                         <outlet property="messageInputBar" destination="UbM-6T-m3n" id="xbc-Nd-cTf"/>
                         <outlet property="tableView" destination="OPv-4u-xKb" id="BbO-HE-yTK"/>
@@ -558,6 +559,34 @@
                         <outlet property="textViewHeight" destination="pOp-Ok-3XW" id="SQe-Xm-piC"/>
                         <outlet property="txtvMessage" destination="qlh-gT-rXV" id="4HI-Iw-70i"/>
                     </connections>
+                </view>
+                <view contentMode="scaleToFill" id="6rX-BP-qej" customClass="ContactDetailInputView" customModule="SalesmateChatSDK" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fUy-HV-mmd" customClass="ContactDetailForm" customModule="SalesmateChatSDK" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jK5-Dk-Duh">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="1"/>
+                            <color key="backgroundColor" red="0.87450980389999999" green="0.88235294119999996" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="PpT-pB-xCg"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <viewLayoutGuide key="safeArea" id="bCF-Ag-vU1"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="jK5-Dk-Duh" secondAttribute="trailing" id="0Ur-K8-UrI"/>
+                        <constraint firstItem="fUy-HV-mmd" firstAttribute="top" secondItem="6rX-BP-qej" secondAttribute="top" id="3hW-oC-kMn"/>
+                        <constraint firstAttribute="bottom" secondItem="fUy-HV-mmd" secondAttribute="bottom" id="NNF-2h-4BR"/>
+                        <constraint firstAttribute="trailing" secondItem="fUy-HV-mmd" secondAttribute="trailing" id="h4a-h9-XIc"/>
+                        <constraint firstItem="jK5-Dk-Duh" firstAttribute="leading" secondItem="6rX-BP-qej" secondAttribute="leading" id="mSU-iC-BUg"/>
+                        <constraint firstItem="jK5-Dk-Duh" firstAttribute="top" secondItem="6rX-BP-qej" secondAttribute="top" id="nwm-VX-vXj"/>
+                        <constraint firstItem="fUy-HV-mmd" firstAttribute="leading" secondItem="6rX-BP-qej" secondAttribute="leading" id="vxc-zf-yBV"/>
+                    </constraints>
                 </view>
                 <view contentMode="scaleToFill" id="14P-jP-vmN" customClass="ChatTypingAnimationView" customModule="SalesmateChatSDK" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>

@@ -9,7 +9,7 @@ import Foundation
 
 enum ChatRow {
     case message(MessageViewModelType)
-    case askEmail(AskEmailViewModel)
+    case askEmail(AskContactDetailViewModel)
     case askRating(AskRatingViewModel)
 }
 
@@ -39,10 +39,11 @@ protocol ChatContentViewModelType {
     var profileViewModel: CirculerProfileViewModelType? { get }
 }
 
-class AskEmailViewModel: ChatContentViewModelType {
+class AskContactDetailViewModel: ChatContentViewModelType {
     let id: MessageID
     let profileViewModel: CirculerProfileViewModelType?
     let actionColorCode: String
+    var name: String? = ""
     var email: String? = ""
 
     init(message: Message, look: Configeration.LookAndFeel) {
