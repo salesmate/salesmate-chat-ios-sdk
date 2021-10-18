@@ -1,9 +1,11 @@
 # salesmate-chat-ios-sdk
 
 **Configuration**
+
 Configure Messenger at your salesmate.io link(For more detail visit: https://support.salesmate.io/hc/en-us/categories/360005786852-Messenger)
 
 **Installation Steps:**
+
 We allow installation via CocoaPods and Swift Package Installation 
 
 //Documentation Pending
@@ -35,11 +37,13 @@ Now in your whole application, wherever you wanted to present chat window, Add b
         
         
 **Analytics**
+
 For adding Analytics, Follow below instructions:
 //Implementation Pending
 
 
 **Notifications**
+
 For handling notifications, Follow below instructions:
 //Implementation Pending
 
