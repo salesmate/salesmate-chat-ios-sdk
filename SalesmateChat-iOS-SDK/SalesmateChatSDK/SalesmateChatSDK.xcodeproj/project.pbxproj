@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		90087656271D812500FEA193 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 90087655271D812500FEA193 /* README.md */; };
+		90771DBB271D885000BCCEDD /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 90771DBA271D885000BCCEDD /* README.md */; };
 		9B09C2C626E632D20007B005 /* HUD.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B09C2C526E632D20007B005 /* HUD.storyboard */; };
 		9B09C2C826E632E60007B005 /* HUDVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B09C2C726E632E60007B005 /* HUDVC.swift */; };
 		9B1B121C26AEB01500ABC3FB /* ChatEventRelay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1B121B26AEB01500ABC3FB /* ChatEventRelay.swift */; };
@@ -150,7 +150,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		90087655271D812500FEA193 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		90771DBA271D885000BCCEDD /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../../README.md; sourceTree = "<group>"; };
 		9B09C2C526E632D20007B005 /* HUD.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HUD.storyboard; sourceTree = "<group>"; };
 		9B09C2C726E632E60007B005 /* HUDVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HUDVC.swift; sourceTree = "<group>"; };
 		9B1B121B26AEB01500ABC3FB /* ChatEventRelay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatEventRelay.swift; sourceTree = "<group>"; };
@@ -430,7 +430,7 @@
 		9BB117DF26A1A45500E0B242 = {
 			isa = PBXGroup;
 			children = (
-				90087655271D812500FEA193 /* README.md */,
+				90771DBA271D885000BCCEDD /* README.md */,
 				9BB117EB26A1A45500E0B242 /* SalesmateChatSDK */,
 				9BB117F626A1A45500E0B242 /* SalesmateChatSDKTests */,
 				9B4B631C26B02D6500203172 /* TestApp */,
@@ -701,7 +701,7 @@
 				9B6A0EC426BD5F13000B68B4 /* Start.storyboard in Resources */,
 				9B09C2C626E632D20007B005 /* HUD.storyboard in Resources */,
 				9B29413C26C3DB2500866911 /* AskEmailCell.xib in Resources */,
-				90087656271D812500FEA193 /* README.md in Resources */,
+				90771DBB271D885000BCCEDD /* README.md in Resources */,
 				9BFC63CC26B128B400976141 /* Home.storyboard in Resources */,
 				9BF260DD26B3D56600D21C75 /* Conversations.storyboard in Resources */,
 				9B5DF75F26DE58570057E276 /* AskRatingCell.xib in Resources */,
