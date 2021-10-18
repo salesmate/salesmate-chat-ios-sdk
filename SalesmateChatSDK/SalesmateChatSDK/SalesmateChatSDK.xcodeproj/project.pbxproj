@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		90A95D89271D7C330041AE3D /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 90A95D88271D7C330041AE3D /* README.md */; };
 		9B1B121C26AEB01500ABC3FB /* ChatEventRelay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B1B121B26AEB01500ABC3FB /* ChatEventRelay.swift */; };
 		9B29413826C3D84B00866911 /* ChatImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B29413726C3D84B00866911 /* ChatImageView.swift */; };
 		9B29413A26C3D86A00866911 /* AskEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B29413926C3D86A00866911 /* AskEmailView.swift */; };
@@ -146,6 +147,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		90A95D88271D7C330041AE3D /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../../README.md; sourceTree = "<group>"; };
 		9B1B121B26AEB01500ABC3FB /* ChatEventRelay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatEventRelay.swift; sourceTree = "<group>"; };
 		9B29413726C3D84B00866911 /* ChatImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatImageView.swift; sourceTree = "<group>"; };
 		9B29413926C3D86A00866911 /* AskEmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskEmailView.swift; sourceTree = "<group>"; };
@@ -423,6 +425,7 @@
 		9BB117DF26A1A45500E0B242 = {
 			isa = PBXGroup;
 			children = (
+				90A95D88271D7C330041AE3D /* README.md */,
 				9BB117EB26A1A45500E0B242 /* SalesmateChatSDK */,
 				9BB117F626A1A45500E0B242 /* SalesmateChatSDKTests */,
 				9B488BC326AAC51200FDD21C /* HTTPTests */,
@@ -687,6 +690,7 @@
 				9BD7753326B2C72D002BA2AD /* ConversationCell.xib in Resources */,
 				9B82163B26BAB560002E86E6 /* ReceivedMessageCell.xib in Resources */,
 				9BE7183426B1897900DD3113 /* NewVisitor.storyboard in Resources */,
+				90A95D89271D7C330041AE3D /* README.md in Resources */,
 				9B82163926BAB546002E86E6 /* SendMessageCell.xib in Resources */,
 				9BDD51B626B19CA2002C2307 /* Media.xcassets in Resources */,
 				9BD7753526B2D18A002BA2AD /* RecentConversations.storyboard in Resources */,
