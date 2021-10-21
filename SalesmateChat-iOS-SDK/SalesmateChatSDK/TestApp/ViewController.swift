@@ -22,10 +22,10 @@ class ViewController: UIViewController {
 
         
         //        // Dev27
-        //        let setting = Settings(workspaceID: "15b160f2-7fcf-4295-9236-81d120c5b47c",
-        //                               appKey: "dac84910-21bc-11ec-adce-354c2694d0d3",
-        //                               tenantID: "dev27.salesmate.io",
-        //                               environment: .development)
+//                let setting = Settings(workspaceID: "15b160f2-7fcf-4295-9236-81d120c5b47c",
+//                                       appKey: "dac84910-21bc-11ec-adce-354c2694d0d3",
+//                                       tenantID: "dev27.salesmate.io",
+//                                       environment: .development)
         //Dev18
 //        let config = Configuration(workspaceID: "3ade8edc-5a62-45dc-b7a5-46b0e40ffb57",
 //                                   appKey: "2f33c730-b08a-11eb-99e2-f3b202d2d81c",
@@ -33,7 +33,7 @@ class ViewController: UIViewController {
 //                                   environment: .development)
 //        SalesmateChat.setSalesmateChat(configuration: config)
         
-        self.configureSalesmateChatMessengerSDK()
+        self.configureSalesmateChatMessengerSDKForDev27()
         
         
         //        if let id = UIDevice.current.identifierForVendor?.uuidString {
@@ -43,10 +43,18 @@ class ViewController: UIViewController {
         //        playAllSound()
     }
     
-    func configureSalesmateChatMessengerSDK(){
+    func configureSalesmateChatMessengerSDKForDev18(){
         let config = Configuration(workspaceID: "3ade8edc-5a62-45dc-b7a5-46b0e40ffb57",
                                    appKey: "2f33c730-b08a-11eb-99e2-f3b202d2d81c",
                                    tenantID: "dev18.salesmate.io",
+                                   environment: .development)
+        SalesmateChat.setSalesmateChat(configuration: config)
+    }
+    
+    func configureSalesmateChatMessengerSDKForDev27(){
+        let config = Configuration(workspaceID: "15b160f2-7fcf-4295-9236-81d120c5b47c",
+                                   appKey: "dac84910-21bc-11ec-adce-354c2694d0d3",
+                                   tenantID: "dev27.salesmate.io",
                                    environment: .development)
         SalesmateChat.setSalesmateChat(configuration: config)
     }

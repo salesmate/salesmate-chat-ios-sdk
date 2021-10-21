@@ -16,7 +16,8 @@ Here you will find these 3 things: 'workspace_id', 'app_key' and 'tenant_id'. Co
 
 Now, in your iOS Code, Open appDelegate file, and add following method for configuration
 
-
+    #import SalesmateChatSDK//Add this at header section
+    
     func configureSalesmateChatMessengerSDK(){
         let config = Configuration(workspaceID: "#WORKSPACE_ID here",
                                    appKey: "#APPKEY here",
@@ -33,6 +34,9 @@ Hurray!..... You completed the configuration part.
 
 Now in your whole application, wherever you wanted to present chat window, Add below code:
 
+        #import SalesmateChatSDK//Don't forget to import our SDK
+        
+        
         SalesmateChat.presentMessenger(from: "View controller's object from where you are presenting this-- if you are presenting from same viewcontroller then use 'self'")
         
         
