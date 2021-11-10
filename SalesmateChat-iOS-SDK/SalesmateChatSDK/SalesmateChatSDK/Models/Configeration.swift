@@ -77,8 +77,8 @@ class Configeration {
     struct ClosedConversation {
         let preventRepliesForContacts: Bool
         let preventRepliesForVisitors: Bool
-        let preventRepliesInDaysForContacts: Int
-        let preventRepliesInDaysForVisitors: Int
+        let preventRepliesInDaysForContacts: IntegerID
+        let preventRepliesInDaysForVisitors: IntegerID
     }
 
     struct MICS {
@@ -312,9 +312,9 @@ extension Configeration {
 
     var preventRepliesInDays: Int {
         if contactID == nil {
-            return closed?.preventRepliesInDaysForVisitors ?? 0
+            return Int(closed?.preventRepliesInDaysForVisitors.description ?? "0") ?? 0
         } else {
-            return closed?.preventRepliesInDaysForContacts ?? 0
+            return Int(closed?.preventRepliesInDaysForContacts.description ?? "0") ?? 0
         }
     }
 }

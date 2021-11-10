@@ -33,7 +33,7 @@ class ViewController: UIViewController {
 //                                   environment: .development)
 //        SalesmateChat.setSalesmateChat(configuration: config)
         
-        self.configureSalesmateChatMessengerSDKForDev27()
+        self.configureSalesmateChatMessengerSDKForDev18()
         
         
         //        if let id = UIDevice.current.identifierForVendor?.uuidString {
