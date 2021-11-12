@@ -89,6 +89,10 @@ class HomeViewModel {
     private func askToShowAllConversations() {
         let viewModel = ConversationsViewModel(config: self.config, client: self.client)
 
+        viewModel.startNewChat = {
+            self.askToStartNewChat()
+        }
+        
         runOnMain {
             self.showAllConversations?(viewModel)
         }

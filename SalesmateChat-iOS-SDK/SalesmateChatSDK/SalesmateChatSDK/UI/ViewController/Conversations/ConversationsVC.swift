@@ -106,6 +106,10 @@ class ConversationsVC: UIViewController {
     @IBAction private func btnCloseAllPressed(_ sender: UIButton) {
         navigationController?.dismiss(animated: true, completion: nil)
     }
+    
+    @IBAction private func btnStartNewChatPressed(_ sender: UIButton) {
+        viewModel.didSelecctStartNewChat()
+    }
 }
 
 extension ConversationsVC: UITableViewDataSource {

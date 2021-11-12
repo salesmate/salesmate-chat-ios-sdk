@@ -9,7 +9,7 @@ import Foundation
 
 enum ChatRow {
     case message(MessageViewModelType)
-    case askEmail(AskEmailViewModel)
+    case askEmail(AskContactDetailViewModel)
     case askRating(AskRatingViewModel)
 }
 
@@ -38,19 +38,19 @@ protocol ChatContentViewModelType: AnyObject {
     var id: MessageID { get }
     var profileViewModel: CirculerProfileViewModelType? { get }
 }
-
-class AskEmailViewModel: ChatContentViewModelType {
-    let id: MessageID
-    let profileViewModel: CirculerProfileViewModelType?
-    let actionColorCode: String
-    var email: String? = ""
-
-    init(message: Message, look: Configeration.LookAndFeel) {
-        id = message.id
-        profileViewModel = CirculerBotProfileViewModel()
-        actionColorCode = look.actionColor
-    }
-}
+//
+//class AskEmailViewModel: ChatContentViewModelType {
+//    let id: MessageID
+//    let profileViewModel: CirculerProfileViewModelType?
+//    let actionColorCode: String
+//    var email: String? = ""
+//
+//    init(message: Message, look: Configeration.LookAndFeel) {
+//        id = message.id
+//        profileViewModel = CirculerBotProfileViewModel()
+//        actionColorCode = look.actionColor
+//    }
+//}
 
 class AskRatingViewModel: ChatContentViewModelType {
     private let config: [Configeration.Rating]
@@ -77,6 +77,20 @@ class AskRatingViewModel: ChatContentViewModelType {
             String(UnicodeScalar(Int(rating.unicode, radix: 16)!)!) + "\u{FE0F}"
         })
         self.remark = remark
+    }
+}
+
+class AskContactDetailViewModel: ChatContentViewModelType {
+    let id: MessageID
+    let profileViewModel: CirculerProfileViewModelType?
+    let actionColorCode: String
+    var name: String? = ""
+    var email: String? = ""
+
+    init(message: Message, look: Configeration.LookAndFeel) {
+        id = message.id
+        profileViewModel = CirculerBotProfileViewModel()
+        actionColorCode = look.actionColor
     }
 }
 

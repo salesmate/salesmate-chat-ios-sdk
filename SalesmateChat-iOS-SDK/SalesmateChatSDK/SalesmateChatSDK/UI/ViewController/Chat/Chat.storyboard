@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -449,6 +449,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="askContactDetailView" destination="6YP-Yf-p7f" id="AqK-hf-pqP"/>
                         <outlet property="closeConversationView" destination="Gpg-L2-5Ht" id="koR-Je-653"/>
                         <outlet property="messageInputBar" destination="UbM-6T-m3n" id="xbc-Nd-cTf"/>
                         <outlet property="tableView" destination="OPv-4u-xKb" id="BbO-HE-yTK"/>
@@ -625,6 +626,34 @@
                         <outlet property="animationView" destination="FhK-6r-y2a" id="2f8-6H-sVI"/>
                         <outlet property="profileView" destination="Hvz-w6-DXA" id="yBr-mo-tte"/>
                     </connections>
+                </view>
+                <view contentMode="scaleToFill" id="6YP-Yf-p7f" customClass="ContactDetailInputView" customModule="SalesmateChatSDK" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yaH-JH-yDa" customClass="ContactDetailForm" customModule="SalesmateChatSDK" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="No3-0l-1RS">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="1"/>
+                            <color key="backgroundColor" red="0.87450980389999999" green="0.88235294119999996" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="mSb-rq-CuZ"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <viewLayoutGuide key="safeArea" id="TMq-34-cK6"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="yaH-JH-yDa" secondAttribute="bottom" id="4lO-9p-lzC"/>
+                        <constraint firstItem="No3-0l-1RS" firstAttribute="leading" secondItem="6YP-Yf-p7f" secondAttribute="leading" id="KYP-Li-UTW"/>
+                        <constraint firstAttribute="trailing" secondItem="No3-0l-1RS" secondAttribute="trailing" id="TDr-eE-cn8"/>
+                        <constraint firstItem="yaH-JH-yDa" firstAttribute="leading" secondItem="6YP-Yf-p7f" secondAttribute="leading" id="UPC-KA-Vke"/>
+                        <constraint firstAttribute="trailing" secondItem="yaH-JH-yDa" secondAttribute="trailing" id="ahW-Hr-PBG"/>
+                        <constraint firstItem="yaH-JH-yDa" firstAttribute="top" secondItem="6YP-Yf-p7f" secondAttribute="top" id="bJg-7A-NvE"/>
+                        <constraint firstItem="No3-0l-1RS" firstAttribute="top" secondItem="6YP-Yf-p7f" secondAttribute="top" id="cMb-xl-U6E"/>
+                    </constraints>
                 </view>
             </objects>
             <point key="canvasLocation" x="132" y="102"/>

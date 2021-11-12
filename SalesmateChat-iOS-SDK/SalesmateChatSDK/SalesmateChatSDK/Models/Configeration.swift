@@ -34,12 +34,51 @@ class Configeration {
             let endTime: String
             let startTime: String
             let weekName: WeekDayName
+            
+            func getTimeIntervalSinceMidnightForTime(timeStr:String) -> TimeInterval{
+                let formatter = DateFormatter();
+                formatter.dateFormat = "h:mm a";
+                let date = formatter.date(from: timeStr);
+                let duration = (date?.timeIntervalSince1970 ?? 0) - (date?.getStartOfDay(timeZone: nil).timeIntervalSince1970 ?? 0)
+                return abs(duration);
+            }
         }
 
         let replyTime: String
         let calculateResponseTimeInOfficeHours: Bool?
         let officeHours: [OfficeHour]?
         let timezone: String
+        
+        func isCurrentTimeFallsUnderOfficeHours() -> Bool{
+            guard let ofcHours = self.officeHours else{
+                return false;
+            }
+            
+            let timeZone = TimeZone(abbreviation: timezone);
+            let currentWeekDayName = Date().getDayWithTimezone(timeZone: timeZone);
+            
+            guard let weekDayName = WeekDayName(rawValue: currentWeekDayName.lowercased()) else{
+                return false;
+            }
+            
+            let weekDays:[WeekDayName] = [.monday, .tuesday, .wednesday, .thursday, .friday];
+            let weekEnds:[WeekDayName] = [.saturday, .sunday];
+            
+            let timeIntervalSinceMidnight = abs(Date().getTimeIntervalSinceMidnightWithTimezone(timeZone: timeZone));
+            
+            var isInOfficeHours = false;
+            for ofcHour in ofcHours{
+                if ofcHour.weekName == weekDayName || (ofcHour.weekName == .weekdays && weekDays.contains(weekDayName)) || (ofcHour.weekName == .weekends && weekEnds.contains(weekDayName)){
+                    let startTimeInterval = ofcHour.getTimeIntervalSinceMidnightForTime(timeStr: ofcHour.startTime)
+                    let endTimeInterval = ofcHour.getTimeIntervalSinceMidnightForTime(timeStr: ofcHour.endTime);
+                    if timeIntervalSinceMidnight > startTimeInterval && timeIntervalSinceMidnight < endTimeInterval{
+                        isInOfficeHours = true;
+                        break;
+                    }
+                }
+            }
+            return isInOfficeHours;
+        }
     }
 
     struct LookAndFeel {
@@ -194,14 +233,13 @@ class Configeration {
 
 extension Configeration {
 
-    func isEmailAddressMandatory() -> Bool {
+    func isContactDetailMandatory() -> Bool {
         guard contact?.email == nil else { return false }
         guard let askEmail = askEmail else { return false }
 
         switch askEmail {
-        case .outsideOfficeHours:
-            // TODO: Canculate actual result using `Availability`
-            return true
+        // TODO: Write logic for outsideOfficeHours which return based on values of `Availability`.
+        case .outsideOfficeHours: return !(self.availability?.isCurrentTimeFallsUnderOfficeHours() ?? true)
         case .always: return true
         case .never: return false
         }
@@ -215,6 +253,9 @@ extension Configeration.Availability: Codable {
         case calculateResponseTimeInOfficeHours = "calculate_response_time_in_office_hours"
         case officeHours = "office_hours"
         case timezone
+    }
+    
+    func isCurrentTimeInOfficeHours(){
     }
 }
 

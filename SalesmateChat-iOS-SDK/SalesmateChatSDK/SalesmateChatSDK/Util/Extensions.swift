@@ -50,10 +50,8 @@ extension URL {
                 completion(.failure(error))
             }
         }
-
         downloadTask.resume()
     }
-
 }
 
 extension FileManager {
@@ -64,5 +62,32 @@ extension FileManager {
                                    appropriateFor: nil,
                                    create: true)
         return documentsURL.appendingPathComponent(fileName)
+    }
+}
+
+
+extension Date{
+    func getDayWithTimezone(timeZone:TimeZone?) -> String{
+        var calendar = Calendar(identifier: .gregorian)
+        if timeZone != nil{
+            calendar.timeZone = timeZone!;
+        }
+        let dateComponents = calendar.dateComponents([.weekday], from: self)
+        let weekDay = dateComponents.weekday ?? 1;
+        let weekDayName = DateFormatter().weekdaySymbols[weekDay-1];
+        return weekDayName;
+    }
+    
+    func getTimeIntervalSinceMidnightWithTimezone(timeZone:TimeZone?) -> TimeInterval{
+        return self.getStartOfDay(timeZone: timeZone).timeIntervalSinceNow
+    }
+    
+    func getStartOfDay(timeZone:TimeZone?) -> Date{
+        var cal = Calendar(identifier: .gregorian)
+        if timeZone != nil{
+            cal.timeZone = timeZone!;
+        }
+        let newDate = cal.startOfDay(for: self);
+        return newDate;
     }
 }

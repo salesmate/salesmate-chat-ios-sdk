@@ -163,7 +163,9 @@ extension ChatViewModel {
     private func prepareBottomOption() {
         let daysInterval: TimeInterval = TimeInterval(config.preventRepliesInDays * 24 * 60 * 60)
 
-        if config.shouldPreventReplies,
+        if isNew, config.isContactDetailMandatory() {
+            bottom = .askContactDetail
+        } else if config.shouldPreventReplies,
            let closedDate = conversation?.closedDate,
            abs(closedDate.timeIntervalSinceNow) > daysInterval {
             bottom = .startNewChat
@@ -189,7 +191,7 @@ extension ChatViewModel {
                                         users: config.users ?? [],
                                         ratings: config.rating ?? [])
             case .emailAsked:
-                return AskEmailViewModel(message: message, look: look)
+                return AskContactDetailViewModel(message: message, look: look)
             case .ratingAsked:
                 let ratingConfig = config.rating ?? []
                 return AskRatingViewModel(config: ratingConfig,
@@ -210,7 +212,7 @@ extension ChatViewModel {
                 return .message(viewModel)
             } else if let viewModel = viewModel as? SendingMessageViewModel {
                 return .message(viewModel)
-            } else if let viewModel = viewModel as? AskEmailViewModel {
+            } else if let viewModel = viewModel as? AskContactDetailViewModel{
                 return .askEmail(viewModel)
             } else if let viewModel = viewModel as? AskRatingViewModel {
                 return .askRating(viewModel)

@@ -27,6 +27,7 @@ class ConversationsViewModel {
     private(set) var conversationViewModels: [ConversationCellViewModel] = []
 
     var conversationsUpdated: (() -> Void)?
+    var startNewChat: (() -> Void)?
 
     // MARK: - Init
     init(config: Configeration, client: ChatClient) {
@@ -34,6 +35,10 @@ class ConversationsViewModel {
         self.client = client
 
         prepareProperties()
+    }
+    
+    func didSelecctStartNewChat() {
+        startNewChat?()
     }
 
     private func prepareProperties() {

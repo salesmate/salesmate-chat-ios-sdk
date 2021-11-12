@@ -62,9 +62,11 @@ class ChatVC: UIViewController {
        FilePickerController(presenter: self)
     }()
 
-    private let askEmailCell: AskEmailCell? = AskEmailCell.instantiate()
+    private let askEmailCell: AskContactDetailCell? = AskContactDetailCell.instantiate()
     private let ratingCell: AskRatingCell? = AskRatingCell.instantiate()
 
+    private var _inputAccessoryView: UIView?
+    
     // MARK: - IBOutlets
     @IBOutlet private weak var viewTopWithoutLogo: ChatTopWithoutLogo!
     @IBOutlet private weak var viewTopWithLogo: ChatTopWithLogo!
@@ -75,11 +77,12 @@ class ChatVC: UIViewController {
     @IBOutlet private weak var typingAnimation: ChatTypingAnimationView!
     @IBOutlet private weak var messageInputBar: MessageComposeView!
     @IBOutlet private weak var closeConversationView: CloseConversationView!
+    @IBOutlet private weak var askContactDetailView: UIView!
 
     // MARK: - Override
     override var canBecomeFirstResponder: Bool { true }
     override var canResignFirstResponder: Bool { true }
-    override var inputAccessoryView: UIView? { messageInputBar }
+    override var inputAccessoryView: UIView? { _inputAccessoryView }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -222,13 +225,16 @@ class ChatVC: UIViewController {
         switch bottom {
         case .message:
             closeConversationView.isHidden = true
+            _inputAccessoryView = messageInputBar
             self.becomeFirstResponder()
         case .askContactDetail:
             closeConversationView.isHidden = true
+            _inputAccessoryView = askContactDetailView
             self.resignFirstResponder()
         case .startNewChat:
             closeConversationView.isHidden = false
             closeConversationView.shouldShowStartChat(viewModel.showStartNewChat)
+            _inputAccessoryView = nil
             self.resignFirstResponder()
         }
     }
@@ -366,8 +372,8 @@ extension ChatVC: UITableViewDataSource {
         }
 
         askEmailCell?.viewModel = viewModel
-        askEmailCell?.sendEmailAddress = { email in
-            self.sendEmail(email)
+        askEmailCell?.submitContactDetail = { _, email in
+            self.sendEmail(email.rawValue)
         }
 
         return askEmailCell ?? UITableViewCell()
