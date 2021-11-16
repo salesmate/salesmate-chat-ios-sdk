@@ -54,7 +54,7 @@ class ChatViewModel {
     private(set) var rows: [ChatRow] = []
     private(set) var email: EmailAddress?
     private(set) var showStartNewChat: Bool = false
-    private(set) var bottom: Bottom = .message {
+    var bottom: Bottom = .message {
         didSet { runOnMain { self.bottomBarUpdated?(self.bottom) } }
     }
 

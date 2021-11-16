@@ -90,6 +90,7 @@ class ChatVC: UIViewController {
         prepareViewModel()
         prepareView()
         registerKeyboardNotifications()
+        
     }
 
     override func viewDidLayoutSubviews() {
@@ -144,12 +145,14 @@ class ChatVC: UIViewController {
             self.updateBottomBar(to: bottom)
         }
     }
+    
 
     // MARK: - View
     private func prepareView() {
         prepareTopBar()
         prepareTableView()
         prepareInputBar()
+        prepareContactDetailView();
         updateBottomBar(to: viewModel.bottom)
 
         loading.loading.color = UIColor(hex: viewModel.actionColorCode)
@@ -189,6 +192,18 @@ class ChatVC: UIViewController {
         viewTop?.didSelectClose = {
             self.resignFirstResponder()
             self.navigationController?.dismiss(animated: true)
+        }
+    }
+    
+    private func prepareContactDetailView(){
+        
+        guard let contactDetailForm = self.askContactDetailView.viewWithTag(1) as? ContactDetailForm else{
+            return;
+        }
+        
+        contactDetailForm.submitContactDetail = { name, email in
+            //TODO: Send name via analytics
+            self.sendEmail(email.rawValue)
         }
     }
 
@@ -520,6 +535,7 @@ extension ChatVC {
         if let email = EmailAddress(rawValue: email) {
             controller.send(email, asMessage: asMessage)
             messageInputBar.clear()
+            self.viewModel.bottom = .message;
         } else {
             showAlert(title: "Email", message: "That email doesn't look quite right.")
         }
