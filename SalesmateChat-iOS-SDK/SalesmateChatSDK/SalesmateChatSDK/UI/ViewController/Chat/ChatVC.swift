@@ -90,7 +90,7 @@ class ChatVC: UIViewController {
         prepareViewModel()
         prepareView()
         registerKeyboardNotifications()
-        
+
     }
 
     override func viewDidLayoutSubviews() {
@@ -239,10 +239,16 @@ class ChatVC: UIViewController {
     private func updateBottomBar(to bottom: ChatViewModel.Bottom) {
         switch bottom {
         case .message:
+            if _inputAccessoryView == messageInputBar{
+                return;
+            }
             closeConversationView.isHidden = true
             _inputAccessoryView = messageInputBar
             self.becomeFirstResponder()
         case .askContactDetail:
+            if _inputAccessoryView == askContactDetailView{
+                return;
+            }
             closeConversationView.isHidden = true
             _inputAccessoryView = askContactDetailView
             self.resignFirstResponder()
