@@ -41,12 +41,14 @@ extension ChatAPIClient: ChatAPI {
             switch result {
             case .success(let response):
                 guard let json = response.json as? JSONObject else { return }
-                guard let pseudoName = json["pseudoName"] as? String else { return }
                 guard let authToken = json["authToken"] as? String else { return }
                 guard let channel = json["channel"] as? JSONObject else { return }
                 guard let channels = (channel["channels"] as? JSONObject)?.map({ $0.value }) as? [String] else { return }
-
-                completion(.success((pseudoName: pseudoName, authToken: authToken, channels: channels)))
+                var psName = "";
+                if let pseudoName = json["pseudoName"] as? String {
+                    psName = pseudoName;
+                }
+                completion(.success((pseudoName: psName, authToken: authToken, channels: channels)))
             case .failure:
                 completion(.failure(.unknown))
             }

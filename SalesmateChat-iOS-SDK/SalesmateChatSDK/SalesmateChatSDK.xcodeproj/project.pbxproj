@@ -111,6 +111,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		9065AEC42759F3C300AAAA8D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9BB117E026A1A45500E0B242 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9B4B631A26B02D6500203172;
+			remoteInfo = TestApp;
+		};
 		9B4B633226B02D7200203172 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9BB117E026A1A45500E0B242 /* Project object */;
@@ -630,6 +637,7 @@
 			);
 			dependencies = (
 				9BB117F526A1A45500E0B242 /* PBXTargetDependency */,
+				9065AEC52759F3C300AAAA8D /* PBXTargetDependency */,
 			);
 			name = SalesmateChatSDKTests;
 			productName = SalesmateChatSDKTests;
@@ -846,6 +854,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		9065AEC52759F3C300AAAA8D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9B4B631A26B02D6500203172 /* TestApp */;
+			targetProxy = 9065AEC42759F3C300AAAA8D /* PBXContainerItemProxy */;
+		};
 		9B4B633326B02D7200203172 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 9BB117E826A1A45500E0B242 /* SalesmateChatSDK */;

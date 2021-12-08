@@ -88,6 +88,8 @@ extension HTTPResult {
                     return nil
                 }
             }()
+            
+            debugPrint("Response Json:\(String(data: data!, encoding: .utf8))");
 
             if let data = data {
                 self = .success(HTTPResponse(request: request, response: response, body: data))

@@ -173,6 +173,10 @@ class Configeration {
     func update(with detail: JSONObject) {
         let json = JSON(detail)
 
+        if json["pseudoName"].exists(){
+            self.pseudoName = json["pseudoName"].stringValue;
+        }
+        
         if json["availability"].exists() {
             self.availability = Availability(from: json["availability"])
         }
@@ -223,6 +227,7 @@ class Configeration {
         }
 
         canStartNewConversation = json["canVisitorOrContactStartNewConversation"].bool ?? false
+        self.saveRequireDataLocally()
     }
 
     func updateStatus(of user: UserID, to status: User.Status) {
