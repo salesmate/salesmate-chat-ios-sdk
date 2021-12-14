@@ -243,7 +243,6 @@ extension Configeration {
         guard let askEmail = askEmail else { return false }
 
         switch askEmail {
-        // TODO: Write logic for outsideOfficeHours which return based on values of `Availability`.
         case .outsideOfficeHours: return !(self.availability?.isCurrentTimeFallsUnderOfficeHours() ?? true)
         case .always: return true
         case .never: return false

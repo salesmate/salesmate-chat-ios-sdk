@@ -15,18 +15,20 @@ class ChatController {
     private let client: ChatClient
     private let conversationID: ConversationID
     private let player: SimpleSoundPlayer.Type
+    private var isNewConversation:Bool = false;
 
     private var sendingMessages: Set<MessageToSend> = []
     private var askEmailTimer: Timer?
 
     private(set) var page = Page(size: 50)
 
-    init(viewModel: ChatViewModel, config: Configeration, client: ChatClient, conversationID: ConversationID, player: SimpleSoundPlayer.Type = AudioToolboxSoundPlayer.self) {
+    init(viewModel: ChatViewModel, config: Configeration, client: ChatClient, conversationID: ConversationID, player: SimpleSoundPlayer.Type = AudioToolboxSoundPlayer.self, isNewConversation:Bool) {
         self.viewModel = viewModel
         self.client = client
         self.config = config
         self.conversationID = conversationID
         self.player = player
+        self.isNewConversation = isNewConversation;
 
         prepareClient()
     }
@@ -101,8 +103,13 @@ class ChatController {
         if asMessage {
             sendMessage(with: email.rawValue)
         }
-
-        client.createContact(with: email.rawValue, in: conversationID) { _ in }
+        
+        if isNewConversation{
+            client.createContact(with: email.rawValue, in: nil) { _ in }
+        }else{
+            client.createContact(with: email.rawValue, in: conversationID) { _ in }
+        }
+        
     }
 
     func getTranscript(completion: @escaping ((URL?) -> Void)) {

@@ -202,8 +202,12 @@ class ChatVC: UIViewController {
         }
         
         contactDetailForm.submitContactDetail = { name, email in
-            //TODO: Send name via analytics
             self.sendEmail(email.rawValue)
+            DispatchQueue.main.asyncAfter(deadline: .now()+0.2) {
+                RapidopsUserDetails.sharedInstance().name = name as RapidopsUserDetailsNullableString;
+                RapidopsUserDetails.sharedInstance().email = email.rawValue as RapidopsUserDetailsNullableString;
+                RapidopsUserDetails.sharedInstance().save();
+            }
         }
     }
 

@@ -11,6 +11,47 @@
 		900479EB273BE56B00838BE2 /* AskContactDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 900479E9273BE56B00838BE2 /* AskContactDetailCell.xib */; };
 		900479EE273BE5B500838BE2 /* ContactDetailForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900479EC273BE5B500838BE2 /* ContactDetailForm.swift */; };
 		900479EF273BE5B600838BE2 /* ContactDetailForm.xib in Resources */ = {isa = PBXBuildFile; fileRef = 900479ED273BE5B500838BE2 /* ContactDetailForm.xib */; };
+		905D54DA276096D10001E897 /* RapidopsAPMNetworkLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 905D54AF276096D10001E897 /* RapidopsAPMNetworkLog.m */; };
+		905D54DB276096D10001E897 /* Rapidops_OpenUDID.h in Headers */ = {isa = PBXBuildFile; fileRef = 905D54B0276096D10001E897 /* Rapidops_OpenUDID.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		905D54DC276096D10001E897 /* RapidopsConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 905D54B1276096D10001E897 /* RapidopsConfig.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		905D54DD276096D10001E897 /* LICENSE.md in Resources */ = {isa = PBXBuildFile; fileRef = 905D54B2276096D10001E897 /* LICENSE.md */; };
+		905D54DE276096D10001E897 /* RapidopsViewTracking.m in Sources */ = {isa = PBXBuildFile; fileRef = 905D54B3276096D10001E897 /* RapidopsViewTracking.m */; };
+		905D54DF276096D10001E897 /* RapidopsNotificationService.h in Headers */ = {isa = PBXBuildFile; fileRef = 905D54B4276096D10001E897 /* RapidopsNotificationService.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		905D54E0276096D10001E897 /* RapidopsCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 905D54B5276096D10001E897 /* RapidopsCommon.m */; };
+		905D54E1276096D10001E897 /* RapidopsDeviceInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 905D54B6276096D10001E897 /* RapidopsDeviceInfo.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		905D54E2276096D10001E897 /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = 905D54B7276096D10001E897 /* CHANGELOG.md */; };
+		905D54E3276096D10001E897 /* RapidopsCrashReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 905D54B8276096D10001E897 /* RapidopsCrashReporter.m */; };
+		905D54E4276096D10001E897 /* Rapidops_dsym_uploader.sh in Resources */ = {isa = PBXBuildFile; fileRef = 905D54B9276096D10001E897 /* Rapidops_dsym_uploader.sh */; };
+		905D54E5276096D10001E897 /* RapidopsRemoteConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 905D54BA276096D10001E897 /* RapidopsRemoteConfig.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		905D54E6276096D10001E897 /* RapidopsPersistency.h in Headers */ = {isa = PBXBuildFile; fileRef = 905D54BB276096D10001E897 /* RapidopsPersistency.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		905D54E7276096D10001E897 /* Rapidops.m in Sources */ = {isa = PBXBuildFile; fileRef = 905D54BC276096D10001E897 /* Rapidops.m */; };
+		905D54E8276096D10001E897 /* RapidopsAPM.m in Sources */ = {isa = PBXBuildFile; fileRef = 905D54BD276096D10001E897 /* RapidopsAPM.m */; };
+		905D54E9276096D10001E897 /* RapidopsPushNotifications.h in Headers */ = {isa = PBXBuildFile; fileRef = 905D54BE276096D10001E897 /* RapidopsPushNotifications.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		905D54EA276096D10001E897 /* RapidopsLocationManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 905D54BF276096D10001E897 /* RapidopsLocationManager.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		905D54EB276096D10001E897 /* RapidopsConnectionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 905D54C0276096D10001E897 /* RapidopsConnectionManager.m */; };
+		905D54EC276096D10001E897 /* RapidopsEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 905D54C1276096D10001E897 /* RapidopsEvent.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		905D54ED276096D10001E897 /* RapidopsConsentManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 905D54C2276096D10001E897 /* RapidopsConsentManager.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		905D54EE276096D10001E897 /* RapidopsUserDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 905D54C3276096D10001E897 /* RapidopsUserDetails.m */; };
+		905D54EF276096D10001E897 /* RapidopsStarRating.h in Headers */ = {isa = PBXBuildFile; fileRef = 905D54C4276096D10001E897 /* RapidopsStarRating.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		905D54F0276096D10001E897 /* RapidopsNotificationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 905D54C5276096D10001E897 /* RapidopsNotificationService.m */; };
+		905D54F1276096D10001E897 /* RapidopsViewTracking.h in Headers */ = {isa = PBXBuildFile; fileRef = 905D54C6276096D10001E897 /* RapidopsViewTracking.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		905D54F2276096D10001E897 /* RapidopsConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 905D54C7276096D10001E897 /* RapidopsConfig.m */; };
+		905D54F3276096D10001E897 /* Rapidops_OpenUDID.m in Sources */ = {isa = PBXBuildFile; fileRef = 905D54C8276096D10001E897 /* Rapidops_OpenUDID.m */; };
+		905D54F4276096D10001E897 /* RapidopsAPMNetworkLog.h in Headers */ = {isa = PBXBuildFile; fileRef = 905D54C9276096D10001E897 /* RapidopsAPMNetworkLog.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		905D54F5276096D10001E897 /* RapidopsCrashReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 905D54CA276096D10001E897 /* RapidopsCrashReporter.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		905D54F6276096D10001E897 /* RapidopsDeviceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 905D54CB276096D10001E897 /* RapidopsDeviceInfo.m */; };
+		905D54F8276096D10001E897 /* RapidopsCommon.h in Headers */ = {isa = PBXBuildFile; fileRef = 905D54CE276096D10001E897 /* RapidopsCommon.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		905D54F9276096D10001E897 /* RapidopsRemoteConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 905D54CF276096D10001E897 /* RapidopsRemoteConfig.m */; };
+		905D54FA276096D10001E897 /* RapidopsPersistency.m in Sources */ = {isa = PBXBuildFile; fileRef = 905D54D0276096D10001E897 /* RapidopsPersistency.m */; };
+		905D54FB276096D10001E897 /* RapidopsStarRating.m in Sources */ = {isa = PBXBuildFile; fileRef = 905D54D1276096D10001E897 /* RapidopsStarRating.m */; };
+		905D54FC276096D10001E897 /* RapidopsUserDetails.h in Headers */ = {isa = PBXBuildFile; fileRef = 905D54D2276096D10001E897 /* RapidopsUserDetails.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		905D54FD276096D10001E897 /* RapidopsConsentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 905D54D3276096D10001E897 /* RapidopsConsentManager.m */; };
+		905D54FE276096D10001E897 /* RapidopsEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 905D54D4276096D10001E897 /* RapidopsEvent.m */; };
+		905D54FF276096D10001E897 /* RapidopsConnectionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 905D54D5276096D10001E897 /* RapidopsConnectionManager.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		905D5500276096D10001E897 /* RapidopsLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 905D54D6276096D10001E897 /* RapidopsLocationManager.m */; };
+		905D5501276096D10001E897 /* RapidopsPushNotifications.m in Sources */ = {isa = PBXBuildFile; fileRef = 905D54D7276096D10001E897 /* RapidopsPushNotifications.m */; };
+		905D5502276096D10001E897 /* RapidopsAPM.h in Headers */ = {isa = PBXBuildFile; fileRef = 905D54D8276096D10001E897 /* RapidopsAPM.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		905D5503276096D10001E897 /* Rapidops.h in Headers */ = {isa = PBXBuildFile; fileRef = 905D54D9276096D10001E897 /* Rapidops.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		90771DBB271D885000BCCEDD /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 90771DBA271D885000BCCEDD /* README.md */; };
 		9B09C2C626E632D20007B005 /* HUD.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B09C2C526E632D20007B005 /* HUD.storyboard */; };
 		9B09C2C826E632E60007B005 /* HUDVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B09C2C726E632E60007B005 /* HUDVC.swift */; };
@@ -23,7 +64,6 @@
 		9B3A9B6526A6FF4200EB7C10 /* StarscreamChatStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3A9B6126A6FF4200EB7C10 /* StarscreamChatStream.swift */; };
 		9B3A9B6826A7007400EB7C10 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 9B3A9B6726A7007400EB7C10 /* SwiftyJSON */; };
 		9B3A9B7926A701D200EB7C10 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3A9B6B26A701D200EB7C10 /* Conversation.swift */; };
-		9B3A9B7A26A701D200EB7C10 /* Visitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3A9B6C26A701D200EB7C10 /* Visitor.swift */; };
 		9B3A9B7B26A701D200EB7C10 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3A9B6D26A701D200EB7C10 /* Configuration.swift */; };
 		9B3A9B7D26A701D200EB7C10 /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3A9B6F26A701D200EB7C10 /* Block.swift */; };
 		9B3A9B7E26A701D200EB7C10 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B3A9B7026A701D200EB7C10 /* Message.swift */; };
@@ -163,6 +203,48 @@
 		900479E9273BE56B00838BE2 /* AskContactDetailCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AskContactDetailCell.xib; sourceTree = "<group>"; };
 		900479EC273BE5B500838BE2 /* ContactDetailForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactDetailForm.swift; sourceTree = "<group>"; };
 		900479ED273BE5B500838BE2 /* ContactDetailForm.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactDetailForm.xib; sourceTree = "<group>"; };
+		905D54AF276096D10001E897 /* RapidopsAPMNetworkLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RapidopsAPMNetworkLog.m; sourceTree = "<group>"; };
+		905D54B0276096D10001E897 /* Rapidops_OpenUDID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rapidops_OpenUDID.h; sourceTree = "<group>"; };
+		905D54B1276096D10001E897 /* RapidopsConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RapidopsConfig.h; sourceTree = "<group>"; };
+		905D54B2276096D10001E897 /* LICENSE.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = "<group>"; };
+		905D54B3276096D10001E897 /* RapidopsViewTracking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RapidopsViewTracking.m; sourceTree = "<group>"; };
+		905D54B4276096D10001E897 /* RapidopsNotificationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RapidopsNotificationService.h; sourceTree = "<group>"; };
+		905D54B5276096D10001E897 /* RapidopsCommon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RapidopsCommon.m; sourceTree = "<group>"; };
+		905D54B6276096D10001E897 /* RapidopsDeviceInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RapidopsDeviceInfo.h; sourceTree = "<group>"; };
+		905D54B7276096D10001E897 /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
+		905D54B8276096D10001E897 /* RapidopsCrashReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RapidopsCrashReporter.m; sourceTree = "<group>"; };
+		905D54B9276096D10001E897 /* Rapidops_dsym_uploader.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = Rapidops_dsym_uploader.sh; sourceTree = "<group>"; };
+		905D54BA276096D10001E897 /* RapidopsRemoteConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RapidopsRemoteConfig.h; sourceTree = "<group>"; };
+		905D54BB276096D10001E897 /* RapidopsPersistency.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RapidopsPersistency.h; sourceTree = "<group>"; };
+		905D54BC276096D10001E897 /* Rapidops.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Rapidops.m; sourceTree = "<group>"; };
+		905D54BD276096D10001E897 /* RapidopsAPM.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RapidopsAPM.m; sourceTree = "<group>"; };
+		905D54BE276096D10001E897 /* RapidopsPushNotifications.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RapidopsPushNotifications.h; sourceTree = "<group>"; };
+		905D54BF276096D10001E897 /* RapidopsLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RapidopsLocationManager.h; sourceTree = "<group>"; };
+		905D54C0276096D10001E897 /* RapidopsConnectionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RapidopsConnectionManager.m; sourceTree = "<group>"; };
+		905D54C1276096D10001E897 /* RapidopsEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RapidopsEvent.h; sourceTree = "<group>"; };
+		905D54C2276096D10001E897 /* RapidopsConsentManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RapidopsConsentManager.h; sourceTree = "<group>"; };
+		905D54C3276096D10001E897 /* RapidopsUserDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RapidopsUserDetails.m; sourceTree = "<group>"; };
+		905D54C4276096D10001E897 /* RapidopsStarRating.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RapidopsStarRating.h; sourceTree = "<group>"; };
+		905D54C5276096D10001E897 /* RapidopsNotificationService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RapidopsNotificationService.m; sourceTree = "<group>"; };
+		905D54C6276096D10001E897 /* RapidopsViewTracking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RapidopsViewTracking.h; sourceTree = "<group>"; };
+		905D54C7276096D10001E897 /* RapidopsConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RapidopsConfig.m; sourceTree = "<group>"; };
+		905D54C8276096D10001E897 /* Rapidops_OpenUDID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Rapidops_OpenUDID.m; sourceTree = "<group>"; };
+		905D54C9276096D10001E897 /* RapidopsAPMNetworkLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RapidopsAPMNetworkLog.h; sourceTree = "<group>"; };
+		905D54CA276096D10001E897 /* RapidopsCrashReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RapidopsCrashReporter.h; sourceTree = "<group>"; };
+		905D54CB276096D10001E897 /* RapidopsDeviceInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RapidopsDeviceInfo.m; sourceTree = "<group>"; };
+		905D54CE276096D10001E897 /* RapidopsCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RapidopsCommon.h; sourceTree = "<group>"; };
+		905D54CF276096D10001E897 /* RapidopsRemoteConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RapidopsRemoteConfig.m; sourceTree = "<group>"; };
+		905D54D0276096D10001E897 /* RapidopsPersistency.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RapidopsPersistency.m; sourceTree = "<group>"; };
+		905D54D1276096D10001E897 /* RapidopsStarRating.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RapidopsStarRating.m; sourceTree = "<group>"; };
+		905D54D2276096D10001E897 /* RapidopsUserDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RapidopsUserDetails.h; sourceTree = "<group>"; };
+		905D54D3276096D10001E897 /* RapidopsConsentManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RapidopsConsentManager.m; sourceTree = "<group>"; };
+		905D54D4276096D10001E897 /* RapidopsEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RapidopsEvent.m; sourceTree = "<group>"; };
+		905D54D5276096D10001E897 /* RapidopsConnectionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RapidopsConnectionManager.h; sourceTree = "<group>"; };
+		905D54D6276096D10001E897 /* RapidopsLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RapidopsLocationManager.m; sourceTree = "<group>"; };
+		905D54D7276096D10001E897 /* RapidopsPushNotifications.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RapidopsPushNotifications.m; sourceTree = "<group>"; };
+		905D54D8276096D10001E897 /* RapidopsAPM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RapidopsAPM.h; sourceTree = "<group>"; };
+		905D54D9276096D10001E897 /* Rapidops.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Rapidops.h; sourceTree = "<group>"; };
+		905D55062760AAF10001E897 /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 		90771DBA271D885000BCCEDD /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../../README.md; sourceTree = "<group>"; };
 		9B09C2C526E632D20007B005 /* HUD.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HUD.storyboard; sourceTree = "<group>"; };
 		9B09C2C726E632E60007B005 /* HUDVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HUDVC.swift; sourceTree = "<group>"; };
@@ -174,7 +256,6 @@
 		9B3A9B6026A6FF4200EB7C10 /* ChatStream.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatStream.swift; sourceTree = "<group>"; };
 		9B3A9B6126A6FF4200EB7C10 /* StarscreamChatStream.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StarscreamChatStream.swift; sourceTree = "<group>"; };
 		9B3A9B6B26A701D200EB7C10 /* Conversation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
-		9B3A9B6C26A701D200EB7C10 /* Visitor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Visitor.swift; sourceTree = "<group>"; };
 		9B3A9B6D26A701D200EB7C10 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		9B3A9B6F26A701D200EB7C10 /* Block.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
 		9B3A9B7026A701D200EB7C10 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
@@ -292,6 +373,62 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		905D54AB2760968D0001E897 /* OtherLibs */ = {
+			isa = PBXGroup;
+			children = (
+				905D54AE276096D10001E897 /* Rapidops-sdk-ios */,
+			);
+			path = OtherLibs;
+			sourceTree = "<group>";
+		};
+		905D54AE276096D10001E897 /* Rapidops-sdk-ios */ = {
+			isa = PBXGroup;
+			children = (
+				905D54D9276096D10001E897 /* Rapidops.h */,
+				905D54BC276096D10001E897 /* Rapidops.m */,
+				905D54B1276096D10001E897 /* RapidopsConfig.h */,
+				905D54C7276096D10001E897 /* RapidopsConfig.m */,
+				905D54C1276096D10001E897 /* RapidopsEvent.h */,
+				905D54D4276096D10001E897 /* RapidopsEvent.m */,
+				905D54D2276096D10001E897 /* RapidopsUserDetails.h */,
+				905D54C3276096D10001E897 /* RapidopsUserDetails.m */,
+				905D54BE276096D10001E897 /* RapidopsPushNotifications.h */,
+				905D54D7276096D10001E897 /* RapidopsPushNotifications.m */,
+				905D54D8276096D10001E897 /* RapidopsAPM.h */,
+				905D54BD276096D10001E897 /* RapidopsAPM.m */,
+				905D54B0276096D10001E897 /* Rapidops_OpenUDID.h */,
+				905D54C8276096D10001E897 /* Rapidops_OpenUDID.m */,
+				905D54C6276096D10001E897 /* RapidopsViewTracking.h */,
+				905D54B3276096D10001E897 /* RapidopsViewTracking.m */,
+				905D54CA276096D10001E897 /* RapidopsCrashReporter.h */,
+				905D54B8276096D10001E897 /* RapidopsCrashReporter.m */,
+				905D54D5276096D10001E897 /* RapidopsConnectionManager.h */,
+				905D54C0276096D10001E897 /* RapidopsConnectionManager.m */,
+				905D54B6276096D10001E897 /* RapidopsDeviceInfo.h */,
+				905D54CB276096D10001E897 /* RapidopsDeviceInfo.m */,
+				905D54BA276096D10001E897 /* RapidopsRemoteConfig.h */,
+				905D54CF276096D10001E897 /* RapidopsRemoteConfig.m */,
+				905D54CE276096D10001E897 /* RapidopsCommon.h */,
+				905D54B5276096D10001E897 /* RapidopsCommon.m */,
+				905D54BF276096D10001E897 /* RapidopsLocationManager.h */,
+				905D54D6276096D10001E897 /* RapidopsLocationManager.m */,
+				905D54C2276096D10001E897 /* RapidopsConsentManager.h */,
+				905D54D3276096D10001E897 /* RapidopsConsentManager.m */,
+				905D54C4276096D10001E897 /* RapidopsStarRating.h */,
+				905D54D1276096D10001E897 /* RapidopsStarRating.m */,
+				905D54BB276096D10001E897 /* RapidopsPersistency.h */,
+				905D54D0276096D10001E897 /* RapidopsPersistency.m */,
+				905D54C9276096D10001E897 /* RapidopsAPMNetworkLog.h */,
+				905D54AF276096D10001E897 /* RapidopsAPMNetworkLog.m */,
+				905D54B4276096D10001E897 /* RapidopsNotificationService.h */,
+				905D54C5276096D10001E897 /* RapidopsNotificationService.m */,
+				905D54B2276096D10001E897 /* LICENSE.md */,
+				905D54B7276096D10001E897 /* CHANGELOG.md */,
+				905D54B9276096D10001E897 /* Rapidops_dsym_uploader.sh */,
+			);
+			path = "Rapidops-sdk-ios";
+			sourceTree = "<group>";
+		};
 		9B09C2C426E632C70007B005 /* HUD */ = {
 			isa = PBXGroup;
 			children = (
@@ -334,7 +471,6 @@
 			children = (
 				9B85939826AFE4BF00D035AD /* Configeration.swift */,
 				9B3A9B6B26A701D200EB7C10 /* Conversation.swift */,
-				9B3A9B6C26A701D200EB7C10 /* Visitor.swift */,
 				9B3A9B6D26A701D200EB7C10 /* Configuration.swift */,
 				9B3A9B6F26A701D200EB7C10 /* Block.swift */,
 				9B3A9B7026A701D200EB7C10 /* Message.swift */,
@@ -442,6 +578,7 @@
 			isa = PBXGroup;
 			children = (
 				90771DBA271D885000BCCEDD /* README.md */,
+				905D55062760AAF10001E897 /* module.modulemap */,
 				9BB117EB26A1A45500E0B242 /* SalesmateChatSDK */,
 				9BB117F626A1A45500E0B242 /* SalesmateChatSDKTests */,
 				9B4B631C26B02D6500203172 /* TestApp */,
@@ -463,6 +600,7 @@
 		9BB117EB26A1A45500E0B242 /* SalesmateChatSDK */ = {
 			isa = PBXGroup;
 			children = (
+				905D54AB2760968D0001E897 /* OtherLibs */,
 				9B488BB826AAC51200FDD21C /* HTTP */,
 				9B3A9B8726A701E600EB7C10 /* Util */,
 				9B3A9B6A26A701D200EB7C10 /* Models */,
@@ -575,6 +713,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				9BB117FA26A1A45500E0B242 /* SalesmateChatSDK.h in Headers */,
+				905D54F1276096D10001E897 /* RapidopsViewTracking.h in Headers */,
+				905D54F8276096D10001E897 /* RapidopsCommon.h in Headers */,
+				905D54F5276096D10001E897 /* RapidopsCrashReporter.h in Headers */,
+				905D54E1276096D10001E897 /* RapidopsDeviceInfo.h in Headers */,
+				905D54DB276096D10001E897 /* Rapidops_OpenUDID.h in Headers */,
+				905D54F4276096D10001E897 /* RapidopsAPMNetworkLog.h in Headers */,
+				905D54E6276096D10001E897 /* RapidopsPersistency.h in Headers */,
+				905D54EA276096D10001E897 /* RapidopsLocationManager.h in Headers */,
+				905D54DF276096D10001E897 /* RapidopsNotificationService.h in Headers */,
+				905D5502276096D10001E897 /* RapidopsAPM.h in Headers */,
+				905D54EC276096D10001E897 /* RapidopsEvent.h in Headers */,
+				905D54ED276096D10001E897 /* RapidopsConsentManager.h in Headers */,
+				905D54E9276096D10001E897 /* RapidopsPushNotifications.h in Headers */,
+				905D54E5276096D10001E897 /* RapidopsRemoteConfig.h in Headers */,
+				905D54FF276096D10001E897 /* RapidopsConnectionManager.h in Headers */,
+				905D54FC276096D10001E897 /* RapidopsUserDetails.h in Headers */,
+				905D54DC276096D10001E897 /* RapidopsConfig.h in Headers */,
+				905D5503276096D10001E897 /* Rapidops.h in Headers */,
+				905D54EF276096D10001E897 /* RapidopsStarRating.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -717,6 +874,9 @@
 				900479EF273BE5B600838BE2 /* ContactDetailForm.xib in Resources */,
 				90771DBB271D885000BCCEDD /* README.md in Resources */,
 				900479EB273BE56B00838BE2 /* AskContactDetailCell.xib in Resources */,
+				905D54DD276096D10001E897 /* LICENSE.md in Resources */,
+				905D54E4276096D10001E897 /* Rapidops_dsym_uploader.sh in Resources */,
+				905D54E2276096D10001E897 /* CHANGELOG.md in Resources */,
 				9BFC63CC26B128B400976141 /* Home.storyboard in Resources */,
 				9BF260DD26B3D56600D21C75 /* Conversations.storyboard in Resources */,
 				9B5DF75F26DE58570057E276 /* AskRatingCell.xib in Resources */,
@@ -769,16 +929,22 @@
 			files = (
 				9B65E00F26A58615001F3928 /* APIRequests.swift in Sources */,
 				9BD7752F26B27D59002BA2AD /* AvailableUsersView.swift in Sources */,
+				905D54F2276096D10001E897 /* RapidopsConfig.m in Sources */,
 				9B82164326BAF3B5002E86E6 /* MessageCellViewModel.swift in Sources */,
 				9BD594EC26B9189700998632 /* ChatTopView.swift in Sources */,
 				9B3A9B6226A6FF4200EB7C10 /* WebSocketEventCreation.swift in Sources */,
 				9B85939926AFE4BF00D035AD /* Configeration.swift in Sources */,
+				905D54E0276096D10001E897 /* RapidopsCommon.m in Sources */,
 				9B6A0ECB26BD7203000B68B4 /* ActivityIndicatorView.swift in Sources */,
 				9BCD394A26B30BA100D484CF /* ConversationCell.swift in Sources */,
 				9BFCCA1526BC1E0B0051DF6D /* RequestLoader.swift in Sources */,
+				905D54E3276096D10001E897 /* RapidopsCrashReporter.m in Sources */,
 				9B86734C26B83575002C7959 /* MessageComposeView.swift in Sources */,
 				9B4AD3EC26B959B600EA32DB /* HexColor.swift in Sources */,
 				9B7DE67D26C6A0DE009BE523 /* ChatController.swift in Sources */,
+				905D54F6276096D10001E897 /* RapidopsDeviceInfo.m in Sources */,
+				905D54DA276096D10001E897 /* RapidopsAPMNetworkLog.m in Sources */,
+				905D5500276096D10001E897 /* RapidopsLocationManager.m in Sources */,
 				9B59F38C26CA4B0700BE7A79 /* FilePickerController.swift in Sources */,
 				9B3A9B6526A6FF4200EB7C10 /* StarscreamChatStream.swift in Sources */,
 				9B3A9B8F26A701E600EB7C10 /* DateTime.swift in Sources */,
@@ -787,9 +953,12 @@
 				9B85939B26AFE96200D035AD /* Entities.swift in Sources */,
 				9BF260E226B3D5A400D21C75 /* ConversationsViewModel.swift in Sources */,
 				9B65E01026A58615001F3928 /* APIRequestLoader.swift in Sources */,
+				905D54EE276096D10001E897 /* RapidopsUserDetails.m in Sources */,
 				9BAD6E6E26B7F8380072EC83 /* ChatViewModel.swift in Sources */,
 				9B3A9B8E26A701E600EB7C10 /* Miscellaneous.swift in Sources */,
+				905D54DE276096D10001E897 /* RapidopsViewTracking.m in Sources */,
 				9BE7183626B1898800DD3113 /* NewVisitorVC.swift in Sources */,
+				905D54FE276096D10001E897 /* RapidopsEvent.m in Sources */,
 				9B3A9B8126A701D200EB7C10 /* IntegerID.swift in Sources */,
 				9B3A9B7926A701D200EB7C10 /* Conversation.swift in Sources */,
 				9BFCCA1026BC1E000051DF6D /* Body.swift in Sources */,
@@ -798,6 +967,7 @@
 				9BFCCA1426BC1E090051DF6D /* Result.swift in Sources */,
 				9B82163126BA85A9002E86E6 /* HTML.swift in Sources */,
 				900479EA273BE56B00838BE2 /* AskContactDetailCell.swift in Sources */,
+				905D54F0276096D10001E897 /* RapidopsNotificationService.m in Sources */,
 				9BBBAED826A6EEC5006AB718 /* SalesmateChat.swift in Sources */,
 				9BFC63D126B128F600976141 /* HomeViewModel.swift in Sources */,
 				9B1B121C26AEB01500ABC3FB /* ChatEventRelay.swift in Sources */,
@@ -806,12 +976,16 @@
 				9B83EAB826BD132B00C269DB /* ChatFileView.swift in Sources */,
 				9BD7752D26B27BEE002BA2AD /* XIBView.swift in Sources */,
 				900479EE273BE5B500838BE2 /* ContactDetailForm.swift in Sources */,
+				905D54E7276096D10001E897 /* Rapidops.m in Sources */,
 				9B3A9B7D26A701D200EB7C10 /* Block.swift in Sources */,
+				905D54E8276096D10001E897 /* RapidopsAPM.m in Sources */,
 				9BF6EFEA26F1C3B5007A0216 /* SimpleSound.swift in Sources */,
 				9B09C2C826E632E60007B005 /* HUDVC.swift in Sources */,
+				905D54FA276096D10001E897 /* RapidopsPersistency.m in Sources */,
 				9BAB61B726CCCB89001B5B8C /* DataPersistency.swift in Sources */,
 				9B65E01226A58C64001F3928 /* APIDataTypes.swift in Sources */,
 				9B5DF76126DE58690057E276 /* AskRatingCell.swift in Sources */,
+				905D54FB276096D10001E897 /* RapidopsStarRating.m in Sources */,
 				9BD7753926B2D1B2002BA2AD /* RecentConversationsViewModel.swift in Sources */,
 				9B2B4F7726B1B126008AA860 /* UIKitExtensions.swift in Sources */,
 				9BAD6E7026B7F84B0072EC83 /* ChatVC.swift in Sources */,
@@ -828,18 +1002,22 @@
 				9B3A9B7B26A701D200EB7C10 /* Configuration.swift in Sources */,
 				9B3A9B8C26A701E600EB7C10 /* MIME.swift in Sources */,
 				9BFC63CE26B128C600976141 /* HomeVC.swift in Sources */,
+				905D54EB276096D10001E897 /* RapidopsConnectionManager.m in Sources */,
 				9BF260E026B3D59000D21C75 /* ConversationsVC.swift in Sources */,
 				9BE7183826B1899900DD3113 /* NewVisitorViewModel.swift in Sources */,
+				905D5501276096D10001E897 /* RapidopsPushNotifications.m in Sources */,
 				9B3A9B8D26A701E600EB7C10 /* Extensions.swift in Sources */,
 				9BD7753726B2D1A8002BA2AD /* RecentConversationsVC.swift in Sources */,
 				9BFCCA1226BC1E040051DF6D /* Response.swift in Sources */,
-				9B3A9B7A26A701D200EB7C10 /* Visitor.swift in Sources */,
+				905D54FD276096D10001E897 /* RapidopsConsentManager.m in Sources */,
 				9B82164126BAB5C9002E86E6 /* MessageCell.swift in Sources */,
 				9B3A9B8626A701D200EB7C10 /* DataTypes.swift in Sources */,
 				9BD7753126B2A986002BA2AD /* CirculerProfileView.swift in Sources */,
+				905D54F9276096D10001E897 /* RapidopsRemoteConfig.m in Sources */,
 				9B4B630B26B0106000203172 /* ChatAPI.swift in Sources */,
 				9B5DF76326DE8D6D0057E276 /* TypingAnimationView.swift in Sources */,
 				9B3A9B6326A6FF4200EB7C10 /* PayloadHandler.swift in Sources */,
+				905D54F3276096D10001E897 /* Rapidops_OpenUDID.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1138,9 +1316,11 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
+				SWIFT_INCLUDE_PATHS = "$(SRCROOT)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USE_HEADERMAP = YES;
 			};
 			name = Debug;
 		};
@@ -1167,8 +1347,10 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SUPPORTS_MACCATALYST = NO;
+				SWIFT_INCLUDE_PATHS = "$(SRCROOT)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USE_HEADERMAP = YES;
 			};
 			name = Release;
 		};

@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -16,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9rj-Db-Whs">
-                                <rect key="frame" x="143.5" y="427" width="127" height="42"/>
+                                <rect key="frame" x="143.5" y="94" width="127" height="42"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                 <state key="normal" title="Show Chat">
                                     <color key="titleColor" red="0.92941176469999998" green="0.94117647059999998" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -25,18 +27,72 @@
                                     <action selector="showChatPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ce9-z4-Jb6"/>
                                 </connections>
                             </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="It6-eI-Xfw">
+                                <rect key="frame" x="40" y="186" width="334" height="131"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Event Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="N7r-Ei-rVM">
+                                        <rect key="frame" x="0.0" y="0.0" width="334" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="c31-d0-sET">
+                                        <rect key="frame" x="0.0" y="50" width="334" height="34"/>
+                                        <subviews>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Key(optional)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="c8b-f3-6x0">
+                                                <rect key="frame" x="0.0" y="0.0" width="159" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Value(optional)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="IsD-m6-u6l">
+                                                <rect key="frame" x="175" y="0.0" width="159" height="34"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                        </subviews>
+                                    </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dZE-aF-rKO">
+                                        <rect key="frame" x="0.0" y="100" width="334" height="31"/>
+                                        <color key="backgroundColor" systemColor="linkColor"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="Send Test Event">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <buttonConfiguration key="configuration" style="plain" title="Send Test Event">
+                                            <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="14"/>
+                                            <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="btnSendTestEventPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="kNR-pz-GKq"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" red="0.035294117649999998" green="0.1176470588" blue="0.25882352939999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
-                            <constraint firstItem="9rj-Db-Whs" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="50V-0J-JKs"/>
+                            <constraint firstItem="It6-eI-Xfw" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="9fk-3t-2iA"/>
+                            <constraint firstItem="It6-eI-Xfw" firstAttribute="top" secondItem="9rj-Db-Whs" secondAttribute="bottom" constant="50" id="IQI-IL-a37"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="It6-eI-Xfw" secondAttribute="trailing" constant="40" id="WZs-5Z-4dg"/>
                             <constraint firstItem="9rj-Db-Whs" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="eFX-iB-N8x"/>
+                            <constraint firstItem="9rj-Db-Whs" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="50" id="l0y-Kk-EAN"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tFieldEventName" destination="N7r-Ei-rVM" id="h1h-Zy-901"/>
+                        <outlet property="tFieldKey" destination="c8b-f3-6x0" id="WOr-ap-UbG"/>
+                        <outlet property="tFieldValue" destination="IsD-m6-u6l" id="FBo-uc-Msu"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="132" y="97"/>
         </scene>
     </scenes>
+    <resources>
+        <systemColor name="linkColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
 </document>

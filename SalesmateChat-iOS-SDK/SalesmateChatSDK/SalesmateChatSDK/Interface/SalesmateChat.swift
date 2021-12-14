@@ -58,11 +58,16 @@ public class SalesmateChat {
         shared = SalesmateChat(with: settings)
 
         shared?.updateCustomization()
+        shared?.setupAnalyticsSDK();
         shared?.client.connect(completion: { _ in })
     }
 
     public static func presentMessenger(from viewController: UIViewController) {
         shared?.presentMessenger(from: viewController)
+    }
+    
+    public static func logEventWith(eventName:String, withData data:[AnyHashable:Any]? = nil){
+        shared?.logEventWith(eventName: eventName, withData: data);
     }
 
     public static func setVerifiedID(_ ID: String) {
@@ -71,6 +76,19 @@ public class SalesmateChat {
 }
 
 extension SalesmateChat {
+    
+    private func setupAnalyticsSDK(){
+        let rapidopsConfig = RapidopsConfig();
+        let hostStr = "https://\(config.identity.tenantID)/apis" //CAC.shared.base.host ?? "https://\(config.identity.tenantID)/apis"
+        rapidopsConfig.host = "\(hostStr)/sm-web-anl/v1"
+        rapidopsConfig.appKey = config.identity.appKey;
+        rapidopsConfig.enableDebug = true;
+        rapidopsConfig.alwaysUsePOST = true;
+        rapidopsConfig.deviceID = config.uniqueID;
+        rapidopsConfig.tenantID = config.identity.tenantID;
+        
+        Rapidops.sharedInstance().start(with: rapidopsConfig);
+    }
 
     private func updateCustomization() {
         isLoading = true
@@ -93,6 +111,10 @@ extension SalesmateChat {
 
             runOnMain { self.showHomeVC() }
         }
+    }
+    
+    private func logEventWith(eventName:String, withData data:[AnyHashable:Any]?){
+        Rapidops.sharedInstance().recordEvent(eventName, segmentation: data);
     }
 
     private func presentMessenger(from viewController: UIViewController) {

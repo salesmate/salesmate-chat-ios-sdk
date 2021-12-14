@@ -1,0 +1,17 @@
+//
+//  module.modulemap
+//  SalesmateChatSDK
+//
+//  Created by Mehul Thakkar on 08/12/21.
+//
+
+/*
+ This is the private module which is used to make private ObjC headers available to Swift code.
+ Note how all header files need to be specified with paths relative to this file.
+
+ This file lives inside a folder, and that folder is the actual module. In Xcode the SWIFT_INCLUDE_PATHS needs to include the parent directory to that folder.
+ */
+module SalesmateChatSDK {
+    header "../SalesmateChatSDK/SalesmateChatSDK/OtherLibs/Rapidops-sdk-ios/Rapidops.h"
+    export *
+}

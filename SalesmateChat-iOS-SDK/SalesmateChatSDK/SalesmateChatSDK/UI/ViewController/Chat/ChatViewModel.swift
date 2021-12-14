@@ -101,7 +101,7 @@ class ChatViewModel {
     }
 
     func getController() -> ChatController {
-        ChatController(viewModel: self, config: config, client: client, conversationID: conversationID)
+        ChatController(viewModel: self, config: config, client: client, conversationID: conversationID, isNewConversation: self.isNew)
     }
 
     func update(_ conversation: Conversation) {
