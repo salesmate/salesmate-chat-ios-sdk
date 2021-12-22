@@ -26,4 +26,7 @@ protocol ChatAPI: AnyObject {
     func send(message: MessageToSend, to conversation: ConversationID, completion: @escaping (Result<Void, ChatError>) -> Void)
 
     func upload(file: FileToUpload, progress: ((Float) -> Void)?, completion: @escaping (Result<UploadedFile, ChatError>) -> Void)
+    
+    func createLogin(with loginUser: LoginUser, completion: @escaping (Result<Void, ChatError>) -> Void)
+
 }

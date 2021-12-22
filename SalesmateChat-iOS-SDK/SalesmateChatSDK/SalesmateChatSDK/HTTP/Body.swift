@@ -29,6 +29,41 @@ struct JSONBody<T: Encodable>: HTTPBody {
     }
 }
 
+struct FORMBody: HTTPBody {
+    var headers: HTTPHeaders = [
+        "Content-Type": "application/x-www-form-urlencoded"
+    ]
+
+    private let value: [String : String]
+    init(params: [String: String]) {
+        self.value = params
+    }
+
+    func encode() throws -> Data {
+        var data = Data()
+
+        let parameterArray = value.map { (arg) -> String in
+          let (key, value) = arg
+            if key != "user_details" {
+                return "\(key)=\(self.percentEscapeString(value))"
+            }
+           return "\(key)=\(value)"
+        }
+        data =  parameterArray.joined(separator: "&").data(using: String.Encoding.utf8) ?? Data()
+        return data
+    }
+    
+    private func percentEscapeString(_ string: String) -> String {
+      var characterSet = CharacterSet.alphanumerics
+      characterSet.insert(charactersIn: "-._* ")
+      
+      return string
+        .addingPercentEncoding(withAllowedCharacters: characterSet)!
+        .replacingOccurrences(of: " ", with: "+")
+        .replacingOccurrences(of: " ", with: "+", options: [], range: nil)
+    }
+}
+
 struct MultipartSingleFileBody: HTTPBody {
     var headers: HTTPHeaders {
         ["Content-Type": "multipart/form-data; boundary=\(boundary)"]

@@ -69,3 +69,19 @@ struct Owner: Codable {
         case mobile
     }
 }
+
+// MARK: - Owner
+struct LoginUser: Codable {
+
+    let userId: String?
+    let email: String?
+    let firstName: String?
+    let lastName: String?
+
+    enum CodingKeys: String, CodingKey {
+        case userId = "user_id"
+        case email = "email"
+        case firstName = "first_name"
+        case lastName = "last_name"
+    }
+}

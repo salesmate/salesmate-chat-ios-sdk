@@ -75,6 +75,10 @@ extension SalesmateChatClient: ChatClient {
     func createContact(with email: String, in conversation: ConversationID?, completion: @escaping (Result<Void, ChatError>) -> Void) {
         chatAPI.createContact(with: email, in: conversation, completion: completion)
     }
+    
+    func loginWith(with loginUser: LoginUser, completion: @escaping (Result<Void, ChatError>) -> Void) {
+        chatAPI.createLogin(with: loginUser, completion: completion)
+    }
 }
 
 extension SalesmateChatClient: ConversationFetcher {

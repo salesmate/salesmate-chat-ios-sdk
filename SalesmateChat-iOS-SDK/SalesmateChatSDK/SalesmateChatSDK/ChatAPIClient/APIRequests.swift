@@ -211,3 +211,37 @@ struct ReadConversationRequest: HTTPRequest {
         body = JSONBody(["conversation_id": conversationID])
     }
 }
+
+struct CreateLoginRequest: HTTPRequest {
+
+    var method: HTTPMethod = .post
+    var url: URL
+    var headers: HTTPHeaders?
+    var body: HTTPBody?
+
+    init(loginUser: LoginUser, common: CAC = common) {
+        url = URL(string: "/apis/sm-web-anl/v1/track", relativeTo: common.base)!
+        headers = common.headers
+
+        let encodedData = try? JSONEncoder().encode(loginUser)
+        let jsonString = String(data: encodedData!,
+                                encoding: .utf8)
+        let timestamp = Date().timeIntervalSince1970
+
+        body = FORMBody(params: [LoginUser.CodingKeys.userId.rawValue: loginUser.userId ?? "",
+                                 LoginUser.CodingKeys.firstName.rawValue: loginUser.firstName ?? "",
+                                 LoginUser.CodingKeys.lastName.rawValue: loginUser.lastName ?? "",
+                                 LoginUser.CodingKeys.email.rawValue: loginUser.email ?? "",
+                                 LoginFormHeaderKey.tenantId: common.config?.identity.tenantID ?? "",
+                                 LoginFormHeaderKey.deviceId: common.config?.uniqueID ?? "",
+                                 LoginFormHeaderKey.visitorId: common.config?.uniqueID ?? "",
+                                 LoginFormHeaderKey.sessionId: common.config?.uniqueID ?? "",
+                                 LoginFormHeaderKey.sdkName: "sm-analytics",
+                                 LoginFormHeaderKey.uuid: IntegerID,
+                                 LoginFormHeaderKey.appKey: common.config?.identity.appKey,
+                                 LoginFormHeaderKey.hour: 12,
+                                 LoginFormHeaderKey.timestamp: timestamp,
+                                 "user_details": jsonString ?? ""])
+        
+    }
+}

@@ -17,6 +17,18 @@ struct HeaderKey {
     static let contentType = "Content-Type"
 }
 
+struct LoginFormHeaderKey {
+    static let tenantId = "tenant_id"
+    static let deviceId = "device_id"
+    static let visitorId = "visitor_id"
+    static let sessionId = "session_id"
+    static let sdkName = "sdk_name"
+    static let uuid = "uuid"
+    static let appKey = "app_key"
+    static let hour = "hour"
+    static let timestamp = "timestamp"
+}
+
 struct ResponseKeyValue {
     static let status = "Status"
     static let success = "success"

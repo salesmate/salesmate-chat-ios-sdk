@@ -73,6 +73,11 @@ public class SalesmateChat {
     public static func setVerifiedID(_ ID: String) {
         shared?.config.verifiedID = ID
     }
+    
+    public static func loginWith(userId: String?, email: String?, firstName: String?, lastName: String?) {
+        let loginUser = LoginUser(userId: userId, email: email, firstName: firstName, lastName: lastName)
+        shared?.client.loginWith(with: loginUser, completion: { _ in })
+    }
 }
 
 extension SalesmateChat {

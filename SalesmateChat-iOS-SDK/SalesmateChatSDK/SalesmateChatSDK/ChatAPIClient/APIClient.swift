@@ -203,4 +203,15 @@ extension ChatAPIClient: ChatAPI {
             }
         }
     }
+    
+    func createLogin(with loginUser: LoginUser, completion: @escaping (Result<Void, ChatError>) -> Void) {
+        let request = CreateLoginRequest(loginUser: loginUser)
+        
+        loader.load(request: request) { (result) in
+            switch result {
+            case .success: completion(.success(()))
+            case .failure: completion(.failure(.unknown))
+            }
+        }
+    }
 }

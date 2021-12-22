@@ -17,8 +17,9 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.configureSalesmateChatMessengerSDKForDev27()
+        //self.configureSalesmateChatMessengerSDKForDev27()
 //        self.configureSalesmateChatMessengerSDKForMobileApp();
+        configureSalesmateChatMessengerSDKForDev18()
     }
     
     func configureSalesmateChatMessengerSDKForDev18(){
@@ -52,7 +53,8 @@ class ViewController: UIViewController {
     }
     
     @IBAction func showChatPressed(_ sender: UIButton) {
-        SalesmateChat.presentMessenger(from: self)
+        //SalesmateChat.presentMessenger(from: self)
+        SalesmateChat.loginWith(userId: "234", email: "tt@t.com", firstName: "java", lastName: "script")
     }
     
     @IBAction func btnSendTestEventPressed(_ sender: Any) {
