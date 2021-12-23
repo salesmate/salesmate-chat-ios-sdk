@@ -207,11 +207,50 @@ extension ChatAPIClient: ChatAPI {
     func createLogin(with loginUser: LoginUser, completion: @escaping (Result<Void, ChatError>) -> Void) {
         let request = CreateLoginRequest(loginUser: loginUser)
         
-        loader.load(request: request) { (result) in
-            switch result {
-            case .success: completion(.success(()))
-            case .failure: completion(.failure(.unknown))
+        
+        //create the session object
+        let session = URLSession.shared
+
+        //create dataTask using the session object to send data to the server
+        let task = session.dataTask(with: request.request!, completionHandler: { data, response, error in
+
+            guard error == nil else {
+                if let error = error as? ChatError {
+                    completion(.failure(error))
+                }
+                return
             }
-        }
+
+            guard let data = data else {
+                if let error = error as? ChatError {
+                    completion(.failure(error))
+                }
+                return
+            }
+            
+            if let httpResponse = response as? HTTPURLResponse {
+                
+                if httpResponse.statusCode == 200 {
+                    do {
+                        let str = String(decoding: data, as: UTF8.self)
+                        print(str)
+                        if str == "success" {
+                            completion(.success(()))
+                        } else {
+                            if let error = error as? ChatError {
+                                completion(.failure(error))
+                            }
+                        }
+                        
+                    }
+                } else {
+                    if let error = error as? ChatError {
+                        completion(.failure(error))
+                    }
+                }
+            }
+        })
+
+        task.resume()
     }
 }

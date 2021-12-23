@@ -27,6 +27,7 @@ struct LoginFormHeaderKey {
     static let appKey = "app_key"
     static let hour = "hour"
     static let timestamp = "timestamp"
+    static let userDetails = "user_details"
 }
 
 struct ResponseKeyValue {

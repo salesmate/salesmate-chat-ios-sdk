@@ -237,11 +237,11 @@ struct CreateLoginRequest: HTTPRequest {
                                  LoginFormHeaderKey.visitorId: common.config?.uniqueID ?? "",
                                  LoginFormHeaderKey.sessionId: common.config?.uniqueID ?? "",
                                  LoginFormHeaderKey.sdkName: "sm-analytics",
-                                 LoginFormHeaderKey.uuid: IntegerID,
-                                 LoginFormHeaderKey.appKey: common.config?.identity.appKey,
-                                 LoginFormHeaderKey.hour: 12,
-                                 LoginFormHeaderKey.timestamp: timestamp,
-                                 "user_details": jsonString ?? ""])
+                                 LoginFormHeaderKey.uuid: UUID.new,
+                                 LoginFormHeaderKey.appKey: common.config?.identity.appKey ?? "",
+                                 LoginFormHeaderKey.hour: "12",
+                                 LoginFormHeaderKey.timestamp: "\(timestamp)",
+                                 LoginFormHeaderKey.userDetails: jsonString ?? ""])
         
     }
 }
