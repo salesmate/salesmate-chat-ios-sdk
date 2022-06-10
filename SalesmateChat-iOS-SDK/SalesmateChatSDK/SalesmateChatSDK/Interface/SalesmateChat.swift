@@ -7,7 +7,7 @@
 
 import UIKit
 
-public enum Environment {
+@objc public enum Environment: Int {
     case development
     case production
 
@@ -19,22 +19,24 @@ public enum Environment {
     }
 }
 
-public struct Configuration {
+@objc public class Configuration: NSObject {
+  @objc let workspaceID: String
+  @objc let appKey: String
+  @objc let tenantID: String
+  @objc let environment: Environment
 
-    let workspaceID: String
-    let appKey: String
-    let tenantID: String
-    let environment: Environment
-
-    public init(workspaceID: String, appKey: String, tenantID: String, environment: Environment) {
-        self.workspaceID = workspaceID
-        self.appKey = appKey
-        self.tenantID = tenantID
-        self.environment = environment
-    }
+  @objc public init(workspaceID: String, appKey: String, tenantID: String, environment: Environment) {
+      self.workspaceID = workspaceID
+      self.appKey = appKey
+      self.tenantID = tenantID
+      self.environment = environment
+  }
 }
+//@objc public struct Configuration {
+//
+//}
 
-public class SalesmateChat {
+@objc public class SalesmateChat: NSObject {
 
     private var client: ChatClient
     private var config: Configeration
@@ -54,7 +56,7 @@ public class SalesmateChat {
         self.client = SalesmateChatClient(config: config, chatStream: chatStream, chatAPI: chatAPI)
     }
 
-    public static func setSalesmateChat(configuration settings: Configuration) {
+    @objc public static func setSalesmateChat(configuration settings: Configuration) {
         shared = SalesmateChat(with: settings)
 
         shared?.updateCustomization()
@@ -62,11 +64,11 @@ public class SalesmateChat {
         shared?.client.connect(completion: { _ in })
     }
 
-    public static func presentMessenger(from viewController: UIViewController) {
+    @objc public static func presentMessenger(from viewController: UIViewController) {
         shared?.presentMessenger(from: viewController)
     }
     
-    public static func logEventWith(eventName:String, withData data:[AnyHashable:Any]? = nil){
+    @objc public static func logEventWith(eventName:String, withData data:[AnyHashable:Any]? = nil){
         shared?.logEventWith(eventName: eventName, withData: data);
     }
 
@@ -74,13 +76,44 @@ public class SalesmateChat {
         shared?.config.verifiedID = ID
     }
     
-    public static func loginWith(userId: String?, email: String?, firstName: String?, lastName: String?) {
+    @objc public static func loginWith(userId: String?, email: String?, firstName: String?, lastName: String?, completion: @escaping (String?, Error?) -> Void) {
         let loginUser = LoginUser(userId: userId, email: email, firstName: firstName, lastName: lastName)
-        shared?.client.loginWith(with: loginUser, completion: { result in
-            
+        shared?.client.loginWith(with: loginUser, completion: { (result) in
+            switch result {
+            case .success(let response):
+                self.setVerifiedID(userId ?? "")
+                shared?.saveUserId(userId: userId ?? "")
+                completion(response, nil)
+            case .failure(let error):
+                completion(nil, error)
+                break
+            }
         })
-        shared?.client.loginWith(with: loginUser, completion: { _ in })
     }
+    
+    @objc public static func logout() {
+        shared?.logout()
+    }
+    
+    @objc public static func getVisitorId() -> String {
+        return shared?.getVisitorId() ?? ""
+    }
+
+    @objc public static func update(userId: String?, email: String?, firstName: String?, lastName: String?, completion: @escaping (String?, Error?) -> Void) {
+        let loginUser = LoginUser(userId: userId, email: email, firstName: firstName, lastName: lastName)
+        shared?.client.update(with: loginUser, completion: { (result) in
+            switch result {
+            case .success(let response):
+                self.setVerifiedID(userId ?? "")
+                shared?.saveUserId(userId: userId ?? "")
+                completion(response, nil)
+            case .failure(let error):
+                completion(nil, error)
+                break
+            }
+        })
+    }
+
 }
 
 extension SalesmateChat {
@@ -163,5 +196,27 @@ extension SalesmateChat {
         }
 
         viewController?.present(rootNC, animated: true, completion: nil)
+    }
+    
+    private func logout() {
+        SalesmateChat.shared?.config.verifiedID = nil
+        UserDefaults.standard.removeObject(forKey: UserDefaultStorage.userDefaultKey)
+        UserDefaults.standard.removeObject(forKey: "userId")
+        UserDefaults.standard.synchronize()
+    }
+    
+    private func getVisitorId() -> String? {
+        return self.getUserId() ?? ""
+    }
+    
+    private func saveUserId(userId: String) {
+        let defaults = UserDefaults.standard
+        defaults.set(userId, forKey: "userId")
+        defaults.synchronize()
+    }
+    
+    private func getUserId() -> String? {
+        let defaults = UserDefaults.standard
+        return defaults.string(forKey: "userId") ?? ""
     }
 }

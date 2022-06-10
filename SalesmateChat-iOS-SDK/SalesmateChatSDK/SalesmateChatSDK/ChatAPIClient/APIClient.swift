@@ -204,7 +204,7 @@ extension ChatAPIClient: ChatAPI {
         }
     }
     
-    func createLogin(with loginUser: LoginUser, completion: @escaping (Result<Void, ChatError>) -> Void) {
+    func createLogin(with loginUser: LoginUser, completion: @escaping (Result<String, ChatError>) -> Void) {
         let request = CreateLoginRequest(loginUser: loginUser)
         
         
@@ -235,7 +235,7 @@ extension ChatAPIClient: ChatAPI {
                         let str = String(decoding: data, as: UTF8.self)
                         print(str)
                         if str == "success" {
-                            completion(.success(()))
+                            completion(.success(str))
                         } else {
                             if let error = error as? ChatError {
                                 completion(.failure(error))

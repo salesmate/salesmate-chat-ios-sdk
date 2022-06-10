@@ -73,7 +73,8 @@ protocol ChatClient: ChatObservation, ConversationFetcher, ConversationOperation
     func getConfigerations(completion: @escaping ((Result<JSONObject, ChatError>) -> Void))
     func connect(waitForFullConnection: Bool, completion: @escaping (Result<Void, ChatError>) -> Void)
     func createContact(with email: String, in conversation: ConversationID?, completion: @escaping (Result<Void, ChatError>) -> Void)
-    func loginWith(with loginUser: LoginUser, completion: @escaping (Result<Void, ChatError>) -> Void)
+    func loginWith(with loginUser: LoginUser, completion: @escaping (Result<String, ChatError>) -> Void)
+    func update(with loginUser: LoginUser, completion: @escaping (Result<String, ChatError>) -> Void)
 }
 
 extension ChatClient {

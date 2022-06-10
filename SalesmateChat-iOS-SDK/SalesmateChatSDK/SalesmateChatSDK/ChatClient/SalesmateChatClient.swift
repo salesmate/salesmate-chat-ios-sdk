@@ -76,7 +76,11 @@ extension SalesmateChatClient: ChatClient {
         chatAPI.createContact(with: email, in: conversation, completion: completion)
     }
     
-    func loginWith(with loginUser: LoginUser, completion: @escaping (Result<Void, ChatError>) -> Void) {
+    func loginWith(with loginUser: LoginUser, completion: @escaping (Result<String, ChatError>) -> Void) {
+        chatAPI.createLogin(with: loginUser, completion: completion)
+    }
+        
+    func update(with loginUser: LoginUser, completion: @escaping (Result<String, ChatError>) -> Void) {
         chatAPI.createLogin(with: loginUser, completion: completion)
     }
 }

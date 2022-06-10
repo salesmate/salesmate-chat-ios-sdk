@@ -220,9 +220,9 @@ struct CreateLoginRequest: HTTPRequest {
     var body: HTTPBody?
 
     init(loginUser: LoginUser, common: CAC = common) {
-        url = URL(string: "/apis/sm-web-anl/v1/track", relativeTo: common.base)!
+        url = URL(string: "/analytics/v1/track", relativeTo: common.base)!
         headers = common.headers
-
+        
         let encodedData = try? JSONEncoder().encode(loginUser)
         let jsonString = String(data: encodedData!,
                                 encoding: .utf8)

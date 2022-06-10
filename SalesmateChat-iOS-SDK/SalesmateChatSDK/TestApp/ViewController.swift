@@ -15,11 +15,17 @@ class ViewController: UIViewController {
     @IBOutlet weak var tFieldKey: UITextField!
     @IBOutlet weak var tFieldValue: UITextField!
     
+    @IBOutlet weak var tFieldUserId: UITextField!
+    @IBOutlet weak var tFieldEmail: UITextField!
+    @IBOutlet weak var tFieldFirstName: UITextField!
+    @IBOutlet weak var tFieldLastName: UITextField!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         //self.configureSalesmateChatMessengerSDKForDev27()
 //        self.configureSalesmateChatMessengerSDKForMobileApp();
-        configureSalesmateChatMessengerSDKForDev18()
+        configureSalesmateChatMessengerSDKForDev27()
+        setVerifiedId()
     }
     
     func configureSalesmateChatMessengerSDKForDev18(){
@@ -46,6 +52,12 @@ class ViewController: UIViewController {
         SalesmateChat.setSalesmateChat(configuration: config)
     }
     
+    func setVerifiedId() {
+        guard !SalesmateChat.getVisitorId().isEmpty else {
+            return
+        }
+        SalesmateChat.setVerifiedID(SalesmateChat.getVisitorId())
+    }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -53,8 +65,59 @@ class ViewController: UIViewController {
     }
     
     @IBAction func showChatPressed(_ sender: UIButton) {
-        //SalesmateChat.presentMessenger(from: self)
-        SalesmateChat.loginWith(userId: "234", email: "tt@t.com", firstName: "java", lastName: "script")
+        SalesmateChat.presentMessenger(from: self)
+    }
+    
+    @IBAction func loginPressed(_ sender: UIButton) {
+        userLogin()
+    }
+    
+    func userLogin() {
+        guard let userId = tFieldUserId.text, !userId.isEmpty else {
+            self.showAlertWithTitle(title: "Salesmate Chat", andMessage: "Please enter valid user id")
+            return
+        }
+        
+        SalesmateChat.loginWith(userId: userId, email: tFieldEmail.text ?? "", firstName: tFieldFirstName.text ?? "", lastName: tFieldLastName.text ?? "", completion: { (success, error)  in
+            if error == nil {
+                DispatchQueue.main.async {
+                    self.showAlertWithTitle(title: "Salesmate Chat", andMessage: "Login Success")
+                }
+            }
+        })
+    }
+    
+    func userUpdate() {
+        guard let userId = tFieldUserId.text, !userId.isEmpty else {
+            self.showAlertWithTitle(title: "Salesmate Chat", andMessage: "Please enter valid user id")
+            return
+        }
+        
+        SalesmateChat.loginWith(userId: userId, email: tFieldEmail.text ?? "", firstName: tFieldFirstName.text ?? "", lastName: tFieldLastName.text ?? "", completion: { (success, error)  in
+            if error == nil {
+                DispatchQueue.main.async {
+                    self.showAlertWithTitle(title: "Salesmate Chat", andMessage: "Update Success")
+                }
+            }
+        })
+    }
+    
+    @IBAction func logoutPressed(_ sender: UIButton) {
+        SalesmateChat.logout()
+        self.showAlertWithTitle(title: "Salesmate Chat", andMessage: "Logout Success")
+    }
+    
+    @IBAction func updatePressed(_ sender: UIButton) {
+        userUpdate()
+        self.showAlertWithTitle(title: "Salesmate Chat", andMessage: "Update Success")
+    }
+    
+    @IBAction func getVisitorIdPressed(_ sender: UIButton) {
+        guard !SalesmateChat.getVisitorId().isEmpty else {
+            return
+        }
+        self.showAlertWithTitle(title: "Salesmate Chat", andMessage: "Visitor Id is : \(SalesmateChat.getVisitorId())")
+
     }
     
     @IBAction func btnSendTestEventPressed(_ sender: Any) {
