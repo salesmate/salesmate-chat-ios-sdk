@@ -200,6 +200,10 @@ extension SalesmateChat {
     
     private func logout() {
         SalesmateChat.shared?.config.verifiedID = nil
+        SalesmateChat.shared?.config.channels = []
+        SalesmateChat.shared?.client.clearConversations()
+        SalesmateChat.shared?.client.clearMessages()
+        SalesmateChat.shared?.config.uniqueID = UIDevice.current.identifierForVendor?.uuidString ?? ""
         UserDefaults.standard.removeObject(forKey: UserDefaultStorage.userDefaultKey)
         UserDefaults.standard.removeObject(forKey: "userId")
         UserDefaults.standard.synchronize()

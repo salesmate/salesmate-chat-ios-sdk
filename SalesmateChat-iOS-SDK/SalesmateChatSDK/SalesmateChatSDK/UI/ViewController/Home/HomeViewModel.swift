@@ -58,6 +58,8 @@ class HomeViewModel {
         let viewModel = NewVisitorViewModel(config: config)
 
         viewModel.startNewChat = {
+            // Static event for conversation 
+            Rapidops.sharedInstance().recordEvent("StartNewConversation", segmentation: ["eventType":"1"]);
             self.askToStartNewChat()
         }
 

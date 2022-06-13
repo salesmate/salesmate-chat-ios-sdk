@@ -104,6 +104,10 @@ class ViewController: UIViewController {
     
     @IBAction func logoutPressed(_ sender: UIButton) {
         SalesmateChat.logout()
+        tFieldUserId.text = ""
+        tFieldEmail.text = ""
+        tFieldFirstName.text = ""
+        tFieldLastName.text = ""
         self.showAlertWithTitle(title: "Salesmate Chat", andMessage: "Logout Success")
     }
     

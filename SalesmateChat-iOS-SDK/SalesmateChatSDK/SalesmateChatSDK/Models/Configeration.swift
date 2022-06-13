@@ -143,7 +143,7 @@ class Configeration {
     private(set) var canStartNewConversation: Bool = false
 
     /// We are assuming that we will alwayes get identifierForVendor because the chances of that is very low.
-    let uniqueID: String = UIDevice.current.identifierForVendor?.uuidString ?? ""
+    var uniqueID: String = UIDevice.current.identifierForVendor?.uuidString ?? ""
     var contactID: IntegerID? { self.contact?.id }
     var verifiedID: String?
 
