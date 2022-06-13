@@ -121,7 +121,7 @@ extension SalesmateChat {
     private func setupAnalyticsSDK(){
         let rapidopsConfig = RapidopsConfig();
         let hostStr = "https://\(config.identity.tenantID)/apis" //CAC.shared.base.host ?? "https://\(config.identity.tenantID)/apis"
-        rapidopsConfig.host = "\(hostStr)/sm-web-anl/v1"
+        rapidopsConfig.host = "\(hostStr)/analytics/v1"
         rapidopsConfig.appKey = config.identity.appKey;
         rapidopsConfig.enableDebug = true;
         rapidopsConfig.alwaysUsePOST = true;
