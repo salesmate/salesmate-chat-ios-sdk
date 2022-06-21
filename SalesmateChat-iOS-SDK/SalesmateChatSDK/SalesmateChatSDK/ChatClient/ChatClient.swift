@@ -75,6 +75,7 @@ protocol ChatClient: ChatObservation, ConversationFetcher, ConversationOperation
     func createContact(with email: String, in conversation: ConversationID?, completion: @escaping (Result<Void, ChatError>) -> Void)
     func loginWith(with loginUser: LoginUser, completion: @escaping (Result<String, ChatError>) -> Void)
     func update(with loginUser: LoginUser, completion: @escaping (Result<String, ChatError>) -> Void)
+    func sendDeviceToken(with deviceToken: String, deviceId: String, completion: @escaping (Result<Void, ChatError>) -> Void)
 }
 
 extension ChatClient {

@@ -114,6 +114,17 @@ import UIKit
         })
     }
 
+    @objc public static func sendDeviceToken(with deviceToken: String, deviceId: String) {
+        shared?.client.sendDeviceToken(with: deviceToken, deviceId: deviceId, completion: { (result) in
+            switch result {
+            case .success:
+                print("success")
+            case .failure:
+                print("failure")
+                break
+            }
+        })
+    }
 }
 
 extension SalesmateChat {

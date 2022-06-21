@@ -204,6 +204,17 @@ extension ChatAPIClient: ChatAPI {
         }
     }
     
+    func sendDeviceToken(with deviceToken: String, deviceId: String, completion: @escaping (Result<Void, ChatError>) -> Void) {
+        let request = SendDeviceTokenRequest(deviceToken: deviceToken, deviceId: deviceId)
+
+        loader.load(request: request) { (result) in
+            switch result {
+            case .success: completion(.success(()))
+            case .failure: completion(.failure(.unknown))
+            }
+        }
+    }
+    
     func createLogin(with loginUser: LoginUser, completion: @escaping (Result<String, ChatError>) -> Void) {
         let request = CreateLoginRequest(loginUser: loginUser)
         

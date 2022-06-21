@@ -83,6 +83,10 @@ extension SalesmateChatClient: ChatClient {
     func update(with loginUser: LoginUser, completion: @escaping (Result<String, ChatError>) -> Void) {
         chatAPI.createLogin(with: loginUser, completion: completion)
     }
+    
+    func sendDeviceToken(with deviceToken: String, deviceId: String, completion: @escaping (Result<Void, ChatError>) -> Void) {
+        chatAPI.sendDeviceToken(with: deviceToken, deviceId: deviceId, completion: completion)
+    }
 }
 
 extension SalesmateChatClient: ConversationFetcher {

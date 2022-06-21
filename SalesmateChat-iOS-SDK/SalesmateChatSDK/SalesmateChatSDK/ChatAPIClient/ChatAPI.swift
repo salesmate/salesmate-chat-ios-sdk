@@ -29,4 +29,5 @@ protocol ChatAPI: AnyObject {
     
     func createLogin(with loginUser: LoginUser, completion: @escaping (Result<String, ChatError>) -> Void)
 
+    func sendDeviceToken(with deviceToken: String, deviceId: String, completion: @escaping (Result<Void, ChatError>) -> Void)
 }

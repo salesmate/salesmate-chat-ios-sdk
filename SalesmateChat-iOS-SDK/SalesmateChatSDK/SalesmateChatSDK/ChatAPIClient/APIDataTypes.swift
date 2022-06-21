@@ -102,9 +102,10 @@ extension HTTPResult {
                 }
             }()
             
-            debugPrint("Response Json:\(String(data: data!, encoding: .utf8))");
+            
 
             if let data = data {
+                debugPrint("Response Json:\(String(data: data, encoding: .utf8))");
                 self = .success(HTTPResponse(request: request, response: response, body: data))
             } else {
                 self = .success(httpResponse)

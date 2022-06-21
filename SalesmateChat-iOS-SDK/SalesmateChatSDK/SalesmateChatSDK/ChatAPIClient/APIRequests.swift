@@ -212,6 +212,20 @@ struct ReadConversationRequest: HTTPRequest {
     }
 }
 
+struct SendDeviceTokenRequest: HTTPRequest {
+
+    var method: HTTPMethod = .post
+    var url: URL
+    var headers: HTTPHeaders?
+    var body: HTTPBody?
+
+    init(deviceToken: String, deviceId: String, common: CAC = common) {
+        url = URL(string: "/analytics/v1/visitors/update-device-token", relativeTo: common.base)!
+        headers = common.headers
+        body = JSONBody(["iosDeviceToken": deviceToken, "deviceId": deviceId])
+    }
+}
+
 struct CreateLoginRequest: HTTPRequest {
 
     var method: HTTPMethod = .post
