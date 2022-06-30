@@ -7,6 +7,8 @@
 
 import Foundation
 
+let messageType = "NewChatConversationMessageReceivedFromUser"
+
 class SalesmateChatClient {
 
     private let config: Configeration

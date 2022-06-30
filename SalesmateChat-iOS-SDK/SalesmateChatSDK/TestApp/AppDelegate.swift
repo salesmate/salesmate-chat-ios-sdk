@@ -62,9 +62,60 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        print("notification received:\(userInfo)");
+
+        if SalesmateChat.isSalesmateChatSDKPushNotification(userInfo: userInfo) {
+            SalesmateChat.handlePushNotification(userInfo: userInfo)
+            completionHandler(.newData)
+            return
+        }
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        
+        //other notifications will be here(non-silent)
+        let dict = response.notification.request.content.userInfo as! [String : AnyObject]
+        
+        if SalesmateChat.isSalesmateChatSDKPushNotification(userInfo: dict) {
+            SalesmateChat.handlePushNotification(userInfo: dict)
+            return
+        }
+
+        print("notification received:\(dict)");
+        
+        switch response.actionIdentifier {
+        case UNNotificationDefaultActionIdentifier:
+            self.getDictPayLoad(dict: dict)
+        default:
+            print("Unknown action")
+        }
+        completionHandler()
         
     }
     
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        
+        let dict = notification.request.content.userInfo as! [String : AnyObject]
+        let dictMessageTemp = dict["message"] as! [String : AnyObject]
+        completionHandler( [.alert,.sound,.badge])
+        
+        print("notification received:\(dict)")
+        
+        if UIApplication.shared.applicationState == .active{
+            print("notification received:\(dictMessageTemp)")
+        } else{
+            self.getDictPayLoad(dict: dict)
+        }
+    }
+    
+    func getDictPayLoad(dict : [String : Any]) -> Void {
+        
+        let dictMessageTemp = dict["message"] as! [String : AnyObject]
+        print("notification received:\(dictMessageTemp)")
+
+        return;
+    }
+
 }
 
 struct Platform {

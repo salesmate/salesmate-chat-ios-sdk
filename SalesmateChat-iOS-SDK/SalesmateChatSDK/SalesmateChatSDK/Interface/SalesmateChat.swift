@@ -125,6 +125,15 @@ import UIKit
             }
         })
     }
+    
+    @objc public static func isSalesmateChatSDKPushNotification(userInfo: [AnyHashable : Any]) -> Bool {
+        return shared?.isSalesmateChatSDKPushNotification(userInfo: userInfo) ?? false
+        
+    }
+    
+    @objc public static func handlePushNotification(userInfo: [AnyHashable : Any]) {
+        shared?.redirectToChatHomeVC()
+    }
 }
 
 extension SalesmateChat {
@@ -234,4 +243,38 @@ extension SalesmateChat {
         let defaults = UserDefaults.standard
         return defaults.string(forKey: "userId") ?? ""
     }
+    
+    private func isSalesmateChatSDKPushNotification(userInfo: [AnyHashable : Any]) -> Bool? {
+        var isSalesmateChatSDKPush: Bool = false
+        if let messageObj = userInfo["message"] as? [String: Any] {
+            if let message = messageObj["message"] as? [String: Any] {
+                if let messageTypeValue = message["notificationType"] as? String, messageTypeValue == messageType {
+                    isSalesmateChatSDKPush = true
+                }
+            }
+        }
+        return isSalesmateChatSDKPush
+    }
+    
+    func redirectToChatHomeVC() {
+        let VC = HomeVC.create(with: HomeViewModel(config: config, client: client))
+
+        rootNC.setViewControllers([VC], animated: true)
+        rootNC.navigationBar.isHidden = true
+
+        if UIDevice.current.isIPad {
+            rootNC.modalPresentationStyle = .fullScreen
+        }
+
+        self.getTopViewController()?.present(rootNC, animated: true, completion: nil)
+    }
+    
+    func getTopViewController() -> UIViewController? {
+        var topController: UIViewController? = UIApplication.shared.keyWindow?.rootViewController
+        while topController?.presentedViewController != nil {
+            topController = topController?.presentedViewController
+        }
+        return topController
+    }
+
 }
