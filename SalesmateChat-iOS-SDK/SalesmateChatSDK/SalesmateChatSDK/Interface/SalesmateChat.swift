@@ -9,11 +9,13 @@ import UIKit
 
 @objc public enum Environment: Int {
     case development
+    case staging
     case production
-
+    
     var baseAPIURL: URL {
         switch self {
         case .development: return URL(string: "https://apis-dev.salesmate.io")!
+        case .staging: return URL(string: "https://apis-staging.salesmate.io")!
         case .production: return URL(string: "https://apis.salesmate.io")!
         }
     }

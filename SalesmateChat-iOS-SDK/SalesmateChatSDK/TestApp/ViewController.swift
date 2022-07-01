@@ -22,13 +22,19 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        //self.configureSalesmateChatMessengerSDKForDev27()
-//        self.configureSalesmateChatMessengerSDKForMobileApp();
-        configureSalesmateChatMessengerSDKForDev27()
+        
+        configureSalesmateChatMessengerSDK(env: .staging, workspaceID: "70bca1a9-925d-48e6-98e7-3dc4c75a082c", appKey: "dfb7dff0-a8fb-11ec-8457-39918f70b6b9", tenantID: "staging16.salesmate.io")
         setVerifiedId()
     }
+    func configureSalesmateChatMessengerSDK(env: Environment, workspaceID: String, appKey: String, tenantID: String) {
+        let config = Configuration(workspaceID: workspaceID,
+                                   appKey: appKey,
+                                   tenantID: tenantID,
+                                   environment: env)
+        SalesmateChat.setSalesmateChat(configuration: config)
+    }
     
-    func configureSalesmateChatMessengerSDKForDev18(){
+    /*func configureSalesmateChatMessengerSDKForDev18(){
         let config = Configuration(workspaceID: "3ade8edc-5a62-45dc-b7a5-46b0e40ffb57",
                                    appKey: "2f33c730-b08a-11eb-99e2-f3b202d2d81c",
                                    tenantID: "dev18.salesmate.io",
@@ -50,7 +56,7 @@ class ViewController: UIViewController {
                                    tenantID: "mobileapp.salesmate.io",
                                    environment: .production)
         SalesmateChat.setSalesmateChat(configuration: config)
-    }
+    }*/
     
     func setVerifiedId() {
         guard !SalesmateChat.getVisitorId().isEmpty else {

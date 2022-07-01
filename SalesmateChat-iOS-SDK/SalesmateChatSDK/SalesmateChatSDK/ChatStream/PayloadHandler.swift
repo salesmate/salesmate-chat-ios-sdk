@@ -26,8 +26,8 @@ enum PayloadHandler {
                     return handleNewMessage(event: innerData)
                 case .availableStatusUpdate:
                     return handleUserAvailabilityStatusUpdate(event: innerData)
-                case .conversationHasRead:
-                    return handleConversationHasRead(event: innerData)
+                case .conversationHasSeen:
+                    return handleConversationHasSeen(event: innerData)
                 case .conversationListUpdate:
                     return handleConversationListUpdate(event: innerData)
                 case .messageDeleted:
@@ -68,9 +68,9 @@ enum PayloadHandler {
         return nil
     }
 
-    static private func handleConversationHasRead(event data: JSON) -> ChatEvent? {
+    static private func handleConversationHasSeen(event data: JSON) -> ChatEvent? {
         guard let conversationId = data["conversationId"].string else { return nil }
-        guard let contactHasRead = data["userHasRead"].bool, contactHasRead else { return nil }
+        guard let contactHasSeen = data["userHasSeen"].bool, contactHasSeen else { return nil }
 
         return .readStatusChange(conversationId)
     }

@@ -39,7 +39,7 @@ struct Payload {
     enum PublishType: String {
         case newMessage = "NEW_MESSAGE"
         case availableStatusUpdate = "USER_AVAILABILITY_STATUS_UPDATED"
-        case conversationHasRead = "CONVERSATION_HAS_READ"
+        case conversationHasSeen = "CONVERSATION_HAS_SEEN"
         case conversationListUpdate = "UPDATE_CONVERSATIONS_LIST"
         case messageDeleted = "MESSAGE_DELETED"
     }

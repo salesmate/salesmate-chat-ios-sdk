@@ -62,7 +62,7 @@ extension Conversation: Codable {
         case lastMessage = "lastMessageData"
         case closedDateString = "closedDate"
         case isReadByVisitor = "contact_has_read"
-        case isReadByUser = "userHasRead"
+        case isReadByUser = "userHasSeen"
         case ownerUserId = "owner_user"
         case lastUserId = "last_participating_user_id"
         case rating

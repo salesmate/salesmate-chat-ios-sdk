@@ -55,7 +55,7 @@ extension Date {
         let day = hour * 24
 
         if interval < minute {
-            return "Now"
+            return "Just now"
         } else if interval < hour {
             return "\(interval / minute)m ago"
         } else if interval < day {
