@@ -23,7 +23,10 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //configureSalesmateChatMessengerSDK(env: .staging, workspaceID: "5f7054c3-4a1b-4f8f-8010-452532b5993f", appKey: "928bed30-f779-11ec-ad1c-a9d01d9ff0cd", tenantID: "staging14.salesmate.io")
+        
         configureSalesmateChatMessengerSDK(env: .staging, workspaceID: "70bca1a9-925d-48e6-98e7-3dc4c75a082c", appKey: "dfb7dff0-a8fb-11ec-8457-39918f70b6b9", tenantID: "staging16.salesmate.io")
+        
         setVerifiedId()
     }
     func configureSalesmateChatMessengerSDK(env: Environment, workspaceID: String, appKey: String, tenantID: String) {

@@ -108,7 +108,7 @@ extension FilePickerController {
         }
 
         guard Self.isValidSize(of: file) else {
-            presenter.filePicker(self, errorOccured: "Selected file have size larger than 25 MB.")
+            presenter.filePicker(self, errorOccured: "We support file sizes up to 25MB. If your file is larger than 25MB, we suggest you break it up into multiple files.")
             return
         }
 
@@ -141,8 +141,8 @@ extension FilePickerController: UIImagePickerControllerDelegate {
 
     public func imagePickerController(_ picker: UIImagePickerController,
                                       didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
-        defer { presenter.dismiss(animated: true) }
-
+//        defer { presenter.dismiss(animated: true) }
+        presenter.dismiss(animated: true)
         guard let image = info[.originalImage] as? UIImage else { return }
 
         didSelect(image)
