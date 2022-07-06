@@ -256,8 +256,14 @@ extension ChatController {
 
     private func startAskEmailTimesIfRequire() {
         func askEmail() {
+            var blockToSendStr = "Hi there! Currently our team is away, but we’ll be available in a moment. In the meantime, please give us a way to reach you."
+            if let teamAvailability = config.teamNextAvailableTime {
+                if !teamAvailability.isPastTime,  let teamAvailabilityText = teamAvailability.fromNow {
+                    blockToSendStr = "Hi there! Currently our team is away, but we’ll be \(teamAvailabilityText.lowercased()). In the meantime, please give us a way to reach you."
+                }
+            }
             let message1 = MessageToSend(type: .comment,
-                                         contents: [BlockToSend(text: "Give the team a way to reach you:")],
+                                         contents: [BlockToSend(text: blockToSendStr)],
                                          conversationName: config.pseudoName ?? "",
                                          isBot: true)
 

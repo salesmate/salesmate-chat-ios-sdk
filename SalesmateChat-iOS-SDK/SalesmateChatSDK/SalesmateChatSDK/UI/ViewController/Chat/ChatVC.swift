@@ -488,7 +488,7 @@ extension ChatVC: FilePickerControllerPresenter {
     }
 
     func filePicker(_ picker: FilePickerController, errorOccured message: String) {
-        showAlert(title: nil, message: message)
+        showAlert(title: "Failed", message: message)
     }
 }
 
@@ -509,7 +509,8 @@ extension ChatVC: MessageComposeViewDelegate {
     }
 
     private func askAttachmentSource() {
-        let sheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+    
+        let sheet = UIAlertController(title: nil, message: nil, preferredStyle: UIDevice.current.isIPad ? .alert : .actionSheet)
 
         let photos = UIAlertAction(title: "Take from photos", style: .default) { _ in
             self.filePicker.showMediaPicker()

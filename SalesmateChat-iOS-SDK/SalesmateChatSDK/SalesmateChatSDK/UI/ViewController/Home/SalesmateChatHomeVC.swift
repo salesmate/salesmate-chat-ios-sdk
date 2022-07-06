@@ -1,5 +1,5 @@
 //
-//  HomeVC.swift
+//  SalesmateChatHomeVC.swift
 //  SalesmateChatSDK
 //
 //  Created by Chintan Dave on 28/07/21.
@@ -7,12 +7,12 @@
 
 import UIKit
 
-class HomeVC: UIViewController {
+class SalesmateChatHomeVC: UIViewController {
 
     // MARK: - Static Functions
-    static func create(with viewModel: HomeViewModel) -> HomeVC {
+    static func create(with viewModel: HomeViewModel) -> SalesmateChatHomeVC {
         let storyboard = UIStoryboard(name: "Home", bundle: Bundle(for: Self.self))
-        let homeVC = storyboard.instantiateInitialViewController() as! HomeVC
+        let homeVC = storyboard.instantiateInitialViewController() as! SalesmateChatHomeVC
 
         homeVC.viewModel = viewModel
 

@@ -140,7 +140,7 @@
 		9BF64A2026BC44F0001F7FB0 /* CirculerProfileViewModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF64A1F26BC44F0001F7FB0 /* CirculerProfileViewModels.swift */; };
 		9BF6EFEA26F1C3B5007A0216 /* SimpleSound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF6EFE926F1C3B5007A0216 /* SimpleSound.swift */; };
 		9BFC63CC26B128B400976141 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BFC63CB26B128B400976141 /* Home.storyboard */; };
-		9BFC63CE26B128C600976141 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BFC63CD26B128C600976141 /* HomeVC.swift */; };
+		9BFC63CE26B128C600976141 /* SalesmateChatHomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BFC63CD26B128C600976141 /* SalesmateChatHomeVC.swift */; };
 		9BFC63D126B128F600976141 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BFC63D026B128F600976141 /* HomeViewModel.swift */; };
 		9BFCCA1026BC1E000051DF6D /* Body.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B65E00126A58615001F3928 /* Body.swift */; };
 		9BFCCA1126BC1E020051DF6D /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B65E00026A58615001F3928 /* Request.swift */; };
@@ -362,7 +362,7 @@
 		9BF64A1F26BC44F0001F7FB0 /* CirculerProfileViewModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CirculerProfileViewModels.swift; sourceTree = "<group>"; };
 		9BF6EFE926F1C3B5007A0216 /* SimpleSound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleSound.swift; sourceTree = "<group>"; };
 		9BFC63CB26B128B400976141 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
-		9BFC63CD26B128C600976141 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
+		9BFC63CD26B128C600976141 /* SalesmateChatHomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalesmateChatHomeVC.swift; sourceTree = "<group>"; };
 		9BFC63D026B128F600976141 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		CB3166142857499700B2899F /* IQTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IQTextView.swift; sourceTree = "<group>"; };
 		CB3166152857499700B2899F /* IQKeyboardManager+Internal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IQKeyboardManager+Internal.swift"; sourceTree = "<group>"; };
@@ -699,7 +699,7 @@
 			isa = PBXGroup;
 			children = (
 				9BFC63CB26B128B400976141 /* Home.storyboard */,
-				9BFC63CD26B128C600976141 /* HomeVC.swift */,
+				9BFC63CD26B128C600976141 /* SalesmateChatHomeVC.swift */,
 				9BFC63D026B128F600976141 /* HomeViewModel.swift */,
 				9BE7183326B1897900DD3113 /* NewVisitor.storyboard */,
 				9BE7183526B1898800DD3113 /* NewVisitorVC.swift */,
@@ -1137,7 +1137,7 @@
 				9B3A9B7E26A701D200EB7C10 /* Message.swift in Sources */,
 				9B3A9B7B26A701D200EB7C10 /* Configuration.swift in Sources */,
 				9B3A9B8C26A701E600EB7C10 /* MIME.swift in Sources */,
-				9BFC63CE26B128C600976141 /* HomeVC.swift in Sources */,
+				9BFC63CE26B128C600976141 /* SalesmateChatHomeVC.swift in Sources */,
 				905D54EB276096D10001E897 /* RapidopsConnectionManager.m in Sources */,
 				9BF260E026B3D59000D21C75 /* ConversationsVC.swift in Sources */,
 				9BE7183826B1899900DD3113 /* NewVisitorViewModel.swift in Sources */,
@@ -1273,7 +1273,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = io.salesmate.chat;
+				PRODUCT_BUNDLE_IDENTIFIER = io.salesmate.apptest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
@@ -1301,7 +1301,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = io.salesmate.chat;
+				PRODUCT_BUNDLE_IDENTIFIER = io.salesmate.apptest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;

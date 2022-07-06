@@ -96,16 +96,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         
         let dict = notification.request.content.userInfo as! [String : AnyObject]
-        let dictMessageTemp = dict["message"] as! [String : AnyObject]
-        completionHandler( [.alert,.sound,.badge])
         
-        print("notification received:\(dict)")
-        
-        if UIApplication.shared.applicationState == .active{
-            print("notification received:\(dictMessageTemp)")
-        } else{
-            self.getDictPayLoad(dict: dict)
+        if SalesmateChat.isSalesmateChatSDKPushNotification(userInfo: dict) {
+            SalesmateChat.handlePushNotification(userInfo: dict)
+            return
         }
+        //let dictMessageTemp = dict["message"] as! [String : AnyObject]
+        
+//        print("notification received:\(dict)")
+//
+//        if UIApplication.shared.applicationState == .active{
+//            print("notification received:\(dictMessageTemp)")
+//        } else{
+//            self.getDictPayLoad(dict: dict)
+//        }
     }
     
     func getDictPayLoad(dict : [String : Any]) -> Void {

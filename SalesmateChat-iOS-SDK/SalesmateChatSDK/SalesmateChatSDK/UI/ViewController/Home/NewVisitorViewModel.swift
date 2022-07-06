@@ -34,8 +34,21 @@ class NewVisitorViewModel {
     private func prepareProperties() {
         guard let availability = config.availability else { return }
         guard let look = config.look else { return }
-
-        responseTime = "The team replies \(availability.replyTime)"
+        
+        if let teamAvailability = config.teamNextAvailableTime {
+            if teamAvailability.isPastTime {
+                responseTime = "The team replies \(availability.replyTime)"
+            } else {
+                if let teamAvailabilityText = teamAvailability.fromNow {
+                    responseTime = "Team will be \(teamAvailabilityText.lowercased())"
+                } else {
+                    responseTime = "The team replies \(availability.replyTime)"
+                }
+            }
+        } else {
+            responseTime = "The team replies \(availability.replyTime)"
+        }
+        
         showPowerBy = look.showPoweredBy
         buttonColorCode = look.actionColor
         showStartNewChat = config.canStartNewConversation

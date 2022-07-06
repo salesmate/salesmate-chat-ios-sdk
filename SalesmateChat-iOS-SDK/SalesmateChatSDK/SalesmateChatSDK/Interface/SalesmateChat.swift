@@ -134,7 +134,17 @@ import UIKit
     }
     
     @objc public static func handlePushNotification(userInfo: [AnyHashable : Any]) {
-        shared?.redirectToChatHomeVC()
+        
+        if UIApplication.shared.applicationState == .active {
+            if let topViewController = UIApplication.topViewController(), topViewController.isKind(of: ChatVC.self) {
+                return
+            } else {
+                print("Popup")
+            }
+        } else {
+            shared?.redirectToChatHomeVC()
+        }
+        
     }
 }
 
@@ -208,7 +218,7 @@ extension SalesmateChat {
     }
 
     private func showHomeVC(from viewController: UIViewController? = nil) {
-        let VC = HomeVC.create(with: HomeViewModel(config: config, client: client))
+        let VC = SalesmateChatHomeVC.create(with: HomeViewModel(config: config, client: client))
 
         rootNC.setViewControllers([VC], animated: true)
         rootNC.navigationBar.isHidden = true
@@ -259,24 +269,18 @@ extension SalesmateChat {
     }
     
     func redirectToChatHomeVC() {
-        let VC = HomeVC.create(with: HomeViewModel(config: config, client: client))
-
+                
+        if let topViewController = UIApplication.topViewController(), (topViewController.isKind(of: SalesmateChatHomeVC.self) || topViewController.isKind(of: ChatVC.self)) {
+            return
+        }
+        let VC = SalesmateChatHomeVC.create(with: HomeViewModel(config: config, client: client))
+        
         rootNC.setViewControllers([VC], animated: true)
         rootNC.navigationBar.isHidden = true
-
+        
         if UIDevice.current.isIPad {
             rootNC.modalPresentationStyle = .fullScreen
         }
-
-        self.getTopViewController()?.present(rootNC, animated: true, completion: nil)
+        UIApplication.topViewController()?.present(rootNC, animated: true, completion: nil)
     }
-    
-    func getTopViewController() -> UIViewController? {
-        var topController: UIViewController? = UIApplication.shared.keyWindow?.rootViewController
-        while topController?.presentedViewController != nil {
-            topController = topController?.presentedViewController
-        }
-        return topController
-    }
-
 }

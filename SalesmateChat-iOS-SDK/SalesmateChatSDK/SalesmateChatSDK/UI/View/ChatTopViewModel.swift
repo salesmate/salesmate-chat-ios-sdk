@@ -29,8 +29,20 @@ class ChatTopViewModel {
 
         teamIntro = config.welcome?.teamIntro ?? ""
 
-        responseTime = "We reply \(config.availability?.replyTime ?? "")"
-
+        if let teamAvailability = config.teamNextAvailableTime {
+            if teamAvailability.isPastTime {
+                responseTime = "We reply \(config.availability?.replyTime ?? "")"
+            } else {
+                if let teamAvailabilityText = teamAvailability.fromNow {
+                    responseTime = teamAvailabilityText
+                } else {
+                    responseTime = "We reply \(config.availability?.replyTime ?? "")"
+                }
+            }
+        } else {
+            responseTime = "We reply \(config.availability?.replyTime ?? "")"
+        }
+        
         let attributes: AvailableUsersViewModel.Attributes
 
         if headerLogoURL == nil {

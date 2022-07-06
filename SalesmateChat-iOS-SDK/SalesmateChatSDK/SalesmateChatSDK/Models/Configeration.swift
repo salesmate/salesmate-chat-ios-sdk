@@ -124,6 +124,33 @@ class Configeration {
         let shouldPlaySoundsForMessage: Bool
     }
 
+    struct TeamNextAvailableTime {
+        let fromNow: String?
+        let availableAt: String?
+        
+        var availableAtDate: Date? {
+            guard let closedDateString = availableAt else { return nil }
+            if let date = DateFormatter.fullISO8601NoFraction.date(from: closedDateString) {
+                return date
+            } else if let date = DateFormatter.fullISO8601.date(from: closedDateString) {
+                return date
+            } else if let date = DateFormatter.fullISO8601WithoutZ.date(from: closedDateString) {
+                return date
+            }
+            
+            return nil
+        }
+        
+        var isPastTime: Bool {
+            guard let availableAtDate = availableAtDate else { return false }
+            if availableAtDate.timeIntervalSinceNow.sign == .minus {
+                return true
+            } else {
+                return false
+            }
+        }
+    }
+    
     let identity: Configuration
     let environment: Environment
     let local: Storage
@@ -141,6 +168,7 @@ class Configeration {
     private(set) var closed: ClosedConversation?
     private(set) var other: MICS?
     private(set) var canStartNewConversation: Bool = false
+    private(set) var teamNextAvailableTime: TeamNextAvailableTime?
 
     /// We are assuming that we will alwayes get identifierForVendor because the chances of that is very low.
     var uniqueID: String = UIDevice.current.identifierForVendor?.uuidString ?? ""
@@ -224,6 +252,10 @@ class Configeration {
 
         if json["misc"].exists() {
             self.other = MICS(from: json["misc"])
+        }
+
+        if json["teamNextAvailableTime"].exists() {
+            self.teamNextAvailableTime = TeamNextAvailableTime(from: json["teamNextAvailableTime"])
         }
 
         canStartNewConversation = json["canVisitorOrContactStartNewConversation"].bool ?? false
@@ -333,6 +365,13 @@ extension Configeration.MICS: Codable {
 
     enum CodingKeys: String, CodingKey {
         case shouldPlaySoundsForMessage = "play_sounds_for_messenger"
+    }
+}
+
+extension Configeration.TeamNextAvailableTime: Codable {
+    enum CodingKeys: String, CodingKey {
+        case fromNow = "fromNow"
+        case availableAt = "availableAt"
     }
 }
 
