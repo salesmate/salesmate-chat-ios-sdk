@@ -171,6 +171,9 @@
 		CB3166432857499800B2899F /* IQUIView+Hierarchy.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB31662C2857499800B2899F /* IQUIView+Hierarchy.swift */; };
 		CB3166442857499800B2899F /* IQNSArray+Sort.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB31662D2857499800B2899F /* IQNSArray+Sort.swift */; };
 		CB3166452857499800B2899F /* IQKeyboardManager+UITextFieldViewNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB31662E2857499800B2899F /* IQKeyboardManager+UITextFieldViewNotification.swift */; };
+		CB721E8D28782F9D00DE904F /* SalesmateChatDragView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB721E8C28782F9D00DE904F /* SalesmateChatDragView.swift */; };
+		CB721E8F28783FCC00DE904F /* SalesmateChatDragView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CB721E8E28783FCC00DE904F /* SalesmateChatDragView.xib */; };
+		CB8896F6287C154200BCF53F /* ViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB8896F5287C154200BCF53F /* ViewController2.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -389,6 +392,9 @@
 		CB31662D2857499800B2899F /* IQNSArray+Sort.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IQNSArray+Sort.swift"; sourceTree = "<group>"; };
 		CB31662E2857499800B2899F /* IQKeyboardManager+UITextFieldViewNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "IQKeyboardManager+UITextFieldViewNotification.swift"; sourceTree = "<group>"; };
 		CB4B83F02861A3C000A32277 /* TestApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TestApp.entitlements; sourceTree = "<group>"; };
+		CB721E8C28782F9D00DE904F /* SalesmateChatDragView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SalesmateChatDragView.swift; sourceTree = "<group>"; };
+		CB721E8E28783FCC00DE904F /* SalesmateChatDragView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SalesmateChatDragView.xib; sourceTree = "<group>"; };
+		CB8896F5287C154200BCF53F /* ViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController2.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -424,6 +430,7 @@
 		905D54AB2760968D0001E897 /* OtherLibs */ = {
 			isa = PBXGroup;
 			children = (
+				CB721E7D2876EE7C00DE904F /* SalesmateFloatingView */,
 				905D54AE276096D10001E897 /* Rapidops-sdk-ios */,
 			);
 			path = OtherLibs;
@@ -564,6 +571,7 @@
 				CB3166122857499700B2899F /* IQKeyboardManagerSwift */,
 				9B4B631D26B02D6500203172 /* AppDelegate.swift */,
 				9B4B632126B02D6500203172 /* ViewController.swift */,
+				CB8896F5287C154200BCF53F /* ViewController2.swift */,
 				9B4B632326B02D6500203172 /* Main.storyboard */,
 				9B4B632626B02D6700203172 /* Assets.xcassets */,
 				9B4B632826B02D6700203172 /* LaunchScreen.storyboard */,
@@ -818,6 +826,15 @@
 			path = Categories;
 			sourceTree = "<group>";
 		};
+		CB721E7D2876EE7C00DE904F /* SalesmateFloatingView */ = {
+			isa = PBXGroup;
+			children = (
+				CB721E8C28782F9D00DE904F /* SalesmateChatDragView.swift */,
+				CB721E8E28783FCC00DE904F /* SalesmateChatDragView.xib */,
+			);
+			path = SalesmateFloatingView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -975,6 +992,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CB721E8F28783FCC00DE904F /* SalesmateChatDragView.xib in Resources */,
 				9BAD6E7226B7F9EC0072EC83 /* Chat.storyboard in Resources */,
 				9BD7753326B2C72D002BA2AD /* ConversationCell.xib in Resources */,
 				9B82163B26BAB560002E86E6 /* ReceivedMessageCell.xib in Resources */,
@@ -1056,6 +1074,7 @@
 				CB3166342857499800B2899F /* IQToolbar.swift in Sources */,
 				CB3166362857499800B2899F /* IQInvocation.swift in Sources */,
 				CB3166382857499800B2899F /* IQKeyboardManagerConstantsInternal.swift in Sources */,
+				CB8896F6287C154200BCF53F /* ViewController2.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1148,6 +1167,7 @@
 				905D54FD276096D10001E897 /* RapidopsConsentManager.m in Sources */,
 				9B82164126BAB5C9002E86E6 /* MessageCell.swift in Sources */,
 				9B3A9B8626A701D200EB7C10 /* DataTypes.swift in Sources */,
+				CB721E8D28782F9D00DE904F /* SalesmateChatDragView.swift in Sources */,
 				9BD7753126B2A986002BA2AD /* CirculerProfileView.swift in Sources */,
 				905D54F9276096D10001E897 /* RapidopsRemoteConfig.m in Sources */,
 				9B4B630B26B0106000203172 /* ChatAPI.swift in Sources */,
@@ -1452,6 +1472,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.salesmate.chat;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -1484,6 +1505,7 @@
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.salesmate.chat;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;

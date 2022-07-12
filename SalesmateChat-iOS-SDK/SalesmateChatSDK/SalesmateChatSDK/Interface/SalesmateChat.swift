@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import WebKit
 
 @objc public enum Environment: Int {
     case development
@@ -34,11 +35,14 @@ import UIKit
       self.environment = environment
   }
 }
-//@objc public struct Configuration {
-//
-//}
 
 @objc public class SalesmateChat: NSObject {
+    private lazy var floatingView : SalesmateChatDragView = {
+        var floatingView = SalesmateChatDragView.loadFromNib()
+        floatingView.backgroundColor = .darkGray
+        return floatingView
+    }()
+    
 
     private var client: ChatClient
     private var config: Configeration
@@ -139,12 +143,16 @@ import UIKit
             if let topViewController = UIApplication.topViewController(), topViewController.isKind(of: ChatVC.self) {
                 return
             } else {
-                print("Popup")
+                shared?.showChatHead()
             }
         } else {
             shared?.redirectToChatHomeVC()
         }
         
+    }
+    
+    @objc public static func showChatHeadOnWindow() {
+        shared?.showChatHead()
     }
 }
 
@@ -159,8 +167,12 @@ extension SalesmateChat {
         rapidopsConfig.alwaysUsePOST = true;
         rapidopsConfig.deviceID = config.uniqueID;
         rapidopsConfig.tenantID = config.identity.tenantID;
-        
-        Rapidops.sharedInstance().start(with: rapidopsConfig);
+        rapidopsConfig.customHeaderFieldName = "user-agent"
+        if let userAgentValue = WKWebView().value(forKey: "userAgent") as? String {
+            rapidopsConfig.customHeaderFieldValue = userAgentValue
+
+        }
+        Rapidops.sharedInstance().start(with: rapidopsConfig)
     }
 
     private func updateCustomization() {
@@ -260,7 +272,7 @@ extension SalesmateChat {
         var isSalesmateChatSDKPush: Bool = false
         if let messageObj = userInfo["message"] as? [String: Any] {
             if let message = messageObj["message"] as? [String: Any] {
-                if let messageTypeValue = message["notificationType"] as? String, messageTypeValue == messageType {
+                if let isChatPush = message[isSalesmateVisitorSDK] as? Bool, isChatPush {
                     isSalesmateChatSDKPush = true
                 }
             }
@@ -283,4 +295,30 @@ extension SalesmateChat {
         }
         UIApplication.topViewController()?.present(rootNC, animated: true, completion: nil)
     }
+    
+    private func showChatHead() {
+        floatingView.hasNavagation = false
+        floatingView.isKeepBounds = false
+        floatingView.forbidenOutFree = false
+        floatingView.fatherIsController = true
+        floatingView.forbidenEnterStatusBar = true
+        floatingView.messageCount = 3
+        floatingView.updateMessageUI()
+        var currentWindow: UIWindow? = UIApplication.shared.keyWindow
+        currentWindow = currentWindow ?? UIApplication.shared.windows.filter {$0.isKeyWindow}.first
+        currentWindow = currentWindow ?? UIApplication.shared.windows.first
+            if currentWindow?.subviews.first != floatingView {
+                currentWindow?.addSubview(floatingView)
+            }
+            
+            floatingView.clickDragViewBlock = { dragV in
+                print("clickDragView-\(dragV)")
+            }
+            floatingView.endDragBlock = { dragV in
+                print("endDrag-\(dragV)")
+            }
+            floatingView.beginDragBlock = { dragV in
+                print("beginDrag-\(dragV)")
+            }
+        }
 }

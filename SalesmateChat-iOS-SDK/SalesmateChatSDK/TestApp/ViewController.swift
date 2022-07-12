@@ -30,6 +30,7 @@ class ViewController: UIViewController {
         configureSalesmateChatMessengerSDK(env: .development, workspaceID: "3ade8edc-5a62-45dc-b7a5-46b0e40ffb57", appKey: "2f33c730-b08a-11eb-99e2-f3b202d2d81c", tenantID: "dev18.salesmate.io")
 
         setVerifiedId()
+        
     }
     func configureSalesmateChatMessengerSDK(env: Environment, workspaceID: String, appKey: String, tenantID: String) {
         let config = Configuration(workspaceID: workspaceID,
@@ -71,6 +72,7 @@ class ViewController: UIViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        SalesmateChat.showChatHeadOnWindow()
         
 //        SalesmateChat.presentMessenger(from: self)
     }
@@ -172,5 +174,11 @@ class ViewController: UIViewController {
             self.soundID += 1
             self.playAllSound()
         }
+    }
+    
+    @IBAction func next(_ sender: Any) {
+        let storyBoard = UIStoryboard.init(name: "Main", bundle: .main)
+        let vc = storyBoard.instantiateViewController(withIdentifier: "ViewController2")
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }

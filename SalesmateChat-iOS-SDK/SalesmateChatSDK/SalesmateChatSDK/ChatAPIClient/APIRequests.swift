@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import WebKit
 
 class CommonAPIComponents {
 
@@ -125,6 +126,17 @@ struct SendMessagesRequest: HTTPRequest {
     init(conversationID: String, message: MessageToSend, common: CAC = common) {
         url = URL(string: "messenger/v1/conversations/\(conversationID)/message", relativeTo: common.base)!
         headers = common.headers
+        if let userAgentValue = WKWebView().value(forKey: "userAgent") as? String {
+            if headers != nil {
+                headers!["user-agent"] = userAgentValue
+                var APPVersion : String = "0.0"
+                let identifiedBundle = Bundle(for: CommonAPIComponents.self)
+                if let shortVersion = identifiedBundle.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String {
+                    APPVersion = shortVersion
+                }
+                headers!["sdk-version"] = APPVersion
+            }
+        }
         body = JSONBody(message)
     }
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-let messageType = "NewChatConversationMessageReceivedFromUser"
+let isSalesmateVisitorSDK = "isSalesmateVisitorSDKPush"
 
 class SalesmateChatClient {
 
