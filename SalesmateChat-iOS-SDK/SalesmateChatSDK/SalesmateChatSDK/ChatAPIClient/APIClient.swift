@@ -70,6 +70,21 @@ extension ChatAPIClient: ChatAPI {
         }
     }
 
+    func getUnreadConversations(completion: @escaping (Result<[UnreadConversation], ChatError>) -> Void) {
+        let request = GetUnreadConversationsRequest()
+
+        loader.load(request: request) { (result) in
+            switch result {
+            case .success(let response):
+                guard let json = response.json as? JSONArray else { return }
+                let conversations = json.compactMap { UnreadConversation(from: $0) }
+                completion(.success(conversations))
+            case .failure:
+                completion(.failure(.unknown))
+            }
+        }
+    }
+
     func getDetail(of conversation: ConversationID, completion: @escaping (Result<Conversation, ChatError>) -> Void) {
         let request = GetConversationDetailRequest(conversationID: conversation)
 

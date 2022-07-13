@@ -70,6 +70,23 @@ struct GetConversationsRequest: HTTPRequest {
     }
 }
 
+struct GetUnreadConversationsRequest: HTTPRequest {
+
+    var method: HTTPMethod = .get
+    var url: URL
+    var queryItems: [URLQueryItem]?
+    var headers: HTTPHeaders?
+
+    init(common: CAC = common) {
+        url = URL(string: "messenger/v1/widget/conversations", relativeTo: common.base)!
+        queryItems = [URLQueryItem(name: "rows", value: "5"),
+                      URLQueryItem(name: "offset", value: "0"),
+                      URLQueryItem(name: "messages_blocks", value: "true"),
+                      URLQueryItem(name: "contact_has_read", value: "false")]
+        headers = common.headers
+    }
+}
+
 struct GetConversationDetailRequest: HTTPRequest {
 
     var method: HTTPMethod = .get

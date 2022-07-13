@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 let isSalesmateVisitorSDK = "isSalesmateVisitorSDKPush"
 
@@ -26,6 +27,13 @@ class SalesmateChatClient {
 
     private(set) var conversations: Set<Conversation> = []
     private(set) var messages: [ConversationID: Set<Message>] = [:]
+
+    // For Chat bubble
+    private lazy var floatingView : SalesmateChatDragView = {
+        var floatingView = SalesmateChatDragView.loadFromNib()
+        return floatingView
+    }()
+
 }
 
 extension SalesmateChatClient: ChatDataSource {
@@ -65,7 +73,11 @@ extension SalesmateChatClient: ChatClient {
                 self.config.socketAuthToken = authToken
                 self.config.channels = channels
                 self.config.saveRequireDataLocally()
-
+                
+                /// Get unread conversations
+                if let topViewController = UIApplication.topViewController(), (!topViewController.isKind(of: SalesmateChatHomeVC.self) || !topViewController.isKind(of: ChatVC.self)) {
+                    self.getUnreadConversations()
+                }
                 whenAuthTokenAvailable()
             case .failure(let error):
                 print(error)
@@ -92,6 +104,18 @@ extension SalesmateChatClient: ChatClient {
 }
 
 extension SalesmateChatClient: ConversationFetcher {
+    
+    func getUnreadConversations() {
+        chatAPI.getUnreadConversations { result in
+            switch result {
+            case .success(let conversations):
+                self.handleChatHeadBubbleWithLatestConversations(latestConversations: conversations)
+            case .failure:
+                break
+            }
+        }
+    }
+    
 
     func getConversations(at page: Page, completion: @escaping (Result<[Conversation], ChatError>) -> Void) {
         chatAPI.getConversations(at: page) { result in
@@ -239,4 +263,54 @@ extension SalesmateChatClient {
 
         self.messages[conversation] = messagesOfConversations
     }
+    
+    private func handleChatHeadBubbleWithLatestConversations(latestConversations: [UnreadConversation]) {
+        if latestConversations.count > 0 {
+            if let latestConversation = latestConversations.first {
+                DispatchQueue.main.async {
+                    self.showChatHead(unReadConversation: latestConversation, messageCount: latestConversations.count)
+                }
+            }
+        }
+    }
+    
+    private func showChatHead(unReadConversation: UnreadConversation, messageCount: Int) {
+        
+        floatingView.messageCount = messageCount
+
+        if unReadConversation.lastMessage?.messageType == .comment {
+            var messageStr: String = unReadConversation.lastMessage?.messageSummary ?? ""
+            if let blockType = unReadConversation.lastMessage?.blockData?.last?.type {
+                switch blockType {
+                case .text:
+                    messageStr = unReadConversation.lastMessage?.messageSummary ?? ""
+                case .image:
+                    messageStr = "[Image: \(unReadConversation.lastMessage?.messageSummary ?? "")]"
+                case .file:
+                    messageStr = unReadConversation.lastMessage?.messageSummary ?? ""
+                case .html:
+                    messageStr = unReadConversation.lastMessage?.messageSummary ?? ""
+                case .orderedList:
+                    messageStr = unReadConversation.lastMessage?.messageSummary ?? ""
+                case .unorderedList:
+                    messageStr = unReadConversation.lastMessage?.messageSummary ?? ""
+                }
+            }
+            floatingView.updateMessageUI(withMessageText: messageStr, withSenderText: unReadConversation.name)
+        } else if unReadConversation.lastMessage?.messageType == .ratingAsked {
+            floatingView.updateMessageUI(withMessageText: "Please rate your experience.", withSenderText: "")
+        }
+        
+        floatingView.showFloatview()
+            floatingView.clickDragViewBlock = { dragV in
+                print("clickDragView-\(dragV)")
+                self.floatingView.removeFloatview()
+            }
+            floatingView.endDragBlock = { dragV in
+                print("endDrag-\(dragV)")
+            }
+            floatingView.beginDragBlock = { dragV in
+                print("beginDrag-\(dragV)")
+            }
+        }
 }

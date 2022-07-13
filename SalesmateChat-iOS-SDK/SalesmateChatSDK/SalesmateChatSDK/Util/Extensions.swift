@@ -92,6 +92,7 @@ extension Date{
         return newDate;
     }
 }
+
 extension UIApplication {
     
     class func topViewController(base: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {

@@ -13,24 +13,6 @@ public enum DragDirection: Int{
     case vertical
 }
 
-public enum BubbleType {
-    case rateBubble
-    case messageBubble
-}
-//class GradientView: UIView {
-//    override open class var layerClass: AnyClass {
-//        return CAGradientLayer.classForCoder()
-//    }
-//
-//    required init?(coder aDecoder: NSCoder) {
-//        super.init(coder: aDecoder)
-//        let gradientLayer = self.layer as! CAGradientLayer
-//        gradientLayer.colors = [UIColor.clear.cgColor, UIColor.clear.cgColor, UIColor.black.cgColor, UIColor.black.cgColor, UIColor.clear.cgColor, UIColor.clear.cgColor]
-//        gradientLayer.locations = [0.0, 0.15, 0.25, 0.75, 0.85, 1.0]
-//        backgroundColor = UIColor.clear
-//    }
-//}
-
 let kScreenH = UIScreen.main.bounds.height
 let kScreenW = UIScreen.main.bounds.width
 let isIphoneX: Bool = kScreenH >= 812.0 ? true: false
@@ -38,46 +20,41 @@ let kStatusBarH: CGFloat = isIphoneX == true ? 44 : 20
 let kSafeBottomH: CGFloat = isIphoneX == true ? 34 : 0
 let kNavBarH: CGFloat = isIphoneX ? 88 : 64
 
-@IBDesignable
 class SalesmateChatDragView: UIView {
     
     public var dragEnable: Bool = true
     public var freeRect: CGRect = CGRect.zero
     public var dragDirection: DragDirection = DragDirection.any
-    public var bubbleType: BubbleType = BubbleType.messageBubble
-    @IBOutlet weak var contentViewForDrag: UIView!
-
-    @IBOutlet weak var rateStackView: UIStackView!
-    @IBOutlet weak var rateView: UIView!
-    @IBOutlet weak var rateImageView: UIImageView!
-    @IBOutlet weak var rateTextLabel: UILabel!
-
-
+    
     @IBOutlet weak var messageMainStackView: UIStackView!
     @IBOutlet weak var messageOneMoreView: UIView!
     @IBOutlet weak var messageView1: UIView!
     @IBOutlet weak var messageView2: UIView!
     @IBOutlet weak var messageView3: UIView!
     @IBOutlet weak var messageTextLabel: UILabel!
+    @IBOutlet weak var senderTextLabel: UILabel!
     @IBOutlet weak var messageImageView: UIImageView!
     
     public var messageCount: Int = 1
-
-    @IBInspectable
+    
     public var isKeepBounds: Bool = false
     
-    @IBInspectable
-    public var forbidenOutFree: Bool = true
+    public var forbidenOutFree: Bool = false
     
-    @IBInspectable
-    public var hasNavagation: Bool = true
-    
-    @IBInspectable
-    public var forbidenEnterStatusBar: Bool = false
-    
-    @IBInspectable
-    public var fatherIsController: Bool = false
+    public var hasNavagation: Bool = false
         
+    public var forbidenEnterStatusBar: Bool = true
+    
+    public var fatherIsController: Bool = true
+    
+    //    @objc lazy var contentViewForDrag: UIView = {
+    //        let contentV = UIView.init()
+    //        contentV.clipsToBounds = true
+    //        contentV.backgroundColor = .red
+    //        self.addSubview(contentV)
+    //        return contentV
+    //    }()
+    
     public var clickDragViewBlock: ((SalesmateChatDragView) -> ())?
     public var beginDragBlock: ((SalesmateChatDragView) -> ())?
     public var duringDragBlock: ((SalesmateChatDragView) -> ())?
@@ -97,10 +74,9 @@ class SalesmateChatDragView: UIView {
         super.init(frame: frame)
         setup()
     }
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        setupUI()
         setup()
     }
     
@@ -113,41 +89,50 @@ class SalesmateChatDragView: UIView {
         if let superview = self.superview {
             freeRect = CGRect(x: 0, y: kScreenH - superview.bounds.size.height - 34 , width: kScreenW, height: superview.bounds.size.height)
         }
-        contentViewForDrag.frame = CGRect.init(origin: CGPoint.zero, size: self.bounds.size)
     }
     
     func setup() {
+        
         if let superview = self.superview {
             freeRect = CGRect.init(origin: CGPoint.zero, size: superview.bounds.size)
         }
         self.clipsToBounds = true
         let singleTap = UITapGestureRecognizer.init(target: self, action: #selector(clickDragView))
         self.addGestureRecognizer(singleTap)
-        self.frame = CGRect(x: 0, y: kScreenH - self.bounds.size.height - 34 , width: kScreenW, height: self.bounds.size.height)
+        self.frame = CGRect(x: -kScreenW, y: kScreenH - self.bounds.size.height - 34 , width: kScreenW, height: self.bounds.size.height)
         panGestureRecognizer = UIPanGestureRecognizer.init(target: self, action: #selector(dragAction(pan:)))
-                
+        
         panGestureRecognizer.minimumNumberOfTouches = 1
         panGestureRecognizer.maximumNumberOfTouches = 1
         self.addGestureRecognizer(panGestureRecognizer)
-        
-        setupBubbleUI()
     }
     
-    func setupBubbleUI() {
-        if self.bubbleType == .rateBubble {
-            self.rateStackView.isHidden = false
-            self.messageMainStackView.isHidden = true
-            self.applyShadowWithView(view: self.rateView)
-        } else if self.bubbleType == .messageBubble{
-            self.rateStackView.isHidden = true
-            self.messageMainStackView.isHidden = false
-            self.applyShadowWithView(view: self.messageView3)
-            self.applyShadowWithView(view: self.messageView2)
-            self.applyShadowWithView(view: self.messageView1)
-            updateMessageUI()
+    func showFloatview() {
+        var currentWindow: UIWindow? = UIApplication.shared.keyWindow
+        currentWindow = currentWindow ?? UIApplication.shared.windows.filter {$0.isKeyWindow}.first
+        currentWindow = currentWindow ?? UIApplication.shared.windows.first
+        if currentWindow?.subviews.first != self {
+            currentWindow?.addSubview(self)
+            self.alpha = 0.0
+            UIView.animate(withDuration: 1, animations: {
+                self.alpha = 1.0
+                let moveRight = CGAffineTransform(translationX: +(self.frame.width), y: 0.0)
+                currentWindow?.subviews.last!.transform = moveRight
+            })
         }
     }
-    func updateMessageUI() {
+    
+    func removeFloatview() {
+        messageCount = 1
+        self.removeFromSuperview()
+    }
+    
+    
+    func updateMessageUI(withMessageText: String, withSenderText: String) {
+        self.applyShadowWithView(view: self.messageView3)
+        self.applyShadowWithView(view: self.messageView2)
+        self.applyShadowWithView(view: self.messageView1)
+        
         switch messageCount {
         case 1:
             self.messageView1.isHidden = false
@@ -172,6 +157,11 @@ class SalesmateChatDragView: UIView {
         default:
             break
         }
+
+        self.messageTextLabel.text = withMessageText
+        self.senderTextLabel.text = withSenderText
+        self.setNeedsLayout()
+        self.layoutIfNeeded()
     }
     
     func applyShadowWithView(view: UIView) {
@@ -181,58 +171,7 @@ class SalesmateChatDragView: UIView {
         view.layer.shadowOffset = .zero
         view.layer.shadowRadius = 5
     }
-    
-    func setupUI() {
-        let metalView = UIView(frame: contentViewForDrag.bounds)
-//        metalView.backgroundColor = .white
-//        metalView.alpha = 0.9
-//        let layer0 = CAGradientLayer()
-//        layer0.colors = [
-//          UIColor(red: 0.98, green: 0.984, blue: 0.988, alpha: 1).cgColor,
-//          UIColor(red: 1, green: 1, blue: 1, alpha: 1).cgColor,
-//          UIColor(red: 1, green: 1, blue: 1, alpha: 0).cgColor
-//        ]
-//        layer0.locations = [0, 0.54, 1]
-//        layer0.startPoint = CGPoint(x: 0.25, y: 0.5)
-//        layer0.endPoint = CGPoint(x: 0.75, y: 0.5)
-//        layer0.transform = CATransform3DMakeAffineTransform(CGAffineTransform(a: 0, b: -1, c: 1, d: 0, tx: 0.48, ty: 1))
-//        layer0.bounds = metalView.bounds.insetBy(dx: -0.5*metalView.bounds.size.width, dy: -0.5*metalView.bounds.size.height)
-//        layer0.position = metalView.center
-//        metalView.layer.addSublayer(layer0)
-//
-//
-//        self.insertSubview(metalView, at: 0)
-//        metalView.translatesAutoresizingMaskIntoConstraints = false
         
-//        let gradientLayer = CAGradientLayer()
-//        gradientLayer.colors = [UIColor.clear.cgColor, UIColor.white.cgColor]
-//        gradientLayer.startPoint = CGPoint(x: 0.5, y: 1.0)
-//        gradientLayer.endPoint = CGPoint(x: 0.5, y: 0.0)
-//        gradientLayer.locations = [0, 1]
-//        gradientLayer.frame = bounds
-//
-//        se.layer.mask = gradientLayer
-
-//        let transparent = UIColor(white: 0, alpha: 0).cgColor
-//        let opaque = UIColor(white: 1, alpha: 1).cgColor
-//        
-//        let maskLayer = CALayer()
-//        maskLayer.frame = self.bounds
-//
-//        let gradientLayer = CAGradientLayer()
-//        gradientLayer.frame = CGRect(x:self.bounds.origin.x, y:0, width:self.bounds.size.width, height:self.bounds.size.height)
-//        gradientLayer.colors = [transparent, opaque, opaque, transparent]
-//        gradientLayer.locations = [0.0, 0.3, 0.5, 1.0]
-//        //metalView.layer.addSublayer(gradientLayer)
-////        self.layer.insertSublayer(gradientLayer, at: 0)
-//        maskLayer.addSublayer(gradientLayer)
-//        self.layer.insertSublayer(maskLayer, at: 0)
-//        contentViewForDrag.layer.insertSublayer(maskLayer, at: 0)
-//        metalView.translatesAutoresizingMaskIntoConstraints = false
-        
-        
-    }
-    
     @objc func clickDragView() {
         clickDragViewBlock?(self)
     }
@@ -331,7 +270,7 @@ class SalesmateChatDragView: UIView {
         var rect: CGRect = self.frame
         if isKeepBounds == false {
             if frame.origin.x < freeRect.origin.x {
-
+                
                 UIView.beginAnimations(leftMove, context: nil)
                 UIView.setAnimationCurve(.easeInOut)
                 UIView.setAnimationDuration(animationTime)
@@ -347,7 +286,7 @@ class SalesmateChatDragView: UIView {
                 self.frame = rect
                 UIView.commitAnimations()
             }
-
+            
         } else if isKeepBounds == true{
             if frame.origin.x < centerX {
                 

@@ -71,9 +71,7 @@ class ViewController: UIViewController {
         SalesmateChat.setVerifiedID(SalesmateChat.getVisitorId())
     }
     override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        SalesmateChat.showChatHeadOnWindow()
-        
+        super.viewDidAppear(animated)        
 //        SalesmateChat.presentMessenger(from: self)
     }
     

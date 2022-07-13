@@ -23,53 +23,47 @@ import WebKit
 }
 
 @objc public class Configuration: NSObject {
-  @objc let workspaceID: String
-  @objc let appKey: String
-  @objc let tenantID: String
-  @objc let environment: Environment
-
-  @objc public init(workspaceID: String, appKey: String, tenantID: String, environment: Environment) {
-      self.workspaceID = workspaceID
-      self.appKey = appKey
-      self.tenantID = tenantID
-      self.environment = environment
-  }
+    @objc let workspaceID: String
+    @objc let appKey: String
+    @objc let tenantID: String
+    @objc let environment: Environment
+    
+    @objc public init(workspaceID: String, appKey: String, tenantID: String, environment: Environment) {
+        self.workspaceID = workspaceID
+        self.appKey = appKey
+        self.tenantID = tenantID
+        self.environment = environment
+    }
 }
 
 @objc public class SalesmateChat: NSObject {
-    private lazy var floatingView : SalesmateChatDragView = {
-        var floatingView = SalesmateChatDragView.loadFromNib()
-        floatingView.backgroundColor = .darkGray
-        return floatingView
-    }()
     
-
     private var client: ChatClient
     private var config: Configeration
-
+    
     private static var shared: SalesmateChat?
-
+    
     private var isLoading: Bool = false
-
+    
     private let rootNC = UINavigationController()
-
+    
     private init?(with settings: Configuration) {
         self.config = Configeration(connection: settings, environment: settings.environment)
-
+        
         let chatStream = StarscreamChatStream(for: config)
         let chatAPI = ChatAPIClient(config: config)
-
+        
         self.client = SalesmateChatClient(config: config, chatStream: chatStream, chatAPI: chatAPI)
     }
-
+    
     @objc public static func setSalesmateChat(configuration settings: Configuration) {
         shared = SalesmateChat(with: settings)
-
+        
         shared?.updateCustomization()
         shared?.setupAnalyticsSDK();
         shared?.client.connect(completion: { _ in })
     }
-
+    
     @objc public static func presentMessenger(from viewController: UIViewController) {
         shared?.presentMessenger(from: viewController)
     }
@@ -77,7 +71,7 @@ import WebKit
     @objc public static func logEventWith(eventName:String, withData data:[AnyHashable:Any]? = nil){
         shared?.logEventWith(eventName: eventName, withData: data);
     }
-
+    
     public static func setVerifiedID(_ ID: String) {
         shared?.config.verifiedID = ID
     }
@@ -104,7 +98,7 @@ import WebKit
     @objc public static func getVisitorId() -> String {
         return shared?.getVisitorId() ?? ""
     }
-
+    
     @objc public static func update(userId: String?, email: String?, firstName: String?, lastName: String?, completion: @escaping (String?, Error?) -> Void) {
         let loginUser = LoginUser(userId: userId, email: email, firstName: firstName, lastName: lastName)
         shared?.client.update(with: loginUser, completion: { (result) in
@@ -119,7 +113,7 @@ import WebKit
             }
         })
     }
-
+    
     @objc public static func sendDeviceToken(with deviceToken: String, deviceId: String) {
         shared?.client.sendDeviceToken(with: deviceToken, deviceId: deviceId, completion: { (result) in
             switch result {
@@ -142,17 +136,11 @@ import WebKit
         if UIApplication.shared.applicationState == .active {
             if let topViewController = UIApplication.topViewController(), topViewController.isKind(of: ChatVC.self) {
                 return
-            } else {
-                shared?.showChatHead()
             }
         } else {
             shared?.redirectToChatHomeVC()
         }
         
-    }
-    
-    @objc public static func showChatHeadOnWindow() {
-        shared?.showChatHead()
     }
 }
 
@@ -170,14 +158,14 @@ extension SalesmateChat {
         rapidopsConfig.customHeaderFieldName = "user-agent"
         if let userAgentValue = WKWebView().value(forKey: "userAgent") as? String {
             rapidopsConfig.customHeaderFieldValue = userAgentValue
-
+            
         }
         Rapidops.sharedInstance().start(with: rapidopsConfig)
     }
-
+    
     private func updateCustomization() {
         isLoading = true
-
+        
         client.getConfigerations { result in
             switch result {
             case .success(let customization):
@@ -185,15 +173,15 @@ extension SalesmateChat {
             case .failure:
                 break
             }
-
+            
             self.isLoading = false
-
+            
             if let look = self.config.look {
                 runOnMain {
                     HUDVC.shared = HUDVC.create(with: HUDViewModel(look: look))
                 }
             }
-
+            
             runOnMain { self.showHomeVC() }
         }
     }
@@ -201,44 +189,44 @@ extension SalesmateChat {
     private func logEventWith(eventName:String, withData data:[AnyHashable:Any]?){
         Rapidops.sharedInstance().recordEvent(eventName, segmentation: data);
     }
-
+    
     private func presentMessenger(from viewController: UIViewController) {
         if config.look == nil {
             showStartVC(from: viewController)
-
+            
             if !isLoading {
                 updateCustomization()
             }
-
+            
             client.connect(completion: { _ in })
         } else {
             showHomeVC(from: viewController)
         }
     }
-
+    
     private func showStartVC(from viewController: UIViewController? = nil) {
         let VC = StartVC.create(with: StartViewModel())
-
+        
         rootNC.setViewControllers([VC], animated: true)
         rootNC.navigationBar.isHidden = true
-
+        
         if UIDevice.current.isIPad {
             rootNC.modalPresentationStyle = .fullScreen
         }
-
+        
         viewController?.present(rootNC, animated: false, completion: nil)
     }
-
+    
     private func showHomeVC(from viewController: UIViewController? = nil) {
         let VC = SalesmateChatHomeVC.create(with: HomeViewModel(config: config, client: client))
-
+        
         rootNC.setViewControllers([VC], animated: true)
         rootNC.navigationBar.isHidden = true
-
+        
         if UIDevice.current.isIPad {
             rootNC.modalPresentationStyle = .fullScreen
         }
-
+        
         viewController?.present(rootNC, animated: true, completion: nil)
     }
     
@@ -281,7 +269,7 @@ extension SalesmateChat {
     }
     
     func redirectToChatHomeVC() {
-                
+        
         if let topViewController = UIApplication.topViewController(), (topViewController.isKind(of: SalesmateChatHomeVC.self) || topViewController.isKind(of: ChatVC.self)) {
             return
         }
@@ -296,29 +284,7 @@ extension SalesmateChat {
         UIApplication.topViewController()?.present(rootNC, animated: true, completion: nil)
     }
     
-    private func showChatHead() {
-        floatingView.hasNavagation = false
-        floatingView.isKeepBounds = false
-        floatingView.forbidenOutFree = false
-        floatingView.fatherIsController = true
-        floatingView.forbidenEnterStatusBar = true
-        floatingView.messageCount = 3
-        floatingView.updateMessageUI()
-        var currentWindow: UIWindow? = UIApplication.shared.keyWindow
-        currentWindow = currentWindow ?? UIApplication.shared.windows.filter {$0.isKeyWindow}.first
-        currentWindow = currentWindow ?? UIApplication.shared.windows.first
-            if currentWindow?.subviews.first != floatingView {
-                currentWindow?.addSubview(floatingView)
-            }
-            
-            floatingView.clickDragViewBlock = { dragV in
-                print("clickDragView-\(dragV)")
-            }
-            floatingView.endDragBlock = { dragV in
-                print("endDrag-\(dragV)")
-            }
-            floatingView.beginDragBlock = { dragV in
-                print("beginDrag-\(dragV)")
-            }
-        }
+    func redirectToConversation() {
+        
+    }
 }
