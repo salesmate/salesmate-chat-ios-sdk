@@ -298,7 +298,8 @@ extension SalesmateChatClient {
             }
             floatingView.updateMessageUI(withMessageText: messageStr, withSenderText: unReadConversation.name)
         } else if unReadConversation.lastMessage?.messageType == .ratingAsked {
-            floatingView.updateMessageUI(withMessageText: "Please rate your experience.", withSenderText: "")
+            floatingView.messageCount = 1
+            floatingView.updateMessageUI(withMessageText: "", withSenderText: "Please rate your experience.")
         }
         
         floatingView.showFloatview()
