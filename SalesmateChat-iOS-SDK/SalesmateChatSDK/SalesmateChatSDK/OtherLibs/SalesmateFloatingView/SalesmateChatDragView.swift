@@ -166,9 +166,11 @@ class SalesmateChatDragView: UIView {
 
         self.messageTextLabel.text = withMessageText
         self.senderTextLabel.text = withSenderText
+        messageMainStackView.layoutIfNeeded()
+
         self.setNeedsLayout()
         self.layoutIfNeeded()
-        //self.frame = CGRect(x: 0, y: kScreenH - messageMainStackView.bounds.height - 34, width: kScreenW, height: messageMainStackView.bounds.height + (messageCount >= 4 ? 30 : 0))
+        self.frame = CGRect(x: 0, y: (kScreenH - messageMainStackView.bounds.height - 68), width: kScreenW, height: messageMainStackView.bounds.height + 34)
     }
     
     func applyShadowWithView(view: UIView) {
