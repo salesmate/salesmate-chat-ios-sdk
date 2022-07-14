@@ -16,6 +16,7 @@ class SalesmateChatClient {
     private let chatStream: ChatStream
     private let chatAPI: ChatAPI
     private let relay: ChatEventRelay = ChatEventRelay()
+    private var unreadConversations: [UnreadConversation] = []
 
     init(config: Configeration, chatStream: ChatStream, chatAPI: ChatAPI) {
         self.config = config
@@ -75,9 +76,8 @@ extension SalesmateChatClient: ChatClient {
                 self.config.saveRequireDataLocally()
                 
                 /// Get unread conversations
-                if let topViewController = UIApplication.topViewController(), (!topViewController.isKind(of: SalesmateChatHomeVC.self) || !topViewController.isKind(of: ChatVC.self)) {
-                    self.getUnreadConversations()
-                }
+                self.getUnreadConversations()
+                
                 whenAuthTokenAvailable()
             case .failure(let error):
                 print(error)
@@ -106,12 +106,16 @@ extension SalesmateChatClient: ChatClient {
 extension SalesmateChatClient: ConversationFetcher {
     
     func getUnreadConversations() {
-        chatAPI.getUnreadConversations { result in
-            switch result {
-            case .success(let conversations):
-                self.handleChatHeadBubbleWithLatestConversations(latestConversations: conversations)
-            case .failure:
-                break
+        if !SalesmateChat.isFromSalesmateChatSDK() {
+            
+            chatAPI.getUnreadConversations { result in
+                switch result {
+                case .success(let conversations):
+                    self.unreadConversations = conversations
+                    self.handleChatHeadBubbleWithLatestConversations(latestConversations: conversations)
+                case .failure:
+                    break
+                }
             }
         }
     }
@@ -216,6 +220,7 @@ extension SalesmateChatClient {
         chatStream.register(observer: self, for: events, of: nil) { event in
             switch event {
             case .messageReceived(let CID, _):
+                self.getUnreadConversations()
                 self.getNewMessages(of: CID)
             case .conversationUpdated(let ID):
                 self.updateDetail(of: ID)
@@ -265,10 +270,12 @@ extension SalesmateChatClient {
     }
     
     private func handleChatHeadBubbleWithLatestConversations(latestConversations: [UnreadConversation]) {
-        if latestConversations.count > 0 {
-            if let latestConversation = latestConversations.first {
-                DispatchQueue.main.async {
-                    self.showChatHead(unReadConversation: latestConversation, messageCount: latestConversations.count)
+        if !SalesmateChat.isFromSalesmateChatSDK() {
+            if latestConversations.count > 0 {
+                if let latestConversation = latestConversations.first {
+                    DispatchQueue.main.async {
+                        self.showChatHead(unReadConversation: latestConversation, messageCount: latestConversations.count)
+                    }
                 }
             }
         }
@@ -277,7 +284,7 @@ extension SalesmateChatClient {
     private func showChatHead(unReadConversation: UnreadConversation, messageCount: Int) {
         
         floatingView.messageCount = messageCount
-
+        
         if unReadConversation.lastMessage?.messageType == .comment {
             var messageStr: String = unReadConversation.lastMessage?.messageSummary ?? ""
             if let blockType = unReadConversation.lastMessage?.blockData?.last?.type {
@@ -303,15 +310,18 @@ extension SalesmateChatClient {
         }
         
         floatingView.showFloatview()
-            floatingView.clickDragViewBlock = { dragV in
-                print("clickDragView-\(dragV)")
+        
+        floatingView.clickDragViewBlock = { dragV in
+            
+            if self.unreadConversations.count == 1 {
                 self.floatingView.removeFloatview()
+            } else {
+                if let removeIndex = self.unreadConversations.firstIndex(where: {$0.id == unReadConversation.id}) {
+                    self.unreadConversations.remove(at: removeIndex)
+                    self.handleChatHeadBubbleWithLatestConversations(latestConversations: self.unreadConversations)
+                }
             }
-            floatingView.endDragBlock = { dragV in
-                print("endDrag-\(dragV)")
-            }
-            floatingView.beginDragBlock = { dragV in
-                print("beginDrag-\(dragV)")
-            }
+            SalesmateChat.redirectToConversation(conversationId: unReadConversation.id)
         }
+    }
 }

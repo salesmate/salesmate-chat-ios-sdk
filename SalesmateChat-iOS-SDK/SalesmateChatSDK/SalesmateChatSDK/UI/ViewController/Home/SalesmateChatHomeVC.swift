@@ -119,6 +119,10 @@ class SalesmateChatHomeVC: UIViewController {
         viewModel.getRecentConversations()
     }
 
+    func redirectToChatConversation(conversationId: String) {
+        viewModel.redirectToConversation(conversationId: conversationId)    
+    }
+    
     // MARK: - Event
     @IBAction private func btnClosePressed(_ sender: UIButton) {
         navigationController?.dismiss(animated: true)

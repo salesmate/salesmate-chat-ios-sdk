@@ -29,7 +29,8 @@ class HomeViewModel {
     var showAllConversations: ((ConversationsViewModel) -> Void)?
     var startNewChat: ((ChatViewModel) -> Void)?
     var showConversation: ((ChatViewModel) -> Void)?
-
+    var recentConversations: [Conversation]?
+    
     // MARK: - Init
     init(config: Configeration, client: ChatClient) {
         self.config = config
@@ -134,6 +135,7 @@ extension HomeViewModel {
         client.getConversations(at: Page(size: 3)) { result in
             switch result {
             case .success(let conversations):
+                self.recentConversations = conversations
                 if conversations.isEmpty {
                     self.askToShowNewVisitorView()
                 } else {
@@ -144,5 +146,24 @@ extension HomeViewModel {
                 break
             }
         }
+    }
+    
+    func redirectToConversation(conversationId: String) {
+        
+        let viewModel = ChatViewModel(chatOf: .conversationID(conversationId), config: config, client: client)
+
+        runOnMain {
+            self.showConversation?(viewModel)
+        }
+
+        /*if let indexOfConversation = self.recentConversations?.firstIndex(where: {$0.id == conversationId}) {
+            if recentConversations != nil {
+                let viewModel = ChatViewModel(chatOf: .conversationID(conversationId), config: config, client: client)
+
+                runOnMain {
+                    self.showConversation?(viewModel)
+                }
+            }
+        }*/
     }
 }

@@ -99,7 +99,7 @@ class SalesmateChatDragView: UIView {
         self.clipsToBounds = true
         let singleTap = UITapGestureRecognizer.init(target: self, action: #selector(clickDragView))
         self.addGestureRecognizer(singleTap)
-        self.frame = CGRect(x: -kScreenW, y: kScreenH - self.bounds.size.height - 34 , width: kScreenW, height: self.bounds.size.height)
+        self.frame = CGRect(x: 0, y: kScreenH - self.bounds.size.height - 34 , width: kScreenW, height: self.bounds.size.height)
         panGestureRecognizer = UIPanGestureRecognizer.init(target: self, action: #selector(dragAction(pan:)))
         
         panGestureRecognizer.minimumNumberOfTouches = 1
@@ -111,14 +111,20 @@ class SalesmateChatDragView: UIView {
         var currentWindow: UIWindow? = UIApplication.shared.keyWindow
         currentWindow = currentWindow ?? UIApplication.shared.windows.filter {$0.isKeyWindow}.first
         currentWindow = currentWindow ?? UIApplication.shared.windows.first
-        if currentWindow?.subviews.first != self {
-            currentWindow?.addSubview(self)
-            self.alpha = 0.0
-            UIView.animate(withDuration: 1, animations: {
-                self.alpha = 1.0
-                let moveRight = CGAffineTransform(translationX: +(self.frame.width), y: 0.0)
-                currentWindow?.subviews.last!.transform = moveRight
-            })
+        if currentWindow != nil, currentWindow?.subviews != nil, (currentWindow?.subviews.count)! > 0 {
+            if (currentWindow?.subviews.contains(self))! {
+                //self.removeFromSuperview()
+                if let indexOfView = currentWindow?.subviews.firstIndex(of: self) {
+                    currentWindow?.insertSubview(self, at: indexOfView)
+                }
+                
+            } else {
+                currentWindow?.addSubview(self)
+                self.alpha = 0.0
+                UIView.animate(withDuration: 1, animations: {
+                    self.alpha = 1.0
+                })
+            }
         }
     }
     
@@ -162,7 +168,7 @@ class SalesmateChatDragView: UIView {
         self.senderTextLabel.text = withSenderText
         self.setNeedsLayout()
         self.layoutIfNeeded()
-        self.frame = CGRect(x: -kScreenW, y: kScreenH - messageMainStackView.frame.height - 54, width: kScreenW, height: messageMainStackView.frame.height+20)
+        //self.frame = CGRect(x: 0, y: kScreenH - messageMainStackView.bounds.height - 34, width: kScreenW, height: messageMainStackView.bounds.height + (messageCount >= 4 ? 30 : 0))
     }
     
     func applyShadowWithView(view: UIView) {

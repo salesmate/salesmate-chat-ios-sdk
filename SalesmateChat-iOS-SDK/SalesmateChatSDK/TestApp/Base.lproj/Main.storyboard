@@ -36,7 +36,7 @@
                                 <rect key="frame" x="143.5" y="94" width="127" height="42"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                 <state key="normal" title="Show Chat">
-                                    <color key="titleColor" red="0.92941176469999998" green="0.94117647059999998" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
                                     <action selector="showChatPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ce9-z4-Jb6"/>
@@ -156,14 +156,13 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XNN-6C-aK0">
-                                <rect key="frame" x="347" y="66" width="67" height="31"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XNN-6C-aK0">
+                                <rect key="frame" x="340" y="56" width="54" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="31" id="U7o-Hj-mzj"/>
-                                    <constraint firstAttribute="width" constant="67" id="n61-7d-BqP"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Next"/>
                                 <connections>
                                     <action selector="next:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9id-YU-gox"/>
                                 </connections>
@@ -172,14 +171,14 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="XNN-6C-aK0" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="22" id="2Vy-Wp-9fB"/>
                             <constraint firstItem="It6-eI-Xfw" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="9fk-3t-2iA"/>
-                            <constraint firstItem="XNN-6C-aK0" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="EIR-O7-z31"/>
                             <constraint firstItem="It6-eI-Xfw" firstAttribute="top" secondItem="9rj-Db-Whs" secondAttribute="bottom" constant="30" id="IQI-IL-a37"/>
                             <constraint firstItem="VQd-JK-9SJ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="UtT-3Z-vN2"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="It6-eI-Xfw" secondAttribute="trailing" constant="40" id="WZs-5Z-4dg"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="VQd-JK-9SJ" secondAttribute="trailing" constant="40" id="Y1i-i0-FOr"/>
+                            <constraint firstItem="XNN-6C-aK0" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="12" id="bcd-tH-206"/>
                             <constraint firstItem="9rj-Db-Whs" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="eFX-iB-N8x"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="XNN-6C-aK0" secondAttribute="trailing" constant="20" id="ebp-XE-qkT"/>
                             <constraint firstItem="9rj-Db-Whs" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="50" id="l0y-Kk-EAN"/>
                             <constraint firstItem="VQd-JK-9SJ" firstAttribute="top" secondItem="It6-eI-Xfw" secondAttribute="bottom" constant="30" id="o46-Lg-5tT"/>
                         </constraints>
@@ -206,8 +205,26 @@
                     <view key="view" contentMode="scaleToFill" id="T3H-bW-UZC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nf1-Bf-XFt">
+                                <rect key="frame" x="179" y="110" width="56" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="31" id="spw-QO-qDJ"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Back"/>
+                                <connections>
+                                    <action selector="back:" destination="dDO-hU-AQB" eventType="touchUpInside" id="O2N-7N-Iyl"/>
+                                    <action selector="next:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aiO-wI-6eZ"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="qO6-8C-Ved"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Nf1-Bf-XFt" firstAttribute="centerX" secondItem="T3H-bW-UZC" secondAttribute="centerX" id="Ijm-xU-O4q"/>
+                            <constraint firstItem="Nf1-Bf-XFt" firstAttribute="top" secondItem="qO6-8C-Ved" secondAttribute="top" constant="66" id="OGd-7M-C1W"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uwJ-oV-pN0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

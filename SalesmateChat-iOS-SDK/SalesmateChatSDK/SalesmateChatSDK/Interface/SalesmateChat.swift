@@ -134,7 +134,7 @@ import WebKit
     @objc public static func handlePushNotification(userInfo: [AnyHashable : Any]) {
         
         if UIApplication.shared.applicationState == .active {
-            if let topViewController = UIApplication.topViewController(), topViewController.isKind(of: ChatVC.self) {
+            if isFromSalesmateChatSDK() {
                 return
             }
         } else {
@@ -270,7 +270,7 @@ extension SalesmateChat {
     
     func redirectToChatHomeVC() {
         
-        if let topViewController = UIApplication.topViewController(), (topViewController.isKind(of: SalesmateChatHomeVC.self) || topViewController.isKind(of: ChatVC.self)) {
+        if SalesmateChat.isFromSalesmateChatSDK() {
             return
         }
         let VC = SalesmateChatHomeVC.create(with: HomeViewModel(config: config, client: client))
@@ -284,7 +284,44 @@ extension SalesmateChat {
         UIApplication.topViewController()?.present(rootNC, animated: true, completion: nil)
     }
     
-    func redirectToConversation() {
+    private func showConvesationVC(from viewController: UIViewController? = nil, conversationId: String) {
+        let VC = SalesmateChatHomeVC.create(with: HomeViewModel(config: config, client: client))
         
+        rootNC.setViewControllers([VC], animated: true)
+        rootNC.navigationBar.isHidden = true
+        
+        if UIDevice.current.isIPad {
+            rootNC.modalPresentationStyle = .fullScreen
+        }
+        viewController?.present(rootNC, animated: true, completion: {
+            VC.redirectToChatConversation(conversationId: conversationId)
+        })
+    }
+
+    static func redirectToConversation(conversationId: String) {
+        if let topViewController = UIApplication.topViewController() {
+            shared?.showConvesationVC(from: topViewController, conversationId: conversationId)
+        }
+    }
+    
+    static func isFromSalesmateChatSDK() -> Bool {
+        
+        var isPartOfTheSDK: Bool = false
+        if let topViewController = UIApplication.topViewController() {
+            if topViewController.isKind(of: StartVC.self) {
+                isPartOfTheSDK = true
+            } else if topViewController.isKind(of: SalesmateChatHomeVC.self) {
+                isPartOfTheSDK = true
+            } else if topViewController.isKind(of: NewVisitorVC.self) {
+                isPartOfTheSDK = true
+            } else if topViewController.isKind(of: RecentConversationsVC.self) {
+                isPartOfTheSDK = true
+            } else if topViewController.isKind(of: ConversationsVC.self) {
+                isPartOfTheSDK = true
+            } else if topViewController.isKind(of: ChatVC.self) {
+                isPartOfTheSDK = true
+            }
+        }
+        return isPartOfTheSDK
     }
 }
