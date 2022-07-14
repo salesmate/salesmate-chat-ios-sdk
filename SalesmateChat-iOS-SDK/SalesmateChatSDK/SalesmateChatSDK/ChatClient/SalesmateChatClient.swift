@@ -16,7 +16,7 @@ class SalesmateChatClient {
     private let chatStream: ChatStream
     private let chatAPI: ChatAPI
     private let relay: ChatEventRelay = ChatEventRelay()
-    private var unreadConversations: [UnreadConversation] = []
+    private var unreadConversations: [Conversation] = []
 
     init(config: Configeration, chatStream: ChatStream, chatAPI: ChatAPI) {
         self.config = config
@@ -269,7 +269,7 @@ extension SalesmateChatClient {
         self.messages[conversation] = messagesOfConversations
     }
     
-    private func handleChatHeadBubbleWithLatestConversations(latestConversations: [UnreadConversation]) {
+    private func handleChatHeadBubbleWithLatestConversations(latestConversations: [Conversation]) {
         if !SalesmateChat.isFromSalesmateChatSDK() {
             if latestConversations.count > 0 {
                 if let latestConversation = latestConversations.first {
@@ -281,7 +281,7 @@ extension SalesmateChatClient {
         }
     }
     
-    private func showChatHead(unReadConversation: UnreadConversation, messageCount: Int) {
+    private func showChatHead(unReadConversation: Conversation, messageCount: Int) {
         
         floatingView.messageCount = messageCount
         
@@ -321,7 +321,7 @@ extension SalesmateChatClient {
                     self.handleChatHeadBubbleWithLatestConversations(latestConversations: self.unreadConversations)
                 }
             }
-            SalesmateChat.redirectToConversation(conversationId: unReadConversation.id)
+            SalesmateChat.redirectToConversation(conversation: unReadConversation)
         }
     }
 }

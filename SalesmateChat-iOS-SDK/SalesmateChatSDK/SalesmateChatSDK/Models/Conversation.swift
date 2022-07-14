@@ -16,6 +16,7 @@ struct Conversation {
         let messageSummary: String
         let messageType: MessageType?
         let userID: IntegerID?
+        let blockData: [Block]?
     }
 
     let id: String
@@ -77,6 +78,7 @@ extension Conversation.LastMessage: Codable {
         case messageSummary = "message_summary"
         case messageType = "message_type"
         case userID = "user_id"
+        case blockData = "blockData"
     }
 }
 

@@ -13,7 +13,7 @@ protocol ChatAPI: AnyObject {
     func createContact(with email: String, in conversation: ConversationID?, completion: @escaping (Result<Void, ChatError>) -> Void)
 
     func getConversations(at page: Page, completion: @escaping (Result<[Conversation], ChatError>) -> Void)
-    func getUnreadConversations(completion: @escaping (Result<[UnreadConversation], ChatError>) -> Void)
+    func getUnreadConversations(completion: @escaping (Result<[Conversation], ChatError>) -> Void)
     func getDetail(of conversation: ConversationID, completion: @escaping (Result<Conversation, ChatError>) -> Void)
     func downloadTranscript(of ID: ConversationID, completion: @escaping ((Result<String, ChatError>) -> Void))
 

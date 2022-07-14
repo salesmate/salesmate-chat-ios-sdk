@@ -148,22 +148,12 @@ extension HomeViewModel {
         }
     }
     
-    func redirectToConversation(conversationId: String) {
+    func redirectToConversation(conversation: Conversation) {
         
-        let viewModel = ChatViewModel(chatOf: .conversationID(conversationId), config: config, client: client)
+        let viewModel = ChatViewModel(chatOf: .conversation(conversation), config: config, client: client)
 
         runOnMain {
             self.showConversation?(viewModel)
         }
-
-        /*if let indexOfConversation = self.recentConversations?.firstIndex(where: {$0.id == conversationId}) {
-            if recentConversations != nil {
-                let viewModel = ChatViewModel(chatOf: .conversationID(conversationId), config: config, client: client)
-
-                runOnMain {
-                    self.showConversation?(viewModel)
-                }
-            }
-        }*/
     }
 }

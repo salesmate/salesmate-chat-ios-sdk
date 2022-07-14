@@ -119,8 +119,8 @@ class SalesmateChatHomeVC: UIViewController {
         viewModel.getRecentConversations()
     }
 
-    func redirectToChatConversation(conversationId: String) {
-        viewModel.redirectToConversation(conversationId: conversationId)    
+    func redirectToChatConversation(conversation: Conversation) {
+        viewModel.redirectToConversation(conversation: conversation)    
     }
     
     // MARK: - Event

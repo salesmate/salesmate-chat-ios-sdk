@@ -284,7 +284,7 @@ extension SalesmateChat {
         UIApplication.topViewController()?.present(rootNC, animated: true, completion: nil)
     }
     
-    private func showConvesationVC(from viewController: UIViewController? = nil, conversationId: String) {
+    private func showConvesationVC(from viewController: UIViewController? = nil, conversation: Conversation) {
         let VC = SalesmateChatHomeVC.create(with: HomeViewModel(config: config, client: client))
         
         rootNC.setViewControllers([VC], animated: true)
@@ -294,13 +294,13 @@ extension SalesmateChat {
             rootNC.modalPresentationStyle = .fullScreen
         }
         viewController?.present(rootNC, animated: true, completion: {
-            VC.redirectToChatConversation(conversationId: conversationId)
+            VC.redirectToChatConversation(conversation: conversation)
         })
     }
 
-    static func redirectToConversation(conversationId: String) {
+    static func redirectToConversation(conversation: Conversation) {
         if let topViewController = UIApplication.topViewController() {
-            shared?.showConvesationVC(from: topViewController, conversationId: conversationId)
+            shared?.showConvesationVC(from: topViewController, conversation: conversation)
         }
     }
     
