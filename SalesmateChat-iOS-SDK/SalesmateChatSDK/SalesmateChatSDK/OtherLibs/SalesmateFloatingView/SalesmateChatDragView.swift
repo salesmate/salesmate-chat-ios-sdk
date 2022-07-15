@@ -134,7 +134,7 @@ class SalesmateChatDragView: UIView {
     }
     
     
-    func updateMessageUI(withMessageText: String, withSenderText: String) {
+    func updateMessageUI(withMessageText: HTML, withSenderText: String) {
         self.applyShadowWithView(view: self.messageView3)
         self.applyShadowWithView(view: self.messageView2)
         self.applyShadowWithView(view: self.messageView1)
@@ -164,7 +164,7 @@ class SalesmateChatDragView: UIView {
             break
         }
 
-        self.messageTextLabel.text = withMessageText
+        self.messageTextLabel.attributedText = withMessageText.attributedString
         self.senderTextLabel.text = withSenderText
         messageMainStackView.layoutIfNeeded()
 

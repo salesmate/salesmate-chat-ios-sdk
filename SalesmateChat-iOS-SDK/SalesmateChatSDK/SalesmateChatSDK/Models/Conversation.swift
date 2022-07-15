@@ -13,7 +13,7 @@ struct Conversation {
 
     struct LastMessage {
         let id: String?
-        let messageSummary: String
+        let messageSummary: HTML
         let messageType: MessageType?
         let userID: IntegerID?
         let blockData: [Block]?

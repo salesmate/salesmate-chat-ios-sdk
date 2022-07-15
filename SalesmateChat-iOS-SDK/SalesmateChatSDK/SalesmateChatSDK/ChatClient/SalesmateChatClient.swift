@@ -286,21 +286,21 @@ extension SalesmateChatClient {
         floatingView.messageCount = messageCount
         
         if unReadConversation.lastMessage?.messageType == .comment {
-            var messageStr: String = unReadConversation.lastMessage?.messageSummary ?? ""
+            var messageStr: String =  ""
             if let blockType = unReadConversation.lastMessage?.blockData?.last?.type {
                 switch blockType {
                 case .text:
-                    messageStr = unReadConversation.lastMessage?.messageSummary ?? ""
+                    messageStr = unReadConversation.lastMessage?.blockData?.last?.text ?? ""
                 case .image:
-                    messageStr = "[Image: \(unReadConversation.lastMessage?.messageSummary ?? "")]"
+                    messageStr = "You received image."
                 case .file:
-                    messageStr = unReadConversation.lastMessage?.messageSummary ?? ""
+                    messageStr = "You received file."
                 case .html:
-                    messageStr = unReadConversation.lastMessage?.messageSummary ?? ""
+                    messageStr = unReadConversation.lastMessage?.blockData?.last?.text ?? ""
                 case .orderedList:
-                    messageStr = unReadConversation.lastMessage?.messageSummary ?? ""
+                    messageStr = unReadConversation.lastMessage?.blockData?.last?.text ?? ""
                 case .unorderedList:
-                    messageStr = unReadConversation.lastMessage?.messageSummary ?? ""
+                    messageStr = unReadConversation.lastMessage?.blockData?.last?.text ?? ""
                 }
             }
             floatingView.updateMessageUI(withMessageText: messageStr, withSenderText: unReadConversation.name)
