@@ -7,6 +7,7 @@
 
 import UIKit
 @_implementationOnly import SwiftyJSON
+import WebKit
 
 class Configeration {
 
@@ -174,7 +175,7 @@ class Configeration {
     var uniqueID: String = UIDevice.current.identifierForVendor?.uuidString ?? ""
     var contactID: IntegerID? { self.contact?.id }
     var verifiedID: String?
-
+    var userAgent: String = WKWebView().value(forKey: "userAgent") as? String ?? ""
     var socketAuthToken: String?
     var pseudoName: String?
     var channels: [String]?
