@@ -305,21 +305,12 @@ extension SalesmateChat {
     }
     
     static func isFromSalesmateChatSDK() -> Bool {
-        
         var isPartOfTheSDK: Bool = false
         if let topViewController = UIApplication.topViewController() {
-            if topViewController.isKind(of: StartVC.self) {
-                isPartOfTheSDK = true
-            } else if topViewController.isKind(of: SalesmateChatHomeVC.self) {
-                isPartOfTheSDK = true
-            } else if topViewController.isKind(of: NewVisitorVC.self) {
-                isPartOfTheSDK = true
-            } else if topViewController.isKind(of: RecentConversationsVC.self) {
-                isPartOfTheSDK = true
-            } else if topViewController.isKind(of: ConversationsVC.self) {
-                isPartOfTheSDK = true
-            } else if topViewController.isKind(of: ChatVC.self) {
-                isPartOfTheSDK = true
+            if let objClass = object_getClass(topViewController) {
+                if Bundle.salesmate.self == Bundle(for: objClass) {
+                    isPartOfTheSDK = true
+                }
             }
         }
         return isPartOfTheSDK

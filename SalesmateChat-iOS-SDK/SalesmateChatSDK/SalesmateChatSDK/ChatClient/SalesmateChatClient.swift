@@ -292,9 +292,9 @@ extension SalesmateChatClient {
                 case .text:
                     messageStr = unReadConversation.lastMessage?.blockData?.last?.text ?? ""
                 case .image:
-                    messageStr = "You received image."
+                    messageStr = "You received an image."
                 case .file:
-                    messageStr = "You received file."
+                    messageStr = "You received a file."
                 case .html:
                     messageStr = unReadConversation.lastMessage?.blockData?.last?.text ?? ""
                 case .orderedList:
@@ -312,6 +312,10 @@ extension SalesmateChatClient {
         floatingView.showFloatview()
         
         floatingView.clickDragViewBlock = { dragV in
+            if self.unreadConversations.count == 0 {
+                self.floatingView.removeFloatview()
+                return
+            }
             
             if self.unreadConversations.count == 1 {
                 self.floatingView.removeFloatview()
