@@ -34,7 +34,7 @@ extension ChatAPIClient: ChatAPI {
         }
     }
 
-    func getAuthToken(with socketAuthToken: String?, pseudoName: String?, completion: @escaping (Result<(pseudoName: String, authToken: String, channels: [String]), ChatError>) -> Void) {
+    func getAuthToken(with socketAuthToken: String?, pseudoName: String?, completion: @escaping (Result<(authToken: String, channels: [String]), ChatError>) -> Void) {
         let request = GetSCAuthTokenRequest(socketAuthToken: socketAuthToken, pseudoName: pseudoName)
 
         loader.load(request: request) { (result) in
@@ -44,11 +44,8 @@ extension ChatAPIClient: ChatAPI {
                 guard let authToken = json["authToken"] as? String else { return }
                 guard let channel = json["channel"] as? JSONObject else { return }
                 guard let channels = (channel["channels"] as? JSONObject)?.map({ $0.value }) as? [String] else { return }
-                var psName = "";
-                if let pseudoName = json["pseudoName"] as? String {
-                    psName = pseudoName;
-                }
-                completion(.success((pseudoName: psName, authToken: authToken, channels: channels)))
+                
+                completion(.success((authToken: authToken, channels: channels)))
             case .failure:
                 completion(.failure(.unknown))
             }

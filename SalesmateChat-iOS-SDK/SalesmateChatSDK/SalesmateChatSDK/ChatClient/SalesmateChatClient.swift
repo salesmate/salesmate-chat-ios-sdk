@@ -69,8 +69,7 @@ extension SalesmateChatClient: ChatClient {
 
         chatAPI.getAuthToken(with: config.socketAuthToken, pseudoName: config.pseudoName) { result in
             switch result {
-            case .success((let pseudoName, let authToken, let channels)):
-                self.config.pseudoName = pseudoName
+            case .success((let authToken, let channels)):
                 self.config.socketAuthToken = authToken
                 self.config.channels = channels
                 self.config.saveRequireDataLocally()

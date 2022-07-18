@@ -9,7 +9,7 @@ import Foundation
 
 protocol ChatAPI: AnyObject {
     func getConfigerations(completion: @escaping ((Result<JSONObject, ChatError>) -> Void))
-    func getAuthToken(with socketAuthToken: String?, pseudoName: String?, completion: @escaping (Result<(pseudoName: String, authToken: String, channels: [String]), ChatError>) -> Void)
+    func getAuthToken(with socketAuthToken: String?, pseudoName: String?, completion: @escaping (Result<(authToken: String, channels: [String]), ChatError>) -> Void)
     func createContact(with email: String, in conversation: ConversationID?, completion: @escaping (Result<Void, ChatError>) -> Void)
 
     func getConversations(at page: Page, completion: @escaping (Result<[Conversation], ChatError>) -> Void)
