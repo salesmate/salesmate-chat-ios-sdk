@@ -254,6 +254,19 @@ extension ChatController {
         }
     }
 
+    private func sendBot(_ message: MessageToSend) {
+        var message = message
+
+        client.send(message: message, to: conversationID) { result in
+            switch result {
+            case .success:
+                message.status = .sent
+            case .failure:
+                message.status = .fail
+            }
+        }
+    }
+
     private func startAskEmailTimesIfRequire() {
         func askEmail() {
             var blockToSendStr = "Hi there! Currently our team is away, but we’ll be available in a moment. In the meantime, please give us a way to reach you."
@@ -272,8 +285,8 @@ extension ChatController {
                                          conversationName: config.pseudoName ?? "",
                                          isBot: true)
 
-            send(message1)
-            send(message2)
+            sendBot(message1)
+            sendBot(message2)
         }
 
         guard config.askEmail == .never else { return }
