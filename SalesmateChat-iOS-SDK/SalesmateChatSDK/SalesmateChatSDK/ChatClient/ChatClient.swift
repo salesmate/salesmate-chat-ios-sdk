@@ -21,6 +21,7 @@ protocol ConversationOperation {
     func updateRemark(of ID: ConversationID, to remark: String, completion: @escaping ((Result<Void, ChatError>) -> Void))
     func readConversation(ID: ConversationID, completion: ((Result<Void, ChatError>) -> Void)?)
     func sendTyping(to ID: ConversationID, as name: String)
+    func contactTrack(with contactData: CreateContact, completion: @escaping (Result<String, ChatError>) -> Void)
 }
 
 protocol MessageFetcher {

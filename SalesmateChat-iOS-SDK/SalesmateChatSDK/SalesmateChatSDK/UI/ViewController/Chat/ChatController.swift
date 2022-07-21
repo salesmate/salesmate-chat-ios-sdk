@@ -112,6 +112,25 @@ class ChatController {
         
     }
 
+    func sendContact(_ name: String, _ email: EmailAddress, asMessage: Bool = true) {
+        if asMessage {
+            sendMessage(with: email.rawValue)
+        }
+        
+        if isNewConversation{
+            client.createContact(with: email.rawValue, in: nil) { _ in
+                let contactData = CreateContact(email: email.rawValue, name: name)
+                self.client.contactTrack(with: contactData) { _ in }
+            }
+        }else{
+            client.createContact(with: email.rawValue, in: conversationID) { _ in
+                let contactData = CreateContact(email: email.rawValue, name: name)
+                self.client.contactTrack(with: contactData) { _ in }
+            }
+        }
+        
+    }
+
     func getTranscript(completion: @escaping ((URL?) -> Void)) {
         client.downloadTranscript(of: conversationID) { result in
             switch result {

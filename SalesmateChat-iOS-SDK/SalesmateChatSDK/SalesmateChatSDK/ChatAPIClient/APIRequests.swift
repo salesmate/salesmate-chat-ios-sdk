@@ -36,7 +36,7 @@ struct PingRequest: HTTPRequest {
     init(common: CAC = common) {
         url = URL(string: "messenger/v1/widget/ping", relativeTo: common.base)!
         headers = common.headers
-        body = JSONBody(["referer": common.config?.identity.tenantID ?? ""])
+        body = JSONBody(["referer": common.config?.identity.tenantID ?? "", "pseudo_name": common.config?.pseudoName ?? ""])
     }
 }
 
@@ -282,6 +282,37 @@ struct CreateLoginRequest: HTTPRequest {
                                  LoginFormHeaderKey.hour: "12",
                                  LoginFormHeaderKey.timestamp: "\(timestamp)",
                                  LoginFormHeaderKey.userDetails: jsonString ?? ""])
+        
+    }
+}
+
+struct CreateContactTrackRequest: HTTPRequest {
+
+    var method: HTTPMethod = .post
+    var url: URL
+    var headers: HTTPHeaders?
+    var body: HTTPBody?
+
+    init(contactData: CreateContact, common: CAC = common) {
+        url = URL(string: "/analytics/v1/track", relativeTo: common.base)!
+        headers = common.headers
+        let timestamp = Date().timeIntervalSince1970
+        let encodedData = try? JSONEncoder().encode(contactData)
+        let jsonString = String(data: encodedData!,
+                                encoding: .utf8)
+
+        body = FORMBody(params: [CreateContact.CodingKeys.name.rawValue: contactData.name ?? "",
+                                 CreateContact.CodingKeys.email.rawValue: contactData.email ?? "",
+                                 LoginFormHeaderKey.tenantId: common.config?.identity.tenantID ?? "",
+                                 LoginFormHeaderKey.deviceId: common.config?.uniqueID ?? "",
+                                 LoginFormHeaderKey.visitorId: common.config?.uniqueID ?? "",
+                                 LoginFormHeaderKey.sessionId: common.config?.uniqueID ?? "",
+                                 LoginFormHeaderKey.sdkName: "sm-analytics",
+                                 LoginFormHeaderKey.uuid: UUID.new,
+                                 LoginFormHeaderKey.timestamp: "\(timestamp)",
+                                 LoginFormHeaderKey.appKey: common.config?.identity.appKey ?? "",
+                                 LoginFormHeaderKey.userDetails: jsonString ?? ""
+                                 ])
         
     }
 }

@@ -202,7 +202,7 @@ class ChatVC: UIViewController {
         }
         
         contactDetailForm.submitContactDetail = { name, email in
-            self.sendEmail(email.rawValue)
+            self.sendContact(name, email.rawValue)
             DispatchQueue.main.asyncAfter(deadline: .now()+0.2) {
                 RapidopsUserDetails.sharedInstance().name = name as RapidopsUserDetailsNullableString;
                 RapidopsUserDetails.sharedInstance().email = email.rawValue as RapidopsUserDetailsNullableString;
@@ -397,8 +397,11 @@ extension ChatVC: UITableViewDataSource {
         }
 
         askEmailCell?.viewModel = viewModel
-        askEmailCell?.submitContactDetail = { _, email in
-            self.sendEmail(email.rawValue)
+        askEmailCell?.submitContactDetail = { name, email in
+            viewModel.email = email.rawValue
+            viewModel.name = name
+            self.askEmailCell?.viewModel = viewModel
+            self.sendContact(name, email.rawValue)
         }
 
         return askEmailCell ?? UITableViewCell()
@@ -551,6 +554,17 @@ extension ChatVC {
             showAlert(title: "Email", message: "That email doesn't look quite right.")
         }
     }
+    
+    private func sendContact(_ name: String,_ email: String, asMessage: Bool = true) {
+        if let email = EmailAddress(rawValue: email) {
+            controller.sendContact(name, email)
+            messageInputBar.clear()
+            self.viewModel.bottom = .message;
+        } else {
+            showAlert(title: "Email", message: "That email doesn't look quite right.")
+        }
+    }
+
 }
 
 // MARK: - Typing Animation

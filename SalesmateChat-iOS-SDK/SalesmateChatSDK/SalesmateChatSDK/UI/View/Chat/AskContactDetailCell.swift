@@ -32,6 +32,7 @@ class AskContactDetailCell: UITableViewCell {
     @IBOutlet private weak var profileView: CirculerProfileView!
     @IBOutlet private weak var viewMainContainer: UIView!
     @IBOutlet private weak var form: ContactDetailForm!
+    @IBOutlet private weak var lblNotifiedName: UILabel!
 
     // MARK: - Override
     override func awakeFromNib() {
@@ -53,6 +54,8 @@ class AskContactDetailCell: UITableViewCell {
         }
 
         if let name = viewModel.name, let email = viewModel.email, let emailAddres = EmailAddress(rawValue: email) {
+            lblNotifiedName.text = "You will be notified on the below email"
+            lblNotifiedName.font = UIFont.systemFont(ofSize: 12)
             form.display(name: name, and: emailAddres)
         }
     }

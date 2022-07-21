@@ -85,3 +85,14 @@ struct LoginUser: Codable {
         case lastName = "last_name"
     }
 }
+
+struct CreateContact: Codable {
+
+    let email: String?
+    let name: String?
+
+    enum CodingKeys: String, CodingKey {
+        case email = "email"
+        case name = "name"
+    }
+}

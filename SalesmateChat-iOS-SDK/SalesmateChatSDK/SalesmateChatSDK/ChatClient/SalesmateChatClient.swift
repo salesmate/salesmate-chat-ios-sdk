@@ -169,6 +169,10 @@ extension SalesmateChatClient: ConversationOperation {
     func sendTyping(to ID: ConversationID, as name: String) {
         chatStream.sendTyping(for: ID, and: name)
     }
+    
+    func contactTrack(with contactData: CreateContact, completion: @escaping (Result<String, ChatError>) -> Void) {
+        chatAPI.contactTrack(with: contactData, completion: completion)
+    }
 }
 
 extension SalesmateChatClient: MessageFetcher {
@@ -306,6 +310,8 @@ extension SalesmateChatClient {
         } else if unReadConversation.lastMessage?.messageType == .ratingAsked {
             floatingView.messageCount = 1
             floatingView.updateMessageUI(withMessageText: "", withSenderText: "Please rate your experience.")
+        } else {
+            floatingView.updateMessageUI(withMessageText: "You received message", withSenderText: unReadConversation.name)
         }
         
         floatingView.showFloatview()

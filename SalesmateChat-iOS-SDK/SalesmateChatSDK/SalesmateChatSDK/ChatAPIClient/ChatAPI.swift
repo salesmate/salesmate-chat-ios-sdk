@@ -29,6 +29,7 @@ protocol ChatAPI: AnyObject {
     func upload(file: FileToUpload, progress: ((Float) -> Void)?, completion: @escaping (Result<UploadedFile, ChatError>) -> Void)
     
     func createLogin(with loginUser: LoginUser, completion: @escaping (Result<String, ChatError>) -> Void)
+    func contactTrack(with contactData: CreateContact, completion: @escaping (Result<String, ChatError>) -> Void)
 
     func sendDeviceToken(with deviceToken: String, deviceId: String, completion: @escaping (Result<Void, ChatError>) -> Void)
 }

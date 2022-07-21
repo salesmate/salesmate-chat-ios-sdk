@@ -198,6 +198,11 @@ extension ChatViewModel {
                                           look: look,
                                           rating: conversation?.rating,
                                           remark: conversation?.remark)
+            case .sendAndClose:
+                return MessageViewModel(message: message,
+                                        look: look,
+                                        users: config.users ?? [],
+                                        ratings: config.rating ?? [])
             }
         }
 

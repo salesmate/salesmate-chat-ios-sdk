@@ -276,4 +276,53 @@ extension ChatAPIClient: ChatAPI {
 
         task.resume()
     }
+    
+    func contactTrack(with contactData: CreateContact, completion: @escaping (Result<String, ChatError>) -> Void) {
+        let request = CreateContactTrackRequest(contactData: contactData)
+
+        //create the session object
+        let session = URLSession.shared
+
+        //create dataTask using the session object to send data to the server
+        let task = session.dataTask(with: request.request!, completionHandler: { data, response, error in
+
+            guard error == nil else {
+                if let error = error as? ChatError {
+                    completion(.failure(error))
+                }
+                return
+            }
+
+            guard let data = data else {
+                if let error = error as? ChatError {
+                    completion(.failure(error))
+                }
+                return
+            }
+            
+            if let httpResponse = response as? HTTPURLResponse {
+                
+                if httpResponse.statusCode == 200 {
+                    do {
+                        let str = String(decoding: data, as: UTF8.self)
+                        print(str)
+                        if str == "success" {
+                            completion(.success(str))
+                        } else {
+                            if let error = error as? ChatError {
+                                completion(.failure(error))
+                            }
+                        }
+                        
+                    }
+                } else {
+                    if let error = error as? ChatError {
+                        completion(.failure(error))
+                    }
+                }
+            }
+        })
+
+        task.resume()
+    }
 }

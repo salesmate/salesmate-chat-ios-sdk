@@ -12,6 +12,7 @@ enum MessageType: String, Codable {
 
     case emailAsked = "email_asked"
     case ratingAsked = "rating_asked"
+    case sendAndClose = "send_and_close"
 }
 
 struct MessageToSend: Codable, Hashable {

@@ -91,6 +91,8 @@ class AskContactDetailViewModel: ChatContentViewModelType {
         id = message.id
         profileViewModel = CirculerBotProfileViewModel()
         actionColorCode = look.actionColor
+        name = message.contactName
+        email = message.contactEmail
     }
 }
 
