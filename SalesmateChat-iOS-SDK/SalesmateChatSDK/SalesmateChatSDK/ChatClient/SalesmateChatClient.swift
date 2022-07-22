@@ -125,6 +125,7 @@ extension SalesmateChatClient: ConversationFetcher {
             switch result {
             case .success(let conversations):
                 self.conversations.update(with: conversations)
+                self.saveContactId()
                 completion(.success(conversations))
             case .failure(let error):
                 completion(.failure(error))
@@ -137,6 +138,7 @@ extension SalesmateChatClient: ConversationFetcher {
             switch result {
             case .success(let conversation):
                 self.conversations.update(with: conversation)
+                self.saveContactId()
                 completion(.success(conversation))
             case .failure(let error):
                 completion(.failure(error))
@@ -146,6 +148,18 @@ extension SalesmateChatClient: ConversationFetcher {
 
     func downloadTranscript(of ID: ConversationID, completion: @escaping ((Result<String, ChatError>) -> Void)) {
         chatAPI.downloadTranscript(of: ID, completion: completion)
+    }
+    
+    func saveContactId() {
+        if config.local.contactId == nil || config.contactId == nil {
+            if self.conversations.count > 0 {
+                if let index = self.conversations.firstIndex(where: {$0.contactId != nil && $0.lastMessage?.userID == nil }) {
+                    let conversation = self.conversations[index]
+                    config.contactId = conversation.contactId
+                    config.local.contactId = conversation.contactId?.description
+                }
+            }
+        }
     }
 }
 
@@ -218,7 +232,7 @@ extension SalesmateChatClient: FileOperation {
 extension SalesmateChatClient {
 
     private func prepareEventListener() {
-        let events: [ChatEventToObserve] = [.messageReceived, .typing, .conversationUpdated, .readStatusChange, .onlineUsers, .offlineUsers]
+        let events: [ChatEventToObserve] = [.messageReceived, .typing, .conversationUpdated, .readStatusChange, .onlineUsers, .offlineUsers, .contactData]
 
         chatStream.register(observer: self, for: events, of: nil) { event in
             switch event {
@@ -231,12 +245,27 @@ extension SalesmateChatClient {
                 self.updateDetail(of: ID)
             case .onlineUsers, .offlineUsers, .typing:
                 self.relay(event)
+            case .contactData(let contactData):
+                self.saveContactData(contactData: contactData)
+                self.relay(event)
             default:
                 break
             }
         }
     }
 
+    private func saveContactData(contactData: Contact) {
+        config.local.contactId = contactData.id.description
+        config.local.pseudoName = contactData.name
+
+        if let contactEmail = contactData.email {
+            config.local.contactEmail = contactEmail
+            config.contactEmail = contactEmail
+        }
+        config.contact = contactData
+        config.contactId = contactData.id
+    }
+    
     private func updateDetail(of ID: ConversationID) {
         self.getDetail(of: ID) { result in
             switch result {

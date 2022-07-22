@@ -235,6 +235,9 @@ extension SalesmateChat {
         SalesmateChat.shared?.config.channels = []
         SalesmateChat.shared?.client.clearConversations()
         SalesmateChat.shared?.client.clearMessages()
+        SalesmateChat.shared?.config.pseudoName = ""
+        SalesmateChat.shared?.config.contactEmail = ""
+        SalesmateChat.shared?.config.contactId = ""
         SalesmateChat.shared?.config.uniqueID = UIDevice.current.identifierForVendor?.uuidString ?? ""
         UserDefaults.standard.removeObject(forKey: UserDefaultStorage.userDefaultKey)
         UserDefaults.standard.removeObject(forKey: "userId")

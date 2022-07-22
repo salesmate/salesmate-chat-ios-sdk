@@ -227,6 +227,14 @@ extension ChatAPIClient: ChatAPI {
         }
     }
     
+    func saveLoginData(loginUser: LoginUser) {
+        let name = "\(loginUser.firstName ?? "") " + "\(loginUser.lastName ?? "")"
+        CommonAPIComponents.shared.config?.pseudoName = name
+        CommonAPIComponents.shared.config?.contactEmail = loginUser.email
+        CommonAPIComponents.shared.config?.local.pseudoName = name
+        CommonAPIComponents.shared.config?.local.contactEmail = loginUser.email
+    }
+    
     func createLogin(with loginUser: LoginUser, completion: @escaping (Result<String, ChatError>) -> Void) {
         let request = CreateLoginRequest(loginUser: loginUser)
         
@@ -258,6 +266,7 @@ extension ChatAPIClient: ChatAPI {
                         let str = String(decoding: data, as: UTF8.self)
                         print(str)
                         if str == "success" {
+                            self.saveLoginData(loginUser: loginUser)
                             completion(.success(str))
                         } else {
                             if let error = error as? ChatError {

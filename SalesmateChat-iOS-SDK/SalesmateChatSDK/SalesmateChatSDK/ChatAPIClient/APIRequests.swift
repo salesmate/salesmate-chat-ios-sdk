@@ -17,7 +17,7 @@ class CommonAPIComponents {
         return [HeaderKey.linkName: config?.identity.tenantID ?? "",
                 HeaderKey.workspaceID: config?.identity.workspaceID ?? "",
                 HeaderKey.verifiedID: config?.verifiedID?.description ?? "",
-                HeaderKey.contactID: config?.contactID?.description ?? "",
+                HeaderKey.contactID: config?.contactId?.description ?? "",
                 HeaderKey.uniqueID: config?.uniqueID ?? ""]
     }
 }

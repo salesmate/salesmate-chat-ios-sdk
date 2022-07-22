@@ -162,7 +162,6 @@ class Configeration {
     private(set) var workspace: Workspace?
     private(set) var users: [User]?
     private(set) var unread: [ConversationID]?
-    private(set) var contact: Contact?
     private(set) var rating: [Rating]?
     private(set) var askEmail: AskEmailSetting?
     private(set) var security: Security?
@@ -179,6 +178,9 @@ class Configeration {
     var socketAuthToken: String?
     var pseudoName: String?
     var channels: [String]?
+    var contactEmail: String?
+    var contactId: IntegerID?
+    var contact: Contact?
 
     init(connection: Configuration, environment: Environment, local: Storage = UserDefaultStorage()) {
         self.identity = connection
@@ -191,6 +193,14 @@ class Configeration {
 
         if let socketAuthToken = local.socketAuthToken {
             self.socketAuthToken = socketAuthToken
+        }
+        
+        if let localEmail = local.contactEmail {
+            self.contactEmail = localEmail
+        }
+        
+        if let localContactId = local.contactId {
+            self.contactId = IntegerID(localContactId)!
         }
     }
 

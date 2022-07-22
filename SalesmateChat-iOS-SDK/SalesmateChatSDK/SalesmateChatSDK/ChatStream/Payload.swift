@@ -42,6 +42,8 @@ struct Payload {
         case conversationHasSeen = "CONVERSATION_HAS_SEEN"
         case conversationListUpdate = "UPDATE_CONVERSATIONS_LIST"
         case messageDeleted = "MESSAGE_DELETED"
+        case contactCreated = "CONTACT_CREATED"
+        case contactLogin = "CONTACT_LOGIN"
     }
 
     let event: Event?

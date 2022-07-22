@@ -61,7 +61,7 @@ class ChatController {
     func sendMessage(with text: String) {
         let message = MessageToSend(type: .comment,
                                     contents: [BlockToSend(text: text)],
-                                    conversationName: config.pseudoName ?? "")
+                                    conversationName: config.pseudoName ?? "", email: config.contactEmail ?? "")
 
         sendingMessages.update(with: message)
 
@@ -74,7 +74,7 @@ class ChatController {
         let message = MessageToSend(type: .comment,
                                     contents: [],
                                     conversationName: config.pseudoName ?? "",
-                                    file: file)
+                                    email: config.contactEmail ?? "", file: file)
 
         sendingMessages.update(with: message)
 
@@ -113,6 +113,8 @@ class ChatController {
     }
 
     func sendContact(_ name: String, _ email: EmailAddress, asMessage: Bool = true) {
+        self.saveContactLocally(name: name, email: email.rawValue)
+        
         if asMessage {
             sendMessage(with: email.rawValue)
         }
@@ -130,7 +132,15 @@ class ChatController {
         }
         
     }
-
+    
+    func saveContactLocally(name: String, email: String) {
+        config.local.pseudoName = name
+        config.local.contactEmail = email
+        
+        config.pseudoName = name
+        config.contactEmail = email
+    }
+    
     func getTranscript(completion: @escaping ((URL?) -> Void)) {
         client.downloadTranscript(of: conversationID) { result in
             switch result {
@@ -296,12 +306,12 @@ extension ChatController {
             }
             let message1 = MessageToSend(type: .comment,
                                          contents: [BlockToSend(text: blockToSendStr)],
-                                         conversationName: config.pseudoName ?? "",
+                                         conversationName: config.pseudoName ?? "", email: config.contactEmail ?? "",
                                          isBot: true)
 
             let message2 = MessageToSend(type: .emailAsked,
                                          contents: [],
-                                         conversationName: config.pseudoName ?? "",
+                                         conversationName: config.pseudoName ?? "", email: config.contactEmail ?? "",
                                          isBot: true)
 
             sendBot(message1)

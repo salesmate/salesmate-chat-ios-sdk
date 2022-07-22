@@ -32,6 +32,10 @@ enum PayloadHandler {
                     return handleConversationListUpdate(event: innerData)
                 case .messageDeleted:
                     return handleDeleteMessage(event: innerData)
+                case .contactCreated:
+                    return handleContactData(event: innerData)
+                case .contactLogin:
+                    return handleContactData(event: innerData)
                 }
             } else {
                 // Typing event
@@ -94,4 +98,18 @@ enum PayloadHandler {
 
         return .messageDeleted(conversationId, messageId, userID, date)
     }
+    
+    static private func handleContactData(event data: JSON) -> ChatEvent? {
+        var contactId: String = ""
+        if let contactIdStr = data["contactId"].string {
+            contactId = contactIdStr
+        } else if let contactIdInt = data["contactId"].int {
+            contactId = "\(contactIdInt)"
+        }
+        guard let contactEmail = data["email"].string else { return nil }
+        guard let contactName = data["name"].string else { return nil }
+        let contact = Contact(id: IntegerID(contactId)!, name: contactName, email: contactEmail, owner: nil, isDeleted: false)
+        return .contactData(contact)
+    }
+
 }

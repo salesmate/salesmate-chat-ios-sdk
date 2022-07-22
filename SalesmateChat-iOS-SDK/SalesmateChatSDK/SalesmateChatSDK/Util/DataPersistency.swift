@@ -10,6 +10,8 @@ import Foundation
 protocol Storage: AnyObject {
     var pseudoName: String? { get set}
     var socketAuthToken: String? { get set}
+    var contactEmail: String? { get set}
+    var contactId: String? { get set}
 }
 
 // TODO: We are currently saving in UserDefaults as plain text. We should either save in keychain or save encrypted data.
@@ -18,6 +20,8 @@ class UserDefaultStorage: Storage {
     static let userDefaultKey = "com.salesmate.chat"
     static let pseudoNameKey = "pseudoName.com.salesmate.chat"
     static let socketAuthTokenKey = "socketAuthTokenKey.com.salesmate.chat"
+    static let contactEmailKey = "contactEmailKey.com.salesmate.chat"
+    static let contactIdKey = "contactIdKey.com.salesmate.chat"
 
     private let standard: UserDefaults = UserDefaults.standard
 
@@ -44,4 +48,29 @@ class UserDefaultStorage: Storage {
             standard.setValue(data, forKey: Self.userDefaultKey)
         }
     }
+    
+    var contactEmail: String? {
+        get {
+            guard let data = standard.value(forKey: Self.userDefaultKey) as? [String: String] else { return nil }
+            return data[Self.contactEmailKey]
+        }
+        set {
+            var data: [String: String] = (standard.object(forKey: Self.userDefaultKey) as? [String: String]) ?? [:]
+            data[Self.contactEmailKey] = newValue
+            standard.setValue(data, forKey: Self.userDefaultKey)
+        }
+    }
+    
+    var contactId: String? {
+        get {
+            guard let data = standard.value(forKey: Self.userDefaultKey) as? [String: String] else { return nil }
+            return data[Self.contactIdKey]
+        }
+        set {
+            var data: [String: String] = (standard.object(forKey: Self.userDefaultKey) as? [String: String]) ?? [:]
+            data[Self.contactIdKey] = newValue
+            standard.setValue(data, forKey: Self.userDefaultKey)
+        }
+    }
+
 }

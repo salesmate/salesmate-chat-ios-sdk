@@ -33,9 +33,9 @@ struct User: Codable {
 // MARK: - Contact
 struct Contact: Codable {
 
-    let id: IntegerID
-    let name: String
-    let email: String?
+    var id: IntegerID
+    var name: String
+    var email: String?
     let owner: Owner?
     let isDeleted: Bool?
 
